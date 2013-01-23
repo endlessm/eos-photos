@@ -1,0 +1,38 @@
+GtkLabel {
+    color: white;
+    font-family: Droid Sans;
+}
+
+WeatherSummary {
+    font-size: 48;
+}
+
+GtkLabel#weekday {
+    font-size: 10;
+    padding-bottom: 5px;
+}
+
+GtkLabel#temperature {
+    font-size: 16;
+}
+
+GtkLabel#quantity {
+    font-size: 16;
+}
+
+GtkLabel#description {
+    font-size: 12;
+    padding-top: 10px;
+}
+
+GtkEventBox {
+    background-color: transparent;
+}
+
+WeatherWindow {
+    background-image: url("../images/background.png");
+}
+
+EndlessSlidingPanel > GtkViewport {
+    background-color: transparent;
+}
