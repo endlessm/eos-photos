@@ -30,7 +30,7 @@ GtkEventBox {
 }
 
 WeatherWindow {
-    background-image: url("../images/background.png");
+    background-image: url("../images/Background_Texture-Light.jpg");
 }
 
 EndlessSlidingPanel > GtkViewport {
