@@ -29,7 +29,7 @@ GtkEventBox {
     background-color: transparent;
 }
 
-WeatherWindow {
+PhotosWindow {
     background-image: url("../images/Background_Texture-Light.jpg");
 }
 
