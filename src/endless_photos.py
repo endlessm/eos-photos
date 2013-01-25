@@ -4,6 +4,7 @@ from gi.repository import Gtk, Gdk, GLib
 import gettext
 gettext.install('endless_photos')
 
+from photos_model import PhotosModel
 from photos_view import PhotosView
 from photos_presenter import PhotosPresenter
 
@@ -39,11 +40,11 @@ class EndlessPhotos(Gtk.Application):
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
-        # The application has only one window; we create it here.
-        # self._view = PhotosView()
-        # self.add_window(self._view.get_window())
-        # self._presenter = PhotosPresenter(view=self._window)
-        self._window = Gtk.Window()
+        # Create the mvp for the Photo app and attach the window to the application.
+        self._model = PhotosModel()
+        self._view = PhotosView()
+        self._presenter = PhotosPresenter(model=self._model, view=self._view)
+        self._window = self._view.get_window()
         self.add_window(self._window)
         self._window.show_all()
 
