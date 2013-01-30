@@ -22,6 +22,7 @@ class PhotosView(object):
         self._presenter = presenter
         self._top_toolbar.set_presenter(presenter)
         self._left_toolbar.set_presenter(presenter)
+        self._right_toolbar.set_presenter(presenter)
 
     def get_window(self):
         return self._window

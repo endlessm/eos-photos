@@ -32,7 +32,7 @@ class ImageTextButton(Gtk.Button):
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
         self._hbox.pack_start(self._image, expand=False, fill=False, padding=0)
-        self._hbox.pack_start(self._label, expand=False, fill=False, padding=0)
+        self._hbox.pack_start(self._label, expand=False, fill=False, padding=2)
         self.add(self._hbox)
 
         self.connect('enter-notify-event', self._on_mouse_enter)

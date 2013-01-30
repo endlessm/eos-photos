@@ -15,9 +15,8 @@ class PhotosPresenter(object):
         print "Open called"
 
     def save(self):
-        
         print "Save called"
 
-    def post_to_facebook(self):
-        print "Post to facebook called"
+    def share(self):
+        print "Share called"
 

@@ -4,6 +4,8 @@
     border-color: white;
 }
 
+#save-button,
+#share-button,
 #close-button,
 #minimize-button {
     -GtkWidget-focus-line-width: 0;
@@ -11,6 +13,37 @@
     background-image: none;
     border-width: 0;
 }
+
+#filters-scroll-area > GtkViewport {
+    background-color: transparent;
+}
+
+.scrollbar {
+    -GtkRange-slider-width: 5;
+    -GtkRange-trough-border: 0;
+}
+
+/*This changes the scrollbar look, but not how we want. Punting on this for now*/
+/*
+.slider{
+    background-image: url("../images/scroll-bar_normal.png");
+}
+
+.scrollbar.trough{
+    background-image: url("../images/scroll-bar_normal.png");
+}
+*/
+
+/*These are the scrollbar colors we want*/
+/*
+GtkScrollbar {
+    background-color: #3a3838;
+}
+
+GtkScrollbar:hover {
+    background-color: #515050;
+}
+*/
 
 PhotosWindow {
     background-size: cover;
@@ -28,18 +61,8 @@ GtkButton {
     -unico-outer-stroke-width: 0;
 }
 
-/*GtkButton {
-    -GtkWidget-focus-line-width: 0;
-    border-width: 0;
-    background-color: transparent;
-    background-image: none;
-    -unico-focus-fill-color: transparent;
-    -unico-inner-stroke-width: 0;
-    -unico-outer-stroke-width: 0;
-}
-
+/*
 GtkButton {
-    background-image: url("../images/close_normal.png");
     color: green;
 }
 
@@ -49,4 +72,5 @@ GtkButton:hover {
 
 GtkButton:active {
     color: red;
-}*/
+}
+*/
