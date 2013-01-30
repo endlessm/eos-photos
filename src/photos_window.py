@@ -32,7 +32,7 @@ class PhotosWindow(Gtk.Window):
 
         # Let's just hardcode the resolution of one of our flats for now.
         # self.fullscreen()
-        self.set_size_request(1024, 768)
+        self.set_size_request(80, 50)
 
     def minimize(self):
         self.iconify()

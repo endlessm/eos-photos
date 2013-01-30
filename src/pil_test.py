@@ -50,7 +50,8 @@ class App:
 		global FILE_NAME # file address of the image
 		global TEMP_FILE # file address of the temp image to apply changes
 
-		TEMP_FILE = '~/Desktop/temp.jpg'
+		TEMP_FILE = os.path.expanduser("~/Desktop/temp.jpg")
+		print TEMP_FILE
 
 		# Opens a dialog window where the user can choose an image file
 		dialog = Gtk.FileChooserDialog ("Open Image", button.get_toplevel(), Gtk.FileChooserAction.OPEN);
@@ -71,6 +72,7 @@ class App:
 
 			# Loads the image
 			FILE_NAME = dialog.get_filename()
+			print FILE_NAME
 			im = Image.open(FILE_NAME)
 
 			# Creates a thumbnail of the given size

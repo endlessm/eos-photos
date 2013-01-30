@@ -32,3 +32,10 @@ class PhotosView(object):
 
     def minimize_window(self):
         self._window.iconify()
+
+    def replace_image(self, image):
+        cur_image = self._window._image_align.get_children()[0]
+        self._window._image_align.remove(cur_image)
+        self._window._image_align.add(image)
+        image.show()
+        #self._window._image_align.get_children()[0].show()
