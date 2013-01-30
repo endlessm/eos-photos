@@ -1,3 +1,17 @@
+#photo-image {
+    border-style: solid;
+    border-width: 7px;
+    border-color: white;
+}
+
+#close-button,
+#minimize-button {
+    -GtkWidget-focus-line-width: 0;
+    background-color: transparent;
+    background-image: none;
+    border-width: 0;
+}
+
 PhotosWindow {
     background-size: cover;
     background-image: url("../images/Background_Texture-Light.jpg");
@@ -9,17 +23,22 @@ PhotosWindow {
 }
 
 GtkButton {
-    -GtkWidget-focus-line-width: 0;
-    border-width: 0;
-    background-color: transparent;
-    background-image: none;
-    /* Settings specific to Unico engine on Ubuntu */
     -unico-focus-fill-color: transparent;
     -unico-inner-stroke-width: 0;
     -unico-outer-stroke-width: 0;
 }
 
 /*GtkButton {
+    -GtkWidget-focus-line-width: 0;
+    border-width: 0;
+    background-color: transparent;
+    background-image: none;
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+}
+
+GtkButton {
     background-image: url("../images/close_normal.png");
     color: green;
 }
@@ -31,4 +50,3 @@ GtkButton:hover {
 GtkButton:active {
     color: red;
 }*/
-

@@ -1,3 +1,5 @@
+from gi.repository import Gtk
+
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
@@ -13,7 +15,8 @@ class PhotosView(object):
         self._top_toolbar = PhotosTopToolbar()
         self._left_toolbar = PhotosLeftToolbar()
         self._right_toolbar = PhotosRightToolbar()
-        self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar)
+        self._image = Gtk.Image(file="../images/test_photo.jpg", name="photo-image")
+        self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar, self._image)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

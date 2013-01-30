@@ -13,8 +13,8 @@ class ImageTextButton(Gtk.Button):
     __gtype_name__ = 'EndlessImageTextButton'
 
     def __init__(self, normal_path=None, hover_path=None, down_path=None, label_text="",
-                 normal_font_color=Gdk.RGBA(1, 0, 0, 1), hover_font_color=Gdk.RGBA(0, 1, 0, 1),
-                 down_font_color=Gdk.RGBA(0, 0, 1, 1), **kw):
+                 normal_font_color=Gdk.RGBA(0.44, 0.44, 0.44, 1), hover_font_color=Gdk.RGBA(0.82, 0.82, 0.82, 1.0),
+                 down_font_color=Gdk.RGBA(0.46, 0.46, 0.46, 1), **kw):
         Gtk.Button.__init__(self, **kw)
 
         self._normal_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(normal_path)
