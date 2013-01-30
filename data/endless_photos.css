@@ -1,38 +1,34 @@
-GtkLabel {
-    color: white;
-    font-family: Droid Sans;
-}
-
-WeatherSummary {
-    font-size: 48;
-}
-
-GtkLabel#weekday {
-    font-size: 10;
-    padding-bottom: 5px;
-}
-
-GtkLabel#temperature {
-    font-size: 16;
-}
-
-GtkLabel#quantity {
-    font-size: 16;
-}
-
-GtkLabel#description {
-    font-size: 12;
-    padding-top: 10px;
-}
-
-GtkEventBox {
-    background-color: transparent;
-}
-
 PhotosWindow {
+    background-size: cover;
     background-image: url("../images/Background_Texture-Light.jpg");
 }
 
-EndlessSlidingPanel > GtkViewport {
-    background-color: transparent;
+.primary-toolbar {
+    background-image: -gtk-gradient(linear, center top, center bottom,
+        from(#343434), to(#262624));
 }
+
+GtkButton {
+    -GtkWidget-focus-line-width: 0;
+    border-width: 0;
+    background-color: transparent;
+    background-image: none;
+    /* Settings specific to Unico engine on Ubuntu */
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+}
+
+/*GtkButton {
+    background-image: url("../images/close_normal.png");
+    color: green;
+}
+
+GtkButton:hover {
+    color: blue;
+}
+
+GtkButton:active {
+    color: red;
+}*/
+
