@@ -24,6 +24,49 @@ class PhotosView(object):
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
 
+    def present_dialog(self):
+        
+        
+        # Opens a dialog window where the user can choose an image file
+        dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);
+
+        # Adds 'Cancel' and 'Open' buttons
+        dialog.add_button (Gtk.STOCK_CANCEL, 0)
+        dialog.add_button (Gtk.STOCK_OK, 1)
+
+        # Sets default to 'Open'
+        dialog.set_default_response(1)
+
+        # Filters and displays files which can be opened by Gtk.Image
+        filefilter = Gtk.FileFilter ()
+        filefilter.add_pixbuf_formats ()
+        dialog.set_filter(filefilter)
+
+        if dialog.run() == 1:
+
+            # Loads the image
+            
+            filename = dialog.get_filename()
+            dialog.destroy()
+            return filename
+          
+
+            #new_image = Gtk.Image(file=FILE_NAME, name="photo-image")
+            #im = Image.open(FILE_NAME)
+
+            # Creates a thumbnail of the given size
+            # size = 50, 50
+            # im.thumbnail(size, Image.ANTIALIAS)
+            #im.save(TEMP_FILE)
+
+            # Converts image to pixbuf
+            #pbuf = self.image_to_pixbuf(im)
+            
+            # Displays the chosen image
+            #self.image.set_from_pixbuf(pbuf)
+
+        
+
     def get_window(self):
         return self._window
 
@@ -33,7 +76,8 @@ class PhotosView(object):
     def minimize_window(self):
         self._window.iconify()
 
-    def replace_image(self, image):
+    def replace_image(self, image_name):
+        image = Gtk.Image(file=image_name, name="photo-image")
         cur_image = self._window._image_align.get_children()[0]
         self._window._image_align.remove(cur_image)
         self._window._image_align.add(image)
