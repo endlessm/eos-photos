@@ -26,12 +26,20 @@ class PhotosLeftToolbar(Gtk.VBox):
         scroll_contents.pack_start(FilterOption(), expand=False, fill=False, padding=0)
         scroll_contents.pack_start(FilterOption(), expand=False, fill=False, padding=0)
 
+
         scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
         scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll_area.add_with_viewport(scroll_contents)
 
+        drop_shadow = Gtk.Image.new_from_file("../images/Filters_drop-shadow.png")
+        drop_shadow.set_halign(Gtk.Align.CENTER)
+        drop_shadow.set_valign(Gtk.Align.START)
+        overlay = Gtk.Overlay()
+        overlay.add(scroll_area)
+        overlay.add_overlay(drop_shadow)
+
         self.pack_start(filters_title_allign, expand=False, fill=False, padding=20)
-        self.pack_start(scroll_area, expand=True, fill=True, padding=0)
+        self.pack_start(overlay, expand=True, fill=True, padding=0)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

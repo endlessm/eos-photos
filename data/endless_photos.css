@@ -23,6 +23,23 @@
     -GtkRange-trough-border: 0;
 }
 
+.scrollbar.trough{
+    border-width: 0px;
+    background-image: url("../images/transparent.png");
+}
+
+.scrollbar.slider{
+    border-width: 0px;
+    background-image: url("../images/dark_gray.png");
+    -unico-inner-stroke-width: 0px;
+    -unico-centroid-texture: url("../images/transparent.png");
+}
+
+.scrollbar.slider:hover{
+    background-image: url("../images/light_gray.png");
+}
+
+
 /*This changes the scrollbar look, but not how we want. Punting on this for now*/
 /*
 .slider{
@@ -59,6 +76,10 @@ GtkButton {
     -unico-focus-fill-color: transparent;
     -unico-inner-stroke-width: 0;
     -unico-outer-stroke-width: 0;
+}
+
+GtkOverlay {
+    background-color: transparent;
 }
 
 /*
