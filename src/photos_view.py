@@ -4,6 +4,7 @@ from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
 from photos_window import PhotosWindow
+from photos_photo_displayer import PhotoDisplayer
 
 class PhotosView(object):
     """
@@ -15,7 +16,7 @@ class PhotosView(object):
         self._top_toolbar = PhotosTopToolbar()
         self._left_toolbar = PhotosLeftToolbar()
         self._right_toolbar = PhotosRightToolbar()
-        self._image = Gtk.Image(file="../images/test_photo.jpg", name="photo-image")
+        self._image = PhotoDisplayer()
         self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar, self._image)
 
     def set_presenter(self, presenter):
@@ -24,8 +25,7 @@ class PhotosView(object):
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
 
-    def present_dialog(self):
-        
+    def present_dialog(self):    
         
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);
@@ -64,8 +64,7 @@ class PhotosView(object):
             
             # Displays the chosen image
             #self.image.set_from_pixbuf(pbuf)
-
-        
+    
 
     def get_window(self):
         return self._window
@@ -77,9 +76,10 @@ class PhotosView(object):
         self._window.iconify()
 
     def replace_image(self, image_name):
-        image = Gtk.Image(file=image_name, name="photo-image")
-        cur_image = self._window._image_align.get_children()[0]
-        self._window._image_align.remove(cur_image)
-        self._window._image_align.add(image)
-        image.show()
+        self._image.load_from_file(image_name)
+        # image = Gtk.Image(file=image_name, name="photo-image")
+        # cur_image = self._window._image_align.get_children()[0]
+        # self._window._image_align.remove(cur_image)
+        # self._window._image_align.add(image)
+        # image.show()
         #self._window._image_align.get_children()[0].show()

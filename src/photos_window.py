@@ -5,13 +5,21 @@ from image_text_button import ImageTextButton
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
+    
+    # Constants
+    PHOTO_HORIZ_PADDING = 10
+    PHOTO_VERT_PADDING = 30
 
     def __init__(self, top_toolbar, left_toolbar, right_toolbar, image, **kw):
         # kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         Gtk.Window.__init__(self, **kw)
 
-        self._image_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=1.0, yscale=1.0)
+        self._image_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
+        self._image_align.set_padding(padding_top=PhotosWindow.PHOTO_VERT_PADDING,
+                                      padding_bottom=PhotosWindow.PHOTO_VERT_PADDING,
+                                      padding_left=PhotosWindow.PHOTO_HORIZ_PADDING,
+                                      padding_right=PhotosWindow.PHOTO_HORIZ_PADDING)
         self._image_align.add(image)
 
         # Flats were designed by splitting the window into 24 columns with a
@@ -31,8 +39,8 @@ class PhotosWindow(Gtk.Window):
         self.show()
 
         # Let's just hardcode the resolution of one of our flats for now.
+        self.set_size_request(1024, 768)
         # self.fullscreen()
-        self.set_size_request(80, 50)
 
     def minimize(self):
         self.iconify()
