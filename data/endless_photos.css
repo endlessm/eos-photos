@@ -14,6 +14,26 @@
     border-width: 0;
 }
 
+#open-button {
+    -GtkWidget-focus-line-width: 0;
+    border-width: 0;
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     from (shade (#404040, 0.9)),
+                                     to (shade (#202020, 0.95)));
+}
+
+#open-button:hover {
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     from (shade (#3a3a3a, 0.9)),
+                                     to (shade (#181818, 0.95)));
+}
+
+#open-button:active {
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     from (shade (#141615, 0.9)),
+                                     to (shade (#323131, 0.95)));
+}
+
 #filters-scroll-area > GtkViewport {
     background-color: transparent;
 }
@@ -25,18 +45,20 @@
 
 .scrollbar.trough{
     border-width: 0px;
-    background-image: url("../images/transparent.png");
+    background-color: transparent;
+    background-image: none;
 }
 
 .scrollbar.slider{
     border-width: 0px;
-    background-image: url("../images/dark_gray.png");
+    background-image: none;
+    background-color: #3a3838;
     -unico-inner-stroke-width: 0px;
-    -unico-centroid-texture: url("../images/transparent.png");
+    -unico-centroid-texture: none;
 }
 
 .scrollbar.slider:hover{
-    background-image: url("../images/light_gray.png");
+    background-color: #515050;
 }
 
 

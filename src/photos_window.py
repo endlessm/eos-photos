@@ -5,7 +5,7 @@ from image_text_button import ImageTextButton
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
-    
+
     # Constants
     PHOTO_HORIZ_PADDING = 10
     PHOTO_VERT_PADDING = 30
@@ -21,6 +21,15 @@ class PhotosWindow(Gtk.Window):
                                       padding_left=PhotosWindow.PHOTO_HORIZ_PADDING,
                                       padding_right=PhotosWindow.PHOTO_HORIZ_PADDING)
         self._image_align.add(image)
+        self._fullscreen_button = ImageButton(normal_path="../images/expand-image_normal.png",
+                                              hover_path="../images/expand-image_hover.png",
+                                              down_path="../images/expand-image_down.png",
+                                              name="close-button")
+        self._fullscreen_button.set_halign(Gtk.Align.END)
+        self._fullscreen_button.set_valign(Gtk.Align.END)
+        self._overlay = Gtk.Overlay()
+        self._overlay.add(self._image_align)
+        # self._overlay.add_overlay(self._fullscreen_button)
 
         # Flats were designed by splitting the window into 24 columns with a
         # 10 pixel gap between each column. We'll do the same.
@@ -28,7 +37,7 @@ class PhotosWindow(Gtk.Window):
         self._table.set_row_spacings(10)
         self._table.attach(left_toolbar, 0, 4, 0, 1)
         self._table.attach(right_toolbar, 20, 24, 0, 1)
-        self._table.attach(self._image_align, 4, 20, 0, 1)
+        self._table.attach(self._overlay, 4, 20, 0, 1)
         self._table.show()
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)

@@ -17,6 +17,7 @@ class PhotosView(object):
         self._left_toolbar = PhotosLeftToolbar()
         self._right_toolbar = PhotosRightToolbar()
         self._image = PhotoDisplayer()
+        self._image.load_from_file("../images/test_photo.jpg")
         self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar, self._image)
 
     def set_presenter(self, presenter):
