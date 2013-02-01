@@ -46,7 +46,7 @@ class EndlessPhotos(Gtk.Application):
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()
         self.add_window(self._window)
-        self._window.show_all()
+        self._window.show()
 
         # Run the main loop, to make sure the window is shown and therefore
         # seems responsive

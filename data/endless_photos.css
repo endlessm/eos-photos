@@ -16,19 +16,21 @@
 
 #open-button {
     -GtkWidget-focus-line-width: 0;
-    border-width: 0;
+    border-width: 1px;
+    border-color: #2a2a2a;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      from (shade (#404040, 0.9)),
                                      to (shade (#202020, 0.95)));
 }
 
 #open-button:hover {
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (shade (#3a3a3a, 0.9)),
-                                     to (shade (#181818, 0.95)));
+    -unico-border-gradient: none;
+    border-color: #2a2a2a;
 }
 
 #open-button:active {
+    -unico-border-gradient: none;
+    border-color: #2a2a2a;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      from (shade (#141615, 0.9)),
                                      to (shade (#323131, 0.95)));
@@ -91,7 +93,7 @@ PhotosWindow {
 
 .primary-toolbar {
     background-image: -gtk-gradient(linear, center top, center bottom,
-        from(#343434), to(#262624));
+        from(#3e3e3e), to(#282828));
 }
 
 GtkButton {

@@ -44,3 +44,6 @@ class PhotosPresenter(object):
     def share(self):
         print "Share called"
 
+    def fullscreen(self):
+        print "Fullscreen called"
+

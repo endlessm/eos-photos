@@ -40,6 +40,9 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.pack_start(filters_title_allign, expand=False, fill=False, padding=20)
         self.pack_start(overlay, expand=True, fill=True, padding=0)
+        
+        filters_title_allign.show_all()
+        overlay.show_all()
 
     def set_presenter(self, presenter):
         self._presenter = presenter
