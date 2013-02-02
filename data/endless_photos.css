@@ -4,6 +4,24 @@
     border-color: white;
 }
 
+#filter-event-box {
+    background-color: transparent;
+}
+
+#filter-image {
+    border-style: solid;
+    border-width: 2px;
+    border-color: transparent;
+}
+
+#filter-image:hover {
+    border-color: #404040;
+}
+
+#filter-image:selected {
+    border-color: white;
+}
+
 #save-button,
 #share-button,
 #close-button,

@@ -16,20 +16,20 @@ class PhotosTopToolbar(Gtk.EventBox):
                                          hover_path="../images/close_hover.png",
                                          down_path="../images/close_down.png",
                                          name="close-button")
-        self._close_button.connect('clicked', lambda w: self._presenter.close())
+        self._close_button.connect('clicked', lambda w: self._presenter.on_close())
 
         self._minimize_button = ImageButton(normal_path="../images/minimize_normal.png",
                                             hover_path="../images/minimize_hover.png",
                                             down_path="../images/minimize_down.png",
                                             name="minimize-button")
-        self._minimize_button.connect('clicked', lambda w: self._presenter.minimize())
+        self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 
         self._open_button = ImageTextButton(normal_path="../images/close_normal.png",
                                             hover_path="../images/close_hover.png",
                                             down_path="../images/close_down.png",
                                             label_text="ABRIR IMAGEN",
                                             name="open-button")
-        self._open_button.connect('clicked', lambda w: self._presenter.open())
+        self._open_button.connect('clicked', lambda w: self._presenter.on_open())
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
         self._hbox.pack_start(self._open_button, expand=False, fill=False, padding=20)
@@ -40,9 +40,10 @@ class PhotosTopToolbar(Gtk.EventBox):
         # buttons in the toolbar. Is there a better way to do this?
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
         self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=3)
-        self._vbox.show_all()
 
         self.add(self._vbox)
+
+        self.show_all()
 
     def set_presenter(self, presenter):
         self._presenter = presenter

@@ -23,10 +23,6 @@ class PhotosWindow(Gtk.Window):
         self._vbox.show()
         self.add(self._vbox)
 
-        top_toolbar.show()
-        left_toolbar.show()
-        right_toolbar.show()
-        image_viewer.show()
         # Let's just hardcode the resolution of one of our flats for now.
         self.set_size_request(1024, 768)
         # self.fullscreen()

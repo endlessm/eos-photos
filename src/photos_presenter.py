@@ -8,19 +8,6 @@ class PhotosPresenter(object):
         self._view = view
         self._view.set_presenter(self)
 
-    def close(self):
-        # Prompt for save?
-        self._view.close_window()
-
-    def minimize(self):
-        self._view.minimize_window()
-
-    def open(self):
-        filename = self._view.present_dialog()
-        self._model.set_current_image(filename)
-        self.update_view()
-        # call update view here
-        
     def update_view(self):
         new_image = self._model.get_current_image()
         self._view.replace_image(new_image)
@@ -38,12 +25,28 @@ class PhotosPresenter(object):
         loader.close()
         return pixbuf
 
-    def save(self):
+    #UI callbacks...
+    def on_close(self):
+        # Prompt for save?
+        self._view.close_window()
+
+    def on_minimize(self):
+        self._view.minimize_window()
+
+    def on_open(self):
+        filename = self._view.present_dialog()
+        self._model.set_current_image(filename)
+        self.update_view()
+        # call update view here
+            
+    def on_save(self):
         print "Save called"
 
-    def share(self):
+    def on_share(self):
         print "Share called"
 
-    def fullscreen(self):
+    def on_fullscreen(self):
         print "Fullscreen called"
 
+    def on_filter_select(self, filter_name):
+        print filter_name, "selected"

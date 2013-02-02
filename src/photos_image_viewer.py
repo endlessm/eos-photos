@@ -26,7 +26,7 @@ class ImageViewer(Gtk.Alignment):
         self._fullscreen_button.set_valign(Gtk.Align.END)
         self._fullscreen_button.set_margin_right(ImageViewer.BORDER_WIDTH)
         self._fullscreen_button.set_margin_bottom(ImageViewer.BORDER_WIDTH)
-        self._fullscreen_button.connect('clicked', lambda w: self._presenter.fullscreen())
+        self._fullscreen_button.connect('clicked', lambda w: self._presenter.on_fullscreen())
         
         self._overlay = Gtk.Overlay()
         self._overlay.add(self._image)
@@ -37,6 +37,7 @@ class ImageViewer(Gtk.Alignment):
                                       padding_left=ImageViewer.PHOTO_HORIZ_PADDING,
                                       padding_right=ImageViewer.PHOTO_HORIZ_PADDING)
         self.add(self._overlay)
+        self.show()
 
         # self.connect("size-allocate", self.resize_callback)
 
