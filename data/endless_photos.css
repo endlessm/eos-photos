@@ -58,18 +58,18 @@
     background-color: transparent;
 }
 
-.scrollbar {
+#filters-scroll-area > .scrollbar {
     -GtkRange-slider-width: 5;
     -GtkRange-trough-border: 0;
 }
 
-.scrollbar.trough{
+#filters-scroll-area > .scrollbar.trough{
     border-width: 0px;
     background-color: transparent;
     background-image: none;
 }
 
-.scrollbar.slider{
+#filters-scroll-area > .scrollbar.slider{
     border-width: 0px;
     background-image: none;
     background-color: #3a3838;
@@ -77,32 +77,9 @@
     -unico-centroid-texture: none;
 }
 
-.scrollbar.slider:hover{
+#filters-scroll-area > .scrollbar.slider:hover{
     background-color: #515050;
 }
-
-
-/*This changes the scrollbar look, but not how we want. Punting on this for now*/
-/*
-.slider{
-    background-image: url("../images/scroll-bar_normal.png");
-}
-
-.scrollbar.trough{
-    background-image: url("../images/scroll-bar_normal.png");
-}
-*/
-
-/*These are the scrollbar colors we want*/
-/*
-GtkScrollbar {
-    background-color: #3a3838;
-}
-
-GtkScrollbar:hover {
-    background-color: #515050;
-}
-*/
 
 PhotosWindow {
     background-size: cover;
@@ -123,17 +100,3 @@ GtkButton {
 GtkOverlay {
     background-color: transparent;
 }
-
-/*
-GtkButton {
-    color: green;
-}
-
-GtkButton:hover {
-    color: blue;
-}
-
-GtkButton:active {
-    color: red;
-}
-*/
