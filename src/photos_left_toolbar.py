@@ -39,6 +39,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._filter_options[default].select()
 
     def _add_filter_option(self, filter_name):
+        
         option = FilterOption(filter_name=filter_name, clicked_callback=self.select_filter)
         self._filter_options[filter_name] = option
         align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
@@ -61,9 +62,11 @@ class FilterOption(Gtk.EventBox):
     """
     A selectable filter option with an image and caption.
     """
-    def __init__(self, filter_name="NORMAL", thumbnail_path="../images/Filters_Example-Picture_01.jpg", clicked_callback=None):
+    def __init__(self, filter_name="NORMAL", clicked_callback=None):
         super(FilterOption, self).__init__(name="filter-event-box")
-
+        
+        thumbnail_path = "../images/filter_examples/filter_" + filter_name + ".jpg"
+        
         self._filter_name = filter_name
         self._clicked_callback = clicked_callback
         self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
