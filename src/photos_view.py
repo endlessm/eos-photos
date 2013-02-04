@@ -26,47 +26,6 @@ class PhotosView(object):
         self._right_toolbar.set_presenter(presenter)
         self._image_viewer.set_presenter(presenter)
 
-    def present_dialog(self):    
-        
-        # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);
-
-        # Adds 'Cancel' and 'Open' buttons
-        dialog.add_button (Gtk.STOCK_CANCEL, 0)
-        dialog.add_button (Gtk.STOCK_OK, 1)
-
-        # Sets default to 'Open'
-        dialog.set_default_response(1)
-
-        # Filters and displays files which can be opened by Gtk.Image
-        filefilter = Gtk.FileFilter ()
-        filefilter.add_pixbuf_formats ()
-        dialog.set_filter(filefilter)
-
-        if dialog.run() == 1:
-
-            # Loads the image
-            
-            filename = dialog.get_filename()
-            dialog.destroy()
-            return filename
-          
-
-            #new_image = Gtk.Image(file=FILE_NAME, name="photo-image")
-            #im = Image.open(FILE_NAME)
-
-            # Creates a thumbnail of the given size
-            # size = 50, 50
-            # im.thumbnail(size, Image.ANTIALIAS)
-            #im.save(TEMP_FILE)
-
-            # Converts image to pixbuf
-            #pbuf = self.image_to_pixbuf(im)
-            
-            # Displays the chosen image
-            #self.image.set_from_pixbuf(pbuf)
-    
-
     def get_window(self):
         return self._window
 
@@ -76,5 +35,56 @@ class PhotosView(object):
     def minimize_window(self):
         self._window.iconify()
 
-    def replace_image(self, image_name):
+    def set_filter_names(self, filter_names, default):
+        self._left_toolbar.set_filter_names(filter_names, default)
+
+    def select_filter(self, filter_name):
+        self._left_toolbar.select_filter(filter_name)
+
+    def replace_image_from_file(self, image_name):
         self._image_viewer.load_from_file(image_name)
+
+    def show_open_dialog(self):
+        # Opens a dialog window where the user can choose an image file
+        dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);
+
+        # Adds 'Cancel' and 'OK' buttons
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.add_button(Gtk.STOCK_OK, 1)
+
+        # Sets default to 'OK'
+        dialog.set_default_response(1)
+
+        # Filters and displays files which can be opened by Gtk.Image
+        filefilter = Gtk.FileFilter()
+        filefilter.add_pixbuf_formats()
+        dialog.set_filter(filefilter)
+
+        if dialog.run() == 1:
+            # Loads the image
+            filename = dialog.get_filename()
+            dialog.destroy()
+            return filename
+        else:
+            dialog.destroy()
+            return None
+
+    def show_save_dialog(self):
+        # Opens a dialog window where the user can choose an image file
+        dialog = Gtk.FileChooserDialog ("Save Image", None, Gtk.FileChooserAction.SAVE);
+
+        # Adds 'Cancel' and 'OK' buttons
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.add_button(Gtk.STOCK_OK, 1)
+
+        # Sets default to 'OK'
+        dialog.set_default_response(1)
+
+        if dialog.run() == 1:
+            # Loads the image
+            filename = dialog.get_filename()
+            dialog.destroy()
+            return filename
+        else:
+            dialog.destroy()
+            return None

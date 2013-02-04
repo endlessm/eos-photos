@@ -17,16 +17,6 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
         self._filter_options = {}
-        self._add_filter_option("NORMAL")
-        self._add_filter_option("BLUR")
-        self._add_filter_option("PIXELATE")
-        self._add_filter_option("ZOMBIES")
-        self._add_filter_option("PASTA")
-        self._add_filter_option("FOO")
-        self._add_filter_option("BAR")
-        self._add_filter_option("BINGO")
-        self._add_filter_option("WHAAAA?")
-        self._filter_options["NORMAL"].select()
 
         self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -44,12 +34,17 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.show_all()
 
+    def set_filter_names(self, filter_names, default):
+        map(self._add_filter_option, filter_names)
+        self._filter_options[default].select()
+
     def _add_filter_option(self, filter_name):
         option = FilterOption(filter_name=filter_name, clicked_callback=self.select_filter)
         self._filter_options[filter_name] = option
         align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
         align.add(option)
         self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
+        self.show_all()
 
     def select_filter(self, filter_name):
         for name, option in self._filter_options.items():
