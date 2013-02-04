@@ -17,10 +17,10 @@ class PhotosRightToolbar(Gtk.Alignment):
         self._save_button.connect('clicked', lambda w: self._presenter.on_save())
 
         self._share_button = ImageTextButton(normal_path="../images/share_normal.png",
-                                            hover_path="../images/share_hover.png",
-                                            down_path="../images/share_down.png",
-                                            label_text="FACEBOOK",
-                                            name="share-button")
+                                             hover_path="../images/share_hover.png",
+                                             down_path="../images/share_down.png",
+                                             label_text="FACEBOOK",
+                                             name="share-button")
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
 
         self._button_box = Gtk.VBox(homogeneous=False, spacing=20)

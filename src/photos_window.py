@@ -6,7 +6,7 @@ class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
     def __init__(self, top_toolbar, left_toolbar, right_toolbar, image_viewer, **kw):
-        # kw.setdefault('decorated', False)
+        kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         Gtk.Window.__init__(self, **kw)
 

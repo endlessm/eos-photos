@@ -2,6 +2,10 @@ import os
 import tempfile
 
 class PhotosPresenter(object):
+    """
+    Presenter class for the photo application. Interacts with view and model
+    and handles the main logic of the application.
+    """
     def __init__(self, model=None, view=None):
         self._model = model
         self._view = view
@@ -31,6 +35,7 @@ class PhotosPresenter(object):
             self._update_view()
             
     def on_save(self):
+        if not self._model.is_open(): return
         filename = self._view.show_save_dialog()
         if filename != None:
             self._model.save(filename)
