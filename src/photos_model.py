@@ -14,6 +14,7 @@ class PhotosModel(object):
         self._curr_image = None
 
     def open(self, filename):
+        self._filename = filename
         self._src_image = Image.open(filename)
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_name()
@@ -24,6 +25,10 @@ class PhotosModel(object):
 
     def is_open(self):
         return self._curr_image != None
+
+    def get_curr_filename(self):
+        if not self.is_open(): return None
+        return self._filename
 
     def is_modified(self):
         return self._curr_filter == "NORMAL"

@@ -33,10 +33,43 @@ class PhotosPresenter(object):
             self._model.open(filename)
             self._view.select_filter(self._model.get_default_name())
             self._update_view()
+
+    def _check_extension(self, filename, original_ext):
+        name_arr = filename.split(".")
+        ext = name_arr.pop(-1)
+        valid = ["jpg", "png", "gif"]
+        dot_join = "."
+        print name_arr
+        # if array is empty, set array to be list with filename as only element
+        #if name_arr.empty(): name_arr = 
+        if ext not in valid:
+            return dot_join.join(name_arr) + "." + original_ext
+        return filename
             
     def on_save(self):
         if not self._model.is_open(): return
-        filename = self._view.show_save_dialog()
+        
+        # Check to see if a file exists with current name
+        # If so, we need to add a version extenstion, e.g. (1), (2)
+        file_path_list = self._model.get_curr_filename().split("/")
+        base_name_arr = file_path_list.pop(-1).split(".")
+        name = base_name_arr[0]
+        ext = base_name_arr[1]
+        str_slash = "/"
+        directory_path = str_slash.join(file_path_list)
+        i = 1
+        curr_name = name
+        while(1):
+            if not os.path.exists(directory_path + "/" + curr_name + "." + ext):
+                break
+            curr_name = name + " (" + str(i) + ")" 
+            i += 1
+        filename = self._view.show_save_dialog(curr_name + "." + ext, directory_path)
+        
+        filename = self._check_extension(filename, ext)
+        print filename
+
+
         if filename != None:
             self._model.save(filename)
 
