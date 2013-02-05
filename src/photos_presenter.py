@@ -80,6 +80,7 @@ class PhotosPresenter(object):
         print "Fullscreen called"
 
     def on_filter_select(self, filter_name):
+        if not self._model.is_open(): return
         self._model.apply_filter(filter_name)
         self._update_view()
 
