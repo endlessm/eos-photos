@@ -42,7 +42,7 @@ class ImageViewer(Gtk.Alignment):
         self._fullscreen_button.connect('clicked', lambda w: self._presenter.on_fullscreen())
         
         self._overlay = Gtk.Overlay()
-        self._overlay.add(embed)
+        self._overlay.add(self._embed)
         self._overlay.add_overlay(self._fullscreen_button)
         
         self.set_padding(padding_top=ImageViewer.PHOTO_VERT_PADDING,
