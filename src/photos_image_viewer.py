@@ -76,11 +76,17 @@ class ImageViewer(Gtk.Alignment):
         self._overlay.show_all()
 
     def load_from_data(self, data, width, height):
-        viewer_width = width + ImageViewer.BORDER_WIDTH * 2
-        viewer_height = height + ImageViewer.BORDER_WIDTH * 2
-        self._embed.set_size_request(viewer_width, viewer_height)
-        self._border.set_size(viewer_width, viewer_height)
         self._image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
+        allocation = self.get_allocation()
+        available_width, available_height = allocation.width, allocation.height
+        if available_width < width or available_height < height:
+            if height < width:
+                height = height * available_width / width
+                width = available_width
+            else:
+                width = width * available_height / height
+                height = available_height
+        self._embed.set_size_request(width, height)
 
     def load_from_file(self, file):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(file)
@@ -99,11 +105,15 @@ class ImageViewer(Gtk.Alignment):
         self._presenter = presenter
 
     def _on_embed_size_allocate(self, widget, allocation):
-        width, height = self._image.get_size()
+        self._image.set_size(allocation.width - ImageViewer.BORDER_WIDTH * 2,
+                             allocation.height - ImageViewer.BORDER_WIDTH * 2)
+        self._border.set_size(allocation.width, allocation.height)
+
         self._border.set_anchor_point(allocation.width / 2,
                                       allocation.height / 2)
         self._border.set_position(allocation.width / 2,
                                   allocation.height / 2)
+        width, height = self._image.get_size()
         self._image.set_anchor_point(width / 2, height / 2)
         self._image.set_position(allocation.width / 2,
                                  allocation.height / 2)
