@@ -13,15 +13,23 @@ class ImageViewer(Gtk.Alignment):
     PHOTO_VERT_PADDING = 30
     # TODO: Read this from the css.
     BORDER_WIDTH = 7
+    BORDER_COLOR = '#fff'
 
     def __init__(self, **kw):
         super(ImageViewer, self).__init__(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0, **kw)
-        embed = GtkClutter.Embed.new()
-        embed.set_size_request(800, 500)
-        self._stage = embed.get_stage()
+        self._embed = GtkClutter.Embed.new()
+        self._embed.connect('size-allocate', self._on_embed_size_allocate)
+        self._stage = self._embed.get_stage()
         self._image = Clutter.Texture.new()
+        self._border = Clutter.Rectangle.new()
+        self._border.set_border_width(ImageViewer.BORDER_WIDTH)
+        color = Clutter.Color.new(0, 0, 0, 255)
+        color.from_string(self.BORDER_COLOR)
+        self._border.set_border_color(color)
+        background = Clutter.Texture.new_from_file('../images/Background_Texture-Light.jpg')
+        self._stage.add_child(background)
+        self._stage.add_child(self._border)
         self._stage.add_child(self._image)
-        self._stage.show_all()
 
         self._fullscreen_button = ImageButton(normal_path="../images/expand-image_normal.png",
                                               hover_path="../images/expand-image_hover.png",
@@ -68,7 +76,11 @@ class ImageViewer(Gtk.Alignment):
         self._overlay.show_all()
 
     def load_from_data(self, data, width, height):
-        self._image.set_from_rgb_data(data, False, width, height, 0, 3, 0)
+        viewer_width = width + ImageViewer.BORDER_WIDTH * 2
+        viewer_height = height + ImageViewer.BORDER_WIDTH * 2
+        self._embed.set_size_request(viewer_width, viewer_height)
+        self._border.set_size(viewer_width, viewer_height)
+        self._image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
 
     def load_from_file(self, file):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(file)
@@ -76,15 +88,22 @@ class ImageViewer(Gtk.Alignment):
 
     def do_get_request_mode(self):
         return Gtk.SizeRequestMode.CONSTANT_SIZE
-    
+
     def do_get_preferred_width(self):
         return ImageViewer.MIN_SIZE, 9999999
 
     def do_get_preferred_height(self):
         return ImageViewer.MIN_SIZE, 9999999
 
-    # def resize_callback(self, w, alloc):
-    #     print "alloc:", alloc.width, alloc.height
-
     def set_presenter(self, presenter):
         self._presenter = presenter
+
+    def _on_embed_size_allocate(self, widget, allocation):
+        width, height = self._image.get_size()
+        self._border.set_anchor_point(allocation.width / 2,
+                                      allocation.height / 2)
+        self._border.set_position(allocation.width / 2,
+                                  allocation.height / 2)
+        self._image.set_anchor_point(width / 2, height / 2)
+        self._image.set_position(allocation.width / 2,
+                                 allocation.height / 2)
