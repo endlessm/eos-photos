@@ -1,4 +1,4 @@
-from gi.repository import Gtk, GdkPixbuf
+from gi.repository import Gtk, GdkPixbuf, GtkClutter, Clutter
 
 from image_button import ImageButton
 
@@ -16,7 +16,12 @@ class ImageViewer(Gtk.Alignment):
 
     def __init__(self, **kw):
         super(ImageViewer, self).__init__(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0, **kw)
-        self._image = Gtk.Image(name="photo-image")
+        embed = GtkClutter.Embed.new()
+        embed.set_size_request(800, 500)
+        self._stage = embed.get_stage()
+        self._image = Clutter.Texture.new()
+        self._stage.add_child(self._image)
+        self._stage.show_all()
 
         self._fullscreen_button = ImageButton(normal_path="../images/expand-image_normal.png",
                                               hover_path="../images/expand-image_hover.png",
@@ -29,7 +34,7 @@ class ImageViewer(Gtk.Alignment):
         self._fullscreen_button.connect('clicked', lambda w: self._presenter.on_fullscreen())
         
         self._overlay = Gtk.Overlay()
-        self._overlay.add(self._image)
+        self._overlay.add(embed)
         self._overlay.add_overlay(self._fullscreen_button)
         
         self.set_padding(padding_top=ImageViewer.PHOTO_VERT_PADDING,
@@ -37,7 +42,7 @@ class ImageViewer(Gtk.Alignment):
                                       padding_left=ImageViewer.PHOTO_HORIZ_PADDING,
                                       padding_right=ImageViewer.PHOTO_HORIZ_PADDING)
         self.add(self._overlay)
-        self.show()
+        self.show_all()
 
         # self.connect("size-allocate", self.resize_callback)
 
@@ -61,6 +66,9 @@ class ImageViewer(Gtk.Alignment):
         else:
             self._image.set_from_pixbuf(pixbuf)
         self._overlay.show_all()
+
+    def load_from_data(self, data, width, height):
+        self._image.set_from_rgb_data(data, False, width, height, 0, 3, 0)
 
     def load_from_file(self, file):
         pixbuf = GdkPixbuf.Pixbuf.new_from_file(file)

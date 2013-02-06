@@ -1,5 +1,5 @@
 import sys
-from gi.repository import Gtk, Gdk, GLib
+from gi.repository import Gtk, Gdk, GLib, GtkClutter
 
 import gettext
 gettext.install('endless_photos')
@@ -63,5 +63,6 @@ class EndlessPhotos(Gtk.Application):
         pass
 
 if __name__ == '__main__':
+    GtkClutter.init([])
     app = EndlessPhotos()
     app.run(sys.argv)

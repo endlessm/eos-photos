@@ -47,6 +47,9 @@ class PhotosView(object):
     def replace_image_from_pixbuf(self, image_name):
         self._image_viewer.load_from_pixbuf(image_name)
 
+    def replace_image_from_data(self, data, width, height):
+        self._image_viewer.load_from_data(data, width, height)
+
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);

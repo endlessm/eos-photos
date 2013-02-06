@@ -21,10 +21,11 @@ class PhotosPresenter(object):
         width, height = im.size
         self._arr = array.array('B', im.tostring())
         # self._arr = numpy.array(im)
-        pixbuf = GdkPixbuf.Pixbuf.new_from_data(self._arr, GdkPixbuf.Colorspace.RGB,
+        pixbuf = GdkPixbuf.Pixbuf.new_from_data(im.tostring(), GdkPixbuf.Colorspace.RGB,
                                        True, 8, width, height, width * 4,
                                        lambda x, y: 0, None)
-        self._view.replace_image_from_pixbuf(pixbuf)
+        #self._view.replace_image_from_pixbuf(pixbuf)
+        self._view.replace_image_from_data(im.tostring(), width, height)
         # Old and slow way...
         # temp_path = tempfile.mktemp(".jpg")
         # self._model.save(temp_path)
