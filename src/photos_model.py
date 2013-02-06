@@ -18,9 +18,14 @@ class PhotosModel(object):
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_name()
 
-    def save(self, filename):
+    def save(self, filename, format=None):
         if self._curr_image != None:
-            self._curr_image.save(filename)
+            if format!=None:
+                self._curr_image.save(filename, format)
+            else: self._curr_image.save(filename)    
+
+    def get_image(self):
+        return self._curr_image
 
     def is_open(self):
         return self._curr_image != None

@@ -1,5 +1,8 @@
 import os
 import tempfile
+import array
+from gi.repository import GdkPixbuf
+import numpy
 
 class PhotosPresenter(object):
     """
@@ -14,10 +17,19 @@ class PhotosPresenter(object):
         self._view.set_filter_names(filters, self._model.get_default_name())
 
     def _update_view(self):
-        temp_path = tempfile.mktemp(".png")
-        self._model.save(temp_path)
-        self._view.replace_image_from_file(temp_path)
-        os.remove(temp_path)
+        im = self._model.get_image()
+        width, height = im.size
+        self._arr = array.array('B', im.tostring())
+        # self._arr = numpy.array(im)
+        pixbuf = GdkPixbuf.Pixbuf.new_from_data(self._arr, GdkPixbuf.Colorspace.RGB,
+                                       True, 8, width, height, width * 4,
+                                       lambda x, y: 0, None)
+        self._view.replace_image_from_pixbuf(pixbuf)
+        # Old and slow way...
+        # temp_path = tempfile.mktemp(".jpg")
+        # self._model.save(temp_path)
+        # self._view.replace_image_from_file(temp_path)
+        # os.remove(temp_path)
 
     #UI callbacks...
     def on_close(self):

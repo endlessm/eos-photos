@@ -41,13 +41,11 @@ class ImageViewer(Gtk.Alignment):
 
         # self.connect("size-allocate", self.resize_callback)
 
-    def load_from_file(self, file):
+    def load_from_pixbuf(self, pixbuf):
         # TODO: this doesn't support resizing, and is pretty ugly code. Fix me up!
         alloc = self.get_allocation()
         max_width = alloc.width - 2 * ImageViewer.BORDER_WIDTH - 2 * ImageViewer.PHOTO_HORIZ_PADDING
         max_height = alloc.height - 2 * ImageViewer.BORDER_WIDTH - 2 * ImageViewer.PHOTO_VERT_PADDING
-
-        pixbuf = GdkPixbuf.Pixbuf.new_from_file(file)
         width = pixbuf.get_width()
         height = pixbuf.get_height()
         if width > max_width or height > max_height:
@@ -63,6 +61,10 @@ class ImageViewer(Gtk.Alignment):
         else:
             self._image.set_from_pixbuf(pixbuf)
         self._overlay.show_all()
+
+    def load_from_file(self, file):
+        pixbuf = GdkPixbuf.Pixbuf.new_from_file(file)
+        self.load_from_pixbuf(pixbuf)
 
     def do_get_request_mode(self):
         return Gtk.SizeRequestMode.CONSTANT_SIZE
