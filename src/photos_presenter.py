@@ -1,11 +1,16 @@
 import os
 import tempfile
 
+VALID_FILE_TYPES = ["jpg", "png", "gif"]
+
 class PhotosPresenter(object):
     """
     Presenter class for the photo application. Interacts with view and model
     and handles the main logic of the application.
     """
+
+    
+
     def __init__(self, model=None, view=None):
         self._model = model
         self._view = view
@@ -33,11 +38,48 @@ class PhotosPresenter(object):
             self._model.open(filename)
             self._view.select_filter(self._model.get_default_name())
             self._update_view()
+
+    def _check_extension(self, filename, original_ext):
+        name_arr = filename.split(".")
+        ext = name_arr.pop(-1)
+
+        if not name_arr:
+            # there was no extension
+            name_arr = [filename]
+            ext = ""
+        dot_join = "."
+
+        # If extension is not a valid file type we use the extension of the original file
+        if ext not in VALID_FILE_TYPES:
+            return dot_join.join(name_arr) + "." + original_ext
+        return filename
             
     def on_save(self):
         if not self._model.is_open(): return
-        filename = self._view.show_save_dialog()
+        
+        # Check to see if a file exists with current name
+        # If so, we need to add a version extenstion, e.g. (1), (2)
+        file_path_list = self._model.get_curr_filename().split("/")
+        base_name_arr = file_path_list.pop(-1).split(".")
+        name = base_name_arr[0]
+        ext = base_name_arr[1]
+        str_slash = "/"
+        directory_path = str_slash.join(file_path_list)
+        i = 1
+        curr_name = name
+
+        while(1):
+            if not os.path.exists(directory_path + "/" + curr_name + "." + ext):
+                break
+            curr_name = name + " (" + str(i) + ")" 
+            i += 1
+
+        # Set this name as placeholder in save dialog
+        filename = self._view.show_save_dialog(curr_name + "." + ext, directory_path)
+        
         if filename != None:
+            # Check returned value from save dialog to make sure it has a valid extension
+            filename = self._check_extension(filename, ext)
             self._model.save(filename)
 
     def on_share(self):
