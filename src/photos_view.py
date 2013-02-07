@@ -75,14 +75,17 @@ class PhotosView(object):
             dialog.destroy()
             return None
 
-    def show_save_dialog(self):
+    def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Save Image", None, Gtk.FileChooserAction.SAVE);
 
+        
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_OK, 1)
 
+        dialog.set_current_folder(dir_path)
+        dialog.set_current_name(curr_name)
         # Sets default to 'OK'
         dialog.set_default_response(1)
 
