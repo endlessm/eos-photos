@@ -61,8 +61,8 @@ class ImageViewer(Gtk.Alignment):
     def load_from_data(self, data, width, height):
         self._image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
         allocation = self.get_allocation()
-        available_width = allocation.width + ImageViewer.BORDER_WIDTH
-        available_height = allocation.height + ImageViewer.BORDER_WIDTH
+        available_width = allocation.width - ImageViewer.BORDER_WIDTH * 2
+        available_height = allocation.height - ImageViewer.BORDER_WIDTH * 2
         if available_width < width or available_height < height:
             scale = min(available_height / float(height), available_width / float(width))
             height *= scale
