@@ -1,8 +1,6 @@
 import os
 import tempfile
 import array
-from gi.repository import GdkPixbuf
-import numpy
 
 VALID_FILE_TYPES = ["jpg", "png", "gif"]
 
