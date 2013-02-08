@@ -93,7 +93,7 @@ class PhotosModel(object):
     def make_linear_ramp(self, color):
         ramp = []
         r, g, b = color
-        for i in range(255):
+        for i in range(256):
             ramp.extend((r*i/255, g*i/255, b*i/255))
         return ramp
 

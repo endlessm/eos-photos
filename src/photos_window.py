@@ -5,6 +5,8 @@ from image_text_button import ImageTextButton
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
+    TOOLBAR_WIDTH = 160
+
     def __init__(self, top_toolbar, left_toolbar, right_toolbar, image_viewer, **kw):
         kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
@@ -12,8 +14,8 @@ class PhotosWindow(Gtk.Window):
         Gtk.Window.__init__(self, **kw)
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        left_toolbar.set_size_request(160, -1)
-        right_toolbar.set_size_request(160, -1)
+        left_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
+        right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
         self._hbox.pack_start(left_toolbar, expand=False, fill=False, padding=0)
         self._hbox.pack_start(image_viewer, expand=True, fill=True, padding=0)
         self._hbox.pack_end(right_toolbar, expand=False, fill=False, padding=0)
