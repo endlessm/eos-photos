@@ -15,7 +15,7 @@ class PhotosModel(object):
 
     def open(self, filename):
         self._filename = filename
-        self._src_image = Image.open(filename)
+        self._src_image = self.limit_size(Image.open(filename), (2056, 2056))
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_name()
 
@@ -39,7 +39,7 @@ class PhotosModel(object):
         return self._curr_filter == "NORMAL"
 
     def get_filter_names(self):
-        return ["NORMAL", "GRAYSCALE", "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "FIND_EDGES", "BLUR"]
+        return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "FIND_EDGES", "BLUR"]
 
     def get_default_name(self):
         return "NORMAL"
@@ -51,6 +51,10 @@ class PhotosModel(object):
             self._curr_image = self._src_image.copy()
         elif filter_name == "GRAYSCALE":
             self._curr_image = ImageOps.grayscale(self._src_image)
+        elif filter_name == "SEPIA":
+            self._curr_image = self.apply_palette(self._src_image, self.make_linear_ramp((255, 201, 159)))
+        elif filter_name == "PIXELATE":
+            self._curr_image = self.pixelate(self._src_image, 10)
         elif filter_name == "CONTOUR":
             self._curr_image = self._src_image.filter(ImageFilter.CONTOUR)
         elif filter_name == "SMOOTH":
@@ -69,3 +73,38 @@ class PhotosModel(object):
             self._curr_image = self._src_image.filter(ImageFilter.BLUR)
         else:
             print "Filter not supported!"
+
+    def limit_size(self, image, size_limits):
+        width, height = image.size
+        width_limit, height_limit = size_limits
+        if width < width_limit and height < height_limit:
+            return image
+        else:
+            scale = min(width_limit / float(width), height_limit / float(height))
+            new_size = map(int, (width * scale, height * scale))
+            return image.resize(new_size, Image.BILINEAR)
+
+    def grayscale(self, image):
+        mode = image.mode
+        image = ImageOps.grayscale(image)
+        image = image.convert(mode)
+        return image
+
+    def make_linear_ramp(self, color):
+        ramp = []
+        r, g, b = color
+        for i in range(255):
+            ramp.extend((r*i/255, g*i/255, b*i/255))
+        return ramp
+
+    def apply_palette(self, image, palette):
+        mode = image.mode
+        image = image.convert("L")
+        image.putpalette(palette)
+        image = image.convert(mode)
+        return image
+
+    def pixelate(self, image, pixel_size):
+        width, height = image.size
+        downsized = image.resize((width/16, height/16))
+        return downsized.resize((width, height))
