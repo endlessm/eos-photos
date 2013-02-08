@@ -64,9 +64,9 @@ class PhotosModel(object):
         elif filter_name == "EMBOSS":
             self._curr_image = self._src_image.filter(ImageFilter.EMBOSS)
         elif filter_name == "INVERT":
-            self._curr_image = ImageOps.invert(self._src_image)
+            self._curr_image = self.invert(self._src_image)
         elif filter_name == "SOLARIZE":
-            self._curr_image = ImageOps.solarize(self._src_image)
+            self._curr_image = self.solarize(self._src_image)
         elif filter_name == "FIND_EDGES":
             self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
         elif filter_name == "BLUR":
@@ -108,3 +108,21 @@ class PhotosModel(object):
         width, height = image.size
         downsized = image.resize((width/16, height/16))
         return downsized.resize((width, height))
+
+    def invert(self, image):
+        mode = image.mode
+        if mode != "L" or "RGB":
+            image = image.convert("RGB")
+            image = ImageOps.invert(image)
+            return image.convert(mode)
+        else:
+            return ImageOps.invert(image)
+
+    def solarize(self, image):
+        mode = image.mode
+        if mode != "L" or "RGB":
+            image = image.convert("RGB")
+            image = ImageOps.solarize(image)
+            return image.convert(mode)
+        else:
+            return ImageOps.invert(image)
