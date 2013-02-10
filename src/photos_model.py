@@ -3,6 +3,11 @@ import Image
 import ImageOps
 import ImageFilter
 
+from filter import Filter
+from filter import FilterManager
+import numpy
+
+
 class PhotosModel(object):
     """
     The model for the photo being edited. Uses the Python Imaging Library to
@@ -39,10 +44,26 @@ class PhotosModel(object):
         return self._curr_filter == "NORMAL"
 
     def get_filter_names(self):
-        return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "FIND_EDGES", "BLUR"]
+        return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", 
+        "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", 
+        "SOLARIZE", "FIND_EDGES", "BLUR", "COUNTRY", "DESERT", 
+        "NASHVILLE", "CROSSPROCESS", "LUMO", "PORTRAESQUE", 
+        "VELVIAESQUE", "PROVIAESQUE"]
 
     def get_default_name(self):
         return "NORMAL"
+
+    def _apply_filter_ext(self, filter_name):
+        img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
+        
+        image_array = numpy.array(self._src_image)
+
+        filter_manager = FilterManager()
+        filter_manager.add_filter(img_filter)
+
+        filter_array = filter_manager.apply_filter('crgb', image_array)
+        self._curr_image = Image.fromarray(filter_array)
+
 
     def apply_filter(self, filter_name):
         if (not self.is_open()) or self._curr_filter == filter_name: return
@@ -71,6 +92,22 @@ class PhotosModel(object):
             self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
         elif filter_name == "BLUR":
             self._curr_image = self._src_image.filter(ImageFilter.BLUR)
+        elif filter_name == "COUNTRY":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "DESERT":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "NASHVILLE":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "CROSSPROCESS":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "LUMO":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "PORTRAESQUE":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "VELVIAESQUE":
+            self._apply_filter_ext(filter_name)
+        elif filter_name == "PROVIAESQUE":
+            self._apply_filter_ext(filter_name)
         else:
             print "Filter not supported!"
 
