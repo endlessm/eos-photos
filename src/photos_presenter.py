@@ -26,7 +26,13 @@ class PhotosPresenter(object):
     #UI callbacks...
     def on_close(self):
         # Prompt for save?
-        self._view.close_window()
+        if self._model.is_saved():
+            self._view.close_window()
+        else:
+            confirm = self._view.show_confirm_close()
+            if confirm:
+                self._view.close_window()
+                
 
     def on_minimize(self):
         self._view.minimize_window()

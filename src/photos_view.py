@@ -78,6 +78,20 @@ class PhotosView(object):
             dialog.destroy()
             return None
 
+    def show_confirm_close(self):
+        dialog = Gtk.Dialog("Prompt for save",
+                        None,
+                        0)
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.add_button(Gtk.STOCK_QUIT, 1)
+        dialog.set_default_size(150,100)
+        content = dialog.get_content_area()
+        content.add(Gtk.Label("Your changes have not been saved. Are you sure you want to quit?"))
+        content.show_all()
+        confirm = dialog.run()
+        dialog.destroy()
+        return confirm
+
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Save Image", None, Gtk.FileChooserAction.SAVE);

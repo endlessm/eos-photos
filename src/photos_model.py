@@ -17,18 +17,22 @@ class PhotosModel(object):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
+        self._is_saved = 1
 
     def open(self, filename):
         self._filename = filename
         self._src_image = self.limit_size(Image.open(filename), (2056, 2056))
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_name()
+        self._is_saved = 1
+        
 
     def save(self, filename, format=None):
         if self._curr_image != None:
             if format!=None:
                 self._curr_image.save(filename, format)
-            else: self._curr_image.save(filename)    
+            else: self._curr_image.save(filename)
+            self._is_saved = 1    
 
     def get_image(self):
         return self._curr_image
@@ -40,8 +44,11 @@ class PhotosModel(object):
         if not self.is_open(): return None
         return self._filename
 
+    def is_saved(self):
+        return self._is_saved
+
     def is_modified(self):
-        return self._curr_filter == "NORMAL"
+        return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
         return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", 
@@ -68,6 +75,7 @@ class PhotosModel(object):
     def apply_filter(self, filter_name):
         if (not self.is_open()) or self._curr_filter == filter_name: return
         self._curr_filter = filter_name
+        self._is_saved = 0
         if filter_name == "NORMAL":
             self._curr_image = self._src_image.copy()
         elif filter_name == "GRAYSCALE":
@@ -109,6 +117,7 @@ class PhotosModel(object):
         elif filter_name == "PROVIAESQUE":
             self._apply_filter_ext(filter_name)
         else:
+            self._is_saved = 1
             print "Filter not supported!"
 
     def limit_size(self, image, size_limits):
