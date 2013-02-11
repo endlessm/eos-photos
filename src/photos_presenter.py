@@ -10,8 +10,6 @@ class PhotosPresenter(object):
     and handles the main logic of the application.
     """
 
-    
-
     def __init__(self, model=None, view=None):
         self._model = model
         self._view = view
@@ -87,7 +85,11 @@ class PhotosPresenter(object):
         print "Share called"
 
     def on_fullscreen(self):
-        print "Fullscreen called"
+        if not self._model.is_open(): return
+        self._view.set_image_fullscreen(True)
+
+    def on_unfullscreen(self):
+        self._view.set_image_fullscreen(False)
 
     def on_filter_select(self, filter_name):
         if not self._model.is_open(): return

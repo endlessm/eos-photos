@@ -4,6 +4,10 @@
     border-color: white;
 }
 
+#fullscreen-back {
+    background-color: black;
+}
+
 #filter-event-box {
     background-color: transparent;
 }

@@ -35,6 +35,9 @@ class PhotosView(object):
     def minimize_window(self):
         self._window.iconify()
 
+    def set_image_fullscreen(self, fullscreen):
+        self._window.set_image_fullscreen(fullscreen)
+
     def set_filter_names(self, filter_names, default):
         self._left_toolbar.set_filter_names(filter_names, default)
 
