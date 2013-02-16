@@ -80,6 +80,8 @@ class PhotosModel(object):
 
         filters.extend(self._curve_filters)
 
+        return filters
+
     def get_default_name(self):
         return "NORMAL"
 
@@ -186,7 +188,7 @@ class PhotosModel(object):
         elif filter_name == "BLUR":
             self._curr_image = self._src_image.filter(ImageFilter.BLUR)
         elif filter_name in self._curve_filters:
-            self._apply_filter_ext(filter_name)
+            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
         else:
             self._is_saved = 1
             print "Filter not supported!"
