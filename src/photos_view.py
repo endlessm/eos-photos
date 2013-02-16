@@ -55,7 +55,7 @@ class PhotosView(object):
 
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog ("Open Image", None, Gtk.FileChooserAction.OPEN);
+        dialog = Gtk.FileChooserDialog ("Open Image", self.get_window(), Gtk.FileChooserAction.OPEN);
 
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
@@ -79,8 +79,8 @@ class PhotosView(object):
             return None
 
     def show_confirm_close(self):
-        dialog = Gtk.Dialog("Prompt for save",
-                        None,
+        dialog = Gtk.Dialog("Quit Without Save?",
+                        self.get_window(),
                         0)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_QUIT, 1)
@@ -94,7 +94,7 @@ class PhotosView(object):
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog ("Save Image", None, Gtk.FileChooserAction.SAVE);
+        dialog = Gtk.FileChooserDialog ("Save Image", self.get_window(), Gtk.FileChooserAction.SAVE);
 
         
         # Adds 'Cancel' and 'OK' buttons
