@@ -8,6 +8,7 @@ model = PhotosModel()
 model.open("../images/" + name + ".jpg")
 
 filters = model.get_filter_names()
+print filters
 
 for f in filters:
 

@@ -23,9 +23,18 @@ class PhotosRightToolbar(Gtk.Alignment):
                                              name="share-button")
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
 
+        self._email_button = ImageTextButton(normal_path="../images/share_normal.png",
+                                             hover_path="../images/share_hover.png",
+                                             down_path="../images/share_down.png",
+                                             label_text="EMAIL",
+                                             name="email-button")
+        self._email_button.connect('clicked', lambda w: self._presenter.on_email())
+
         self._button_box = Gtk.VBox(homogeneous=False, spacing=20)
         self._button_box.pack_start(self._save_button, expand=False, fill=False, padding=0)
         self._button_box.pack_start(self._share_button, expand=False, fill=False, padding=0)
+        self._button_box.pack_start(self._email_button, expand=False, fill=False, padding=0)
+
         self.add(self._button_box)
 
         self.show_all()

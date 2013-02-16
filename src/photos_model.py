@@ -2,22 +2,44 @@ import os
 import Image
 import ImageOps
 import ImageFilter
+from social_bar_presenter import SocialBarPresenter
+from social_bar_model import SocialBarModel
 
 from filter import Filter
 from filter import FilterManager
 import numpy
 
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.mime.image import MIMEImage
+from email.mime.text import MIMEText
+
+TEMP_FILE = os.path.expanduser("~/Desktop/temp.jpg")
+CURVE_FOLDER = "../data/curves/"
 
 class PhotosModel(object):
     """
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
+
+    
+
     def __init__(self):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
         self._is_saved = 1
+        
+        #set up social bar so we can connect to facebook
+        social_bar_model = SocialBarModel()
+        self._social_bar = SocialBarPresenter(model=social_bar_model)
+
+        self._curve_filters = []
+
+        for files in os.listdir(CURVE_FOLDER):
+            if files.lower().endswith(".acv"):
+                self._curve_filters.append(files.split('.')[0].upper())
 
     def open(self, filename):
         self._filename = filename
@@ -51,14 +73,60 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", 
+        filters = ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", 
         "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", 
-        "SOLARIZE", "FIND_EDGES", "BLUR", "COUNTRY", "DESERT", 
-        "NASHVILLE", "CROSSPROCESS", "LUMO", "PORTRAESQUE", 
-        "VELVIAESQUE", "PROVIAESQUE"]
+        "SOLARIZE", "FIND_EDGES", "BLUR"]
+        filters.extend(self._curve_filters)
+        return filters
 
     def get_default_name(self):
         return "NORMAL"
+
+    def post_to_facebook(self, message):
+        if not self._social_bar.is_user_loged_in():
+            self._social_bar.fb_login()
+        
+        self._curr_image.save(TEMP_FILE)
+        self._social_bar.post_image(TEMP_FILE, message)
+
+    def _create_email(self, message, recipient):
+        # Set up header of email
+        email = MIMEMultipart()
+        email["From"] = "Rory MacQueen"
+        email["To"] = recipient
+        email["Subject"] = "Check out my photo from Endless Photos!"
+
+        # Embed image in body of email using HTML
+        body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />', _subtype='html')
+        email.attach(body)
+
+        # Write image to email from file
+        self._curr_image.save(TEMP_FILE)
+        fp = open(TEMP_FILE, 'rb')
+        msg = MIMEImage(fp.read())
+        msg.add_header('Content-Id', '<myimage>')
+        #email.add_header('Content-Disposition', 'inline', filename=TEMP_FILE)
+        email.attach(msg)
+        return email.as_string()
+
+    def email_photo(self, recipient, message):
+        # Set up email.
+        # TODO: Change this so it is not always sending from Rory's email!
+        from_addr = "rorymacqueen@gmail.com"
+        to_addr = recipient
+        username = 'rorymacqueen'
+        password = 'mrhedberg'
+
+        email = self._create_email(message, recipient)
+
+        # For now, always using gmail server
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.starttls()
+        server.login(username, password)
+        # Send email
+        server.sendmail(from_addr, [to_addr], email)
+        server.quit()
+
 
     def _apply_filter_ext(self, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
@@ -100,21 +168,7 @@ class PhotosModel(object):
             self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
         elif filter_name == "BLUR":
             self._curr_image = self._src_image.filter(ImageFilter.BLUR)
-        elif filter_name == "COUNTRY":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "DESERT":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "NASHVILLE":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "CROSSPROCESS":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "LUMO":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "PORTRAESQUE":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "VELVIAESQUE":
-            self._apply_filter_ext(filter_name)
-        elif filter_name == "PROVIAESQUE":
+        elif filter_name in self._curve_filters:
             self._apply_filter_ext(filter_name)
         else:
             self._is_saved = 1

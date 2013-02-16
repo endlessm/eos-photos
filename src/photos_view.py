@@ -92,6 +92,38 @@ class PhotosView(object):
         dialog.destroy()
         return confirm
 
+    # Gets responses from a user. Args is a list of requested responses
+    # from the user.
+    def get_message(self, prompt, *args):
+        dialog = Gtk.MessageDialog(None, 0, 
+            Gtk.MessageType.OTHER, Gtk.ButtonsType.OK_CANCEL, 
+            prompt)
+
+        entries = []
+        # Create an entry for each of the requested responses
+        for msg in args:
+            entry = Gtk.Entry()
+            entries.append(entry)
+            hbox = Gtk.HBox()
+            hbox.pack_start(Gtk.Label(msg), False, 5, 5)
+            hbox.pack_end(entry, True, True, 0)
+            dialog.vbox.pack_start(hbox, True, True, 0)
+
+        dialog.show_all()
+        result = dialog.run()
+
+        # If user clicks cancel, return having done nothing
+        if result == Gtk.ResponseType.CANCEL: 
+            dialog.destroy()
+            return None
+
+        # Store the responses from user in this list
+        responses = []
+        map(lambda x: responses.append(x.get_text()), entries)
+        dialog.destroy()
+    
+        return responses
+
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Save Image", None, Gtk.FileChooserAction.SAVE);

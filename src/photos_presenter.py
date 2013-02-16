@@ -2,7 +2,7 @@ import os
 import tempfile
 import array
 
-VALID_FILE_TYPES = ["jpg", "png", "gif"]
+VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
 class PhotosPresenter(object):
     """
@@ -88,7 +88,15 @@ class PhotosPresenter(object):
             self._model.save(filename)
 
     def on_share(self):
-        print "Share called"
+        if not self._model.is_open(): return
+        message = self._view.get_message("Enter a message to add to your photo!", "Message")[0]
+        self._model.post_to_facebook(message)
+        
+    def on_email(self):
+        if not self._model.is_open(): return
+        info = self._view.get_message("Enter a message to add to the e-mail","Recipient", "Message")
+        if info:
+            self._model.email_photo(info[0], info[1])
 
     def on_fullscreen(self):
         if not self._model.is_open(): return
