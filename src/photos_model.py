@@ -73,11 +73,12 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        filters = ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", 
-        "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", 
-        "SOLARIZE", "FIND_EDGES", "BLUR"]
+        filters =  ["NORMAL", "GRAYSCALE", "SEPIA", 
+        "PIXELATE", "BOXELATE", "OLD PHOTO", "GRUNGIFY", 
+        "SCRATCH", "FABRIC", "BUMPY", "PAPER", "CONTOUR", "SMOOTH", 
+        "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "POSTERIZE", "FIND_EDGES", "BLUR"]
+
         filters.extend(self._curve_filters)
-        return filters
 
     def get_default_name(self):
         return "NORMAL"
@@ -128,16 +129,16 @@ class PhotosModel(object):
         server.quit()
 
 
-    def _apply_filter_ext(self, filter_name):
+    def _apply_filter_ext(self, image, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
         
-        image_array = numpy.array(self._src_image)
+        image_array = numpy.array(image)
 
         filter_manager = FilterManager()
         filter_manager.add_filter(img_filter)
 
         filter_array = filter_manager.apply_filter('crgb', image_array)
-        self._curr_image = Image.fromarray(filter_array)
+        return Image.fromarray(filter_array)
 
 
     def apply_filter(self, filter_name):
@@ -151,7 +152,21 @@ class PhotosModel(object):
         elif filter_name == "SEPIA":
             self._curr_image = self.apply_palette(self._src_image, self.make_linear_ramp((255, 201, 159)))
         elif filter_name == "PIXELATE":
-            self._curr_image = self.pixelate(self._src_image, 10)
+            self._curr_image = self.pixelate(self._src_image)
+        elif filter_name == "BOXELATE":
+            self._curr_image = self.boxelate(self._src_image)
+        elif filter_name == "OLD PHOTO":
+            self._curr_image = self.old_photo(self._src_image)
+        elif filter_name == "GRUNGIFY":
+            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/grunge.jpg", 0.15)
+        elif filter_name == "SCRATCH":
+            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/old_film.jpg", 0.25)
+        elif filter_name == "FABRIC":
+            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/fabric.jpg", 0.35)
+        elif filter_name == "BUMPY":
+            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/bumpy.jpg", 0.35)
+        elif filter_name == "PAPER":
+            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/paper.jpg", 0.35)
         elif filter_name == "CONTOUR":
             self._curr_image = self._src_image.filter(ImageFilter.CONTOUR)
         elif filter_name == "SMOOTH":
@@ -164,6 +179,8 @@ class PhotosModel(object):
             self._curr_image = self.invert(self._src_image)
         elif filter_name == "SOLARIZE":
             self._curr_image = self.solarize(self._src_image)
+        elif filter_name == "POSTERIZE":
+            self._curr_image = self.posterize(self._src_image)
         elif filter_name == "FIND_EDGES":
             self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
         elif filter_name == "BLUR":
@@ -184,12 +201,6 @@ class PhotosModel(object):
             new_size = map(int, (width * scale, height * scale))
             return image.resize(new_size, Image.BILINEAR)
 
-    def grayscale(self, image):
-        mode = image.mode
-        image = ImageOps.grayscale(image)
-        image = image.convert(mode)
-        return image
-
     def make_linear_ramp(self, color):
         ramp = []
         r, g, b = color
@@ -204,25 +215,42 @@ class PhotosModel(object):
         image = image.convert(mode)
         return image
 
-    def pixelate(self, image, pixel_size):
+    def pixelate(self, image, pixel_size=10):
         width, height = image.size
         downsized = image.resize((width/16, height/16))
         return downsized.resize((width, height))
 
-    def invert(self, image):
+    def texture_overlay(self, image, texture_path, alpha=0.5):
+        texture = Image.open(texture_path)
+        texture = texture.resize(image.size)
+        texture = texture.convert(image.mode)
+        return Image.blend(image, texture, alpha)
+
+    def kill_alpha(self, image):
         mode = image.mode
-        if mode != "L" or "RGB":
-            image = image.convert("RGB")
-            image = ImageOps.invert(image)
-            return image.convert(mode)
-        else:
-            return ImageOps.invert(image)
+        if mode == "L" or mode == "RGB":
+            return image
+        return image.convert("RGB")
+
+    def old_photo(self, image):
+        image = self._apply_filter_ext(image, "LUMO")
+        image = self.apply_palette(image, self.make_linear_ramp((255, 201, 159)))
+        return self.texture_overlay(image, "../images/textures/old_film.jpg", 0.25)
+
+    # These filters don't support an alpha channel, so we have to loose all transparencies.
+    def boxelate(self, image):
+        image = self.kill_alpha(image)
+        image = self.pixelate(image)
+        return image.filter(ImageFilter.FIND_EDGES)
+
+    def invert(self, image):
+        image = self.kill_alpha(image)
+        return ImageOps.invert(image)
 
     def solarize(self, image):
-        mode = image.mode
-        if mode != "L" or "RGB":
-            image = image.convert("RGB")
-            image = ImageOps.solarize(image)
-            return image.convert(mode)
-        else:
-            return ImageOps.invert(image)
+        image = self.kill_alpha(image)
+        return ImageOps.solarize(image)
+
+    def posterize(self, image, bits=2):
+        image = self.kill_alpha(image)
+        return ImageOps.posterize(image, bits)

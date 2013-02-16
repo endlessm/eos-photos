@@ -1,7 +1,5 @@
-#photo-image {
-    border-style: solid;
-    border-width: 7px;
-    border-color: white;
+* {
+    engine: unico;
 }
 
 #fullscreen-back {
@@ -46,12 +44,10 @@
 }
 
 #open-button:hover {
-    -unico-border-gradient: none;
     border-color: #2a2a2a;
 }
 
 #open-button:active {
-    -unico-border-gradient: none;
     border-color: #2a2a2a;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      from (shade (#141615, 0.9)),
@@ -96,6 +92,7 @@ PhotosWindow {
 }
 
 GtkButton {
+    -unico-border-gradient: none;
     -unico-focus-fill-color: transparent;
     -unico-inner-stroke-width: 0;
     -unico-outer-stroke-width: 0;
