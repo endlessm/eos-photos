@@ -31,7 +31,7 @@ class SocialBarPresenter:
         self._app_secret = self.FB_APP_SECRET
         self._fb_graph_url = 'graph.facebook.com'
         self._webserver_url = 'http://localhost:8080/'
-        self._fb_access_token = None #self._model.get_stored_fb_access_token()
+        self._fb_access_token = self._model.get_stored_fb_access_token()
         print self._fb_access_token
         if self._fb_access_token:
             self._graph_api = GraphAPI(access_token=self._fb_access_token)

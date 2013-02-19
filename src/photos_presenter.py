@@ -2,6 +2,8 @@ import os
 import tempfile
 import array
 
+from threading import Thread
+
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
 class PhotosPresenter(object):
@@ -22,6 +24,15 @@ class PhotosPresenter(object):
         width, height = im.size
         self._view.replace_image_from_data(im.tostring(),
                                            width, height)
+
+    def _lock_ui(self):
+        self._lock = True
+        self._view.show_spinner()
+
+    def _unlock_ui(self):
+        self._lock = False
+        self._view.hide_spinner()
+
 
     #UI callbacks...
     def on_close(self):
@@ -87,11 +98,27 @@ class PhotosPresenter(object):
             filename = self._check_extension(filename, ext)
             self._model.save(filename)
 
+    def _run_method_with_handler(self, method, args, callback, callback_args=()):
+        method(*args)
+        callback(*callback_args)
+
+
+    def _run_asynch_task(self, method, args):
+        self._lock_ui()
+        thread = Thread(target=self._run_method_with_handler, args=(method, args, self._unlock_ui))
+        
+        thread.start()
+
+
     def on_share(self):
         if not self._model.is_open(): return
         message = self._view.get_message("Enter a message to add to your photo!", "Message")[0]
-        self._model.post_to_facebook(message)
+        self._run_asynch_task(self._model.post_to_facebook, (message,))
         
+
+    def post_finish(self, arg1, arg2):
+        print "Post to facebook complete"
+
     def on_email(self):
         if not self._model.is_open(): return
         info = self._view.get_message("Enter a message to add to the e-mail","Recipient", "Message")

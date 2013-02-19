@@ -86,11 +86,13 @@ class PhotosModel(object):
         return "NORMAL"
 
     def post_to_facebook(self, message):
+        print "facebook"
         if not self._social_bar.is_user_loged_in():
             self._social_bar.fb_login()
         
         self._curr_image.save(TEMP_FILE)
         self._social_bar.post_image(TEMP_FILE, message)
+        print "end post to facebook"
 
     def _create_email(self, message, recipient):
         # Set up header of email
@@ -118,7 +120,7 @@ class PhotosModel(object):
         from_addr = "rorymacqueen@gmail.com"
         to_addr = recipient
         username = 'rorymacqueen'
-        password = 'mrhedberg'
+        password = ''
 
         email = self._create_email(message, recipient)
 

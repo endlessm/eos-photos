@@ -83,4 +83,5 @@ class PhotosWindow(Gtk.Window):
         # window to fullscreen.
         self._screen_width, self._screen_height = self._get_screen_dimensions()
         self.set_default_size(self._screen_width, self._screen_height)
-        self.resize(self._screen_width, self._screen_height)
+        self.resize(800, 600)
+        #self.resize(self._screen_width, self._screen_height)

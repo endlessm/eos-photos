@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
@@ -120,9 +120,21 @@ class PhotosView(object):
         # Store the responses from user in this list
         responses = []
         map(lambda x: responses.append(x.get_text()), entries)
+        print "in get message"
         dialog.destroy()
     
         return responses
+
+    def show_spinner(self):
+        watch = Gdk.Cursor(Gdk.CursorType.WATCH)
+        gdk_window = self._window.get_window()
+        gdk_window.set_cursor(watch)
+
+    def hide_spinner(self):
+        pointer = Gdk.Cursor(Gdk.CursorType.ARROW)
+        gdk_window = self._window.get_window()
+        gdk_window.set_cursor(pointer)
+
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
