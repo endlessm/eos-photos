@@ -40,7 +40,7 @@ class PhotosLeftToolbar(Gtk.VBox):
 
     def _add_filter_option(self, filter_name):
         
-        option = FilterOption(filter_name=filter_name, clicked_callback=self.select_filter)
+        option = FilterOption(filter_name=filter_name, clicked_callback=lambda:self._presenter.on_filter_select(filter_name))
         self._filter_options[filter_name] = option
         align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
         align.add(option)
@@ -53,7 +53,6 @@ class PhotosLeftToolbar(Gtk.VBox):
                 option.select()
             else:
                 option.deselect()
-        self._presenter.on_filter_select(filter_name)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -102,4 +101,4 @@ class FilterOption(Gtk.EventBox):
         #if mouse is no longer over eventbox, don't select the filter
         if self._filter_image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0: return
         if self._clicked_callback != None:
-            self._clicked_callback(self._filter_name)
+            self._clicked_callback()

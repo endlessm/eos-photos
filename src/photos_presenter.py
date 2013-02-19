@@ -3,6 +3,7 @@ import tempfile
 import array
 
 from threading import Thread
+from asyncworker import AsyncWorker
 
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
@@ -18,6 +19,7 @@ class PhotosPresenter(object):
         self._view.set_presenter(self)
         filters = self._model.get_filter_names()
         self._view.set_filter_names(filters, self._model.get_default_name())
+        self._lock = False
 
     def _update_view(self):
         im = self._model.get_image().convert('RGBA')
@@ -37,6 +39,7 @@ class PhotosPresenter(object):
     #UI callbacks...
     def on_close(self):
         # Prompt for save?
+        if self._lock: return 
         if self._model.is_saved():
             self._view.close_window()
         else:
@@ -46,9 +49,11 @@ class PhotosPresenter(object):
                 
 
     def on_minimize(self):
+        if self._lock: return
         self._view.minimize_window()
 
     def on_open(self):
+        if self._lock: return
         filename = self._view.show_open_dialog()
         if filename != None:
             self._model.open(filename)
@@ -71,7 +76,7 @@ class PhotosPresenter(object):
         return filename
             
     def on_save(self):
-        if not self._model.is_open(): return
+        if self._lock or not self._model.is_open(): return
         
         # Check to see if a file exists with current name
         # If so, we need to add a version extenstion, e.g. (1), (2)
@@ -105,37 +110,40 @@ class PhotosPresenter(object):
 
     def _run_asynch_task(self, method, args):
         self._lock_ui()
-        thread = Thread(target=self._run_method_with_handler, args=(method, args, self._unlock_ui))
-        
-        thread.start()
+        worker = AsyncWorker()
+        worker.add_task(method, args)
+        worker.add_task(self._unlock_ui, ())       
+        worker.start()
 
 
     def on_share(self):
-        if not self._model.is_open(): return
+        if self._lock or not self._model.is_open(): return
         message = self._view.get_message("Enter a message to add to your photo!", "Message")[0]
         self._run_asynch_task(self._model.post_to_facebook, (message,))
         
 
-    def post_finish(self, arg1, arg2):
+    def post_finish(self):
         print "Post to facebook complete"
 
     def on_email(self):
-        if not self._model.is_open(): return
+        if self._lock or not self._model.is_open(): return
         info = self._view.get_message("Enter a message to add to the e-mail","Recipient", "Message")
         if info:
             self._model.email_photo(info[0], info[1])
 
     def on_fullscreen(self):
-        if not self._model.is_open(): return
+        if self._lock or not self._model.is_open(): return
         self._view.set_image_fullscreen(True)
 
     def on_unfullscreen(self):
         self._view.set_image_fullscreen(False)
 
     def on_filter_select(self, filter_name):
-        if not self._model.is_open(): return
+        if self._lock or not self._model.is_open(): return
+        
         self._model.apply_filter(filter_name)
         self._update_view()
+        self._view.select_filter(filter_name)
 
     # def image_to_pixbuf(self, img):
     #     if img.mode != 'RGB':
