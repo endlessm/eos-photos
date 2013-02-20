@@ -2,8 +2,7 @@ import os
 import Image
 import ImageOps
 import ImageFilter
-from social_bar_presenter import SocialBarPresenter
-from social_bar_model import SocialBarModel
+from facebook.facebook_post import FacebookPost
 
 from filter import Filter
 from filter import FilterManager
@@ -23,8 +22,6 @@ class PhotosModel(object):
     modify the current open photo.
     """
 
-    
-
     def __init__(self):
         super(PhotosModel, self).__init__()
         self._src_image = None
@@ -32,8 +29,7 @@ class PhotosModel(object):
         self._is_saved = 1
         
         #set up social bar so we can connect to facebook
-        social_bar_model = SocialBarModel()
-        self._social_bar = SocialBarPresenter(model=social_bar_model)
+        self._facebook_post = FacebookPost()
 
         self._curve_filters = []
 
@@ -87,11 +83,11 @@ class PhotosModel(object):
 
     def post_to_facebook(self, message):
         print "facebook"
-        if not self._social_bar.is_user_loged_in():
-            self._social_bar.fb_login()
+        if not self._facebook_post.is_user_loged_in():
+            self._facebook_post.fb_login()
         
         self._curr_image.save(TEMP_FILE)
-        self._social_bar.post_image(TEMP_FILE, message)
+        self._facebook_post.post_image(TEMP_FILE, message)
         print "end post to facebook"
 
     def _create_email(self, message, recipient):
