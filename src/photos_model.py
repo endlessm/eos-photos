@@ -1,23 +1,31 @@
 import os
+import tempfile
+import numpy
 import Image
 import ImageOps
 import ImageFilter
 
 from filter import Filter
 from filter import FilterManager
-import numpy
 
+CURVE_FOLDER = "../data/curves/"
 
 class PhotosModel(object):
     """
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
+
     def __init__(self):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
         self._is_saved = 1
+        self._curve_filters = []
+
+        for files in os.listdir(CURVE_FOLDER):
+            if files.lower().endswith(".acv"):
+                self._curve_filters.append(files.split('.')[0].upper())
 
     def open(self, filename):
         self._filename = filename
@@ -51,10 +59,27 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        return ["NORMAL", "GRAYSCALE", "SEPIA", "PIXELATE", "BOXELATE", "OLD PHOTO", "GRUNGIFY", "SCRATCH", "FABRIC", "BUMPY", "PAPER", "CONTOUR", "SMOOTH", "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "POSTERIZE", "FIND_EDGES", "BLUR", "COUNTRY", "DESERT", "NASHVILLE", "CROSSPROCESS", "LUMO", "PORTRAESQUE", "VELVIAESQUE", "PROVIAESQUE"]
+        filters =  ["NORMAL", "GRAYSCALE", "SEPIA",  "PIXELATE", "BOXELATE",
+        "OLD PHOTO", "GRUNGIFY",  "SCRATCH", "FABRIC", "BUMPY", "PAPER",
+        "CONTOUR", "SMOOTH",  "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE",
+        "POSTERIZE", "FIND_EDGES", "BLUR"]
+
+        filters.extend(self._curve_filters)
+
+        return filters
 
     def get_default_name(self):
         return "NORMAL"
+
+    def save_to_tempfile(self):
+        filename = ""
+        if self.has_alpha(self._curr_image):
+            filename = tempfile.mkstemp('.png')[1]
+            self._curr_image.save(filename)
+        else:
+            filename = tempfile.mkstemp('.jpg')[1]
+            self._curr_image.save(filename, quality=95)
+        return filename
 
     def _apply_filter_ext(self, image, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
@@ -112,21 +137,7 @@ class PhotosModel(object):
             self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
         elif filter_name == "BLUR":
             self._curr_image = self._src_image.filter(ImageFilter.BLUR)
-        elif filter_name == "COUNTRY":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "DESERT":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "NASHVILLE":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "CROSSPROCESS":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "LUMO":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "PORTRAESQUE":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "VELVIAESQUE":
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
-        elif filter_name == "PROVIAESQUE":
+        elif filter_name in self._curve_filters:
             self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
         else:
             self._is_saved = 1
@@ -167,11 +178,13 @@ class PhotosModel(object):
         texture = texture.convert(image.mode)
         return Image.blend(image, texture, alpha)
 
+    def has_alpha(self, image):
+        return 'a' in image.mode.lower()
+
     def kill_alpha(self, image):
-        mode = image.mode
-        if mode == "L" or mode == "RGB":
-            return image
-        return image.convert("RGB")
+        if self.has_alpha(self, image):
+            return image.convert("RGB")
+        return image
 
     def old_photo(self, image):
         image = self._apply_filter_ext(image, "LUMO")

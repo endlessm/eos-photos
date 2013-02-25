@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
@@ -78,20 +78,6 @@ class PhotosView(object):
             dialog.destroy()
             return None
 
-    def show_confirm_close(self):
-        dialog = Gtk.Dialog("Quit Without Save?",
-                        self.get_window(),
-                        0)
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_QUIT, 1)
-        dialog.set_default_size(150,100)
-        content = dialog.get_content_area()
-        content.add(Gtk.Label("Your changes have not been saved. Are you sure you want to quit?"))
-        content.show_all()
-        confirm = dialog.run()
-        dialog.destroy()
-        return confirm
-
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog ("Save Image", self.get_window(), Gtk.FileChooserAction.SAVE);
@@ -114,3 +100,71 @@ class PhotosView(object):
         else:
             dialog.destroy()
             return None
+
+    def show_confirm_close(self):
+        dialog = Gtk.MessageDialog(parent=self.get_window(),
+            text="Quit Without Save?",
+            secondary_text="Your changes have not been saved. Are you sure you want to quit?",
+            message_type=Gtk.MessageType.WARNING)
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.add_button(Gtk.STOCK_QUIT, 1)
+        # set default to cancel
+        dialog.set_default_response(0)
+        confirm = dialog.run()
+        dialog.destroy()
+        return confirm == 1
+
+    def show_message(self, text, secondary_text=""):
+        dialog = Gtk.MessageDialog(parent=self.get_window(),
+            text=text,
+            secondary_text=secondary_text,
+            message_type=Gtk.MessageType.INFO)
+        dialog.add_button(Gtk.STOCK_OK, 0)
+        # set default to cancel
+        dialog.set_default_response(0)
+        confirm = dialog.run()
+        dialog.destroy()
+
+    # Gets responses from a user. Args is a list of requested responses
+    # from the user.
+    def get_message(self, prompt, *args):
+        dialog = Gtk.MessageDialog(self.get_window(), 0, 
+            Gtk.MessageType.OTHER, Gtk.ButtonsType.OK_CANCEL, 
+            prompt)
+        dialog.set_default_response(Gtk.ResponseType.OK)
+
+        entries = []
+        # Create an entry for each of the requested responses
+        for msg in args:
+            entry = Gtk.Entry()
+            entries.append(entry)
+            hbox = Gtk.HBox()
+            hbox.pack_start(Gtk.Label(msg), False, 5, 5)
+            hbox.pack_end(entry, True, True, 0)
+            dialog.vbox.pack_start(hbox, True, True, 0)
+
+        dialog.show_all()
+        result = dialog.run()
+
+        # If user clicks cancel, return having done nothing
+        if result == Gtk.ResponseType.CANCEL: 
+            dialog.destroy()
+            return None
+
+        # Store the responses from user in this list
+        responses = []
+        map(lambda x: responses.append(x.get_text()), entries)
+        dialog.destroy()
+    
+        return responses
+
+    def show_spinner(self):
+        watch = Gdk.Cursor(Gdk.CursorType.WATCH)
+        gdk_window = self._window.get_window()
+        gdk_window.set_cursor(watch)
+
+    def hide_spinner(self):
+        pointer = Gdk.Cursor(Gdk.CursorType.ARROW)
+        gdk_window = self._window.get_window()
+        gdk_window.set_cursor(pointer)
+        self._window.queue_draw()

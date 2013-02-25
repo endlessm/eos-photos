@@ -1,5 +1,5 @@
 import sys, os
-from gi.repository import Gtk, Gdk, GLib, GtkClutter, Gio
+from gi.repository import Gtk, Gdk, GLib, GtkClutter, Gio, GObject
 
 import gettext
 gettext.install('endless_photos')
@@ -35,6 +35,8 @@ class EndlessPhotos(Gtk.Application):
         # Chaining up is required
         Gtk.Application.do_startup(self)
 
+        
+
         # Style CSS
         provider = Gtk.CssProvider()
         provider.load_from_path('../data/endless_photos.css')
@@ -53,6 +55,7 @@ class EndlessPhotos(Gtk.Application):
             if (not arg[0] == '-') and os.path.exists(arg):
                 self._presenter.open_image(arg)
                 break
+
 
         # Run the main loop, to make sure the window is shown and therefore
         # seems responsive
@@ -76,6 +79,7 @@ class EndlessPhotos(Gtk.Application):
         pass
 
 if __name__ == '__main__':
+    GObject.threads_init()
     GtkClutter.init([])
     app = EndlessPhotos()
     app.run(sys.argv)
