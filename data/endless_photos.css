@@ -26,6 +26,7 @@
 
 #save-button,
 #share-button,
+#email-button,
 #close-button,
 #minimize-button {
     -GtkWidget-focus-line-width: 0;

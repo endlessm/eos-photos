@@ -16,5 +16,5 @@ class AsyncWorker(Thread):
                 method, args = self.queue.get()
                 method(*args)
             except Exception, exception:
-                print "Exception raised in async worker"
-
+                print "Exception raised in async worker of type ", type(exception)
+                print exception

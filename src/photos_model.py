@@ -2,16 +2,10 @@ import os
 import Image
 import ImageOps
 import ImageFilter
-from facebook.facebook_post import FacebookPost
 
 from filter import Filter
 from filter import FilterManager
 import numpy
-
-import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.mime.image import MIMEImage
-from email.mime.text import MIMEText
 
 TEMP_FILE = os.path.expanduser("~/Desktop/temp.jpg")
 CURVE_FOLDER = "../data/curves/"
@@ -27,10 +21,6 @@ class PhotosModel(object):
         self._src_image = None
         self._curr_image = None
         self._is_saved = 1
-        
-        #set up social bar so we can connect to facebook
-        self._facebook_post = FacebookPost()
-
         self._curve_filters = []
 
         for files in os.listdir(CURVE_FOLDER):
@@ -69,10 +59,10 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        filters =  ["NORMAL", "GRAYSCALE", "SEPIA", 
-        "PIXELATE", "BOXELATE", "OLD PHOTO", "GRUNGIFY", 
-        "SCRATCH", "FABRIC", "BUMPY", "PAPER", "CONTOUR", "SMOOTH", 
-        "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "POSTERIZE", "FIND_EDGES", "BLUR"]
+        filters =  ["NORMAL", "GRAYSCALE", "SEPIA",  "PIXELATE", "BOXELATE",
+        "OLD PHOTO", "GRUNGIFY",  "SCRATCH", "FABRIC", "BUMPY", "PAPER",
+        "CONTOUR", "SMOOTH",  "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE",
+        "POSTERIZE", "FIND_EDGES", "BLUR"]
 
         filters.extend(self._curve_filters)
 
@@ -81,53 +71,9 @@ class PhotosModel(object):
     def get_default_name(self):
         return "NORMAL"
 
-    def post_to_facebook(self, message):
-        print "facebook"
-        if not self._facebook_post.is_user_loged_in():
-            self._facebook_post.fb_login()
-        
+    def save_to_tempfile(self):
         self._curr_image.save(TEMP_FILE)
-        self._facebook_post.post_image(TEMP_FILE, message)
-        print "end post to facebook"
-
-    def _create_email(self, message, recipient):
-        # Set up header of email
-        email = MIMEMultipart()
-        email["From"] = "Rory MacQueen"
-        email["To"] = recipient
-        email["Subject"] = "Check out my photo from Endless Photos!"
-
-        # Embed image in body of email using HTML
-        body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />', _subtype='html')
-        email.attach(body)
-
-        # Write image to email from file
-        self._curr_image.save(TEMP_FILE)
-        fp = open(TEMP_FILE, 'rb')
-        msg = MIMEImage(fp.read())
-        msg.add_header('Content-Id', '<myimage>')
-        #email.add_header('Content-Disposition', 'inline', filename=TEMP_FILE)
-        email.attach(msg)
-        return email.as_string()
-
-    def email_photo(self, recipient, message):
-        # Set up email.
-        # TODO: Change this so it is not always sending from Rory's email!
-        from_addr = "rorymacqueen@gmail.com"
-        to_addr = recipient
-        username = 'rorymacqueen'
-        password = ''
-
-        email = self._create_email(message, recipient)
-
-        # For now, always using gmail server
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.starttls()
-        server.login(username, password)
-        # Send email
-        server.sendmail(from_addr, [to_addr], email)
-        server.quit()
-
+        return TEMP_FILE
 
     def _apply_filter_ext(self, image, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
