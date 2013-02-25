@@ -1,5 +1,6 @@
-import sys
-from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject
+import sys, os
+from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio
+
 
 import gettext
 gettext.install('endless_photos')
@@ -22,7 +23,8 @@ class EndlessPhotos(Gtk.Application):
 
     def __init__(self):
         Gtk.Application.__init__(self,
-            application_id='com.endlessm.endless-photos')
+            application_id='com.endlessm.endless-photos',
+            flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
     def do_startup(self):
         """
@@ -49,12 +51,24 @@ class EndlessPhotos(Gtk.Application):
         self._window = self._view.get_window()
         self.add_window(self._window)
         self._window.show()
+        # hacky way of handling file open args as the proper way has python binding issues.
+        for arg in sys.argv[1:]:
+            if (not arg[0] == '-') and os.path.exists(arg):
+                self._presenter.open_image(arg)
+                break
 
 
         # Run the main loop, to make sure the window is shown and therefore
         # seems responsive
         while Gtk.events_pending():
             Gtk.main_iteration()
+
+    # This is the proper way to handle opening files, but it doesn't work with
+    # the python bindings. The file list is always empty. This is a known bug
+    # that may be fixed in newer versions of GTK
+    def do_open(self, files, nfiles, hint):
+        # print files # always empty
+        pass
 
     def do_activate(self):
         """

@@ -21,6 +21,11 @@ class PhotosPresenter(object):
         self._view.set_filter_names(filters, self._model.get_default_name())
         self._lock = False
 
+    def open_image(self, filename):
+        self._model.open(filename)
+        self._view.select_filter(self._model.get_default_name())
+        self._update_view()
+
     def _update_view(self):
         im = self._model.get_image().convert('RGBA')
         width, height = im.size
@@ -56,9 +61,7 @@ class PhotosPresenter(object):
         if self._lock: return
         filename = self._view.show_open_dialog()
         if filename != None:
-            self._model.open(filename)
-            self._view.select_filter(self._model.get_default_name())
-            self._update_view()
+            self.open_image(filename)
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
