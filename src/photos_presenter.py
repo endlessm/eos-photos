@@ -139,7 +139,7 @@ class PhotosPresenter(object):
         
     def on_email(self):
         if self._lock or not self._model.is_open(): return
-        info = self._view.get_message("Enter a message to add to the e-mail", "Your Name", "Recipient", "Message")
+        info = self._view.get_message("Enter a message to add to the e-mail", "Your Name", "Recipient email", "Message")
         if info:
             self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))
 

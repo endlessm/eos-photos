@@ -3,18 +3,22 @@ from email.MIMEMultipart import MIMEMultipart
 from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 
-ENDLESS_ADDRESS = "photos@endlessm.com"
-PASSWORD = "123"
+ENDLESS_ADDRESS = "euquero@endlessm.com"
+PASSWORD = "yesand5000"
 
 def _create_email(name, message, recipient, file):
     # Set up header of email
     email = MIMEMultipart()
-    email["From"] = "Endless Photos"
+    email["From"] = "Endless Photos <photos@endlessm.com>"
     email["To"] = recipient
-    email["Subject"] = name + "sent you a photo from Endless Photos!"
+    if len(name.strip()) == 0:
+        # All whitespace
+        name = "Someone"
+    email["Subject"] = name + " sent you a photo from Endless Photos!"
 
     # Embed image in body of email using HTML
-    body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />', _subtype='html')
+    noreply = '<p><i>Please do not reply to this email. Replies are sent to an unmonitored inbox.</i></p>'
+    body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />' + noreply, _subtype='html')
     email.attach(body)
 
     # Write image to email from file
