@@ -1,13 +1,13 @@
 import os
+import tempfile
+import numpy
 import Image
 import ImageOps
 import ImageFilter
 
 from filter import Filter
 from filter import FilterManager
-import numpy
 
-TEMP_FILE = os.path.expanduser("~/Desktop/temp.jpg")
 CURVE_FOLDER = "../data/curves/"
 
 class PhotosModel(object):
@@ -72,8 +72,14 @@ class PhotosModel(object):
         return "NORMAL"
 
     def save_to_tempfile(self):
-        self._curr_image.save(TEMP_FILE)
-        return TEMP_FILE
+        filename = ""
+        if self.has_alpha(self._curr_image):
+            filename = tempfile.mkstemp('.png')[1]
+            self._curr_image.save(filename)
+        else:
+            filename = tempfile.mkstemp('.jpg')[1]
+            self._curr_image.save(filename, quality=95)
+        return filename
 
     def _apply_filter_ext(self, image, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
@@ -172,11 +178,13 @@ class PhotosModel(object):
         texture = texture.convert(image.mode)
         return Image.blend(image, texture, alpha)
 
+    def has_alpha(self, image):
+        return 'a' in image.mode.lower()
+
     def kill_alpha(self, image):
-        mode = image.mode
-        if mode == "L" or mode == "RGB":
-            return image
-        return image.convert("RGB")
+        if self.has_alpha(self, image):
+            return image.convert("RGB")
+        return image
 
     def old_photo(self, image):
         image = self._apply_filter_ext(image, "LUMO")
