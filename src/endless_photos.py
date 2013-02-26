@@ -1,7 +1,6 @@
 import sys, os
 from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio
 
-
 import gettext
 gettext.install('endless_photos')
 

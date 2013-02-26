@@ -15,7 +15,7 @@ class FBAuthWindow(gtk.Window):
     FB_APP_ID = '407909575958642'
     FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
 
-    def __init__(self, presenter=None, url='', width=800, height=600):
+    def __init__(self, presenter=None, url='', width=600, height=400):
         super(FBAuthWindow, self).__init__()
         self.set_title('Login')
         self._presenter = presenter
@@ -23,7 +23,8 @@ class FBAuthWindow(gtk.Window):
         self.scroller = gtk.ScrolledWindow()
         self.web_view = webkit.WebView()
         self.web_view.connect("navigation-requested", self.on_navigation_requested)
-        self.web_view.open('http://graph.facebook.com/oauth/authorize?scope=read_stream%2Cpublish_stream&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&client_id=' + self.FB_APP_ID)
+        self.web_view.open('http://graph.facebook.com/oauth/authorize?scope=read_stream%2Cpublish_stream&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&display=popup&client_id=' + self.FB_APP_ID)
+        self.web_view.set_size_request(width, height)
         self.web_view.show()
         self.scroller.add(self.web_view)
         self.scroller.show()

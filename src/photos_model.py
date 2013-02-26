@@ -1,20 +1,13 @@
 import os
+import tempfile
+import numpy
 import Image
 import ImageOps
 import ImageFilter
-from social_bar_presenter import SocialBarPresenter
-from social_bar_model import SocialBarModel
 
 from filter import Filter
 from filter import FilterManager
-import numpy
 
-import smtplib
-from email.MIMEMultipart import MIMEMultipart
-from email.mime.image import MIMEImage
-from email.mime.text import MIMEText
-
-TEMP_FILE = os.path.expanduser("~/Desktop/temp.jpg")
 CURVE_FOLDER = "../data/curves/"
 
 class PhotosModel(object):
@@ -23,18 +16,11 @@ class PhotosModel(object):
     modify the current open photo.
     """
 
-    
-
     def __init__(self):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
         self._is_saved = 1
-        
-        #set up social bar so we can connect to facebook
-        social_bar_model = SocialBarModel()
-        self._social_bar = SocialBarPresenter(model=social_bar_model)
-
         self._curve_filters = []
 
         for files in os.listdir(CURVE_FOLDER):
@@ -73,10 +59,10 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        filters =  ["NORMAL", "GRAYSCALE", "SEPIA", 
-        "PIXELATE", "BOXELATE", "OLD PHOTO", "GRUNGIFY", 
-        "SCRATCH", "FABRIC", "BUMPY", "PAPER", "CONTOUR", "SMOOTH", 
-        "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE", "POSTERIZE", "FIND_EDGES", "BLUR"]
+        filters =  ["NORMAL", "GRAYSCALE", "SEPIA",  "PIXELATE", "BOXELATE",
+        "OLD PHOTO", "GRUNGIFY",  "SCRATCH", "FABRIC", "BUMPY", "PAPER",
+        "CONTOUR", "SMOOTH",  "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE",
+        "POSTERIZE", "FIND_EDGES", "BLUR"]
 
         filters.extend(self._curve_filters)
 
@@ -85,53 +71,15 @@ class PhotosModel(object):
     def get_default_name(self):
         return "NORMAL"
 
-    def post_to_facebook(self, message):
-        print "facebook"
-        if not self._social_bar.is_user_loged_in():
-            self._social_bar.fb_login()
-        
-        self._curr_image.save(TEMP_FILE)
-        self._social_bar.post_image(TEMP_FILE, message)
-        print "end post to facebook"
-
-    def _create_email(self, message, recipient):
-        # Set up header of email
-        email = MIMEMultipart()
-        email["From"] = "Rory MacQueen"
-        email["To"] = recipient
-        email["Subject"] = "Check out my photo from Endless Photos!"
-
-        # Embed image in body of email using HTML
-        body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />', _subtype='html')
-        email.attach(body)
-
-        # Write image to email from file
-        self._curr_image.save(TEMP_FILE)
-        fp = open(TEMP_FILE, 'rb')
-        msg = MIMEImage(fp.read())
-        msg.add_header('Content-Id', '<myimage>')
-        #email.add_header('Content-Disposition', 'inline', filename=TEMP_FILE)
-        email.attach(msg)
-        return email.as_string()
-
-    def email_photo(self, recipient, message):
-        # Set up email.
-        # TODO: Change this so it is not always sending from Rory's email!
-        from_addr = "rorymacqueen@gmail.com"
-        to_addr = recipient
-        username = 'rorymacqueen'
-        password = ''
-
-        email = self._create_email(message, recipient)
-
-        # For now, always using gmail server
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.starttls()
-        server.login(username, password)
-        # Send email
-        server.sendmail(from_addr, [to_addr], email)
-        server.quit()
-
+    def save_to_tempfile(self):
+        filename = ""
+        if self.has_alpha(self._curr_image):
+            filename = tempfile.mkstemp('.png')[1]
+            self._curr_image.save(filename)
+        else:
+            filename = tempfile.mkstemp('.jpg')[1]
+            self._curr_image.save(filename, quality=95)
+        return filename
 
     def _apply_filter_ext(self, image, filter_name):
         img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
@@ -230,11 +178,13 @@ class PhotosModel(object):
         texture = texture.convert(image.mode)
         return Image.blend(image, texture, alpha)
 
+    def has_alpha(self, image):
+        return 'a' in image.mode.lower()
+
     def kill_alpha(self, image):
-        mode = image.mode
-        if mode == "L" or mode == "RGB":
-            return image
-        return image.convert("RGB")
+        if self.has_alpha(self, image):
+            return image.convert("RGB")
+        return image
 
     def old_photo(self, image):
         image = self._apply_filter_ext(image, "LUMO")

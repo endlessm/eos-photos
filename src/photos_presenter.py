@@ -2,8 +2,9 @@ import os
 import tempfile
 import array
 
-from threading import Thread
 from asyncworker import AsyncWorker
+from share.facebook_post import FacebookPost
+import share.emailer
 
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
@@ -20,6 +21,9 @@ class PhotosPresenter(object):
         filters = self._model.get_filter_names()
         self._view.set_filter_names(filters, self._model.get_default_name())
         self._lock = False
+        #set up social bar so we can connect to facebook
+        self._facebook_post = FacebookPost()
+
 
     def open_image(self, filename):
         self._model.open(filename)
@@ -31,38 +35,6 @@ class PhotosPresenter(object):
         width, height = im.size
         self._view.replace_image_from_data(im.tostring(),
                                            width, height)
-
-    def _lock_ui(self):
-        self._lock = True
-        self._view.show_spinner()
-
-    def _unlock_ui(self):
-        self._lock = False
-        self._view.hide_spinner()
-
-
-    #UI callbacks...
-    def on_close(self):
-        # Prompt for save?
-        if self._lock: return 
-        if self._model.is_saved():
-            self._view.close_window()
-        else:
-            confirm = self._view.show_confirm_close()
-            if confirm:
-                self._view.close_window()
-                
-
-    def on_minimize(self):
-        if self._lock: return
-        self._view.minimize_window()
-
-    def on_open(self):
-        if self._lock: return
-        filename = self._view.show_open_dialog()
-        if filename != None:
-            self.open_image(filename)
-
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
         ext = name_arr.pop(-1)
@@ -77,7 +49,63 @@ class PhotosPresenter(object):
         if ext not in VALID_FILE_TYPES:
             return dot_join.join(name_arr) + "." + original_ext
         return filename
-            
+
+    def _lock_ui(self):
+        self._lock = True
+        self._view.show_spinner()
+
+    def _unlock_ui(self):
+        self._lock = False
+        self._view.hide_spinner()
+
+    def _run_method_with_handler(self, method, args, callback, callback_args=()):
+        method(*args)
+        callback(*callback_args)
+
+
+    def _run_asynch_task(self, method, args):
+        self._lock_ui()
+        worker = AsyncWorker()
+        worker.add_task(method, args)
+        worker.add_task(self._unlock_ui, ())       
+        worker.start()
+
+    def _do_post_to_facebook(self, message):
+        if not self._facebook_post.is_user_loged_in():
+            self._facebook_post.fb_login()
+        filename = self._model.save_to_tempfile()
+        if not self._facebook_post.post_image(filename, message):
+            # we need to request this from the gtk main thread...
+            # self._view.show_message("Post to facebook failed.")
+            print "Post failed."
+
+    def _do_send_email(self, name, recipient, message):
+        filename = self._model.save_to_tempfile()
+        if not share.emailer.email_photo(name, recipient, message, filename):
+            # self._view.show_message("Email failed.")
+            print "Email failed"
+
+    #UI callbacks...
+    def on_close(self):
+        # Prompt for save?
+        if self._lock: return 
+        if self._model.is_saved():
+            self._view.close_window()
+        else:
+            confirm = self._view.show_confirm_close()
+            if confirm:
+                self._view.close_window()
+
+    def on_minimize(self):
+        if self._lock: return
+        self._view.minimize_window()
+
+    def on_open(self):
+        if self._lock: return
+        filename = self._view.show_open_dialog()
+        if filename != None:
+            self.open_image(filename)
+
     def on_save(self):
         if self._lock or not self._model.is_open(): return
         
@@ -106,33 +134,17 @@ class PhotosPresenter(object):
             filename = self._check_extension(filename, ext)
             self._model.save(filename)
 
-    def _run_method_with_handler(self, method, args, callback, callback_args=()):
-        method(*args)
-        callback(*callback_args)
-
-
-    def _run_asynch_task(self, method, args):
-        self._lock_ui()
-        worker = AsyncWorker()
-        worker.add_task(method, args)
-        worker.add_task(self._unlock_ui, ())       
-        worker.start()
-
-
     def on_share(self):
         if self._lock or not self._model.is_open(): return
-        message = self._view.get_message("Enter a message to add to your photo!", "Message")[0]
-        self._run_asynch_task(self._model.post_to_facebook, (message,))
+        info = self._view.get_message("Enter a message to add to your photo!", "Message")
+        if info:
+            self._run_asynch_task(self._do_post_to_facebook, (info[0],))
         
-
-    def post_finish(self):
-        print "Post to facebook complete"
-
     def on_email(self):
         if self._lock or not self._model.is_open(): return
-        info = self._view.get_message("Enter a message to add to the e-mail","Recipient", "Message")
+        info = self._view.get_message("Enter a message to add to the e-mail", "Your Name", "Recipient email", "Message")
         if info:
-            self._model.email_photo(info[0], info[1])
+            self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))
 
     def on_fullscreen(self):
         if self._lock or not self._model.is_open(): return
@@ -147,16 +159,3 @@ class PhotosPresenter(object):
         self._model.apply_filter(filter_name)
         self._update_view()
         self._view.select_filter(filter_name)
-
-    # def image_to_pixbuf(self, img):
-    #     if img.mode != 'RGB':
-    #         img = img.convert('RGB')
-    #     buff = StringIO.StringIO()
-    #     img.save(buff, 'ppm')
-    #     contents = buff.getvalue()
-    #     buff.close()
-    #     loader = GdkPixbuf.PixbufLoader.new_with_type('pnm')
-    #     loader.write(contents)
-    #     pixbuf = loader.get_pixbuf()
-    #     loader.close()
-    #     return pixbuf
