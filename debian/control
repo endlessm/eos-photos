@@ -1,0 +1,13 @@
+Source: endless-os-weather
+Section: non-free/misc
+Priority: extra
+Maintainer: EndlessMobile <endlessmobile@gmail.com>
+Build-Depends: debhelper (>= 7.0.0)
+Standards-Version: 3.9.2
+Homepage: http://www.endlessm.com
+
+Package: endless-os-weather
+Architecture: all
+Depends: gir1.2-gtk-3.0, python (>= 2.7)
+Description: Endless OS Weather
+ This is a weather application for Endless OS

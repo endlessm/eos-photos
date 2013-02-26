@@ -1,0 +1,8 @@
+data/endless_weather.css usr/share/endless-os-weather/data
+data/weather.desktop usr/share/applications
+images/* usr/share/endless-os-weather/images
+src/* usr/share/endless-os-weather/src
+icons/* usr/share/icons/Endless
+fonts/* usr/share/fonts/truetype/Endless
+po/endless_weather.mo usr/share/locale/pt_BR/LC_MESSAGES/
+endless-os-weather /usr/bin

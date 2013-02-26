@@ -1,0 +1,7 @@
+files
+*.substvars
+*.log
+*~
+endless-os-weather
+endless-os-weather.postinst.debhelper
+endless-os-weather.postrm.debhelper

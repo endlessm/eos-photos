@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Name=Weather
+Name[en_US]=Weather
+Name[pt_BR]=Tempo
+Name[es_GT]=Tiempo
+Comment=See the weather forecast
+GenericName=Weather
+Type=Application
+Icon=endless-os-weather
+Exec=endless-os-weather
+Categories=Network;News
+X-EndlessM-Normal-Icon=/usr/share/endless-os-weather/images/weather_normal.png
+X-EndlessM-Hover-Icon=/usr/share/endless-os-weather/images/weather_hover.png
+X-EndlessM-Down-Icon=/usr/share/endless-os-weather/images/weather_down.png
