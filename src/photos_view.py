@@ -101,18 +101,32 @@ class PhotosView(object):
             dialog.destroy()
             return None
 
+    def show_confirm_open_new(self):
+        dialog = Gtk.MessageDialog(parent=self.get_window(),
+            text="Open New Photo Without Save?",
+            secondary_text="Your changes have not been saved. Are you sure you want to open a new photo without saving?",
+            message_type=Gtk.MessageType.WARNING)
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.add_button(Gtk.STOCK_OK, 1)
+        # set default to cancel
+        dialog.set_default_response(0)
+        confirm = dialog.run()
+        dialog.destroy()
+        return confirm        
+
     def show_confirm_close(self):
         dialog = Gtk.MessageDialog(parent=self.get_window(),
             text="Quit Without Save?",
             secondary_text="Your changes have not been saved. Are you sure you want to quit?",
             message_type=Gtk.MessageType.WARNING)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_QUIT, 1)
+        dialog.add_button(Gtk.STOCK_SAVE, 1)
+        dialog.add_button(Gtk.STOCK_QUIT, 2)
         # set default to cancel
         dialog.set_default_response(0)
         confirm = dialog.run()
         dialog.destroy()
-        return confirm == 1
+        return confirm
 
     def show_message(self, text, secondary_text=""):
         dialog = Gtk.MessageDialog(parent=self.get_window(),

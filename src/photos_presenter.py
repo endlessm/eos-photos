@@ -6,6 +6,8 @@ from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
 import share.emailer
 
+from gi.repository import Gtk, Gdk
+
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
 class PhotosPresenter(object):
@@ -87,24 +89,36 @@ class PhotosPresenter(object):
 
     #UI callbacks...
     def on_close(self):
-        # Prompt for save?
+        # Prompt for save before quitting
         if self._lock: return 
-        if self._model.is_saved():
-            self._view.close_window()
-        else:
+
+        if not self._model.is_saved():
             confirm = self._view.show_confirm_close()
-            if confirm:
-                self._view.close_window()
+            if not confirm: 
+                return
+            elif confirm == 1:
+                self.on_save()
+
+        self._view.close_window()
 
     def on_minimize(self):
         if self._lock: return
         self._view.minimize_window()
 
-    def on_open(self):
-        if self._lock: return
+    def _do_open(self):
         filename = self._view.show_open_dialog()
         if filename != None:
             self.open_image(filename)
+
+    def on_open(self):
+        if self._lock: return
+        if not self._model.is_saved():
+            confirm = self._view.show_confirm_open_new()
+            if not confirm: 
+                return
+        self._do_open()
+        
+
 
     def on_save(self):
         if self._lock or not self._model.is_open(): return
@@ -153,9 +167,20 @@ class PhotosPresenter(object):
     def on_unfullscreen(self):
         self._view.set_image_fullscreen(False)
 
+    def _do_on_filter_select(self, filter_name):
+        self._model.apply_filter(filter_name)
+
+        Gdk.threads_enter()
+        self._update_view()
+        #self._view.select_filter(filter_name)
+        Gdk.threads_leave()
+
+
     def on_filter_select(self, filter_name):
         if self._lock or not self._model.is_open(): return
         
+
+        #self._run_asynch_task(self._do_on_filter_select, (filter_name,))        
         self._model.apply_filter(filter_name)
         self._update_view()
         self._view.select_filter(filter_name)
