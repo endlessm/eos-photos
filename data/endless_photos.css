@@ -84,7 +84,6 @@
 
 PhotosWindow {
     background-size: cover;
-    background-image: url("../images/Background_Texture-Light.jpg");
 }
 
 .primary-toolbar {

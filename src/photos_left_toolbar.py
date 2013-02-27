@@ -4,10 +4,11 @@ class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, **kw):
+    def __init__(self, images_path="", **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
-        
-        self._filters_image = Gtk.Image.new_from_file("../images/Filters_title.png")
+        self._images_path = images_path
+
+        self._filters_image = Gtk.Image.new_from_file(images_path + "Filters_title.png")
         self._filters_label = Gtk.Label("FILTROS")
         self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
@@ -22,7 +23,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self._scroll_area.add_with_viewport(self._scroll_contents)
 
-        self._drop_shadow = Gtk.Image.new_from_file("../images/Filters_drop-shadow.png")
+        self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filters_drop-shadow.png")
         self._drop_shadow.set_halign(Gtk.Align.CENTER)
         self._drop_shadow.set_valign(Gtk.Align.START)
         self._overlay = Gtk.Overlay()
@@ -39,8 +40,8 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._filter_options[default].select()
 
     def _add_filter_option(self, filter_name):
-        
-        option = FilterOption(filter_name=filter_name, clicked_callback=lambda:self._presenter.on_filter_select(filter_name))
+        option = FilterOption(images_path=self._images_path, filter_name=filter_name,
+            clicked_callback=lambda:self._presenter.on_filter_select(filter_name))
         self._filter_options[filter_name] = option
         align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
         align.add(option)
@@ -61,10 +62,10 @@ class FilterOption(Gtk.EventBox):
     """
     A selectable filter option with an image and caption.
     """
-    def __init__(self, filter_name="NORMAL", clicked_callback=None):
+    def __init__(self, images_path="", filter_name="NORMAL", clicked_callback=None):
         super(FilterOption, self).__init__(name="filter-event-box")
         
-        thumbnail_path = "../images/filter_thumbnails/filter_" + filter_name + ".jpg"
+        thumbnail_path = images_path + "/filter_thumbnails/filter_" + filter_name + ".jpg"
         
         self._filter_name = filter_name
         self._clicked_callback = clicked_callback

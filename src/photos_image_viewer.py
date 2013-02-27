@@ -14,7 +14,7 @@ class ImageViewer(Gtk.Alignment):
     BORDER_WIDTH = 7
     BORDER_COLOR = '#fff'
 
-    def __init__(self, **kw):
+    def __init__(self, images_path="", **kw):
         super(ImageViewer, self).__init__(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0, **kw)
         self._embed = GtkClutter.Embed.new()
         self._embed.connect('size-allocate', self._on_embed_size_allocate)
@@ -28,7 +28,7 @@ class ImageViewer(Gtk.Alignment):
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
         self._stage.add_child(self._border)
 
-        self._image_back = Clutter.Texture.new_from_file("../images/transparent_tile.png")
+        self._image_back = Clutter.Texture.new_from_file(images_path + "transparent_tile.png")
         self._image_back.set_repeat(True, True)
         self._image_back.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
@@ -39,9 +39,9 @@ class ImageViewer(Gtk.Alignment):
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
         self._stage.add_child(self._image)
 
-        self._fullscreen_button = ClutterImageButton(normal_path="../images/expand-image_normal.png",
-                                                 hover_path="../images/expand-image_hover.png",
-                                                 down_path="../images/expand-image_down.png",
+        self._fullscreen_button = ClutterImageButton(normal_path=images_path + "expand-image_normal.png",
+                                                 hover_path=images_path + "expand-image_hover.png",
+                                                 down_path=images_path + "expand-image_down.png",
                                                  name="fullscreen-button")
         self._fullscreen_button.set_margin_bottom(ImageViewer.BORDER_WIDTH)
         self._fullscreen_button.set_margin_right(ImageViewer.BORDER_WIDTH)
@@ -49,9 +49,9 @@ class ImageViewer(Gtk.Alignment):
             align_axis=Clutter.AlignAxis.BOTH, factor=1.0, source=self._stage))
         self._fullscreen_button.get_click_action().connect('clicked', lambda w, e: self._presenter.on_fullscreen())
 
-        self._unfullscreen_button = ClutterImageButton(normal_path="../images/expand-image-close_normal.png",
-                                                 hover_path="../images/expand-image-close_hover.png",
-                                                 down_path="../images/expand-image-close_down.png",
+        self._unfullscreen_button = ClutterImageButton(normal_path=images_path + "expand-image-close_normal.png",
+                                                 hover_path=images_path + "expand-image-close_hover.png",
+                                                 down_path=images_path + "expand-image-close_down.png",
                                                  name="fullscreen-button")
         self._unfullscreen_button.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=1.0, source=self._stage))

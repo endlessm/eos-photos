@@ -7,26 +7,25 @@ class PhotosTopToolbar(Gtk.EventBox):
     """
     The top toolbar of the Photo app with open, minimize and close buttons.
     """
-    def __init__(self, **kw):
+    def __init__(self, images_path="", **kw):
         super(PhotosTopToolbar, self).__init__(**kw)
         self.get_style_context().add_class(Gtk.STYLE_CLASS_PRIMARY_TOOLBAR)
 
-        #TODO: nice image path from application like in weather
-        self._close_button = ImageButton(normal_path="../images/close_normal.png",
-                                         hover_path="../images/close_hover.png",
-                                         down_path="../images/close_down.png",
+        self._close_button = ImageButton(normal_path=images_path + "close_normal.png",
+                                         hover_path=images_path + "close_hover.png",
+                                         down_path=images_path + "close_down.png",
                                          name="close-button")
         self._close_button.connect('clicked', lambda w: self._presenter.on_close())
 
-        self._minimize_button = ImageButton(normal_path="../images/minimize_normal.png",
-                                            hover_path="../images/minimize_hover.png",
-                                            down_path="../images/minimize_down.png",
+        self._minimize_button = ImageButton(normal_path=images_path + "minimize_normal.png",
+                                            hover_path=images_path + "minimize_hover.png",
+                                            down_path=images_path + "minimize_down.png",
                                             name="minimize-button")
         self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 
-        self._open_button = ImageTextButton(normal_path="../images/close_normal.png",
-                                            hover_path="../images/close_hover.png",
-                                            down_path="../images/close_down.png",
+        self._open_button = ImageTextButton(normal_path=images_path + "close_normal.png",
+                                            hover_path=images_path + "close_hover.png",
+                                            down_path=images_path + "close_down.png",
                                             label_text=_("OPEN IMAGE"),
                                             name="open-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())

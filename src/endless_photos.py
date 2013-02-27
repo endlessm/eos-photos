@@ -10,6 +10,8 @@ from photos_presenter import PhotosPresenter
 
 
 class EndlessPhotos(Gtk.Application):
+    ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
+    # ABS_PHOTOS_PATH = '/home/matt/share/eos-photos'
     """
     The photo application.
 
@@ -35,17 +37,16 @@ class EndlessPhotos(Gtk.Application):
         # Chaining up is required
         Gtk.Application.do_startup(self)
 
-        
-
         # Style CSS
         provider = Gtk.CssProvider()
-        provider.load_from_path('../data/endless_photos.css')
+        provider.load_from_path(self.get_data_path() + 'endless_photos.css')
         Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Create the mvp for the Photo app and attach the window to the application.
-        self._model = PhotosModel()
-        self._view = PhotosView()
+        self._model = PhotosModel(textures_path=self.get_images_path() + "textures",
+            curves_path=self.get_data_path() + "curves")
+        self._view = PhotosView(images_path=self.get_images_path())
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()
         self.add_window(self._window)
@@ -78,8 +79,16 @@ class EndlessPhotos(Gtk.Application):
         """
         pass
 
-if __name__ == '__main__':
-    GObject.threads_init()
-    GtkClutter.init([])
-    app = EndlessPhotos()
-    app.run(sys.argv)
+    def get_images_path(self):
+        """
+        Returns path in the file system where application-specific image files
+        are stored.
+        """
+        return self.ABS_PHOTOS_PATH + '/images/'
+
+    def get_data_path(self):
+        """
+        Returns path in the file system where application-specific data files
+        are stored.
+        """
+        return self.ABS_PHOTOS_PATH + '/data/'

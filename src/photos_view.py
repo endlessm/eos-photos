@@ -12,12 +12,16 @@ class PhotosView(object):
     presenter calls to the appropriate UI elements. PhotosWindow does the
     actual toplevel layout of the toolbars and central view.
     """
-    def __init__(self):
-        self._top_toolbar = PhotosTopToolbar()
-        self._left_toolbar = PhotosLeftToolbar()
-        self._right_toolbar = PhotosRightToolbar()
-        self._image_viewer = ImageViewer()
-        self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar, self._image_viewer)
+    def __init__(self, images_path=""):
+        self._top_toolbar = PhotosTopToolbar(images_path=images_path)
+        self._left_toolbar = PhotosLeftToolbar(images_path=images_path)
+        self._right_toolbar = PhotosRightToolbar(images_path=images_path)
+        self._image_viewer = ImageViewer(images_path=images_path)
+        self._window = PhotosWindow(images_path=images_path,
+                                    top_toolbar=self._top_toolbar,
+                                    left_toolbar=self._left_toolbar,
+                                    right_toolbar=self._right_toolbar,
+                                    image_viewer=self._image_viewer)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
