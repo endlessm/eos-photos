@@ -1,0 +1,81 @@
+# Portuguese translations for Endless Photos package.
+# Copyright (C) 2013 Endless Mobile
+# This file is distributed under the same license as the Endless Photos package.
+# matt <watson@endlessm.com>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Endless Photos 0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-02-26 18:52-0800\n"
+"PO-Revision-Date: 2013-02-26 19:12-0800\n"
+"Last-Translator: matt <watson@endlessm.com>\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/photos_right_toolbar.py:29
+msgid "EMAIL"
+msgstr "EMAIL"
+
+#: src/photos_presenter.py:145
+msgid "Enter a message to add to the e-mail"
+msgstr "Digite uma mensagem para adicionar o e-mail"
+
+#: src/photos_presenter.py:139
+msgid "Enter a message to add to your photo!"
+msgstr "Digite uma mensagem para adicionar a sua foto!"
+
+#: src/photos_right_toolbar.py:22
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+#: src/photos_presenter.py:139 src/photos_presenter.py:145
+msgid "Message"
+msgstr "Mensagem"
+
+#: src/share/facebook_post.py:73
+msgid ""
+"Network problem detected. Please check your internet connection and try "
+"again."
+msgstr ""
+"Problema de rede detectada. Por favor, verifique sua conexão à Internet e tente novamente."
+
+#: src/photos_top_toolbar.py:30
+msgid "OPEN IMAGE"
+msgstr "ABRIR IMAGEM"
+
+#: src/photos_view.py:58
+msgid "Open Image"
+msgstr "ABRIR IMAGEM"
+
+#: src/photos_view.py:106
+msgid "Quit Without Save?"
+msgstr "Sair sem salvar?"
+
+#: src/photos_presenter.py:145
+msgid "Recipient email"
+msgstr "Email do destinatário"
+
+#: src/share/facebook_post.py:67
+msgid "Requested action is not possible at the moment. Please try again later."
+msgstr "Ação solicitada não é possível no momento. Por favor, tente novamente mais tarde."
+
+#: src/photos_right_toolbar.py:15
+msgid "SAVE"
+msgstr "SALVAR"
+
+#: src/photos_view.py:83
+msgid "Save Image"
+msgstr "Salvar Imagem"
+
+#: src/photos_presenter.py:145
+msgid "Your Name"
+msgstr "Seu Nome"
+
+#: src/photos_view.py:107
+msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
