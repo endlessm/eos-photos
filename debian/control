@@ -8,6 +8,6 @@ Homepage: http://www.endlessm.com
 
 Package: endless-os-photos
 Architecture: all
-Depends: gir1.2-gtkclutter-1.0, python (>= 2.7), python-webkit
+Depends: gir1.2-gtkclutter-1.0, python (>= 2.7), python-webkit, python-numpy
 Description: Endless OS Photos
  This is a photos application for Endless OS

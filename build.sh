@@ -12,6 +12,7 @@ rm -rf *.changes
 rm -rf $(find . -name '*.pyc')
 set -e
 
+python generate_filter_thumbnails.py
 msgfmt -v po/pt_BR.po -o po/endless_photos.mo
 
 # Build package

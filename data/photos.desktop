@@ -2,8 +2,7 @@
 Version=1.0
 Name=Photos
 Name[en_US]=Photos
-Name[pt_BR]=Tempo
-Name[es_GT]=Tiempo
+Name[pt_BR]=Fotos
 Comment=See the photos forecast
 GenericName=Photos
 Type=Application
