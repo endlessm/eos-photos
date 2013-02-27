@@ -13,6 +13,6 @@ print filters
 for f in filters:
 
 	model.apply_filter(f)
-	filename = "../images/filter_examples/" + "filter_" + f + ".jpg"
+	filename = "../images/filter_thumbnails/" + "filter_" + f + ".jpg"
 	print filename
 	model.save(filename)

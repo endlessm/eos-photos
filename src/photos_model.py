@@ -182,7 +182,7 @@ class PhotosModel(object):
         return 'a' in image.mode.lower()
 
     def kill_alpha(self, image):
-        if self.has_alpha(self, image):
+        if self.has_alpha(image):
             return image.convert("RGB")
         return image
 
