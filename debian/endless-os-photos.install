@@ -1,8 +1,7 @@
-data/endless_weather.css usr/share/endless-os-weather/data
-data/weather.desktop usr/share/applications
-images/* usr/share/endless-os-weather/images
-src/* usr/share/endless-os-weather/src
-icons/* usr/share/icons/Endless
-fonts/* usr/share/fonts/truetype/Endless
-po/endless_weather.mo usr/share/locale/pt_BR/LC_MESSAGES/
-endless-os-weather /usr/bin
+data/endless_photos.css usr/share/endless-os-photos/data
+data/curves/* usr/share/endless-os-photos/data/curves
+data/photos.desktop usr/share/applications
+images/* usr/share/endless-os-photos/images
+src/* usr/share/endless-os-photos/src
+po/endless_photos.mo usr/share/locale/pt_BR/LC_MESSAGES/
+endless-os-photos /usr/bin

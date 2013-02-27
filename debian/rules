@@ -13,7 +13,7 @@
 	dh $@
 
 override_dh_install:
-	python -m compileall -f -d /usr/share/endless-os-weather/src src/
+	python -m compileall -f -d /usr/share/endless-os-photos/src src/
 	dh_install
-	find debian/endless-os-weather -name '*.py' -delete
+	find debian/endless-os-photos -name '*.py' -delete
 	find src -name '*.pyc' -delete
