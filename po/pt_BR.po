@@ -50,11 +50,11 @@ msgstr "ABRIR IMAGEM"
 
 #: src/photos_view.py:58
 msgid "Open Image"
-msgstr "ABRIR IMAGEM"
+msgstr "Abrir Imagem"
 
 #: src/photos_view.py:106
 msgid "Quit Without Save?"
-msgstr "Sair sem salvar?"
+msgstr "Sair Sem Salvar?"
 
 #: src/photos_presenter.py:145
 msgid "Recipient email"
