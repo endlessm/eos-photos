@@ -1,14 +1,12 @@
 [Desktop Entry]
 Version=1.0
-Name=Photos
-Name[en_US]=Photos
-Name[pt_BR]=Fotos
-Comment=See the photos forecast
-GenericName=Photos
 Type=Application
-Icon=endless-os-photos
-Exec=endless-os-photos
-Categories=Network;News
-X-EndlessM-Normal-Icon=/usr/share/endless-os-photos/images/photos_normal.png
-X-EndlessM-Hover-Icon=/usr/share/endless-os-photos/images/photos_hover.png
-X-EndlessM-Down-Icon=/usr/share/endless-os-photos/images/photos_down.png
+Name=Photos
+GenericName=Photos
+Name[es]=Fotos
+Name[pt]=Fotos
+Comment=Photos
+TryExec=endless-os-photos
+Exec=endless-os-photos %f
+Icon=photo
+Categories=Photos

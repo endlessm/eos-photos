@@ -23,9 +23,9 @@ class PhotosTopToolbar(Gtk.EventBox):
                                             name="minimize-button")
         self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 
-        self._open_button = ImageTextButton(normal_path=images_path + "close_normal.png",
-                                            hover_path=images_path + "close_hover.png",
-                                            down_path=images_path + "close_down.png",
+        self._open_button = ImageTextButton(normal_path=images_path + "OpenButton-icon_normal-hover.png",
+                                            hover_path=images_path + "OpenButton-icon_normal-hover.png",
+                                            down_path=images_path + "OpenButton-icon_down.png",
                                             label_text=_("OPEN IMAGE"),
                                             name="open-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())

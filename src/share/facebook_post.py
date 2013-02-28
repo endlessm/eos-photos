@@ -21,7 +21,7 @@ class FacebookPost:
 
     def fb_login(self, callback=None):
         # keep as dependency on social bar??
-        # proc = subprocess.Popen(['python', '/usr/share/eos-social/facebook/fb_auth_window.pyc'], stdout=subprocess.PIPE)
+        # proc = subprocess.Popen(['python', '/home/matt/share/eos-photos/src/share/fb_auth_window.py'], stdout=subprocess.PIPE)
         proc = subprocess.Popen(['python', '/usr/share/endless-os-photos/src/share/fb_auth_window.pyc'], stdout=subprocess.PIPE)
         for line in proc.stdout:
             print line
@@ -39,6 +39,8 @@ class FacebookPost:
             callback()
 
     def post_image(self, file_name, message=""):
+        if not self._graph_api:
+            return False, _("Not logged in.")
         try:
             self._graph_api.put_photo(open(file_name), message=message)
             return True, ""
@@ -46,7 +48,7 @@ class FacebookPost:
             return False, self.oauth_exception_message(error.result)
         except URLError as e:
             return False, self.url_exception_handler()
-        except:
+        except Exception as e:
             print e
             return False, _("Post failed. We're not really sure what happened sorry!")
     
@@ -68,7 +70,7 @@ class FacebookPost:
         if code in oauth_error_codes or code in permissions_error_codes or code == 606:
             message = _('Login failed.')
             return message
-        return 
+        return ""
     
     def url_exception_message(self):
         message = _('Network problem detected. Please check your internet connection and try again.')
