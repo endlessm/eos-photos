@@ -65,8 +65,8 @@ class FilterOption(Gtk.EventBox):
     def __init__(self, images_path="", filter_name="NORMAL", clicked_callback=None):
         super(FilterOption, self).__init__(name="filter-event-box")
         
-        thumbnail_path = images_path + "/filter_thumbnails/filter_" + filter_name + ".jpg"
-        
+        thumbnail_path = images_path + "filter_thumbnails/filter_" + filter_name + ".jpg"
+
         self._filter_name = filter_name
         self._clicked_callback = clicked_callback
         self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
