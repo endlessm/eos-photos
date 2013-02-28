@@ -44,8 +44,8 @@ class EndlessPhotos(Gtk.Application):
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Create the mvp for the Photo app and attach the window to the application.
-        self._model = PhotosModel(textures_path=self.get_images_path() + "textures",
-            curves_path=self.get_data_path() + "curves")
+        self._model = PhotosModel(textures_path=self.get_images_path() + "textures/",
+            curves_path=self.get_data_path() + "curves/")
         self._view = PhotosView(images_path=self.get_images_path())
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()
