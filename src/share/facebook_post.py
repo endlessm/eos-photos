@@ -41,20 +41,19 @@ class FacebookPost:
     def post_image(self, file_name, message=""):
         try:
             self._graph_api.put_photo(open(file_name), message=message)
-            return True
+            return True, ""
         except GraphAPIError as error:
-            self.oauth_exception_handler(error.result)
-            return False
+            return False, self.oauth_exception_message(error.result)
         except URLError as e:
-            self.url_exception_handler()
-            return False
+            return False, self.url_exception_handler()
         except:
-            return False
+            print e
+            return False, _("Post failed. We're not really sure what happened sorry!")
     
     def set_fb_access_token(self, token):
         self._fb_access_token = token
 
-    def oauth_exception_handler(self, result):
+    def oauth_exception_message(self, result):
         server_error_codes = [1,2,4,17]
         oauth_error_codes = [102, 190]
         permissions_error_codes = range(200, 300)
@@ -65,13 +64,15 @@ class FacebookPost:
             code = result['error_code']
         if code in server_error_codes:
             message = _('Requested action is not possible at the moment. Please try again later.')
-            self._view.show_popup_notification(message)
+            return message
         if code in oauth_error_codes or code in permissions_error_codes or code == 606:
-            self.fb_login()
+            message = _('Login failed.')
+            return message
+        return 
     
-    def url_exception_handler(self):
+    def url_exception_message(self):
         message = _('Network problem detected. Please check your internet connection and try again.')
-        self._view.show_popup_notification(message)
+        return "Post failed. We're not really sure what happened sorry!"
 
     def is_user_loged_in(self):
         if self._fb_access_token is None or not self.is_token_valid():

@@ -6,6 +6,8 @@ from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
 import share.emailer
 
+from gi.repository import Gdk
+
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
 class PhotosPresenter(object):
@@ -74,9 +76,12 @@ class PhotosPresenter(object):
         if not self._facebook_post.is_user_loged_in():
             self._facebook_post.fb_login()
         filename = self._model.save_to_tempfile()
-        if not self._facebook_post.post_image(filename, message):
+        success, message = self._facebook_post.post_image(filename, message)
+        if not success:
             # we need to request this from the gtk main thread...
-            # self._view.show_message("Post to facebook failed.")
+            gdk_threads_enter()
+            self._view.show_message("Post to facebook failed.")
+            gdk_threads_leave()
             print "Post failed."
 
     def _do_send_email(self, name, recipient, message):
