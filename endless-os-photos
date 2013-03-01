@@ -3,10 +3,10 @@
 import sys
 sys.path.append('/usr/share/endless-os-photos')
 from src import EndlessPhotos
-from gi.repository import GtkClutter, GObject
+from gi.repository import GtkClutter, GLib, Gdk
 
-
-GObject.threads_init()
-GtkClutter.init([])
 app = EndlessPhotos()
+GLib.threads_init()
+Gdk.threads_init()
+GtkClutter.init([])
 app.run(sys.argv)

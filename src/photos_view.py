@@ -132,11 +132,12 @@ class PhotosView(object):
         dialog.destroy()
         return confirm
 
-    def show_message(self, text, secondary_text=""):
+    def show_message(self, text="", secondary_text="", warning=False):
+        dialog_type = Gtk.MessageType.WARNING if warning else Gtk.MessageType.INFO
         dialog = Gtk.MessageDialog(parent=self.get_window(),
             text=text,
             secondary_text=secondary_text,
-            message_type=Gtk.MessageType.INFO)
+            message_type=dialog_type)
         dialog.add_button(Gtk.STOCK_OK, 0)
         # set default to cancel
         dialog.set_default_response(0)

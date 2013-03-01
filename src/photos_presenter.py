@@ -53,12 +53,16 @@ class PhotosPresenter(object):
         return filename
 
     def _lock_ui(self):
+        Gdk.threads_enter()
         self._lock = True
         self._view.show_spinner()
+        Gdk.threads_leave()
 
     def _unlock_ui(self):
+        Gdk.threads_enter()
         self._lock = False
         self._view.hide_spinner()
+        Gdk.threads_leave()
 
     def _run_method_with_handler(self, method, args, callback, callback_args=()):
         method(*args)
@@ -66,8 +70,8 @@ class PhotosPresenter(object):
 
 
     def _run_asynch_task(self, method, args):
-        self._lock_ui()
         worker = AsyncWorker()
+        worker.add_task(self._lock_ui, ())
         worker.add_task(method, args)
         worker.add_task(self._unlock_ui, ())       
         worker.start()
@@ -78,14 +82,16 @@ class PhotosPresenter(object):
         filename = self._model.save_to_tempfile()
         success, message = self._facebook_post.post_image(filename, message)
         if not success:
-            # TODO: show some dialogs to the user!
-            print message
+            Gdk.threads_enter()
+            self._view.show_message(text=message, warning=True)
+            Gdk.threads_leave()
 
     def _do_send_email(self, name, recipient, message):
         filename = self._model.save_to_tempfile()
         if not share.emailer.email_photo(name, recipient, message, filename):
-            # self._view.show_message("Email failed.")
-            print "Email failed"
+            Gdk.threads_enter()
+            self._view.show_message(text="Email failed", warning=True)
+            Gdk.threads_leave()
 
     #UI callbacks...
     def on_close(self):
@@ -169,18 +175,15 @@ class PhotosPresenter(object):
 
     def _do_on_filter_select(self, filter_name):
         self._model.apply_filter(filter_name)
-
         Gdk.threads_enter()
         self._update_view()
-        #self._view.select_filter(filter_name)
+        self._view.select_filter(filter_name)
         Gdk.threads_leave()
-
 
     def on_filter_select(self, filter_name):
         if self._lock or not self._model.is_open(): return
-        
 
-        #self._run_asynch_task(self._do_on_filter_select, (filter_name,))        
+        # self._run_asynch_task(self._do_on_filter_select, (filter_name,))
         self._model.apply_filter(filter_name)
         self._update_view()
         self._view.select_filter(filter_name)
