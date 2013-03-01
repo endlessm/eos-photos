@@ -92,6 +92,7 @@ PhotosWindow {
 }
 
 GtkButton {
+    -unico-glow-radius: 0;
     -unico-border-gradient: none;
     -unico-inner-stroke-gradient: none;
     -unico-focus-fill-color: transparent;
