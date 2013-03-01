@@ -59,6 +59,12 @@ class PhotosWindow(Gtk.Window):
         self._resize_to_fullscreen(screen)
         screen.connect('monitors-changed', self._resize_to_fullscreen)
         screen.connect('size-changed', self._resize_to_fullscreen)
+        self.connect('key_press_event', self._on_keypress)
+        self.connect('destroy', lambda w: Gtk.main_quit())
+
+    def _on_keypress(self, widget, event):
+        if event.keyval == Gdk.KEY_Escape and self.fullscreen:
+            self.set_image_fullscreen(False)
 
     def minimize(self):
         self.iconify()
