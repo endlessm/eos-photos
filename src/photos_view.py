@@ -12,12 +12,16 @@ class PhotosView(object):
     presenter calls to the appropriate UI elements. PhotosWindow does the
     actual toplevel layout of the toolbars and central view.
     """
-    def __init__(self):
-        self._top_toolbar = PhotosTopToolbar()
-        self._left_toolbar = PhotosLeftToolbar()
-        self._right_toolbar = PhotosRightToolbar()
-        self._image_viewer = ImageViewer()
-        self._window = PhotosWindow(self._top_toolbar, self._left_toolbar, self._right_toolbar, self._image_viewer)
+    def __init__(self, images_path=""):
+        self._top_toolbar = PhotosTopToolbar(images_path=images_path)
+        self._left_toolbar = PhotosLeftToolbar(images_path=images_path)
+        self._right_toolbar = PhotosRightToolbar(images_path=images_path)
+        self._image_viewer = ImageViewer(images_path=images_path)
+        self._window = PhotosWindow(images_path=images_path,
+                                    top_toolbar=self._top_toolbar,
+                                    left_toolbar=self._left_toolbar,
+                                    right_toolbar=self._right_toolbar,
+                                    image_viewer=self._image_viewer)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -55,7 +59,7 @@ class PhotosView(object):
 
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog ("Open Image", self.get_window(), Gtk.FileChooserAction.OPEN);
+        dialog = Gtk.FileChooserDialog (_("Open Image"), self.get_window(), Gtk.FileChooserAction.OPEN);
 
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
@@ -80,7 +84,7 @@ class PhotosView(object):
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog ("Save Image", self.get_window(), Gtk.FileChooserAction.SAVE);
+        dialog = Gtk.FileChooserDialog (_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE);
 
         
         # Adds 'Cancel' and 'OK' buttons
@@ -116,8 +120,8 @@ class PhotosView(object):
 
     def show_confirm_close(self):
         dialog = Gtk.MessageDialog(parent=self.get_window(),
-            text="Quit Without Save?",
-            secondary_text="Your changes have not been saved. Are you sure you want to quit?",
+            text=_("Quit Without Save?"),
+            secondary_text=_("Your changes have not been saved. Are you sure you want to quit?"),
             message_type=Gtk.MessageType.WARNING)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_SAVE, 1)

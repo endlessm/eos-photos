@@ -1,0 +1,7 @@
+files
+*.substvars
+*.log
+*~
+endless-os-photos
+endless-os-photos.postinst.debhelper
+endless-os-photos.postrm.debhelper

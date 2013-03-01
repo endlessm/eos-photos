@@ -84,7 +84,6 @@
 
 PhotosWindow {
     background-size: cover;
-    background-image: url("../images/Background_Texture-Light.jpg");
 }
 
 .primary-toolbar {
@@ -94,6 +93,7 @@ PhotosWindow {
 
 GtkButton {
     -unico-border-gradient: none;
+    -unico-inner-stroke-gradient: none;
     -unico-focus-fill-color: transparent;
     -unico-inner-stroke-width: 0;
     -unico-outer-stroke-width: 0;

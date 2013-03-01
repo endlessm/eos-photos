@@ -1,3 +1,6 @@
+*.deb
+*.changes
+*.build
 *.py[co]
 
 # Packages

@@ -1,0 +1,13 @@
+Source: endless-os-photos
+Section: non-free/misc
+Priority: extra
+Maintainer: EndlessMobile <endlessmobile@gmail.com>
+Build-Depends: debhelper (>= 7.0.0)
+Standards-Version: 3.9.2
+Homepage: http://www.endlessm.com
+
+Package: endless-os-photos
+Architecture: all
+Depends: gir1.2-gtkclutter-1.0, python (>= 2.7), python-webkit, python-scipy
+Description: Endless OS Photos
+ This is a photos application for Endless OS

@@ -8,22 +8,22 @@ import ImageFilter
 from filter import Filter
 from filter import FilterManager
 
-CURVE_FOLDER = "../data/curves/"
-
 class PhotosModel(object):
     """
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
 
-    def __init__(self):
+    def __init__(self, textures_path="", curves_path=""):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
         self._is_saved = 1
         self._curve_filters = []
+        self._curves_path = curves_path
+        self._textures_path = textures_path
 
-        for files in os.listdir(CURVE_FOLDER):
+        for files in os.listdir(curves_path):
             if files.lower().endswith(".acv"):
                 self._curve_filters.append(files.split('.')[0].upper())
 
@@ -82,7 +82,7 @@ class PhotosModel(object):
         return filename
 
     def _apply_filter_ext(self, image, filter_name):
-        img_filter = Filter("../data/curves/" + filter_name.lower() + ".acv", 'crgb')
+        img_filter = Filter(self._curves_path + filter_name.lower() + ".acv", 'crgb')
         
         image_array = numpy.array(image)
 
@@ -110,15 +110,15 @@ class PhotosModel(object):
         elif filter_name == "OLD PHOTO":
             self._curr_image = self.old_photo(self._src_image)
         elif filter_name == "GRUNGIFY":
-            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/grunge.jpg", 0.15)
+            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "grunge.jpg", 0.15)
         elif filter_name == "SCRATCH":
-            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/old_film.jpg", 0.25)
+            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "old_film.jpg", 0.25)
         elif filter_name == "FABRIC":
-            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/fabric.jpg", 0.35)
+            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "fabric.jpg", 0.35)
         elif filter_name == "BUMPY":
-            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/bumpy.jpg", 0.35)
+            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "bumpy.jpg", 0.35)
         elif filter_name == "PAPER":
-            self._curr_image = self.texture_overlay(self._src_image, "../images/textures/paper.jpg", 0.35)
+            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "paper.jpg", 0.35)
         elif filter_name == "CONTOUR":
             self._curr_image = self._src_image.filter(ImageFilter.CONTOUR)
         elif filter_name == "SMOOTH":
@@ -189,7 +189,7 @@ class PhotosModel(object):
     def old_photo(self, image):
         image = self._apply_filter_ext(image, "LUMO")
         image = self.apply_palette(image, self.make_linear_ramp((255, 201, 159)))
-        return self.texture_overlay(image, "../images/textures/old_film.jpg", 0.25)
+        return self.texture_overlay(image, self._textures_path + "old_film.jpg", 0.25)
 
     # These filters don't support an alpha channel, so we have to loose all transparencies.
     def boxelate(self, image):

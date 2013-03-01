@@ -1,13 +1,13 @@
 from gi.repository import Gtk, Gdk
-# 
-from image_text_button import ImageTextButton
-# 
+import os
+
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
     TOOLBAR_WIDTH = 160
+    BACKGROUND_IMAGE_CSS_TEMPLATE = 'PhotosWindow {{ background-image: url("{background_image_path}"); }}'
 
-    def __init__(self, top_toolbar, left_toolbar, right_toolbar, image_viewer, **kw):
+    def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_viewer=None, **kw):
         kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         kw.setdefault('has-resize-grip', False)
@@ -43,6 +43,16 @@ class PhotosWindow(Gtk.Window):
         self._notebook.show()
 
         self.add(self._notebook)
+
+        # Set the background CSS.
+        self._background_provider = Gtk.CssProvider()
+        background_image_path = os.path.join(images_path, "Background_Texture-Light.jpg")
+        background_css = self.BACKGROUND_IMAGE_CSS_TEMPLATE.format(background_image_path=background_image_path)
+
+        Gtk.StyleContext.remove_provider_for_screen(Gdk.Screen.get_default(), self._background_provider)
+        self._background_provider.load_from_data(background_css)
+        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), self._background_provider,
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Endless applications are fullscreen
         screen = Gdk.Screen.get_default()

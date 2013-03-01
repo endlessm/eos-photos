@@ -76,10 +76,10 @@ class PhotosPresenter(object):
         if not self._facebook_post.is_user_loged_in():
             self._facebook_post.fb_login()
         filename = self._model.save_to_tempfile()
-        if not self._facebook_post.post_image(filename, message):
-            # we need to request this from the gtk main thread...
-            # self._view.show_message("Post to facebook failed.")
-            print "Post failed."
+        success, message = self._facebook_post.post_image(filename, message)
+        if not success:
+            # TODO: show some dialogs to the user!
+            print message
 
     def _do_send_email(self, name, recipient, message):
         filename = self._model.save_to_tempfile()
@@ -150,13 +150,13 @@ class PhotosPresenter(object):
 
     def on_share(self):
         if self._lock or not self._model.is_open(): return
-        info = self._view.get_message("Enter a message to add to your photo!", "Message")
+        info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message"))
         if info:
             self._run_asynch_task(self._do_post_to_facebook, (info[0],))
         
     def on_email(self):
         if self._lock or not self._model.is_open(): return
-        info = self._view.get_message("Enter a message to add to the e-mail", "Your Name", "Recipient email", "Message")
+        info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name"), _("Recipient email"), _("Message"))
         if info:
             self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))
 
