@@ -4,6 +4,7 @@ import numpy
 import Image
 import ImageOps
 import ImageFilter
+import collections
 
 from filter import Filter
 from filter import FilterManager
@@ -18,21 +19,53 @@ class PhotosModel(object):
         super(PhotosModel, self).__init__()
         self._src_image = None
         self._curr_image = None
-        self._is_saved = 1
-        self._curve_filters = []
-        self._curves_path = curves_path
+        self._is_saved = True
         self._textures_path = textures_path
+        self._curves_path = curves_path
+        self._build_filter_dict()
 
-        for files in os.listdir(curves_path):
-            if files.lower().endswith(".acv"):
-                self._curve_filters.append(files.split('.')[0].upper())
+    def _build_filter_dict(self):
+        self._filter_dict = collections.OrderedDict([
+            (_("NORMAL"), lambda im: im),
+            (_("GRAYSCALE"), lambda im: ImageOps.grayscale(im)),
+            (_("SEPIA"), lambda im: self.apply_palette(im, self.make_linear_ramp((255, 201, 159)))),
+            (_("PIXELATE"), lambda im: self.pixelate(im)),
+            (_("BOXELATE"), lambda im: self.boxelate(im)),
+            (_("OLD PHOTO"), lambda im: self.old_photo(im)),
+            (_("GRUNGIFY"), lambda im: self.texture_overlay(im, self._textures_path + "grunge.jpg", 0.15)),
+            (_("SCRATCH"), lambda im: self.texture_overlay(im, self._textures_path + "old_film.jpg", 0.25)),
+            (_("FABRIC"), lambda im: self.texture_overlay(im, self._textures_path + "fabric.jpg", 0.35)),
+            (_("BUMPY"), lambda im: self.texture_overlay(im, self._textures_path + "bumpy.jpg", 0.35)),
+            (_("PAPER"), lambda im: self.texture_overlay(im, self._textures_path + "paper.jpg", 0.35)),
+            (_("CONTOUR"), lambda im: im.filter(ImageFilter.CONTOUR)),
+            (_("SMOOTH"), lambda im: im.filter(ImageFilter.SMOOTH_MORE)),
+            (_("SHARPEN"), lambda im: im.filter(ImageFilter.SHARPEN)),
+            (_("EMBOSS"), lambda im: im.filter(ImageFilter.EMBOSS)),
+            (_("EDGES"), lambda im: im.filter(ImageFilter.FIND_EDGES)),
+            (_("BLUR"), lambda im: im.filter(ImageFilter.BLUR)),
+            (_("INVERT"), lambda im: self.invert(im)),
+            (_("SOLARIZE"), lambda im: self.solarize(im)),
+            (_("POSTERIZE"), lambda im: self.posterize(im)),
+            (_("COUNTRY"), lambda im: self._apply_filter_ext(im, "country.acv")),
+            (_("CROSS PROCESS"), lambda im: self._apply_filter_ext(im, "crossprocess.acv")),
+            (_("DESERT"), lambda im: self._apply_filter_ext(im, "desert.acv")),
+            (_("FOGGY BLUE"), lambda im: self._apply_filter_ext(im, "fogy_blue.acv")),
+            (_("FRESH BLUE"), lambda im: self._apply_filter_ext(im, "fresh_blue.acv")),
+            (_("LUMO"), lambda im: self._apply_filter_ext(im, "lumo.acv")),
+            (_("NASHVILLE"), lambda im: self._apply_filter_ext(im, "nashville.acv")),
+            (_("YELLOW BLUE"), lambda im: self._apply_filter_ext(im, "new_2_fresh_blue.acv")),
+            (_("PORTRAESQUE"), lambda im: self._apply_filter_ext(im, "portraesque.acv")),
+            (_("PROVIAESQUE"), lambda im: self._apply_filter_ext(im, "proviaesque.acv")),
+            (_("VELVIAESQUE"), lambda im: self._apply_filter_ext(im, "velviaesque.acv")),
+            (_("TRAINS"), lambda im: self._apply_filter_ext(im, "trains.acv")),
+        ])
 
     def open(self, filename):
         self._filename = filename
         self._src_image = self.limit_size(Image.open(filename), (2056, 2056))
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_name()
-        self._is_saved = 1
+        self._is_saved = True
         
 
     def save(self, filename, format=None):
@@ -40,7 +73,7 @@ class PhotosModel(object):
             if format!=None:
                 self._curr_image.save(filename, format)
             else: self._curr_image.save(filename)
-            self._is_saved = 1    
+            self._is_saved = True
 
     def get_image(self):
         return self._curr_image
@@ -59,14 +92,7 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_filter_names(self):
-        filters =  ["NORMAL", "GRAYSCALE", "SEPIA",  "PIXELATE", "BOXELATE",
-        "OLD PHOTO", "GRUNGIFY",  "SCRATCH", "FABRIC", "BUMPY", "PAPER",
-        "CONTOUR", "SMOOTH",  "SHARPEN", "EMBOSS", "INVERT", "SOLARIZE",
-        "POSTERIZE", "FIND_EDGES", "BLUR"]
-
-        filters.extend(self._curve_filters)
-
-        return filters
+        return self._filter_dict.keys()
 
     def get_default_name(self):
         return "NORMAL"
@@ -81,8 +107,8 @@ class PhotosModel(object):
             self._curr_image.save(filename, quality=95)
         return filename
 
-    def _apply_filter_ext(self, image, filter_name):
-        img_filter = Filter(self._curves_path + filter_name.lower() + ".acv", 'crgb')
+    def _apply_filter_ext(self, image, filter_file):
+        img_filter = Filter(self._curves_path + filter_file, 'crgb')
         
         image_array = numpy.array(image)
 
@@ -96,51 +122,11 @@ class PhotosModel(object):
     def apply_filter(self, filter_name):
         if (not self.is_open()) or self._curr_filter == filter_name: return
         self._curr_filter = filter_name
-        self._is_saved = 0
-        if filter_name == "NORMAL":
-            self._curr_image = self._src_image.copy()
-        elif filter_name == "GRAYSCALE":
-            self._curr_image = ImageOps.grayscale(self._src_image)
-        elif filter_name == "SEPIA":
-            self._curr_image = self.apply_palette(self._src_image, self.make_linear_ramp((255, 201, 159)))
-        elif filter_name == "PIXELATE":
-            self._curr_image = self.pixelate(self._src_image)
-        elif filter_name == "BOXELATE":
-            self._curr_image = self.boxelate(self._src_image)
-        elif filter_name == "OLD PHOTO":
-            self._curr_image = self.old_photo(self._src_image)
-        elif filter_name == "GRUNGIFY":
-            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "grunge.jpg", 0.15)
-        elif filter_name == "SCRATCH":
-            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "old_film.jpg", 0.25)
-        elif filter_name == "FABRIC":
-            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "fabric.jpg", 0.35)
-        elif filter_name == "BUMPY":
-            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "bumpy.jpg", 0.35)
-        elif filter_name == "PAPER":
-            self._curr_image = self.texture_overlay(self._src_image, self._textures_path + "paper.jpg", 0.35)
-        elif filter_name == "CONTOUR":
-            self._curr_image = self._src_image.filter(ImageFilter.CONTOUR)
-        elif filter_name == "SMOOTH":
-            self._curr_image = self._src_image.filter(ImageFilter.SMOOTH_MORE)
-        elif filter_name == "SHARPEN":
-            self._curr_image = self._src_image.filter(ImageFilter.SHARPEN)
-        elif filter_name == "EMBOSS":
-            self._curr_image = self._src_image.filter(ImageFilter.EMBOSS)
-        elif filter_name == "INVERT":
-            self._curr_image = self.invert(self._src_image)
-        elif filter_name == "SOLARIZE":
-            self._curr_image = self.solarize(self._src_image)
-        elif filter_name == "POSTERIZE":
-            self._curr_image = self.posterize(self._src_image)
-        elif filter_name == "FIND_EDGES":
-            self._curr_image = self._src_image.filter(ImageFilter.FIND_EDGES)
-        elif filter_name == "BLUR":
-            self._curr_image = self._src_image.filter(ImageFilter.BLUR)
-        elif filter_name in self._curve_filters:
-            self._curr_image = self._apply_filter_ext(self._src_image, filter_name)
+        self._is_saved = False
+        if filter_name in self._filter_dict:
+            self._curr_image = self._filter_dict[filter_name](self._src_image)
         else:
-            self._is_saved = 1
+            self._is_saved = True
             print "Filter not supported!"
 
     def limit_size(self, image, size_limits):
@@ -187,7 +173,7 @@ class PhotosModel(object):
         return image
 
     def old_photo(self, image):
-        image = self._apply_filter_ext(image, "LUMO")
+        image = self._apply_filter_ext(image, "lumo.acv")
         image = self.apply_palette(image, self.make_linear_ramp((255, 201, 159)))
         return self.texture_overlay(image, self._textures_path + "old_film.jpg", 0.25)
 
