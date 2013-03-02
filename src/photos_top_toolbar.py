@@ -13,15 +13,15 @@ class PhotosTopToolbar(Gtk.EventBox):
         super(PhotosTopToolbar, self).__init__(**kw)
         self.get_style_context().add_class(Gtk.STYLE_CLASS_PRIMARY_TOOLBAR)
 
-        self._close_button = ImageButton(normal_path=images_path + "close_normal.png",
-                                         hover_path=images_path + "close_hover.png",
-                                         down_path=images_path + "close_down.png",
+        self._close_button = ImageButton(normal_path=images_path + "top-bar_close_normal.png",
+                                         hover_path=images_path + "top-bar_close_hover.png",
+                                         down_path=images_path + "top-bar_close_down.png",
                                          name="close-button")
         self._close_button.connect('clicked', lambda w: self._presenter.on_close())
 
-        self._minimize_button = ImageButton(normal_path=images_path + "minimize_normal.png",
-                                            hover_path=images_path + "minimize_hover.png",
-                                            down_path=images_path + "minimize_down.png",
+        self._minimize_button = ImageButton(normal_path=images_path + "top-bar_minimize_normal.png",
+                                            hover_path=images_path + "top-bar_minimize_hover.png",
+                                            down_path=images_path + "top-bar_minimize_down.png",
                                             name="minimize-button")
         self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 

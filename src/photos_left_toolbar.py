@@ -9,7 +9,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
-        self._filters_image = Gtk.Image.new_from_file(images_path + "Filters_title.png")
+        self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
         self._filters_label = Gtk.Label("FILTROS")
         self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
@@ -24,7 +24,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self._scroll_area.add_with_viewport(self._scroll_contents)
 
-        self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filters_drop-shadow.png")
+        self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
         self._drop_shadow.set_halign(Gtk.Align.CENTER)
         self._drop_shadow.set_valign(Gtk.Align.START)
         self._overlay = Gtk.Overlay()

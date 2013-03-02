@@ -1,12 +1,12 @@
-from gi.repository import Gtk, Gdk
 import os
+import cairo
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
     TOOLBAR_WIDTH = 160
-    BACKGROUND_IMAGE_CSS_TEMPLATE = 'PhotosWindow {{ background-image: url("{background_image_path}"); }}'
 
     def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_viewer=None, **kw):
         kw.setdefault('decorated', False)
@@ -47,19 +47,9 @@ class PhotosWindow(Gtk.Window):
 
         self.add(self._notebook)
 
-        # Set the background CSS.
-        self._background_provider = Gtk.CssProvider()
-        background_image_path = os.path.join(
-            images_path, "Background_Texture-Light.jpg")
-        background_css = self.BACKGROUND_IMAGE_CSS_TEMPLATE.format(
-            background_image_path=background_image_path)
-
-        Gtk.StyleContext.remove_provider_for_screen(
-            Gdk.Screen.get_default(), self._background_provider)
-        self._background_provider.load_from_data(background_css)
-        Gtk.StyleContext.add_provider_for_screen(
-            Gdk.Screen.get_default(), self._background_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        self._back_image = GdkPixbuf.Pixbuf.new_from_file(images_path + "background-tile.jpg")
+        self.connect('draw', self._draw)
+        self.set_app_paintable(True)
 
         # Endless applications are fullscreen
         screen = Gdk.Screen.get_default()
@@ -68,6 +58,13 @@ class PhotosWindow(Gtk.Window):
         screen.connect('size-changed', self._resize_to_fullscreen)
         self.connect('key_press_event', self._on_keypress)
         self.connect('destroy', lambda w: Gtk.main_quit())
+
+    def _draw(self, w, cr):
+        cr.save()
+        Gdk.cairo_set_source_pixbuf(cr, self._back_image, 0, 0)
+        cr.get_source().set_extend(cairo.EXTEND_REPEAT)
+        cr.paint()
+        cr.restore()
 
     def _on_keypress(self, widget, event):
         if event.keyval == Gdk.KEY_Escape and self.fullscreen:

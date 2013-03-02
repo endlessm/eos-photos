@@ -20,17 +20,17 @@ class PhotosRightToolbar(Gtk.Alignment):
         self._save_button.connect('clicked', lambda w: self._presenter.on_save())
 
         self._share_button = ImageTextButton(
-            normal_path=images_path + "share_normal.png",
-            hover_path=images_path + "share_hover.png",
-            down_path=images_path + "share_down.png",
+            normal_path=images_path + "facebook_normal.png",
+            hover_path=images_path + "facebook_hover.png",
+            down_path=images_path + "facebook_down.png",
             label_text=_("FACEBOOK"),
             name="share-button")
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
 
         self._email_button = ImageTextButton(
-            normal_path=images_path + "share_normal.png",
-            hover_path=images_path + "share_hover.png",
-            down_path=images_path + "share_down.png",
+            normal_path=images_path + "email_normal.png",
+            hover_path=images_path + "email_hover.png",
+            down_path=images_path + "email_down.png",
             label_text=_("EMAIL"),
             name="email-button")
         self._email_button.connect('clicked', lambda w: self._presenter.on_email())
