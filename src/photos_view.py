@@ -1,10 +1,12 @@
 from gi.repository import Gtk, Gdk
+from gettext import gettext as _
 
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
 from photos_window import PhotosWindow
 from photos_image_viewer import ImageViewer
+
 
 class PhotosView(object):
     """
@@ -59,7 +61,9 @@ class PhotosView(object):
 
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog (_("Open Image"), self.get_window(), Gtk.FileChooserAction.OPEN);
+        dialog = Gtk.FileChooserDialog(
+            _("Open Image"), self.get_window(),
+            Gtk.FileChooserAction.OPEN)
 
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
@@ -84,9 +88,8 @@ class PhotosView(object):
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog (_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE);
+        dialog = Gtk.FileChooserDialog(_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE)
 
-        
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_OK, 1)
@@ -106,7 +109,8 @@ class PhotosView(object):
             return None
 
     def show_confirm_open_new(self):
-        dialog = Gtk.MessageDialog(parent=self.get_window(),
+        dialog = Gtk.MessageDialog(
+            parent=self.get_window(),
             text=_("Open New Photo Without Save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to open a new photo without saving?"),
             message_type=Gtk.MessageType.WARNING)
@@ -116,10 +120,11 @@ class PhotosView(object):
         dialog.set_default_response(0)
         confirm = dialog.run()
         dialog.destroy()
-        return confirm        
+        return confirm
 
     def show_confirm_close(self):
-        dialog = Gtk.MessageDialog(parent=self.get_window(),
+        dialog = Gtk.MessageDialog(
+            parent=self.get_window(),
             text=_("Quit Without Save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to quit?"),
             message_type=Gtk.MessageType.WARNING)
@@ -134,21 +139,23 @@ class PhotosView(object):
 
     def show_message(self, text="", secondary_text="", warning=False):
         dialog_type = Gtk.MessageType.WARNING if warning else Gtk.MessageType.INFO
-        dialog = Gtk.MessageDialog(parent=self.get_window(),
+        dialog = Gtk.MessageDialog(
+            parent=self.get_window(),
             text=text,
             secondary_text=secondary_text,
             message_type=dialog_type)
         dialog.add_button(Gtk.STOCK_OK, 0)
         # set default to cancel
         dialog.set_default_response(0)
-        confirm = dialog.run()
+        dialog.run()
         dialog.destroy()
 
     # Gets responses from a user. Args is a list of requested responses
     # from the user.
     def get_message(self, prompt, *args):
-        dialog = Gtk.MessageDialog(self.get_window(), 0, 
-            Gtk.MessageType.OTHER, Gtk.ButtonsType.OK_CANCEL, 
+        dialog = Gtk.MessageDialog(
+            self.get_window(), 0,
+            Gtk.MessageType.OTHER, Gtk.ButtonsType.OK_CANCEL,
             prompt)
         dialog.set_default_response(Gtk.ResponseType.OK)
 
@@ -166,7 +173,7 @@ class PhotosView(object):
         result = dialog.run()
 
         # If user clicks cancel, return having done nothing
-        if result == Gtk.ResponseType.CANCEL: 
+        if result == Gtk.ResponseType.CANCEL:
             dialog.destroy()
             return None
 
@@ -174,7 +181,6 @@ class PhotosView(object):
         responses = []
         map(lambda x: responses.append(x.get_text()), entries)
         dialog.destroy()
-    
         return responses
 
     def show_spinner(self):

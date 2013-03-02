@@ -1,6 +1,7 @@
 from threading import Thread
 import Queue
 
+
 class AsyncWorker(Thread):
 
     def __init__(self):

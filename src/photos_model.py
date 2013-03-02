@@ -1,12 +1,13 @@
-import os
 import tempfile
-import numpy
+import collections
+from gettext import gettext as _
+
 import Image
 import ImageOps
 import ImageFilter
-import collections
 
 import image_processing.image_tools as ImageTools
+
 
 class PhotosModel(object):
     """
@@ -65,12 +66,13 @@ class PhotosModel(object):
         self._curr_image = self._src_image
         self._curr_filter = self.get_default_filter_name()
         self._is_saved = True
-        
+
     def save(self, filename, format=None):
-        if self._curr_image != None:
-            if format!=None:
+        if self._curr_image is not None:
+            if format is not None:
                 self._curr_image.save(filename, format)
-            else: self._curr_image.save(filename)
+            else:
+                self._curr_image.save(filename)
             self._is_saved = True
 
     def save_to_tempfile(self):
@@ -84,7 +86,7 @@ class PhotosModel(object):
         return filename
 
     def is_open(self):
-        return self._curr_image != None
+        return self._curr_image is not None
 
     def is_saved(self):
         return self._is_saved
@@ -93,7 +95,8 @@ class PhotosModel(object):
         return self._curr_filter is not "NORMAL"
 
     def get_curr_filename(self):
-        if not self.is_open(): return None
+        if not self.is_open():
+            return None
         return self._filename
 
     def get_image(self):
@@ -106,7 +109,8 @@ class PhotosModel(object):
         return "NORMAL"
 
     def apply_filter(self, filter_name):
-        if (not self.is_open()) or self._curr_filter == filter_name: return
+        if (not self.is_open()) or self._curr_filter == filter_name:
+            return
         self._curr_filter = filter_name
         self._is_saved = False
         if filter_name in self._filter_dict:

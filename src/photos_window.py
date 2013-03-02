@@ -1,6 +1,7 @@
 from gi.repository import Gtk, Gdk
 import os
 
+
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
@@ -18,15 +19,17 @@ class PhotosWindow(Gtk.Window):
         self._normal_attach.set_visible_window(False)
         self._normal_attach.add(image_viewer)
         self._normal_attach.show()
-        
+
         self._fullscreen_attach = Gtk.EventBox(name="fullscreen-back")
         self._fullscreen_attach.show()
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
         left_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
         right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
-        self._hbox.pack_start(left_toolbar, expand=False, fill=False, padding=0)
-        self._hbox.pack_start(self._normal_attach, expand=True, fill=True, padding=0)
+        self._hbox.pack_start(
+            left_toolbar, expand=False, fill=False, padding=0)
+        self._hbox.pack_start(
+            self._normal_attach, expand=True, fill=True, padding=0)
         self._hbox.pack_end(right_toolbar, expand=False, fill=False, padding=0)
         self._hbox.show()
 
@@ -46,12 +49,16 @@ class PhotosWindow(Gtk.Window):
 
         # Set the background CSS.
         self._background_provider = Gtk.CssProvider()
-        background_image_path = os.path.join(images_path, "Background_Texture-Light.jpg")
-        background_css = self.BACKGROUND_IMAGE_CSS_TEMPLATE.format(background_image_path=background_image_path)
+        background_image_path = os.path.join(
+            images_path, "Background_Texture-Light.jpg")
+        background_css = self.BACKGROUND_IMAGE_CSS_TEMPLATE.format(
+            background_image_path=background_image_path)
 
-        Gtk.StyleContext.remove_provider_for_screen(Gdk.Screen.get_default(), self._background_provider)
+        Gtk.StyleContext.remove_provider_for_screen(
+            Gdk.Screen.get_default(), self._background_provider)
         self._background_provider.load_from_data(background_css)
-        Gtk.StyleContext.add_provider_for_screen(Gdk.Screen.get_default(), self._background_provider,
+        Gtk.StyleContext.add_provider_for_screen(
+            Gdk.Screen.get_default(), self._background_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
 
         # Endless applications are fullscreen
@@ -82,9 +89,9 @@ class PhotosWindow(Gtk.Window):
             self._image_viewer.reparent(self._normal_attach)
             self._image_viewer.set_fullscreen_mode(False)
 
-
     def _get_screen_dimensions(self):
-        # This ought to return the size of the screen, less any panels or docks.
+        # This ought to return the size of the screen, less any panels or
+        # docks.
         screen = Gdk.Screen.get_default()
         if screen.get_n_monitors() == 1:
             monitor = 0

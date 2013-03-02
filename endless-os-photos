@@ -6,7 +6,4 @@ from src import EndlessPhotos
 from gi.repository import GtkClutter, GLib, Gdk
 
 app = EndlessPhotos()
-GLib.threads_init()
-Gdk.threads_init()
-GtkClutter.init([])
 app.run(sys.argv)

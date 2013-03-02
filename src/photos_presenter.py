@@ -1,14 +1,14 @@
 import os
-import tempfile
-import array
+
+from gi.repository import Gtk, Gdk
+from gettext import gettext as _
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
 import share.emailer
 
-from gi.repository import Gtk, Gdk
-
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
+
 
 class PhotosPresenter(object):
     """
@@ -26,7 +26,6 @@ class PhotosPresenter(object):
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
 
-
     def open_image(self, filename):
         self._model.open(filename)
         self._view.select_filter(self._model.get_default_filter_name())
@@ -37,6 +36,7 @@ class PhotosPresenter(object):
         width, height = im.size
         self._view.replace_image_from_data(im.tostring(),
                                            width, height)
+
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
         ext = name_arr.pop(-1)
@@ -68,12 +68,11 @@ class PhotosPresenter(object):
         method(*args)
         callback(*callback_args)
 
-
     def _run_asynch_task(self, method, args):
         worker = AsyncWorker()
         worker.add_task(self._lock_ui, ())
         worker.add_task(method, args)
-        worker.add_task(self._unlock_ui, ())       
+        worker.add_task(self._unlock_ui, ())
         worker.start()
 
     def _do_post_to_facebook(self, message):
@@ -96,11 +95,12 @@ class PhotosPresenter(object):
     #UI callbacks...
     def on_close(self):
         # Prompt for save before quitting
-        if self._lock: return 
+        if self._lock:
+            return
 
         if not self._model.is_saved():
             confirm = self._view.show_confirm_close()
-            if not confirm: 
+            if not confirm:
                 return
             elif confirm == 1:
                 self.on_save()
@@ -108,27 +108,28 @@ class PhotosPresenter(object):
         self._view.close_window()
 
     def on_minimize(self):
-        if self._lock: return
+        if self._lock:
+            return
         self._view.minimize_window()
 
     def _do_open(self):
         filename = self._view.show_open_dialog()
-        if filename != None:
+        if filename is not None:
             self.open_image(filename)
 
     def on_open(self):
-        if self._lock: return
+        if self._lock:
+            return
         if not self._model.is_saved():
             confirm = self._view.show_confirm_open_new()
-            if not confirm: 
+            if not confirm:
                 return
         self._do_open()
-        
-
 
     def on_save(self):
-        if self._lock or not self._model.is_open(): return
-        
+        if self._lock or not self._model.is_open():
+            return
+
         # Check to see if a file exists with current name
         # If so, we need to add a version extenstion, e.g. (1), (2)
         file_path_list = self._model.get_curr_filename().split("/")
@@ -143,25 +144,27 @@ class PhotosPresenter(object):
         while(1):
             if not os.path.exists(directory_path + "/" + curr_name + "." + ext):
                 break
-            curr_name = name + " (" + str(i) + ")" 
+            curr_name = name + " (" + str(i) + ")"
             i += 1
 
         # Set this name as placeholder in save dialog
         filename = self._view.show_save_dialog(curr_name + "." + ext, directory_path)
-        
-        if filename != None:
+
+        if filename is not None:
             # Check returned value from save dialog to make sure it has a valid extension
             filename = self._check_extension(filename, ext)
             self._model.save(filename)
 
     def on_share(self):
-        if self._lock or not self._model.is_open(): return
+        if self._lock or not self._model.is_open():
+            return
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message"))
         if info:
             self._run_asynch_task(self._do_post_to_facebook, (info[0],))
-        
+
     def on_email(self):
-        if self._lock or not self._model.is_open(): return
+        if self._lock or not self._model.is_open():
+            return
         info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name"), _("Recipient email"), _("Message"))
         if info:
             self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))

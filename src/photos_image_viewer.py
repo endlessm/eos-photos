@@ -2,6 +2,7 @@ from gi.repository import Gtk, GdkPixbuf, GtkClutter, Clutter
 
 from widgets.clutter_image_button import ClutterImageButton
 
+
 class ImageViewer(Gtk.Alignment):
     """
     Sizes the image to fit centered in the space allotted.
@@ -19,7 +20,7 @@ class ImageViewer(Gtk.Alignment):
         self._embed = GtkClutter.Embed.new()
         self._embed.connect('size-allocate', self._on_embed_size_allocate)
         self._stage = self._embed.get_stage()
-        
+
         self._border = Clutter.Actor()
         color = Clutter.Color.new(0, 0, 0, 255)
         color.from_string(self.BORDER_COLOR)
@@ -33,34 +34,36 @@ class ImageViewer(Gtk.Alignment):
         self._image_back.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
         self._stage.add_child(self._image_back)
-        
+
         self._image = Clutter.Texture()
         self._image.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
         self._stage.add_child(self._image)
 
-        self._fullscreen_button = ClutterImageButton(normal_path=images_path + "expand-image_normal.png",
-                                                 hover_path=images_path + "expand-image_hover.png",
-                                                 down_path=images_path + "expand-image_down.png",
-                                                 name="fullscreen-button")
+        self._fullscreen_button = ClutterImageButton(
+            normal_path=images_path + "expand-image_normal.png",
+            hover_path=images_path + "expand-image_hover.png",
+            down_path=images_path + "expand-image_down.png",
+            name="fullscreen-button")
         self._fullscreen_button.set_margin_bottom(ImageViewer.BORDER_WIDTH)
         self._fullscreen_button.set_margin_right(ImageViewer.BORDER_WIDTH)
         self._fullscreen_button.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=1.0, source=self._stage))
         self._fullscreen_button.get_click_action().connect('clicked', lambda w, e: self._presenter.on_fullscreen())
 
-        self._unfullscreen_button = ClutterImageButton(normal_path=images_path + "expand-image-close_normal.png",
-                                                 hover_path=images_path + "expand-image-close_hover.png",
-                                                 down_path=images_path + "expand-image-close_down.png",
-                                                 name="fullscreen-button")
+        self._unfullscreen_button = ClutterImageButton(
+            normal_path=images_path + "expand-image-close_normal.png",
+            hover_path=images_path + "expand-image-close_hover.png",
+            down_path=images_path + "expand-image-close_down.png",
+            name="fullscreen-button")
         self._unfullscreen_button.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=1.0, source=self._stage))
         self._unfullscreen_button.get_click_action().connect('clicked', lambda w, e: self._presenter.on_unfullscreen())
-        
+
         self._image_natural_size = (0, 0)
         self._image_open = False
         self.set_fullscreen_mode(False)
-        
+
         self.set_hexpand(True)
         self.set_vexpand(True)
         # self.connect('size-allocate', self._on_size_allocate)
@@ -124,7 +127,7 @@ class ImageViewer(Gtk.Alignment):
         image_height = allocation.height
         if not self._fullscreen_mode:
             image_width = max(0, allocation.width - ImageViewer.BORDER_WIDTH * 2)
-            image_height = max(0, allocation.height - ImageViewer.BORDER_WIDTH * 2)            
+            image_height = max(0, allocation.height - ImageViewer.BORDER_WIDTH * 2)
         self._image.set_size(image_width, image_height)
         self._image_back.set_size(image_width, image_height)
         self._border.set_size(allocation.width, allocation.width)
@@ -132,7 +135,8 @@ class ImageViewer(Gtk.Alignment):
     # Overrides. This is a hacky way to keep our alignment from asking for too
     # much space if the image is too big.
     def do_size_allocate(self, allocation):
-        if self._image_open: self._fit_image(allocation)
+        if self._image_open:
+            self._fit_image(allocation)
         Gtk.Alignment.do_size_allocate(self, allocation)
 
     def do_get_request_mode(self):

@@ -37,12 +37,9 @@ def kill_alpha(image):
 
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
-    
     image_array = numpy.array(image)
-
     curve_manager = CurveManager()
     curve_manager.add_curve(img_curve)
-
     curve_array = curve_manager.apply_curve('crgb', image_array)
     return Image.fromarray(curve_array)
 

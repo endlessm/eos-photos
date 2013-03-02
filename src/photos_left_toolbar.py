@@ -1,5 +1,6 @@
 from gi.repository import Gtk
 
+
 class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
@@ -40,8 +41,9 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._filter_options[default].select()
 
     def _add_filter_option(self, filter_name):
-        option = FilterOption(images_path=self._images_path, filter_name=filter_name,
-            clicked_callback=lambda:self._presenter.on_filter_select(filter_name))
+        option = FilterOption(
+            images_path=self._images_path, filter_name=filter_name,
+            clicked_callback=lambda: self._presenter.on_filter_select(filter_name))
         self._filter_options[filter_name] = option
         align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
         align.add(option)
@@ -58,13 +60,14 @@ class PhotosLeftToolbar(Gtk.VBox):
     def set_presenter(self, presenter):
         self._presenter = presenter
 
+
 class FilterOption(Gtk.EventBox):
     """
     A selectable filter option with an image and caption.
     """
     def __init__(self, images_path="", filter_name="NORMAL", clicked_callback=None):
         super(FilterOption, self).__init__(name="filter-event-box")
-        
+
         thumbnail_path = images_path + "filter_thumbnails/filter_" + filter_name + ".jpg"
 
         self._filter_name = filter_name
@@ -100,6 +103,7 @@ class FilterOption(Gtk.EventBox):
 
     def _on_button_release(self, event, data=None):
         #if mouse is no longer over eventbox, don't select the filter
-        if self._filter_image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0: return
-        if self._clicked_callback != None:
+        if self._filter_image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0:
+            return
+        if self._clicked_callback is not None:
             self._clicked_callback()

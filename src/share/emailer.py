@@ -6,6 +6,7 @@ from email.mime.text import MIMEText
 ENDLESS_ADDRESS = "euquero@endlessm.com"
 PASSWORD = "yesand5000"
 
+
 def _create_email(name, message, recipient, file):
     # Set up header of email
     email = MIMEMultipart()
@@ -29,9 +30,9 @@ def _create_email(name, message, recipient, file):
     email.attach(msg)
     return email.as_string()
 
+
 def email_photo(name, recipient, message, filename):
     # Set up email.
-    to_addr = recipient
     email = _create_email(name, message, recipient, filename)
 
     try:
@@ -43,5 +44,5 @@ def email_photo(name, recipient, message, filename):
         server.sendmail(ENDLESS_ADDRESS, [recipient], email)
         server.quit()
         return True
-    except Exception, exception:
+    except Exception:
         return False

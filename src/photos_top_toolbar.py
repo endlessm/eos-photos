@@ -1,7 +1,9 @@
 from gi.repository import Gtk
+from gettext import gettext as _
 
 from widgets.image_button import ImageButton
 from widgets.image_text_button import ImageTextButton
+
 
 class PhotosTopToolbar(Gtk.EventBox):
     """
