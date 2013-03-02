@@ -2,6 +2,19 @@
     engine: unico;
 }
 
+GtkButton {
+    -unico-glow-radius: 0;
+    -unico-border-gradient: none;
+    -unico-inner-stroke-gradient: none;
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+}
+
+GtkOverlay {
+    background-color: transparent;
+}
+
 #fullscreen-back {
     background-color: black;
 }
@@ -24,35 +37,62 @@
     border-color: white;
 }
 
+#filter-label {
+    font: BentonSans Medium 12;
+    color: #7e7e7e;
+}
+
+#filter-label:selected {
+    color: #ffffff;
+}
+
+#filters-title {
+    font: BentonSans Medium 13;
+    color: #ffffff;
+}
+
 #save-button,
 #share-button,
 #email-button,
 #close-button,
 #minimize-button {
+    font: BentonSans Bold 12;
     -GtkWidget-focus-line-width: 0;
     background-color: transparent;
     background-image: none;
     border-width: 0;
+    text-shadow: 0 1 rgba(0,0,0,0.75);
 }
 
-#open-button {
+#open-photos-button {
+    font: BentonSans Regular 12;
     -GtkWidget-focus-line-width: 0;
     border-width: 1px;
-    border-color: #2a2a2a;
+    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
+                                     from (#5c5c5c),
+                                     to (rgba(1,2,2,0.34)));
     background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (shade (#404040, 0.9)),
-                                     to (shade (#202020, 0.95)));
+                                     color-stop(0.0, #484848),
+                                     color-stop(1.0, #303030));
+    text-shadow: 0 -1 rgba(0,0,0,0.75);
 }
 
-#open-button:hover {
-    border-color: #2a2a2a;
+#open-photos-button:hover {
+    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
+                                     from (#676767),
+                                     to (rgba(1,2,2,0.4)));
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     color-stop(0.0, #565656),
+                                     color-stop(1.0, #343434));
 }
 
-#open-button:active {
-    border-color: #2a2a2a;
+#open-photos-button:active {
+    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
+                                     from (#191919),
+                                     to (#282828));
     background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (shade (#141615, 0.9)),
-                                     to (shade (#323131, 0.95)));
+                                     from (#1a1a1a),
+                                     to (#292929));
 }
 
 #filters-scroll-area > GtkViewport {
@@ -60,7 +100,7 @@
 }
 
 #filters-scroll-area > .scrollbar {
-    -GtkRange-slider-width: 5;
+    -GtkRange-slider-width: 8;
     -GtkRange-trough-border: 0;
 }
 
@@ -73,30 +113,16 @@
 #filters-scroll-area > .scrollbar.slider{
     border-width: 0px;
     background-image: none;
-    background-color: #3a3838;
+    background-color: #3f3f3f;
     -unico-inner-stroke-width: 0px;
     -unico-centroid-texture: none;
 }
 
 #filters-scroll-area > .scrollbar.slider:hover{
-    background-color: #515050;
+    background-color: #5c5c5c;
 }
-
 
 .primary-toolbar {
     background-image: -gtk-gradient(linear, center top, center bottom,
-        from(#3e3e3e), to(#282828));
-}
-
-GtkButton {
-    -unico-glow-radius: 0;
-    -unico-border-gradient: none;
-    -unico-inner-stroke-gradient: none;
-    -unico-focus-fill-color: transparent;
-    -unico-inner-stroke-width: 0;
-    -unico-outer-stroke-width: 0;
-}
-
-GtkOverlay {
-    background-color: transparent;
+        color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
 }

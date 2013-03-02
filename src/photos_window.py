@@ -1,4 +1,3 @@
-import os
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
@@ -6,7 +5,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
 
-    TOOLBAR_WIDTH = 160
+    TOOLBAR_WIDTH = 180
 
     def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_viewer=None, **kw):
         kw.setdefault('decorated', False)

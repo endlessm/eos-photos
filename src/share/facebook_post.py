@@ -1,11 +1,10 @@
 from facebook import GraphAPIError, GraphAPI
 from urllib2 import URLError
 import subprocess
-import pprint
-import webbrowser
+from gettext import gettext as _
+
 
 class FacebookPost:
-
     # -- DEV --
     #FB_APP_ID = '393860344022808'
     #FB_APP_SECRET = 'eb0dcb05f7512be39f7a3826ce99dfcd'
@@ -51,12 +50,12 @@ class FacebookPost:
         except Exception as e:
             print e
             return False, _("Post failed. We're not really sure what happened sorry!")
-    
+
     def set_fb_access_token(self, token):
         self._fb_access_token = token
 
     def oauth_exception_message(self, result):
-        server_error_codes = [1,2,4,17]
+        server_error_codes = [1, 2, 4, 17]
         oauth_error_codes = [102, 190]
         permissions_error_codes = range(200, 300)
         if 'error' in result:
@@ -71,10 +70,10 @@ class FacebookPost:
             message = _('Login failed.')
             return message
         return ""
-    
+
     def url_exception_message(self):
         message = _('Network problem detected. Please check your internet connection and try again.')
-        return "Post failed. We're not really sure what happened sorry!"
+        return message
 
     def is_user_loged_in(self):
         if self._fb_access_token is None or not self.is_token_valid():

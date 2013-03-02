@@ -5,6 +5,7 @@ images/*.png usr/share/endless-os-photos/images
 images/*.jpg usr/share/endless-os-photos/images
 images/filter_thumbnails/* usr/share/endless-os-photos/images/filter_thumbnails
 images/textures/* usr/share/endless-os-photos/images/textures
+fonts/* usr/share/fonts/opentype/endless-os-photos
 src/* usr/share/endless-os-photos/src
 po/endless_photos.mo usr/share/locale/pt_BR/LC_MESSAGES/
 endless-os-photos /usr/bin

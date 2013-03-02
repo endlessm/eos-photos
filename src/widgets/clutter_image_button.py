@@ -1,5 +1,6 @@
 from gi.repository import Clutter
 
+
 class ClutterImageButton(Clutter.Group):
     """
     A simple clutter button with a normal, hover and down state set from three images.

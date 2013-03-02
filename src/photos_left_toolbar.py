@@ -10,12 +10,12 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._images_path = images_path
 
         self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._filters_label = Gtk.Label("FILTROS")
+        self._filters_label = Gtk.Label(label="FILTROS", name="filters-title")
         self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
         self._filters_title_box.pack_start(self._filters_label, expand=False, fill=False, padding=2)
-        self._filters_title_allign = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
-        self._filters_title_allign.add(self._filters_title_box)
+        self._filters_title_allign = Gtk.HBox(homogeneous=False, spacing=0)
+        self._filters_title_allign.pack_start(self._filters_title_box, expand=False, fill=False, padding=10)
 
         self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
         self._filter_options = {}
@@ -45,8 +45,8 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, filter_name=filter_name,
             clicked_callback=lambda: self._presenter.on_filter_select(filter_name))
         self._filter_options[filter_name] = option
-        align = Gtk.Alignment(xalign=0.5, yalign=0.0, xscale=0.0, yscale=0.0)
-        align.add(option)
+        align = Gtk.HBox(homogeneous=False, spacing=0)
+        align.pack_start(option, expand=False, fill=False, padding=30)
         self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
         self.show_all()
 
@@ -62,6 +62,8 @@ class PhotosLeftToolbar(Gtk.VBox):
 
 
 class FilterOption(Gtk.EventBox):
+    __gtype_name__ = 'FilterOption'
+
     """
     A selectable filter option with an image and caption.
     """
@@ -73,7 +75,7 @@ class FilterOption(Gtk.EventBox):
         self._filter_name = filter_name
         self._clicked_callback = clicked_callback
         self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
-        self._filter_label = Gtk.Label(filter_name)
+        self._filter_label = Gtk.Label(name="filter-label", label=filter_name)
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
         self._vbox.pack_start(self._filter_image, expand=False, fill=False, padding=0)
@@ -88,18 +90,22 @@ class FilterOption(Gtk.EventBox):
     def select(self):
         flags = self._filter_image.get_state_flags() | Gtk.StateFlags.SELECTED
         self._filter_image.set_state_flags(flags, True)
+        self._filter_label.set_state_flags(flags, True)
 
     def deselect(self):
         flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.SELECTED)
         self._filter_image.set_state_flags(flags, True)
+        self._filter_label.set_state_flags(flags, True)
 
     def _on_mouse_enter(self, event, data=None):
         flags = self._filter_image.get_state_flags() | Gtk.StateFlags.PRELIGHT
         self._filter_image.set_state_flags(flags, True)
+        self._filter_label.set_state_flags(flags, True)
 
     def _on_mouse_leave(self, event, data=None):
         flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
         self._filter_image.set_state_flags(flags, True)
+        self._filter_label.set_state_flags(flags, True)
 
     def _on_button_release(self, event, data=None):
         #if mouse is no longer over eventbox, don't select the filter

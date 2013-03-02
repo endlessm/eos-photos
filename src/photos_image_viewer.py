@@ -10,8 +10,8 @@ class ImageViewer(Gtk.Alignment):
 
     # Constants
     MIN_SIZE = 100
-    PHOTO_HORIZ_PADDING = 10
-    PHOTO_VERT_PADDING = 30
+    PHOTO_HORIZ_PADDING = 35
+    PHOTO_VERT_PADDING = 35
     BORDER_WIDTH = 7
     BORDER_COLOR = '#fff'
 

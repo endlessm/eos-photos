@@ -1,5 +1,10 @@
 from gi.repository import Gtk, GdkPixbuf, Gdk
 
+DEFAULT_BRIGHT = Gdk.RGBA()
+DEFAULT_BRIGHT.parse("#a1a1a1")
+DEFAULT_DARK = Gdk.RGBA()
+DEFAULT_DARK.parse("#464646")
+
 
 class ImageTextButton(Gtk.Button):
     """
@@ -12,9 +17,16 @@ class ImageTextButton(Gtk.Button):
     """
     __gtype_name__ = 'EndlessImageTextButton'
 
-    def __init__(self, normal_path=None, hover_path=None, down_path=None, label_text="",
-                 normal_font_color=Gdk.RGBA(0.44, 0.44, 0.44, 1), hover_font_color=Gdk.RGBA(0.82, 0.82, 0.82, 1.0),
-                 down_font_color=Gdk.RGBA(0.46, 0.46, 0.46, 1), **kw):
+    def __init__(self,
+                 normal_path=None,
+                 hover_path=None,
+                 down_path=None,
+                 label_text="",
+                 vertical=False,
+                 normal_font_color=DEFAULT_DARK,
+                 hover_font_color=DEFAULT_BRIGHT,
+                 down_font_color=DEFAULT_DARK,
+                 **kw):
         Gtk.Button.__init__(self, **kw)
 
         self._normal_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(normal_path)
@@ -30,10 +42,13 @@ class ImageTextButton(Gtk.Button):
         self._label = Gtk.Label(self._label_text)
         self._label.override_color(Gtk.StateFlags.NORMAL, normal_font_color)
 
-        self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._image, expand=False, fill=False, padding=0)
-        self._hbox.pack_start(self._label, expand=False, fill=False, padding=2)
-        self.add(self._hbox)
+        if vertical:
+            self._box = Gtk.VBox(homogeneous=False, spacing=0)
+        else:
+            self._box = Gtk.HBox(homogeneous=False, spacing=0)
+        self._box.pack_start(self._image, expand=False, fill=False, padding=0)
+        self._box.pack_start(self._label, expand=False, fill=False, padding=2)
+        self.add(self._box)
 
         self.connect('enter-notify-event', self._on_mouse_enter)
         self.connect('leave-notify-event', self._on_mouse_leave)

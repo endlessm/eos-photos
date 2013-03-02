@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Gtk, Gdk
 from gettext import gettext as _
 
 from widgets.image_button import ImageButton
@@ -25,24 +25,30 @@ class PhotosTopToolbar(Gtk.EventBox):
                                             name="minimize-button")
         self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 
+        text_color = Gdk.RGBA()
+        text_color.parse("#787878")
         self._open_button = ImageTextButton(normal_path=images_path + "OpenButton-icon_normal-hover.png",
                                             hover_path=images_path + "OpenButton-icon_normal-hover.png",
                                             down_path=images_path + "OpenButton-icon_down.png",
                                             label_text=_("OPEN IMAGE"),
-                                            name="open-button")
+                                            normal_font_color=text_color,
+                                            hover_font_color=text_color,
+                                            down_font_color=text_color,
+                                            name="open-photos-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())
 
+        self._right_side = Gtk.HBox(homogeneous=False, spacing=0)
+        self._right_side.pack_start(self._minimize_button, expand=False, fill=False, padding=0)
+        self._right_side.pack_start(self._close_button, expand=False, fill=False, padding=0)
+
+        self._left_side = Gtk.Alignment(top_padding=4, bottom_padding=3)
+        self._left_side.add(self._open_button)
+
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._open_button, expand=False, fill=False, padding=20)
-        self._hbox.pack_end(self._close_button, expand=False, fill=False, padding=0)
-        self._hbox.pack_end(self._minimize_button, expand=False, fill=False, padding=0)
+        self._hbox.pack_start(self._left_side, expand=False, fill=False, padding=7)
+        self._hbox.pack_end(self._right_side, expand=False, fill=False, padding=10)
 
-        # This vbox is only to get a few pixels of padding above and below the
-        # buttons in the toolbar. Is there a better way to do this?
-        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=3)
-
-        self.add(self._vbox)
+        self.add(self._hbox)
 
         self.show_all()
 

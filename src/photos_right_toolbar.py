@@ -16,7 +16,8 @@ class PhotosRightToolbar(Gtk.Alignment):
             hover_path=images_path + "save_hover.png",
             down_path=images_path + "save_down.png",
             label_text=_("SAVE"),
-            name="save-button")
+            name="save-button",
+            vertical=True)
         self._save_button.connect('clicked', lambda w: self._presenter.on_save())
 
         self._share_button = ImageTextButton(
@@ -24,7 +25,8 @@ class PhotosRightToolbar(Gtk.Alignment):
             hover_path=images_path + "facebook_hover.png",
             down_path=images_path + "facebook_down.png",
             label_text=_("FACEBOOK"),
-            name="share-button")
+            name="share-button",
+            vertical=True)
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
 
         self._email_button = ImageTextButton(
@@ -32,7 +34,8 @@ class PhotosRightToolbar(Gtk.Alignment):
             hover_path=images_path + "email_hover.png",
             down_path=images_path + "email_down.png",
             label_text=_("EMAIL"),
-            name="email-button")
+            name="email-button",
+            vertical=True)
         self._email_button.connect('clicked', lambda w: self._presenter.on_email())
 
         self._button_box = Gtk.VBox(homogeneous=False, spacing=20)

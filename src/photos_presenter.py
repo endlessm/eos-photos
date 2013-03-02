@@ -170,7 +170,8 @@ class PhotosPresenter(object):
             self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))
 
     def on_fullscreen(self):
-        if self._lock or not self._model.is_open(): return
+        if self._lock or not self._model.is_open():
+            return
         self._view.set_image_fullscreen(True)
 
     def on_unfullscreen(self):
@@ -184,7 +185,8 @@ class PhotosPresenter(object):
         Gdk.threads_leave()
 
     def on_filter_select(self, filter_name):
-        if self._lock or not self._model.is_open(): return
+        if self._lock or not self._model.is_open():
+            return
 
         # self._run_asynch_task(self._do_on_filter_select, (filter_name,))
         self._model.apply_filter(filter_name)
