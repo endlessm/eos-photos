@@ -13,7 +13,7 @@ import scipy
 
 import sys
 
-class Filter:
+class Curve:
 
   def __init__(self, acv_file_path, name):
     self.name = name
@@ -55,18 +55,18 @@ class Filter:
   def get_c(self):
     return self.polynomials[0]
 
-class FilterManager:
+class CurveManager:
 
   def __init__(self):
-    self.filters = {}
+    self.curves = {}
     #add some stuff here
 
-  def add_filter(self,filter_obj):
-    # Overwrites if such a filter already exists
+  def add_curve(self,curve_obj):
+    # Overwrites if such a curve already exists
     # NOTE: Fix or not to fix?
-    self.filters[filter_obj.name] = filter_obj
+    self.curves[curve_obj.name] = curve_obj
 
-  def apply_filter(self,filter_name,image_array):
+  def apply_curve(self,curve_name,image_array):
 
     if image_array.ndim < 3:
       raise Exception('Photos must be in color, meaning at least 3 channels')
@@ -76,45 +76,22 @@ class FilterManager:
         return p_arr 
 
       # NOTE: Assumes that image_array is a numpy array
-      image_filter = self.filters[filter_name]
-      # NOTE: What happens if filter does not exist?
+      image_curve = self.curves[curve_name]
+      # NOTE: What happens if curve does not exist?
       width,height,channels = image_array.shape
-      filter_array = numpy.zeros((width, height, 3), dtype=float) 
+      curve_array = numpy.zeros((width, height, 3), dtype=float) 
 
-      p_r = image_filter.get_r()
-      p_g = image_filter.get_g()
-      p_b = image_filter.get_b()
-      p_c = image_filter.get_c()
+      p_r = image_curve.get_r()
+      p_g = image_curve.get_g()
+      p_b = image_curve.get_b()
+      p_c = image_curve.get_c()
 
-      filter_array[:,:,0] = p_r(image_array[:,:,0])
-      filter_array[:,:,1] = p_g(image_array[:,:,1])
-      filter_array[:,:,2] = p_b(image_array[:,:,2])
-      filter_array = filter_array.clip(0,255)
-      filter_array = p_c(filter_array)
+      curve_array[:,:,0] = p_r(image_array[:,:,0])
+      curve_array[:,:,1] = p_g(image_array[:,:,1])
+      curve_array[:,:,2] = p_b(image_array[:,:,2])
+      curve_array = curve_array.clip(0,255)
+      curve_array = p_c(curve_array)
 
-      filter_array = numpy.ceil(filter_array).clip(0,255)
+      curve_array = numpy.ceil(curve_array).clip(0,255)
 
-      return filter_array.astype(numpy.uint8)
-
-if __name__ == '__main__':
-
-  if len(sys.argv) < 3:
-    print "Wrong number of arguments"
-    print """  Usage: \
-          python filter.py [curvefile] [imagefile] """
-  else:
-    img_filter = Filter(sys.argv[1], 'crgb')
-
-    im = Image.open(sys.argv[2])
-
-    im.show()
-
-    image_array = numpy.array(im)
-
-    filter_manager = FilterManager()
-    filter_manager.add_filter(img_filter)
-
-    filter_array = filter_manager.apply_filter('crgb', image_array)
-    im = Image.fromarray(filter_array)
-    im.save('temp.png')
-    im.show() 
+      return curve_array.astype(numpy.uint8)

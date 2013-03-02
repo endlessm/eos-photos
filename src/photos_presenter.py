@@ -21,7 +21,7 @@ class PhotosPresenter(object):
         self._view = view
         self._view.set_presenter(self)
         filters = self._model.get_filter_names()
-        self._view.set_filter_names(filters, self._model.get_default_name())
+        self._view.set_filter_names(filters, self._model.get_default_filter_name())
         self._lock = False
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
@@ -29,7 +29,7 @@ class PhotosPresenter(object):
 
     def open_image(self, filename):
         self._model.open(filename)
-        self._view.select_filter(self._model.get_default_name())
+        self._view.select_filter(self._model.get_default_filter_name())
         self._update_view()
 
     def _update_view(self):

@@ -1,6 +1,6 @@
 from gi.repository import Gtk, GdkPixbuf, GtkClutter, Clutter
 
-from clutter_image_button import ClutterImageButton
+from widgets.clutter_image_button import ClutterImageButton
 
 class ImageViewer(Gtk.Alignment):
     """
