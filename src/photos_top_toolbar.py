@@ -25,15 +25,10 @@ class PhotosTopToolbar(Gtk.EventBox):
                                             name="minimize-button")
         self._minimize_button.connect('clicked', lambda w: self._presenter.on_minimize())
 
-        text_color = Gdk.RGBA()
-        text_color.parse("#787878")
         self._open_button = ImageTextButton(normal_path=images_path + "OpenButton-icon_normal-hover.png",
                                             hover_path=images_path + "OpenButton-icon_normal-hover.png",
                                             down_path=images_path + "OpenButton-icon_down.png",
-                                            label_text=_("OPEN IMAGE"),
-                                            normal_font_color=text_color,
-                                            hover_font_color=text_color,
-                                            down_font_color=text_color,
+                                            label=_("OPEN IMAGE"),
                                             name="open-photos-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())
 

@@ -51,21 +51,39 @@ GtkOverlay {
     color: #ffffff;
 }
 
+
+#save-button GtkLabel,
+#share-button GtkLabel,
+#email-button GtkLabel {
+    font: BentonSans Bold 12;
+    text-shadow: 0 1 rgba(0,0,0,0.75);
+    color: #464646;
+}
+
+#save-button GtkLabel:hover,
+#share-button GtkLabel:hover,
+#email-button GtkLabel:hover {
+    color: #a1a1a1;
+}
+
+#save-button GtkLabel:active,
+#share-button GtkLabel:active,
+#email-button GtkLabel:active {
+    color: #464646;
+}
+
 #save-button,
 #share-button,
 #email-button,
 #close-button,
 #minimize-button {
-    font: BentonSans Bold 12;
     -GtkWidget-focus-line-width: 0;
     background-color: transparent;
     background-image: none;
     border-width: 0;
-    text-shadow: 0 1 rgba(0,0,0,0.75);
 }
 
 #open-photos-button {
-    font: BentonSans Regular 12;
     -GtkWidget-focus-line-width: 0;
     border-width: 1px;
     -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
@@ -74,7 +92,16 @@ GtkOverlay {
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      color-stop(0.0, #484848),
                                      color-stop(1.0, #303030));
+}
+
+#open-photos-button GtkLabel {
+    font: BentonSans Regular 12;
     text-shadow: 0 -1 rgba(0,0,0,0.75);
+    color: #787878;
+}
+
+#open-photos-button GtkLabel:hover {
+    color: #888888;
 }
 
 #open-photos-button:hover {

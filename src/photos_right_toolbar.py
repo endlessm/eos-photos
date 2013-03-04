@@ -15,7 +15,7 @@ class PhotosRightToolbar(Gtk.Alignment):
             normal_path=images_path + "save_normal.png",
             hover_path=images_path + "save_hover.png",
             down_path=images_path + "save_down.png",
-            label_text=_("SAVE"),
+            label=_("SAVE"),
             name="save-button",
             vertical=True)
         self._save_button.connect('clicked', lambda w: self._presenter.on_save())
@@ -24,7 +24,7 @@ class PhotosRightToolbar(Gtk.Alignment):
             normal_path=images_path + "facebook_normal.png",
             hover_path=images_path + "facebook_hover.png",
             down_path=images_path + "facebook_down.png",
-            label_text=_("FACEBOOK"),
+            label=_("FACEBOOK"),
             name="share-button",
             vertical=True)
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
@@ -33,7 +33,7 @@ class PhotosRightToolbar(Gtk.Alignment):
             normal_path=images_path + "email_normal.png",
             hover_path=images_path + "email_hover.png",
             down_path=images_path + "email_down.png",
-            label_text=_("EMAIL"),
+            label=_("EMAIL"),
             name="email-button",
             vertical=True)
         self._email_button.connect('clicked', lambda w: self._presenter.on_email())
