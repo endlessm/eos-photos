@@ -1,5 +1,5 @@
 from gi.repository import Gtk
-
+from widgets.list_button import ListButton
 
 class PhotosLeftToolbar(Gtk.VBox):
     """
@@ -9,30 +9,46 @@ class PhotosLeftToolbar(Gtk.VBox):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
-        self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._filters_label = Gtk.Label(label="FILTROS", name="filters-title")
-        self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
-        self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
-        self._filters_title_box.pack_start(self._filters_label, expand=False, fill=False, padding=2)
-        self._filters_title_allign = Gtk.HBox(homogeneous=False, spacing=0)
-        self._filters_title_allign.pack_start(self._filters_title_box, expand=False, fill=False, padding=10)
+        self._categories = {}
 
-        self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
+        self._borders_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
+        self._borders_label = Gtk.Label(label="BORDERS", name="borders-title")
+        self._borders_title_box = Gtk.HBox(homogeneous=False, spacing=0)
+        self._borders_title_box.pack_start(self._borders_image, expand=False, fill=False, padding=0)
+        self._borders_title_box.pack_start(self._borders_label, expand=False, fill=False, padding=2)
+        self._borders_title_allign = Gtk.HBox(homogeneous=False, spacing=0)
+        self._borders_title_allign.pack_start(self._borders_title_box, expand=False, fill=False, padding=10)
+
+
+        borders_category = Category(images_path=self._images_path,label_name="BORDERS", category_name="borders",
+            clicked_callback=lambda: self.change_category("borders"))
+
+        filters_category = Category(images_path=self._images_path,label_name="FILTROS", category_name="filters",
+            clicked_callback=lambda: self.change_category("filters"))
+
+        self._categories["filters"] = filters_category
+        self._categories["borders"] = borders_category
+
+
+        #self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
         self._filter_options = {}
 
-        self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
-        self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        self._scroll_area.add_with_viewport(self._scroll_contents)
+        # self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
+        # self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        # self._scroll_area.add_with_viewport(self._scroll_contents)
 
-        self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
-        self._drop_shadow.set_halign(Gtk.Align.CENTER)
-        self._drop_shadow.set_valign(Gtk.Align.START)
-        self._overlay = Gtk.Overlay()
-        self._overlay.add(self._scroll_area)
-        self._overlay.add_overlay(self._drop_shadow)
+        # self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
+        # self._drop_shadow.set_halign(Gtk.Align.CENTER)
+        # self._drop_shadow.set_valign(Gtk.Align.START)
+        # self._overlay = Gtk.Overlay()
+        # self._overlay.add(self._scroll_area)
+        # self._overlay.add_overlay(self._drop_shadow)
 
-        self.pack_start(self._filters_title_allign, expand=False, fill=False, padding=20)
-        self.pack_start(self._overlay, expand=True, fill=True, padding=0)
+        #self.pack_start(self._borders_title_allign, expand=False, fill=False, padding=20)
+        self.pack_start(filters_category, expand=True, fill=True, padding=20)
+        self.pack_start(borders_category, expand=True, fill=True, padding=20)
+
+        #self.pack_start(self._overlay, expand=True, fill=True, padding=0)
 
         self.show_all()
 
@@ -41,14 +57,14 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._filter_options[default].select()
 
     def _add_filter_option(self, filter_name):
-        option = FilterOption(
-            images_path=self._images_path, filter_name=filter_name,
-            clicked_callback=lambda: self._presenter.on_filter_select(filter_name))
+        category = self._categories["filters"]
+        
+        path = "filter_thumbnails/filter_" + filter_name + ".jpg"
+        option = ListButton(images_path = self._images_path, path=path, name="filter", label_name=filter_name,
+            clicked_callback=lambda: self._presenter.on_filter_select(filter_name), vertical=True)
         self._filter_options[filter_name] = option
-        align = Gtk.HBox(homogeneous=False, spacing=0)
-        align.pack_start(option, expand=False, fill=False, padding=30)
-        self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
-        self.show_all()
+
+        category.add_to_scroll(option)
 
     def select_filter(self, filter_name):
         for name, option in self._filter_options.items():
@@ -60,56 +76,69 @@ class PhotosLeftToolbar(Gtk.VBox):
     def set_presenter(self, presenter):
         self._presenter = presenter
 
+    def change_category(self, category_name):
+        for name, category in self._categories.items():
+            if name == category_name:
+                category.select()
+                category.expander.set_expanded(True)
+                #category.expanded_cb(category.expander, None)
+            else:
+                category.deselect()
+                category.expander.set_expanded(False)
 
-class FilterOption(Gtk.EventBox):
-    __gtype_name__ = 'FilterOption'
 
-    """
-    A selectable filter option with an image and caption.
-    """
-    def __init__(self, images_path="", filter_name="NORMAL", clicked_callback=None):
-        super(FilterOption, self).__init__(name="filter-event-box")
+class Category(Gtk.VBox):
+    def __init__(self, images_path="", label_name="", category_name="", clicked_callback=None, **kw):
+        super(Category, self).__init__(homogeneous=False, spacing=0, **kw)
+        
+        self._images_path = images_path
+        self.title_box = ListButton(images_path=self._images_path, path="Filter-icon.png", name="filter",
+        label_name=label_name, clicked_callback=clicked_callback, vertical=False)
+        #self._title_allign = Gtk.HBox(homogeneous=False, spacing=0)
+        #self._title_allign.pack_start(borders_title_box, expand=False, fill=False, padding=10)
 
-        thumbnail_path = images_path + "filter_thumbnails/filter_" + filter_name + ".jpg"
+        self.expander = Gtk.Expander()
 
-        self._filter_name = filter_name
-        self._clicked_callback = clicked_callback
-        self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
-        self._filter_label = Gtk.Label(name="filter-label", label=filter_name)
+        self.expander.connect('notify::expanded', self.expanded_cb)
 
-        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(self._filter_image, expand=False, fill=False, padding=0)
-        self._vbox.pack_start(self._filter_label, expand=False, fill=False, padding=2)
+        self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
 
-        self.add(self._vbox)
+        self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
+        self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self._scroll_area.add_with_viewport(self._scroll_contents)
 
-        self.connect('leave-notify-event', self._on_mouse_leave)
-        self.connect('enter-notify-event', self._on_mouse_enter)
-        self.connect('button-release-event', self._on_button_release)
+        # self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
+        # self._drop_shadow.set_halign(Gtk.Align.CENTER)
+        # self._drop_shadow.set_valign(Gtk.Align.START)
+        # self._overlay = Gtk.Overlay()
+        # self._overlay.add(self._scroll_area)
+        # self._overlay.add_overlay(self._drop_shadow)
+
+        self.pack_start(self.title_box, expand=False, fill=False, padding=20)
+        self.pack_start(self.expander, expand=True, fill=True, padding=20)
+        #self.pack_start(self._scroll_area, expand=True, fill=True, padding=20)
+
+        self.show_all()
+
+    def expanded_cb(self, expander, params):
+        if expander.get_expanded():
+            expander.add(self._scroll_area)
+            self._scroll_area.show()
+        else:
+            expander.remove(self._scroll_area)
+        self.show_all()
 
     def select(self):
-        flags = self._filter_image.get_state_flags() | Gtk.StateFlags.SELECTED
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
+        self.title_box.select()
+        self._scroll_area.show()
 
     def deselect(self):
-        flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.SELECTED)
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
+        self.title_box.deselect()
+        self._scroll_area.hide()
 
-    def _on_mouse_enter(self, event, data=None):
-        flags = self._filter_image.get_state_flags() | Gtk.StateFlags.PRELIGHT
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
 
-    def _on_mouse_leave(self, event, data=None):
-        flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
-
-    def _on_button_release(self, event, data=None):
-        #if mouse is no longer over eventbox, don't select the filter
-        if self._filter_image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0:
-            return
-        if self._clicked_callback is not None:
-            self._clicked_callback()
+    def add_to_scroll(self, object_):
+        align = Gtk.HBox(homogeneous=False, spacing=0)
+        align.pack_start(object_, expand=False, fill=False, padding=30)
+        self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
+        self.show_all()
