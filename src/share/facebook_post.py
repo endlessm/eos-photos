@@ -1,7 +1,6 @@
 from facebook import GraphAPIError, GraphAPI
 from urllib2 import URLError
 import subprocess
-from gettext import gettext as _
 
 
 class FacebookPost:

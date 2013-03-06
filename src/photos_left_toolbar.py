@@ -10,7 +10,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._images_path = images_path
 
         self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._filters_label = Gtk.Label(label="FILTROS", name="filters-title")
+        self._filters_label = Gtk.Label(label=_("FILTROS"), name="filters-title")
         self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
         self._filters_title_box.pack_start(self._filters_label, expand=False, fill=False, padding=2)
@@ -36,13 +36,15 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.show_all()
 
-    def set_filter_names(self, filter_names, default):
-        map(self._add_filter_option, filter_names)
+    def set_filters(self, filters, default):
+        map(self._add_filter_option, filters)
         self._filter_options[default].select()
 
-    def _add_filter_option(self, filter_name):
+    def _add_filter_option(self, name_and_thumb):
+        filter_name = name_and_thumb[0]
+        thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
         option = FilterOption(
-            images_path=self._images_path, filter_name=filter_name,
+            thumbnail_path=thumbnail_path, filter_name=filter_name,
             clicked_callback=lambda: self._presenter.on_filter_select(filter_name))
         self._filter_options[filter_name] = option
         align = Gtk.HBox(homogeneous=False, spacing=0)
@@ -67,19 +69,20 @@ class FilterOption(Gtk.EventBox):
     """
     A selectable filter option with an image and caption.
     """
-    def __init__(self, images_path="", filter_name="NORMAL", clicked_callback=None):
+    def __init__(self, thumbnail_path="", filter_name="NORMAL", clicked_callback=None):
         super(FilterOption, self).__init__(name="filter-event-box")
-
-        thumbnail_path = images_path + "filter_thumbnails/filter_" + filter_name + ".jpg"
-
         self._filter_name = filter_name
         self._clicked_callback = clicked_callback
         self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
         self._filter_label = Gtk.Label(name="filter-label", label=filter_name)
+	self._filter_label.set_line_wrap(True)
+        self._filter_label.set_size_request(150, -1)
+	table = Gtk.Table(1, 1, False)
+        table.attach(self._filter_label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
         self._vbox.pack_start(self._filter_image, expand=False, fill=False, padding=0)
-        self._vbox.pack_start(self._filter_label, expand=False, fill=False, padding=2)
+        self._vbox.pack_start(table, expand=False, fill=False, padding=2)
 
         self.add(self._vbox)
 

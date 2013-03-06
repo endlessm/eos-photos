@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from src.photos_model import PhotosModel
 
 if __name__ == '__main__':
@@ -8,8 +9,10 @@ if __name__ == '__main__':
 
     filters = model.get_filter_names()
 
+    filter_no = 0
     for f in filters:
         model.apply_filter(f)
-        filename = "images/filter_thumbnails/" + "filter_" + f + ".jpg"
-        print filename
+        filename = "images/filter_thumbnails/filter_" + str(filter_no) + ".jpg"
         model.save(filename)
+        print filename
+        filter_no+=1

@@ -1,5 +1,4 @@
 from gi.repository import Gtk, Gdk
-from gettext import gettext as _
 
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
@@ -44,8 +43,8 @@ class PhotosView(object):
     def set_image_fullscreen(self, fullscreen):
         self._window.set_image_fullscreen(fullscreen)
 
-    def set_filter_names(self, filter_names, default):
-        self._left_toolbar.set_filter_names(filter_names, default)
+    def set_filters(self, filters, default):
+        self._left_toolbar.set_filters(filters, default)
 
     def select_filter(self, filter_name):
         self._left_toolbar.select_filter(filter_name)

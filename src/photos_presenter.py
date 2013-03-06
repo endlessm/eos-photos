@@ -1,7 +1,6 @@
 import os
 
 from gi.repository import Gtk, Gdk
-from gettext import gettext as _
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
@@ -20,8 +19,8 @@ class PhotosPresenter(object):
         self._model = model
         self._view = view
         self._view.set_presenter(self)
-        filters = self._model.get_filter_names()
-        self._view.set_filter_names(filters, self._model.get_default_filter_name())
+        filters = self._model.get_filter_names_and_thumbnails()
+        self._view.set_filters(filters, self._model.get_default_filter_name())
         self._lock = False
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
