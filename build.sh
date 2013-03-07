@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # Install dependencies
-sudo apt-get install -y devscripts debhelper
+sudo apt-get install -y devscripts debhelper r1.2-gtkclutter-1.0
 
 cd `dirname $0`  # Move to top repo directory
 
