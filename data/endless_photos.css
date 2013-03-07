@@ -38,7 +38,8 @@ GtkOverlay {
 }
 
 #filter-label {
-    font: BentonSans Medium 12;
+    font-family: BentonSans Medium;
+    font-size: 12;
     color: #7e7e7e;
 }
 
@@ -47,7 +48,8 @@ GtkOverlay {
 }
 
 #filters-title {
-    font: BentonSans Medium 13;
+    font-family: BentonSans Medium;
+    font-size: 13;
     color: #ffffff;
 }
 
@@ -55,7 +57,8 @@ GtkOverlay {
 #save-button GtkLabel,
 #share-button GtkLabel,
 #email-button GtkLabel {
-    font: BentonSans Bold 12;
+    font-family: BentonSans Bold;
+    font-size: 12;
     text-shadow: 0 1 rgba(0,0,0,0.75);
     color: #464646;
 }
@@ -95,7 +98,8 @@ GtkOverlay {
 }
 
 #open-photos-button GtkLabel {
-    font: BentonSans Regular 12;
+    font-family: BentonSans Regular;
+    font-size: 12;
     text-shadow: 0 -1 rgba(0,0,0,0.75);
     color: #787878;
 }

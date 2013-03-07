@@ -1,7 +1,6 @@
 from facebook import GraphAPIError, GraphAPI
 from urllib2 import URLError
 import subprocess
-from gettext import gettext as _
 
 
 class FacebookPost:
@@ -20,7 +19,7 @@ class FacebookPost:
 
     def fb_login(self, callback=None):
         # keep as dependency on social bar??
-        # proc = subprocess.Popen(['python', '/home/matt/share/eos-photos/src/share/fb_auth_window.py'], stdout=subprocess.PIPE)
+        # proc = subprocess.Popen(['python', './src/share/fb_auth_window.py'], stdout=subprocess.PIPE)
         proc = subprocess.Popen(['python', '/usr/share/endless-os-photos/src/share/fb_auth_window.pyc'], stdout=subprocess.PIPE)
         for line in proc.stdout:
             print line

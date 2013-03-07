@@ -1,10 +1,11 @@
 import tempfile
 import collections
-from gettext import gettext as _
 
 import Image
 import ImageOps
 import ImageFilter
+
+from gi.repository import Gtk
 
 import image_processing.image_tools as ImageTools
 
@@ -92,7 +93,7 @@ class PhotosModel(object):
         return self._is_saved
 
     def is_modified(self):
-        return self._curr_filter is not "NORMAL"
+        return self._curr_filter is not self.get_defualt_filter_name()
 
     def get_curr_filename(self):
         if not self.is_open():
@@ -105,8 +106,16 @@ class PhotosModel(object):
     def get_filter_names(self):
         return self._filter_dict.keys()
 
+    def get_filter_names_and_thumbnails(self):
+        names_and_thumbs = []
+        filter_no = 0
+        for name in self._filter_dict.keys():
+            names_and_thumbs.append((name, "filter_" + str(filter_no) + ".jpg"))
+            filter_no += 1
+        return names_and_thumbs
+
     def get_default_filter_name(self):
-        return "NORMAL"
+        return self._filter_dict.keys()[0]
 
     def apply_filter(self, filter_name):
         if (not self.is_open()) or self._curr_filter == filter_name:

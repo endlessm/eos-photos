@@ -14,19 +14,19 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._categories = {}
 
         self._categories["borders"] = Category(
-            images_path=self._images_path, label_name="BORDERS", category_name="borders",
+            images_path=self._images_path, label_name=_("BORDERS"), category_name="borders",
             expanded_callback=lambda: self.change_category("borders"))
 
         self._categories["filters"] = Category(
-            images_path=self._images_path, label_name="FILTROS", category_name="filters",
+            images_path=self._images_path, label_name=_("FILTERS"), category_name="filters",
             expanded_callback=lambda: self.change_category("filters"))
 
         self._categories["text"] = Category(
-            images_path=self._images_path, label_name="TEXTO", category_name="text",
+            images_path=self._images_path, label_name=_("TEXT"), category_name="text",
             expanded_callback=lambda: self.change_category("text"))
 
         self._categories["transforms"] = Category(
-            images_path=self._images_path, label_name="TRANSFORMS", category_name="transforms",
+            images_path=self._images_path, label_name=_("TRANSFORMS"), category_name="transforms",
             expanded_callback=lambda: self.change_category("transforms"))
 
         self._filter_options = {}
@@ -36,23 +36,26 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.show_all()
 
-    def set_filter_names(self, filter_names, default):
-        map(self._add_filter_option, filter_names)
-        self._filter_options[default].select()
+    def set_filters(self, filters, default):
+        map(self._add_filter_option, filters)
+        self.select_filter(default)
 
-    def _add_filter_option(self, filter_name):
+    def _add_filter_option(self, name_and_thumb):
+        filter_name = name_and_thumb[0]
+        thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
         category = self._categories[random.choice(self._categories.keys())]
-        path = "filter_thumbnails/filter_" + filter_name + ".jpg"
         option = ListButton(
-            images_path=self._images_path, path=path, name="filter", label_name=filter_name,
-            clicked_callback=lambda: self._presenter.on_filter_select(filter_name), vertical=True)
+            image_path=thumbnail_path, name="filter", label_name=filter_name,
+            clicked_callback=lambda: self._presenter.on_filter_select(filter_name),
+            vertical=True)
         self._filter_options[filter_name] = option
-
         category.add_to_scroll(option)
 
     def select_filter(self, filter_name):
         for name, option in self._filter_options.items():
-            if not name == filter_name:
+            if name == filter_name:
+                option.select()
+            else:
                 option.deselect()
 
     def set_presenter(self, presenter):
@@ -70,9 +73,11 @@ class Category(Gtk.Expander):
 
         self._expanded_callback = expanded_callback
         self._images_path = images_path
-        self._title_box = ListButton(
-            images_path=self._images_path, path="Filter-icon.png", name="filter",
-            label_name=label_name, vertical=False)
+        self._title_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
+        self._title_label = Gtk.Label(label=label_name, name="filters-title")
+        self._title_box = Gtk.HBox(homogeneous=False, spacing=0)
+        self._title_box.pack_start(self._title_image, expand=False, fill=False, padding=0)
+        self._title_box.pack_start(self._title_label, expand=False, fill=False, padding=2)
         self.set_label_widget(self._title_box)
         #self._title_allign = Gtk.HBox(homogeneous=False, spacing=0)
         #self._title_allign.pack_start(borders_title_box, expand=False, fill=False, padding=10)
@@ -98,12 +103,12 @@ class Category(Gtk.Expander):
 
     def expanded_cb(self, widget, event):
         if self.get_expanded():
-            self._title_box.select()
+            # self._title_box.select()
             self.add(self._scroll_area)
             self._expanded_callback()
         else:
             self.remove(self._scroll_area)
-            self._title_box.deselect()
+            # self._title_box.deselect()
         self.show_all()
 
     def select(self):
