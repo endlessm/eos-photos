@@ -1,9 +1,9 @@
 from gi.repository import Gtk, GdkPixbuf, Gdk
 
+
 class ListButton(Gtk.EventBox):
 
-    def __init__(self, images_path="", path="",name="", label_name="NORMAL", clicked_callback=None, vertical=False):
-        
+    def __init__(self, images_path="", path="", name="", label_name="", clicked_callback=None, vertical=False):
         super(ListButton, self).__init__(name=name+"-event-box")
 
         thumbnail_path = images_path + path
@@ -12,9 +12,9 @@ class ListButton(Gtk.EventBox):
         self._label = Gtk.Label(name=name+"-label", label=label_name)
 
         if vertical:
-        	self._box = Gtk.VBox(homogeneous=False, spacing=0)
+            self._box = Gtk.VBox(homogeneous=False, spacing=0)
         else:
-        	self._box = Gtk.HBox(homogeneous=False, spacing=0)
+            self._box = Gtk.HBox(homogeneous=False, spacing=0)
 
         self._box.pack_start(self._image, expand=False, fill=False, padding=0)
         self._box.pack_start(self._label, expand=False, fill=False, padding=2)
@@ -51,4 +51,3 @@ class ListButton(Gtk.EventBox):
             return
         if self._clicked_callback is not None:
             self._clicked_callback()
-
