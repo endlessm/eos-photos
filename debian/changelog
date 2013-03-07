@@ -1,3 +1,9 @@
+endlessos-base-photos (1.1) unstable; urgency=low
+
+  * renamed package according to EndlessOS standards
+
+ -- dev1 <endlessmobile@gmail.com>  Wed, 24 Oct 2012 11:11:44 -0500
+
 endless-os-photos (1.0) unstable; urgency=low
 
   * Initial release
