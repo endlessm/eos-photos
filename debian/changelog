@@ -1,3 +1,9 @@
+endlessos-base-photos (1.2) unstable; urgency=low
+
+  * Updated fonts and translations. Changed filters.
+
+ -- dev1 <endlessmobile@gmail.com>  Fri, 08 Mar 2013 00:11:18 -0800
+
 endlessos-base-photos (1.1) unstable; urgency=low
 
   * renamed package according to EndlessOS standards
