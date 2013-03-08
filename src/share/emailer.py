@@ -14,11 +14,11 @@ def _create_email(name, message, recipient, file):
     email["To"] = recipient
     if len(name.strip()) == 0:
         # All whitespace
-        name = "Someone"
-    email["Subject"] = name + " sent you a photo from Endless Photos!"
+        name = _("Someone")
+    email["Subject"] = name + " " + _("sent you a photo from Endless Photos!")
 
     # Embed image in body of email using HTML
-    noreply = '<p><i>Please do not reply to this email. Replies are sent to an unmonitored inbox.</i></p>'
+    noreply = '<p><i>' + _('Please do not reply to this email. Replies are sent to an unmonitored inbox.') + '</i></p>'
     body = MIMEText('<p>' + message + ' </p><img src="cid:myimage" />' + noreply, _subtype='html')
     email.attach(body)
 

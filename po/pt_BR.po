@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-06 13:41-0800\n"
+"POT-Creation-Date: 2013-03-07 18:10-0800\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -157,6 +157,13 @@ msgstr "POSTERIZAR"
 msgid "PROVIAESQUE"
 msgstr ""
 
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr ""
+"Por favor, não responda a este e-mail. As respostas são enviadas para uma "
+"caixa de entrada não monitorada."
+
 #: src/share/facebook_post.py:51
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr "Sua publicação falhou. Não temos certeza do que aconteceu, desculpe!"
@@ -194,7 +201,7 @@ msgstr "TORNAR NÍTIDA"
 #: src/photos_model.py:42
 #, fuzzy
 msgid "SMOOTH"
-msgstr "SUAVE"
+msgstr "ALISAR"
 
 #: src/photos_model.py:48
 msgid "SOLARIZE"
@@ -203,6 +210,10 @@ msgstr "SOLARIZAR"
 #: src/photos_view.py:90
 msgid "Save Image"
 msgstr "Salvar Imagem"
+
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr "Alguém"
 
 #: src/photos_model.py:61
 msgid "TRAINS"
@@ -231,3 +242,7 @@ msgstr ""
 #: src/photos_view.py:128
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr "enviei-lhe uma foto de Endless Photos!"
