@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+
 from src.photos_model import PhotosModel
 
 if __name__ == '__main__':

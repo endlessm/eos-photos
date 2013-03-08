@@ -68,6 +68,14 @@ def texture_overlay(image, texture_file, alpha=0.5):
     texture = texture.convert(image.mode)
     return Image.blend(image, texture, alpha)
 
+def vignette(image, texture_file):
+    black = Image.open(_TEXTURES_PATH + "black.png")
+    black = black.resize(image.size)
+    black = black.convert(image.mode)
+    texture = Image.open(_TEXTURES_PATH + texture_file)
+    texture = texture.resize(image.size)
+    return Image.composite(black, image, texture)
+
 def sepia_tone(image):
     return apply_palette(image, make_linear_ramp((255, 201, 159)))
 
@@ -93,3 +101,40 @@ def solarize(image):
 def posterize(image, bits=2):
     image = kill_alpha(image)
     return ImageOps.posterize(image, bits)
+
+def grayscale(image):
+    image = ImageOps.grayscale(image)
+    return vignette(image, "light_vignette.png")
+
+def grunge(image):
+    image = texture_overlay(image, "grunge.jpg", 0.075)
+    return vignette(image, "heavy_vignette.png")
+
+def bumpy(image):
+    image = texture_overlay(image, "bumpy.jpg", 0.15)
+    return vignette(image, "light_vignette.png")
+
+def paper(image):
+    image = texture_overlay(image, "paper.jpg", 0.3)
+    return vignette(image, "light_vignette.png")
+
+def country(image):
+    image = apply_curve(image, "country.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def foggy_blue(image):
+    image = apply_curve(image, "fogy_blue.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def desert(image):
+    image = apply_curve(image, "desert.acv")
+    return vignette(image, "weird_vignette.png")
+
+def lumo(image):
+    image = texture_overlay(image, "paper.jpg", 0.15)
+    image = apply_curve(image, "lumo.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def trains(image):
+    image = apply_curve(image, "trains.acv")
+    return vignette(image, "heavy_vignette.png")
