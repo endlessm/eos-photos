@@ -2,6 +2,10 @@
     engine: unico;
 }
 
+GtkExpander:hover {
+    background-color: transparent;
+}
+
 GtkButton {
     -unico-glow-radius: 0;
     -unico-border-gradient: none;
