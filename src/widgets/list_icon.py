@@ -17,7 +17,7 @@ class IconList(Gtk.VBox):
         self.show_all()
 
     def select_icon(self, label_name):
-         for name, icon in self._icons.items():
+        for name, icon in self._icons.items():
             if name == label_name:
                 icon.select()
             else:

@@ -4,6 +4,7 @@ import collections
 import Image
 import ImageOps
 import ImageFilter
+import ImageEnhance
 
 from gi.repository import Gtk
 
@@ -116,6 +117,24 @@ class PhotosModel(object):
 
     def get_default_filter_name(self):
         return self._filter_dict.keys()[0]
+
+    def apply_contrast(self, value):
+        if not self.is_open():
+            return
+        enh = ImageEnhance.Contrast(self._src_image)
+        self._curr_image = enh.enhance(value)
+
+    def apply_brightness(self, value):
+        if not self.is_open():
+            return
+        enh = ImageEnhance.Brightness(self._src_image)
+        self._curr_image = enh.enhance(value)
+
+    def apply_sharpness(self, value):
+        if not self.is_open():
+            return
+        enh = ImageEnhance.Sharpness(self._src_image)
+        self._curr_image = enh.enhance(value)
 
     def apply_filter(self, filter_name):
         if (not self.is_open()) or self._curr_filter == filter_name:
