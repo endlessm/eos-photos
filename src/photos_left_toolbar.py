@@ -16,24 +16,27 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._categories = {}
 
-        filter_icons = IconList()
-        self._categories["filters"] = Category(filter_icons,
+        self._filter_icons = IconList()
+        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
+        filter_align.add(self._filter_icons)
+        self._categories["filters"] = Category(filter_align,
             images_path=self._images_path, label_name=_("FILTERS"),
             expanded_callback=lambda: self.change_category("filters"))
 
         border_icons = IconList()
-        self._categories["borders"] = Category(border_icons,
+        border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=0)
+        border_align.add(border_icons)
+        self._categories["borders"] = Category(border_align,
             images_path=self._images_path, label_name=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
 
         adjustments = AdjustWidget(change_callback=lambda adj_type, value: self._presenter.change_adjusts(adj_type, value))
-
-        self._categories["adjustments"] = Category(adjustments, 
+        adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
+        adjustments_align.add(adjustments)
+        self._categories["adjustments"] = Category(adjustments_align, 
             images_path=self._images_path, label_name=_("ADJUSTMENTS"),
             expanded_callback=lambda: self.change_category("adjustments"))
-
-
 
         # self._categories["text"] = Category(
         #     images_path=self._images_path, label_name=_("TEXT"), category_name="text",
@@ -42,8 +45,6 @@ class PhotosLeftToolbar(Gtk.VBox):
         # self._categories["transforms"] = Category(
         #     images_path=self._images_path, label_name=_("TRANSFORMS"), category_name="transforms",
         #     expanded_callback=lambda: self.change_category("transforms"))
-
-        self._filter_options = {}
 
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)
@@ -57,15 +58,11 @@ class PhotosLeftToolbar(Gtk.VBox):
     def _add_filter_option(self, name_and_thumb):
         filter_name = name_and_thumb[0]
         thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
-        category = self._categories["filters"]
-  
-        widget = category.get_widget()
-        widget.add_icon(thumbnail_path, "filter", filter_name, lambda: self._presenter.on_filter_select(filter_name))
-        category.show_all()
+        self._filter_icons.add_icon(thumbnail_path, "filter", filter_name, lambda: self._presenter.on_filter_select(filter_name))
+        self._filter_icons.show_all()
 
     def select_filter(self, filter_name):
-        category = self._categories["filters"]
-        category.get_widget().select_icon(filter_name)
+        self._filter_icons.select_icon(filter_name)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

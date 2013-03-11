@@ -11,7 +11,7 @@ class ListButton(Gtk.EventBox):
         self._image = Gtk.Image(name=name+"-image", file=image_path)
         self._label = Gtk.Label(name=name+"-label", label=label_name)
         self._label.set_line_wrap(True)
-        self._label.set_size_request(label_wrap, -1)
+        # self._label.set_size_request(self._image.get_size_request()[0], -1)
         table = Gtk.Table(1, 1, False)
         table.attach(self._label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
 
@@ -21,7 +21,7 @@ class ListButton(Gtk.EventBox):
             self._box = Gtk.HBox(homogeneous=False, spacing=0)
 
         self._box.pack_start(self._image, expand=False, fill=False, padding=0)
-        self._box.pack_start(table, expand=False, fill=False, padding=2)
+        self._box.pack_start(table, expand=True, fill=True, padding=0)
 
         self.add(self._box)
 
