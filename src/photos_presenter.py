@@ -191,3 +191,16 @@ class PhotosPresenter(object):
         self._model.apply_filter(filter_name)
         self._update_view()
         self._view.select_filter(filter_name)
+
+    def change_adjusts(self, adjust_type, value):
+        if not self._model.is_open():
+            return
+        if adjust_type == "Contrast":
+            self._model.apply_contrast(value)
+            self._update_view()
+        elif adjust_type == "Brightness":
+            self._model.apply_brightness(value)
+            self._update_view()
+        elif adjust_type == "Sharpness":
+            self._model.apply_sharpness(value)
+            self._update_view()

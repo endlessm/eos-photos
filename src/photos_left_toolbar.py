@@ -1,5 +1,6 @@
 from gi.repository import Gtk
 from widgets.list_button import ListButton
+from widgets.adjust_widget import AdjustWidget
 import random
 
 from widgets.list_icon import IconList
@@ -15,16 +16,22 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._categories = {}
 
+        filter_icons = IconList()
+        self._categories["filters"] = Category(filter_icons,
+            images_path=self._images_path, label_name=_("FILTERS"),
+            expanded_callback=lambda: self.change_category("filters"))
+
         border_icons = IconList()
         self._categories["borders"] = Category(border_icons,
-            images_path=self._images_path, label_name=_("BORDERS"), category_name="borders",
+            images_path=self._images_path, label_name=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
 
-        filter_icons = IconList()
-        self._categories["filters"] = Category(filter_icons,
-            images_path=self._images_path, label_name=_("FILTERS"), category_name="filters",
-            expanded_callback=lambda: self.change_category("filters"))
+        adjustments = AdjustWidget(change_callback=lambda adj_type, value: self._presenter.change_adjusts(adj_type, value))
+
+        self._categories["adjustments"] = Category(adjustments, 
+            images_path=self._images_path, label_name=_("ADJUSTMENTS"),
+            expanded_callback=lambda: self.change_category("adjustments"))
 
 
 
@@ -50,7 +57,7 @@ class PhotosLeftToolbar(Gtk.VBox):
     def _add_filter_option(self, name_and_thumb):
         filter_name = name_and_thumb[0]
         thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
-        category = self._categories[random.choice(self._categories.keys())]
+        category = self._categories["filters"]
   
         widget = category.get_widget()
         widget.add_icon(thumbnail_path, "filter", filter_name, lambda: self._presenter.on_filter_select(filter_name))
@@ -70,7 +77,7 @@ class PhotosLeftToolbar(Gtk.VBox):
 
 
 class Category(Gtk.Expander):
-    def __init__(self, widget, images_path="", label_name="", category_name="", expanded_callback=None, **kw):
+    def __init__(self, widget, images_path="", label_name="", expanded_callback=None, **kw):
         super(Category, self).__init__(**kw)
 
         self._expanded_callback = expanded_callback
