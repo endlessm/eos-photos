@@ -32,6 +32,7 @@ class PhotosModel(object):
             (_("COUNTRY"), lambda im: ImageTools.country(im)),
             (_("GRUNGIFY"), lambda im: ImageTools.grunge(im)),
             (_("OLD PHOTO"), lambda im: ImageTools.old_photo(im)),
+            (_("COLORFUL"), lambda im: ImageTools.colorful(im)),
             # (_("BUMPY"), lambda im: ImageTools.bumpy(im)),
             (_("LUMO"), lambda im: ImageTools.lumo(im)),
             # (_("SMOOTH"), lambda im: im.filter(ImageFilter.SMOOTH_MORE)),

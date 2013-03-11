@@ -2,12 +2,17 @@ import numpy
 import Image
 import ImageOps
 import ImageFilter
+import ImageEnhance
+import colorsys
 
 from curve import Curve
 from curve import CurveManager
 
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
+
+rgb_to_hsv = numpy.vectorize(colorsys.rgb_to_hsv)
+hsv_to_rgb = numpy.vectorize(colorsys.hsv_to_rgb)
 
 def set_curves_path(curves_path):
     global _CURVES_PATH
@@ -34,6 +39,24 @@ def kill_alpha(image):
     if has_alpha(image):
         return image.convert("RGB")
     return image
+
+def apply_brightness(image, brightness):
+    enhancer = ImageEnhance.Brightness(image)
+    return enhancer.enhance(brightness)
+
+def apply_contrast(image, contrast):
+    enhancer = ImageEnhance.Contrast(image)
+    return enhancer.enhance(contrast)
+
+def saturate(image, saturation):
+    image = image.convert('RGBA')
+    arr = numpy.array(numpy.asarray(image).astype('float'))
+    r, g, b, a = numpy.rollaxis(arr, axis=-1)
+    h, s, v = rgb_to_hsv(r, g, b)
+    s = numpy.minimum(1.0, saturation * s)
+    r, g, b = hsv_to_rgb(h, s, v)
+    arr = numpy.dstack((r, g, b, a))
+    return Image.fromarray(arr.astype('uint8'), 'RGBA')
 
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
@@ -115,7 +138,8 @@ def bumpy(image):
     return vignette(image, "light_vignette.png")
 
 def paper(image):
-    image = texture_overlay(image, "paper.jpg", 0.3)
+    image = apply_contrast(image, 1.4)
+    image = texture_overlay(image, "paper.jpg", 0.4)
     return vignette(image, "light_vignette.png")
 
 def country(image):
@@ -131,6 +155,7 @@ def desert(image):
     return vignette(image, "weird_vignette.png")
 
 def lumo(image):
+    image = saturate(image, 1.2)
     image = texture_overlay(image, "paper.jpg", 0.15)
     image = apply_curve(image, "lumo.acv")
     return vignette(image, "heavy_vignette.png")
@@ -138,3 +163,10 @@ def lumo(image):
 def trains(image):
     image = apply_curve(image, "trains.acv")
     return vignette(image, "heavy_vignette.png")
+    return image
+
+def colorful(image):
+    image = apply_contrast(image, 1.3)
+    image = saturate(image, 1.4)
+    image = vignette(image, "light_vignette.png")
+    return image
