@@ -1,5 +1,6 @@
+import collections
+
 from gi.repository import Gtk
-from photos_adjustments import PhotosAdjustments
 from widgets.option_list import OptionList
 
 
@@ -7,50 +8,34 @@ class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, images_path="", adjustments=None, borders=None, filters=None, **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
-        self._categories = {}
+        self._categories = collections.OrderedDict()
 
-        self._filter_icons = OptionList()
-        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
-        filter_align.add(self._filter_icons)
-        self._categories["filters"] = Category(filter_align,
-            images_path=self._images_path, label_name=_("FILTERS"),
-            expanded_callback=lambda: self.change_category("filters"))
-
-        border_icons = OptionList()
-        border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=0)
-        border_align.add(border_icons)
-        self._categories["borders"] = Category(border_align,
-            images_path=self._images_path, label_name=_("BORDERS"),
-            expanded_callback=lambda: self.change_category("borders"))
-
-        adjustments = PhotosAdjustments(change_callback=lambda adj_type, value: self._presenter.change_adjusts(adj_type, value))
         adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
         adjustments_align.add(adjustments)
         self._categories["adjustments"] = Category(adjustments_align, 
-            images_path=self._images_path, label_name=_("ADJUSTMENTS"),
+            images_path=self._images_path, label=_("ADJUSTMENTS"),
             expanded_callback=lambda: self.change_category("adjustments"))
+
+        border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
+        border_align.add(borders)
+        self._categories["borders"] = Category(border_align,
+            images_path=self._images_path, label=_("BORDERS"),
+            expanded_callback=lambda: self.change_category("borders"))
+
+        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
+        filter_align.add(filters)
+        self._categories["filters"] = Category(filter_align,
+            images_path=self._images_path, label=_("FILTERS"),
+            expanded_callback=lambda: self.change_category("filters"))
 
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)
 
         self.show_all()
-
-    def set_filters(self, filters, default):
-        map(self._add_filter_option, filters)
-        self.select_filter(default)
-
-    def _add_filter_option(self, name_and_thumb):
-        filter_name = name_and_thumb[0]
-        thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
-        self._filter_icons.add_icon(thumbnail_path, "filter", filter_name, lambda: self._presenter.on_filter_select(filter_name))
-        self._filter_icons.show_all()
-
-    def select_filter(self, filter_name):
-        self._filter_icons.select_icon(filter_name)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -75,13 +60,13 @@ class CatagoryScrollWindow(Gtk.ScrolledWindow):
 
 
 class Category(Gtk.Expander):
-    def __init__(self, widget, images_path="", label_name="", expanded_callback=None, **kw):
+    def __init__(self, widget, images_path="", label="", expanded_callback=None, **kw):
         super(Category, self).__init__(**kw)
 
         self._expanded_callback = expanded_callback
         self._images_path = images_path
         self._title_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._title_label = Gtk.Label(label=label_name, name="filters-title")
+        self._title_label = Gtk.Label(label=label, name="filters-title")
         self._title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._title_box.pack_start(self._title_image, expand=False, fill=False, padding=0)
         self._title_box.pack_start(self._title_label, expand=False, fill=False, padding=2)

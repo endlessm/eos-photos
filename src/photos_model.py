@@ -24,7 +24,7 @@ class PhotosModel(object):
 
         self._is_saved = True
         self._build_filter_dict()
-        self._reset_options()
+        self.reset_options()
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -62,14 +62,16 @@ class PhotosModel(object):
             (_("TRAINS"), lambda im: ImageTools.apply_curve(im, "trains.acv")),
         ])
 
-    def _reset_options(self):
-        self._last_filter = self._filter = self.get_default_filter_name()
+    def reset_options(self):
+        self._last_filter = self._filter = self._get_default_filter()
         self._last_brightness = self._brightness = 1.0
         self._last_contrast = self._contrast = 1.0
         self._last_saturation = self._saturation = 1.0
 
+    def _get_default_filter(self):
+        return self._filter_dict.keys()[0]
+
     def open(self, filename):
-        self._reset_options()
         self._filename = filename
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056))
         self._adjusted_image = self._filtered_image = self._source_image
@@ -121,20 +123,29 @@ class PhotosModel(object):
             filter_no += 1
         return names_and_thumbs
 
-    def get_default_filter_name(self):
-        return self._filter_dict.keys()[0]
+    def get_contrast(self):
+        return self._contrast
 
     def set_contrast(self, value):
         self._contrast = value
         self._update_image()
 
+    def get_brightness(self):
+        return self._brightness
+
     def set_brightness(self, value):
         self._brightness = value
         self._update_image()
 
+    def get_saturation(self):
+        return self._saturation
+
     def set_saturation(self, value):
         self._saturation = value
         self._update_image()
+
+    def get_filter(self):
+        return self._filter
 
     def set_filter(self, filter_name):
         self._filter = filter_name

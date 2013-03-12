@@ -3,6 +3,9 @@ from gi.repository import Gtk, Gdk
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
+from photos_adjustment_toolbar import PhotosAdjustmentToolbar
+from photos_border_toolbar import PhotosBorderToolbar
+from photos_filter_toolbar import PhotosFilterToolbar
 from photos_window import PhotosWindow
 from photos_image_viewer import ImageViewer
 
@@ -14,8 +17,14 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, images_path=""):
+        self._adjustments = PhotosAdjustmentToolbar(images_path=images_path)
+        self._borders = PhotosBorderToolbar(images_path=images_path)
+        self._filters = PhotosFilterToolbar(images_path=images_path)
+        self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
+                                               adjustments=self._adjustments,
+                                               borders=self._borders,
+                                               filters=self._filters)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
-        self._left_toolbar = PhotosLeftToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_viewer = ImageViewer(images_path=images_path)
         self._window = PhotosWindow(images_path=images_path,
@@ -30,6 +39,9 @@ class PhotosView(object):
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_viewer.set_presenter(presenter)
+        self._adjustments.set_presenter(presenter)
+        self._borders.set_presenter(presenter)
+        self._filters.set_presenter(presenter)
 
     def get_window(self):
         return self._window
@@ -43,11 +55,14 @@ class PhotosView(object):
     def set_image_fullscreen(self, fullscreen):
         self._window.set_image_fullscreen(fullscreen)
 
-    def set_filters(self, filters, default):
-        self._left_toolbar.set_filters(filters, default)
+    def set_filters(self, filters):
+        self._filters.set_filters(filters)
 
     def select_filter(self, filter_name):
-        self._left_toolbar.select_filter(filter_name)
+        self._filters.select_filter(filter_name)
+
+    def select_border(self, border_name):
+        self._borders.select_border(border_name)
 
     def replace_image_from_file(self, image_name):
         self._image_viewer.load_from_file(image_name)

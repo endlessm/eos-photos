@@ -20,14 +20,16 @@ class PhotosPresenter(object):
         self._view = view
         self._view.set_presenter(self)
         filters = self._model.get_filter_names_and_thumbnails()
-        self._view.set_filters(filters, self._model.get_default_filter_name())
+        self._view.set_filters(filters)
         self._lock = False
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
 
     def open_image(self, filename):
         self._model.open(filename)
-        self._view.select_filter(self._model.get_default_filter_name())
+        self._model.reset_options()
+        self._view.select_filter(self._model.get_filter())
+        # TODO: set border when its implemented.
         self._update_view()
 
     def _update_view(self):
@@ -46,7 +48,6 @@ class PhotosPresenter(object):
             ext = ""
         dot_join = "."
 
-        # If extension is not a valid file type we use the extension of the original file
         if ext not in VALID_FILE_TYPES:
             return dot_join.join(name_arr) + "." + original_ext
         return filename
@@ -91,6 +92,19 @@ class PhotosPresenter(object):
             self._view.show_message(text="Email failed", warning=True)
             Gdk.threads_leave()
 
+    def _do_open(self):
+        filename = self._view.show_open_dialog()
+        if filename is not None:
+            self.open_image(filename)
+        # If extension is not a valid file type we use the extension of the original file
+
+    def _do_on_filter_select(self, filter_name):
+        self._model.set_filter(filter_name)
+        Gdk.threads_enter()
+        self._update_view()
+        self._view.select_filter(filter_name)
+        Gdk.threads_leave()
+
     #UI callbacks...
     def on_close(self):
         # Prompt for save before quitting
@@ -110,11 +124,6 @@ class PhotosPresenter(object):
         if self._lock:
             return
         self._view.minimize_window()
-
-    def _do_open(self):
-        filename = self._view.show_open_dialog()
-        if filename is not None:
-            self.open_image(filename)
 
     def on_open(self):
         if self._lock:
@@ -176,13 +185,6 @@ class PhotosPresenter(object):
     def on_unfullscreen(self):
         self._view.set_image_fullscreen(False)
 
-    def _do_on_filter_select(self, filter_name):
-        self._model.set_filter(filter_name)
-        Gdk.threads_enter()
-        self._update_view()
-        self._view.select_filter(filter_name)
-        Gdk.threads_leave()
-
     def on_filter_select(self, filter_name):
         if self._lock or not self._model.is_open():
             return
@@ -192,15 +194,24 @@ class PhotosPresenter(object):
         self._update_view()
         self._view.select_filter(filter_name)
 
-    def change_adjusts(self, adjust_type, value):
-        if not self._model.is_open():
+    def on_border_select(self, border_name):
+        print border_name, "border selected..."
+        self._view.select_border(border_name)
+
+    def on_contrast_change(self, value):
+        if self._lock or not self._model.is_open():
             return
-        if adjust_type == "Contrast":
-            self._model.set_contrast(value)
-            self._update_view()
-        elif adjust_type == "Brightness":
-            self._model.set_brightness(value)
-            self._update_view()
-        elif adjust_type == "Saturation":
-            self._model.set_saturation(value)
-            self._update_view()
+        self._model.set_contrast(value)
+        self._update_view()
+
+    def on_brightness_change(self, value):
+        if self._lock or not self._model.is_open():
+            return
+        self._model.set_brightness(value)
+        self._update_view()
+
+    def on_saturation_change(self, value):
+        if self._lock or not self._model.is_open():
+            return
+        self._model.set_saturation(value)
+        self._update_view()
