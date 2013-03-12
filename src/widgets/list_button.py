@@ -1,6 +1,18 @@
 from gi.repository import Gtk, GdkPixbuf, Gdk
 
 
+class ListLabel(Gtk.Label):
+    def __init__(self, image=None, **kw):
+        super(ListLabel, self).__init__(**kw)
+        self._image = image
+        self.set_justify(Gtk.Justification.CENTER)
+
+    def do_get_preferred_width(self):
+        if self._image is not None:
+            return self._image.get_preferred_width()
+        return Gtk.Label.do_get_preferred_width()
+
+
 class ListButton(Gtk.EventBox):
 
     def __init__(self, image_path="", name="", label_name="",
@@ -9,11 +21,11 @@ class ListButton(Gtk.EventBox):
 
         self._clicked_callback = clicked_callback
         self._image = Gtk.Image(name=name+"-image", file=image_path)
-        self._label = Gtk.Label(name=name+"-label", label=label_name)
+        self._label = ListLabel(image=self._image, name=name+"-label", label=label_name)
+        # self._label = Gtk.Label(name=name+"-label", label=label_name)
         self._label.set_line_wrap(True)
-        # self._label.set_size_request(self._image.get_size_request()[0], -1)
-        table = Gtk.Table(1, 1, False)
-        table.attach(self._label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
+        # table = Gtk.Table(1, 1, False)
+        # table.attach(self._label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
 
         if vertical:
             self._box = Gtk.VBox(homogeneous=False, spacing=0)
@@ -21,7 +33,7 @@ class ListButton(Gtk.EventBox):
             self._box = Gtk.HBox(homogeneous=False, spacing=0)
 
         self._box.pack_start(self._image, expand=False, fill=False, padding=0)
-        self._box.pack_start(table, expand=True, fill=True, padding=0)
+        self._box.pack_start(self._label, expand=True, fill=True, padding=0)
 
         self.add(self._box)
 

@@ -38,14 +38,6 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, label_name=_("ADJUSTMENTS"),
             expanded_callback=lambda: self.change_category("adjustments"))
 
-        # self._categories["text"] = Category(
-        #     images_path=self._images_path, label_name=_("TEXT"), category_name="text",
-        #     expanded_callback=lambda: self.change_category("text"))
-
-        # self._categories["transforms"] = Category(
-        #     images_path=self._images_path, label_name=_("TRANSFORMS"), category_name="transforms",
-        #     expanded_callback=lambda: self.change_category("transforms"))
-
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)
 
@@ -73,6 +65,15 @@ class PhotosLeftToolbar(Gtk.VBox):
                 category.deselect()
 
 
+class CatagoryScrollWindow(Gtk.ScrolledWindow):
+    def __init__(self, **kw):
+        super(CatagoryScrollWindow, self).__init__(**kw)
+
+    def do_get_preferred_height(self):
+        child_height_request = self.get_children()[0].get_preferred_height()[1]
+        return Gtk.ScrolledWindow.do_get_preferred_height(self)[0], child_height_request
+
+
 class Category(Gtk.Expander):
     def __init__(self, widget, images_path="", label_name="", expanded_callback=None, **kw):
         super(Category, self).__init__(**kw)
@@ -89,12 +90,9 @@ class Category(Gtk.Expander):
         #self._title_allign.pack_start(borders_title_box, expand=False, fill=False, padding=10)
 
         self._widget = widget
-        #self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
-        self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
+        self._scroll_area = CatagoryScrollWindow(name="filters-scroll-area")
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self._scroll_area.add_with_viewport(self._widget)
-        self._scroll_area.set_vexpand(True)
-
 
         # self._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL)
         # self.add(self._separator)
@@ -119,7 +117,6 @@ class Category(Gtk.Expander):
             # self._title_box.deselect()
         self.show_all()
 
-
     def get_widget(self):
         return self._widget
 
@@ -131,9 +128,3 @@ class Category(Gtk.Expander):
 
     def is_selected(self):
         return self.get_expanded()
-
-    # def add_to_scroll(self, object_):
-    #     align = Gtk.HBox(homogeneous=False, spacing=0)
-    #     align.pack_start(object_, expand=False, fill=False, padding=30)
-    #     self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
-    #     self.show_all()

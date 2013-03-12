@@ -22,5 +22,3 @@ class IconList(Gtk.VBox):
                 icon.select()
             else:
                 icon.deselect()
-
-
