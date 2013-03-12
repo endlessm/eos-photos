@@ -1,14 +1,14 @@
 from gi.repository import Gtk
 
-class AdjustWidget(Gtk.VBox):
 
+class PhotosAdjustments(Gtk.VBox):
     MIN = 0.0
     MAX = 2.0
     MID = 1.0
 
     def __init__(self, change_callback):
-        super(AdjustWidget, self).__init__(homogeneous=False, spacing=0)
-        
+        super(PhotosAdjustments, self).__init__(homogeneous=False, spacing=0)
+
         adjusts = ["Contrast", "Brightness", "Sharpness"]
 
         for adjust in adjusts:

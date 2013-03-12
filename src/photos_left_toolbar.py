@@ -1,9 +1,6 @@
 from gi.repository import Gtk
-from widgets.list_button import ListButton
-from widgets.adjust_widget import AdjustWidget
-import random
-
-from widgets.list_icon import IconList
+from photos_adjustments import PhotosAdjustments
+from widgets.option_list import OptionList
 
 
 class PhotosLeftToolbar(Gtk.VBox):
@@ -16,22 +13,21 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._categories = {}
 
-        self._filter_icons = IconList()
+        self._filter_icons = OptionList()
         filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
         filter_align.add(self._filter_icons)
         self._categories["filters"] = Category(filter_align,
             images_path=self._images_path, label_name=_("FILTERS"),
             expanded_callback=lambda: self.change_category("filters"))
 
-        border_icons = IconList()
+        border_icons = OptionList()
         border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=0)
         border_align.add(border_icons)
         self._categories["borders"] = Category(border_align,
             images_path=self._images_path, label_name=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
-
-        adjustments = AdjustWidget(change_callback=lambda adj_type, value: self._presenter.change_adjusts(adj_type, value))
+        adjustments = PhotosAdjustments(change_callback=lambda adj_type, value: self._presenter.change_adjusts(adj_type, value))
         adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
         adjustments_align.add(adjustments)
         self._categories["adjustments"] = Category(adjustments_align, 
@@ -70,8 +66,12 @@ class CatagoryScrollWindow(Gtk.ScrolledWindow):
         super(CatagoryScrollWindow, self).__init__(**kw)
 
     def do_get_preferred_height(self):
-        child_height_request = self.get_children()[0].get_preferred_height()[1]
-        return Gtk.ScrolledWindow.do_get_preferred_height(self)[0], child_height_request
+        children = self.get_children()
+        min_height = Gtk.ScrolledWindow.do_get_preferred_height(self)[0]
+        natural_height = min_height
+        if children:
+            natural_height = max(children[0].get_preferred_height()[1], natural_height)
+        return min_height, natural_height
 
 
 class Category(Gtk.Expander):
