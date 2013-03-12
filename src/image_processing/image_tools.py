@@ -2,6 +2,7 @@ import numpy
 import Image
 import ImageOps
 import ImageFilter
+import ImageEnhance
 
 from curve import Curve
 from curve import CurveManager
@@ -26,6 +27,18 @@ def limit_size(image, size_limits):
         scale = min(width_limit / float(width), height_limit / float(height))
         new_size = map(int, (width * scale, height * scale))
         return image.resize(new_size, Image.BILINEAR)
+
+def apply_contrast(image, value):
+    enh = ImageEnhance.Contrast(image)
+    return enh.enhance(value)
+
+def apply_brightness(image, value):
+    enh = ImageEnhance.Brightness(image)
+    return enh.enhance(value)
+
+def apply_saturation(image, value):
+    enh = ImageEnhance.Color(image)
+    return enh.enhance(value)
 
 def has_alpha(image):
     return 'a' in image.mode.lower()

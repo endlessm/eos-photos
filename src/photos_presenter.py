@@ -177,7 +177,7 @@ class PhotosPresenter(object):
         self._view.set_image_fullscreen(False)
 
     def _do_on_filter_select(self, filter_name):
-        self._model.apply_filter(filter_name)
+        self._model.set_filter(filter_name)
         Gdk.threads_enter()
         self._update_view()
         self._view.select_filter(filter_name)
@@ -188,7 +188,7 @@ class PhotosPresenter(object):
             return
 
         # self._run_asynch_task(self._do_on_filter_select, (filter_name,))
-        self._model.apply_filter(filter_name)
+        self._model.set_filter(filter_name)
         self._update_view()
         self._view.select_filter(filter_name)
 
@@ -196,11 +196,11 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         if adjust_type == "Contrast":
-            self._model.apply_contrast(value)
+            self._model.set_contrast(value)
             self._update_view()
         elif adjust_type == "Brightness":
-            self._model.apply_brightness(value)
+            self._model.set_brightness(value)
             self._update_view()
-        elif adjust_type == "Sharpness":
-            self._model.apply_sharpness(value)
+        elif adjust_type == "Saturation":
+            self._model.set_saturation(value)
             self._update_view()

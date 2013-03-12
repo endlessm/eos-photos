@@ -4,9 +4,6 @@ import collections
 import Image
 import ImageOps
 import ImageFilter
-import ImageEnhance
-
-from gi.repository import Gtk
 
 import image_processing.image_tools as ImageTools
 
@@ -21,10 +18,13 @@ class PhotosModel(object):
         super(PhotosModel, self).__init__()
         ImageTools.set_textures_path(textures_path)
         ImageTools.set_curves_path(curves_path)
-        self._src_image = None
-        self._curr_image = None
+        self._source_image = None
+        self._filtered_image = None
+        self._adjusted_image = None
+
         self._is_saved = True
         self._build_filter_dict()
+        self._reset_options()
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -62,33 +62,39 @@ class PhotosModel(object):
             (_("TRAINS"), lambda im: ImageTools.apply_curve(im, "trains.acv")),
         ])
 
+    def _reset_options(self):
+        self._last_filter = self._filter = self.get_default_filter_name()
+        self._last_brightness = self._brightness = 1.0
+        self._last_contrast = self._contrast = 1.0
+        self._last_saturation = self._saturation = 1.0
+
     def open(self, filename):
+        self._reset_options()
         self._filename = filename
-        self._src_image = ImageTools.limit_size(Image.open(filename), (2056, 2056))
-        self._curr_image = self._src_image
-        self._curr_filter = self.get_default_filter_name()
+        self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056))
+        self._adjusted_image = self._filtered_image = self._source_image
         self._is_saved = True
 
     def save(self, filename, format=None):
-        if self._curr_image is not None:
+        if self.is_open() is not None:
             if format is not None:
-                self._curr_image.save(filename, format)
+                self.get_image().save(filename, format)
             else:
-                self._curr_image.save(filename)
+                self.get_image().save(filename)
             self._is_saved = True
 
     def save_to_tempfile(self):
         filename = ""
-        if ImageTools.has_alpha(self._curr_image):
+        if ImageTools.has_alpha(self.get_image()):
             filename = tempfile.mkstemp('.png')[1]
-            self._curr_image.save(filename)
+            self.get_image().save(filename)
         else:
             filename = tempfile.mkstemp('.jpg')[1]
-            self._curr_image.save(filename, quality=95)
+            self.get_image().save(filename, quality=95)
         return filename
 
     def is_open(self):
-        return self._curr_image is not None
+        return self._source_image is not None
 
     def is_saved(self):
         return self._is_saved
@@ -102,7 +108,7 @@ class PhotosModel(object):
         return self._filename
 
     def get_image(self):
-        return self._curr_image
+        return self._adjusted_image
 
     def get_filter_names(self):
         return self._filter_dict.keys()
@@ -118,31 +124,42 @@ class PhotosModel(object):
     def get_default_filter_name(self):
         return self._filter_dict.keys()[0]
 
-    def apply_contrast(self, value):
-        if not self.is_open():
-            return
-        enh = ImageEnhance.Contrast(self._src_image)
-        self._curr_image = enh.enhance(value)
+    def set_contrast(self, value):
+        self._contrast = value
+        self._update_image()
 
-    def apply_brightness(self, value):
-        if not self.is_open():
-            return
-        enh = ImageEnhance.Brightness(self._src_image)
-        self._curr_image = enh.enhance(value)
+    def set_brightness(self, value):
+        self._brightness = value
+        self._update_image()
 
-    def apply_sharpness(self, value):
-        if not self.is_open():
-            return
-        enh = ImageEnhance.Sharpness(self._src_image)
-        self._curr_image = enh.enhance(value)
+    def set_saturation(self, value):
+        self._saturation = value
+        self._update_image()
 
-    def apply_filter(self, filter_name):
-        if (not self.is_open()) or self._curr_filter == filter_name:
+    def set_filter(self, filter_name):
+        self._filter = filter_name
+        self._update_image()
+
+    def _update_image(self):
+        if (not self.is_open()):
             return
-        self._curr_filter = filter_name
-        self._is_saved = False
-        if filter_name in self._filter_dict:
-            self._curr_image = self._filter_dict[filter_name](self._src_image)
-        else:
-            self._is_saved = True
-            print "Filter not supported!"
+        filtered = False
+        if not self._filter == self._last_filter:
+            if self._filter in self._filter_dict:
+                filtered = True
+                self._last_filter = self._filter
+                self._filtered_image = self._filter_dict[self._filter](self._source_image)
+            else:
+                print "Filter not supported!"
+        adjusted = not (self._last_brightness == self._brightness
+                        and self._last_contrast == self._contrast
+                        and self._last_saturation == self._saturation)
+        if filtered or adjusted:
+            self._adjust_image()
+            self._is_saved = False
+
+    def _adjust_image(self):
+        im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
+        im = ImageTools.apply_brightness(im, self._brightness)
+        im = ImageTools.apply_saturation(im, self._saturation)
+        self._adjusted_image = im
