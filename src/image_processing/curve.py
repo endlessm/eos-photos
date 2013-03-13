@@ -10,7 +10,6 @@ import numpy
 
 
 class Curve:
-
     def __init__(self, acv_file_path, name):
         self.name = name
         with open(acv_file_path, 'rb') as acv_file:

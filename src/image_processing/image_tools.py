@@ -8,6 +8,11 @@ import colorsys
 from curve import Curve
 from curve import CurveManager
 
+"""
+Pretty much all the image processing functionality we coded right now. Maybe
+someday split into filters, basic tools, etc.
+"""
+
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
 

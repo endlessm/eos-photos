@@ -3,8 +3,8 @@ from gi.repository import Gtk, GdkPixbuf, Gdk
 
 class ImageTextButton(Gtk.Button):
     """
-    This is a button for the top toolbar. It contains an image which changes to
-    another image when the mouse hovers over it.
+    This button contains an image and text, packed vertically or horizontally.
+    State flags are set on label for css highlighting.
 
     This class is a temporary measure, in order to get the weather app out the
     door. It should not be added permanently to the SDK. Instead, we will use

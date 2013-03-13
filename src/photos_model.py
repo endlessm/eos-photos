@@ -13,7 +13,6 @@ class PhotosModel(object):
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
-
     def __init__(self, textures_path="", curves_path=""):
         super(PhotosModel, self).__init__()
         ImageTools.set_textures_path(textures_path)

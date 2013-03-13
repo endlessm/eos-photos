@@ -14,7 +14,6 @@ class PhotosPresenter(object):
     Presenter class for the photo application. Interacts with view and model
     and handles the main logic of the application.
     """
-
     def __init__(self, model=None, view=None):
         self._model = model
         self._view = view

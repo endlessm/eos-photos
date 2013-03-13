@@ -4,7 +4,9 @@ from widgets.option_list import OptionList
 
 
 class PhotosBorderToolbar(OptionList):
-
+    """
+    A widget showing a list of clickable border options. Part of left toolbar.
+    """
     def __init__(self, images_path="", **kw):
         super(PhotosBorderToolbar, self).__init__(**kw)
         self._images_path = images_path
@@ -16,7 +18,9 @@ class PhotosBorderToolbar(OptionList):
 
     def _add_border_option(self, label):
         thumbnail_path = self._images_path + "Filters_Example-Picture_01.jpg"
-        self.add_option("filter", thumbnail_path, label, lambda: self._presenter.on_border_select(label))
+        self.add_option(
+            "filter", thumbnail_path, label,
+            lambda: self._presenter.on_border_select(label))
         self.show_all()
 
     def select_border(self, border_name):

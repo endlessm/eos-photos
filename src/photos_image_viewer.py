@@ -7,7 +7,6 @@ class ImageViewer(Gtk.Alignment):
     """
     Sizes the image to fit centered in the space allotted.
     """
-
     # Constants
     MIN_SIZE = 100
     PHOTO_HORIZ_PADDING = 35

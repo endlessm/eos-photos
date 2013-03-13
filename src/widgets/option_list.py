@@ -2,6 +2,9 @@ from gi.repository import Gtk
 
 
 class OptionLabel(Gtk.Label):
+    """
+    Label for a list option.
+    """
     def __init__(self, image=None, **kw):
         super(OptionLabel, self).__init__(**kw)
         self._image = image
@@ -14,7 +17,10 @@ class OptionLabel(Gtk.Label):
 
 
 class Option(Gtk.EventBox):
-
+    """
+    Options for the OptionList, these widgets display a thumbnail and a label
+    fit underneath.
+    """
     def __init__(self, name="", image_path="", label="", clicked_callback=None):
         super(Option, self).__init__(name=name+"-event-box")
 
@@ -63,7 +69,12 @@ class Option(Gtk.EventBox):
 
 
 class OptionList(Gtk.VBox):
+    """
+    A list of clickable options packed vertically.
 
+    Add Options to this list. They will not select themselves automatically,
+    but call the clicked_callback instead.
+    """
     def __init__(self):
         super(OptionList, self).__init__(homogeneous=False, spacing=0)
         self._icons = {}

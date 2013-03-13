@@ -4,7 +4,10 @@ from widgets.option_list import OptionList
 
 
 class PhotosFilterToolbar(OptionList):
-
+    """
+    Widget displaying all the filters as a list of clickable options. Part of
+    left toolbar.
+    """
     def __init__(self, images_path="", **kw):
         super(PhotosFilterToolbar, self).__init__(**kw)
         self._images_path = images_path
