@@ -3,12 +3,16 @@ import Image
 import ImageOps
 import ImageFilter
 import ImageEnhance
+import colorsys
 
 from curve import Curve
 from curve import CurveManager
 
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
+
+rgb_to_hsv = numpy.vectorize(colorsys.rgb_to_hsv)
+hsv_to_rgb = numpy.vectorize(colorsys.hsv_to_rgb)
 
 def set_curves_path(curves_path):
     global _CURVES_PATH
@@ -48,6 +52,16 @@ def kill_alpha(image):
         return image.convert("RGB")
     return image
 
+def color_enhance(image, amount):
+    image = image.convert('RGBA')
+    arr = numpy.array(numpy.asarray(image).astype('float'))
+    r, g, b, a = numpy.rollaxis(arr, axis=-1)
+    h, s, v = rgb_to_hsv(r, g, b)
+    s = numpy.minimum(1.0, amount * s)
+    r, g, b = hsv_to_rgb(h, s, v)
+    arr = numpy.dstack((r, g, b, a))
+    return Image.fromarray(arr.astype('uint8'), 'RGBA')
+
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
     image_array = numpy.array(image)
@@ -81,6 +95,14 @@ def texture_overlay(image, texture_file, alpha=0.5):
     texture = texture.convert(image.mode)
     return Image.blend(image, texture, alpha)
 
+def vignette(image, texture_file):
+    black = Image.open(_TEXTURES_PATH + "black.png")
+    black = black.resize(image.size)
+    black = black.convert(image.mode)
+    texture = Image.open(_TEXTURES_PATH + texture_file)
+    texture = texture.resize(image.size)
+    return Image.composite(black, image, texture)
+
 def sepia_tone(image):
     return apply_palette(image, make_linear_ramp((255, 201, 159)))
 
@@ -106,3 +128,49 @@ def solarize(image):
 def posterize(image, bits=2):
     image = kill_alpha(image)
     return ImageOps.posterize(image, bits)
+
+def grayscale(image):
+    image = ImageOps.grayscale(image)
+    return vignette(image, "light_vignette.png")
+
+def grunge(image):
+    image = texture_overlay(image, "grunge.jpg", 0.075)
+    return vignette(image, "heavy_vignette.png")
+
+def bumpy(image):
+    image = texture_overlay(image, "bumpy.jpg", 0.15)
+    return vignette(image, "light_vignette.png")
+
+def paper(image):
+    image = apply_contrast(image, 1.4)
+    image = texture_overlay(image, "paper.jpg", 0.4)
+    return vignette(image, "light_vignette.png")
+
+def country(image):
+    image = apply_curve(image, "country.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def foggy_blue(image):
+    image = apply_curve(image, "fogy_blue.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def desert(image):
+    image = apply_curve(image, "desert.acv")
+    return vignette(image, "weird_vignette.png")
+
+def lumo(image):
+    image = color_enhance(image, 1.2)
+    image = texture_overlay(image, "paper.jpg", 0.15)
+    image = apply_curve(image, "lumo.acv")
+    return vignette(image, "heavy_vignette.png")
+
+def trains(image):
+    image = apply_curve(image, "trains.acv")
+    return vignette(image, "heavy_vignette.png")
+    return image
+
+def colorful(image):
+    image = apply_contrast(image, 1.3)
+    image = color_enhance(image, 1.4)
+    image = vignette(image, "light_vignette.png")
+    return image

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-06 13:41-0800\n"
+"POT-Creation-Date: 2013-03-07 18:10-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,6 +163,11 @@ msgstr ""
 msgid "PROVIAESQUE"
 msgstr ""
 
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr ""
+
 #: src/share/facebook_post.py:51
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr ""
@@ -207,6 +212,10 @@ msgstr ""
 msgid "Save Image"
 msgstr ""
 
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr ""
+
 #: src/photos_model.py:61
 msgid "TRAINS"
 msgstr ""
@@ -231,4 +240,8 @@ msgstr ""
 
 #: src/photos_view.py:128
 msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr ""
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
 msgstr ""
