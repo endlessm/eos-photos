@@ -64,6 +64,15 @@ class PhotosView(object):
     def select_border(self, border_name):
         self._borders.select_border(border_name)
 
+    def set_brightness_slider(self, value):
+        self._adjustments.set_brightness_slider(value)
+
+    def set_contrast_slider(self, value):
+        self._adjustments.set_contrast_slider(value)
+
+    def set_saturation_slider(self, value):
+        self._adjustments.set_saturation_slider(value)
+
     def replace_image_from_file(self, image_name):
         self._image_viewer.load_from_file(image_name)
 

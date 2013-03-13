@@ -29,6 +29,9 @@ class PhotosPresenter(object):
         self._model.open(filename)
         self._model.reset_options()
         self._view.select_filter(self._model.get_filter())
+        self._view.set_brightness_slider(self._model.get_brightness())
+        self._view.set_contrast_slider(self._model.get_contrast())
+        self._view.set_saturation_slider(self._model.get_saturation())
         # TODO: set border when its implemented.
         self._update_view()
 
