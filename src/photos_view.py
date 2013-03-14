@@ -26,7 +26,7 @@ class PhotosView(object):
                                                filters=self._filters)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
-        self._image_viewer = ImageViewer(images_path=images_path)
+        self._image_viewer = ImageViewer(images_path=images_path, name="image-viewer")
         self._window = PhotosWindow(images_path=images_path,
                                     top_toolbar=self._top_toolbar,
                                     left_toolbar=self._left_toolbar,

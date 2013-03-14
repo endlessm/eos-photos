@@ -4,7 +4,10 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
+    # Constants
     TOOLBAR_WIDTH = 180
+    PHOTO_HORIZ_PADDING = 35
+    PHOTO_VERT_PADDING = 35
     """
     The main window of the photo application. This class handles fullscreen,
     resizing and packs all the toolbars along with with image viewer into its
@@ -17,8 +20,10 @@ class PhotosWindow(Gtk.Window):
         Gtk.Window.__init__(self, **kw)
         self._image_viewer = image_viewer
 
-        self._normal_attach = Gtk.EventBox()
-        self._normal_attach.set_visible_window(False)
+        self._normal_attach = Gtk.Alignment(
+            left_padding=PhotosWindow.PHOTO_VERT_PADDING, right_padding=PhotosWindow.PHOTO_VERT_PADDING,
+            top_padding=PhotosWindow.PHOTO_VERT_PADDING, bottom_padding=PhotosWindow.PHOTO_VERT_PADDING)
+        # self._normal_attach.set_visible_window(False)
         self._normal_attach.add(image_viewer)
         self._normal_attach.show()
 

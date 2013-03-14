@@ -165,6 +165,14 @@ GtkOverlay {
     background-color: #5c5c5c;
 }
 
+#image-viewer{
+    border-color:white;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 7px;
+    -unico-border-gradient: none;
+}
+
 .primary-toolbar {
     background-image: -gtk-gradient(linear, center top, center bottom,
         color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
