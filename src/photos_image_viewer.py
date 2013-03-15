@@ -25,6 +25,12 @@ class ImageViewer(Gtk.AspectFrame):
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
         self._stage.add_child(self._image)
 
+        self._border_image = Clutter.Texture()
+        self._border_image.add_constraint(Clutter.AlignConstraint(
+            align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
+        self._border_image.hide()
+        self._stage.add_child(self._border_image)
+
         self._fullscreen_button = ClutterImageButton(
             normal_path=images_path + "expand-image_normal.png",
             hover_path=images_path + "expand-image_hover.png",
@@ -66,12 +72,21 @@ class ImageViewer(Gtk.AspectFrame):
         image_width = allocation.width
         image_height = allocation.height
         self._image.set_size(image_width, image_height)
+        self._border_image.set_size(image_width, image_height)
         self._image_back.set_size(image_width, image_height)
 
-    def load_from_data(self, data, width, height):
+    def replace_base_image_from_data(self, data, width, height):
         self._image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
         self.set_property("ratio", float(width)/height)
         self._embed.show_all()
+
+    def replace_border_image_from_data(self, data, width, height):
+        self._border_image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
+        self._border_image.show()
+        self._embed.show_all()
+
+    def hide_border_image(self):
+        self._border_image.hide()
 
     def set_presenter(self, presenter):
         self._presenter = presenter

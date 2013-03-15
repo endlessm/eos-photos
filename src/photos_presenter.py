@@ -20,25 +20,37 @@ class PhotosPresenter(object):
         self._view.set_presenter(self)
         filters = self._model.get_filter_names_and_thumbnails()
         self._view.set_filters(filters)
+        borders = self._model.get_border_names_and_thumbnails()
+        self._view.set_borders(borders)
         self._lock = False
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
 
     def open_image(self, filename):
         self._model.open(filename)
-        self._model.reset_options()
         self._view.select_filter(self._model.get_filter())
         self._view.set_brightness_slider(self._model.get_brightness())
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
-        # TODO: set border when its implemented.
-        self._update_view()
+        self._view.select_border(self._model.get_border())
+        self._update_base_image()
+        self._update_border_image()
 
-    def _update_view(self):
-        im = self._model.get_image().convert('RGBA')
+    def _update_base_image(self):
+        im = self._model.get_base_image().convert('RGBA')
         width, height = im.size
-        self._view.replace_image_from_data(im.tostring(),
-                                           width, height)
+        self._view.replace_base_image_from_data(
+            im.tostring(), width, height)
+
+    def _update_border_image(self):
+        im = self._model.get_border_image()
+        if im is not None:
+            im = im.convert('RGBA')
+            width, height = im.size
+            self._view.replace_border_image_from_data(
+                im.tostring(), width, height)
+        else:
+            self._view.hide_border_image()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
@@ -103,7 +115,7 @@ class PhotosPresenter(object):
     def _do_on_filter_select(self, filter_name):
         self._model.set_filter(filter_name)
         Gdk.threads_enter()
-        self._update_view()
+        self._update_base_image()
         self._view.select_filter(filter_name)
         Gdk.threads_leave()
 
@@ -193,27 +205,28 @@ class PhotosPresenter(object):
 
         # self._run_asynch_task(self._do_on_filter_select, (filter_name,))
         self._model.set_filter(filter_name)
-        self._update_view()
+        self._update_base_image()
         self._view.select_filter(filter_name)
 
     def on_border_select(self, border_name):
-        print border_name, "border selected..."
+        self._model.set_border(border_name)
+        self._update_border_image()
         self._view.select_border(border_name)
 
     def on_contrast_change(self, value):
         if self._lock or not self._model.is_open():
             return
         self._model.set_contrast(value)
-        self._update_view()
+        self._update_base_image()
 
     def on_brightness_change(self, value):
         if self._lock or not self._model.is_open():
             return
         self._model.set_brightness(value)
-        self._update_view()
+        self._update_base_image()
 
     def on_saturation_change(self, value):
         if self._lock or not self._model.is_open():
             return
         self._model.set_saturation(value)
-        self._update_view()
+        self._update_base_image()

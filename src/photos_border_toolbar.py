@@ -10,17 +10,14 @@ class PhotosBorderToolbar(OptionList):
     def __init__(self, images_path="", **kw):
         super(PhotosBorderToolbar, self).__init__(**kw)
         self._images_path = images_path
-        self._add_border_option("NONE")
-        self._add_border_option("FRAME")
-        self._add_border_option("POLARIOD")
-        self._add_border_option("BEVELED")
-        self.select_border("NONE")
 
-    def _add_border_option(self, label):
-        thumbnail_path = self._images_path + "Filters_Example-Picture_01.jpg"
-        self.add_option(
-            "filter", thumbnail_path, label,
-            lambda: self._presenter.on_border_select(label))
+    def set_borders(self, borders):
+        map(self._add_border_option, borders)
+
+    def _add_border_option(self, name_and_thumb):
+        border_name = name_and_thumb[0]
+        thumbnail_path = self._images_path + name_and_thumb[1]
+        self.add_option("filter", thumbnail_path, border_name, lambda: self._presenter.on_border_select(border_name))
         self.show_all()
 
     def select_border(self, border_name):

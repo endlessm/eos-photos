@@ -58,6 +58,9 @@ class PhotosView(object):
     def set_filters(self, filters):
         self._filters.set_filters(filters)
 
+    def set_borders(self, borders):
+        self._borders.set_borders(borders)
+
     def select_filter(self, filter_name):
         self._filters.select_filter(filter_name)
 
@@ -73,14 +76,14 @@ class PhotosView(object):
     def set_saturation_slider(self, value):
         self._adjustments.set_saturation_slider(value)
 
-    def replace_image_from_file(self, image_name):
-        self._image_viewer.load_from_file(image_name)
+    def replace_base_image_from_data(self, data, width, height):
+        self._image_viewer.replace_base_image_from_data(data, width, height)
 
-    def replace_image_from_pixbuf(self, image_name):
-        self._image_viewer.load_from_pixbuf(image_name)
+    def replace_border_image_from_data(self, data, width, height):
+        self._image_viewer.replace_border_image_from_data(data, width, height)
 
-    def replace_image_from_data(self, data, width, height):
-        self._image_viewer.load_from_data(data, width, height)
+    def hide_border_image(self):
+        self._image_viewer.hide_border_image()
 
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file
