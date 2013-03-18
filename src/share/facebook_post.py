@@ -17,10 +17,11 @@ class FacebookPost:
         self._fb_access_token = None
         self._graph_api = None
 
-    def fb_login(self, callback=None):
+    def fb_login(self):
         # keep as dependency on social bar??
         # proc = subprocess.Popen(['python', './src/share/fb_auth_window.py'], stdout=subprocess.PIPE)
         proc = subprocess.Popen(['python', '/usr/share/endless-os-photos/src/share/fb_auth_window.pyc'], stdout=subprocess.PIPE)
+        success = False
         for line in proc.stdout:
             print line
             if line.startswith('ACCESS_TOKEN:'):
@@ -28,17 +29,17 @@ class FacebookPost:
                 if self.is_token_valid(token):
                     self.set_fb_access_token(token)
                     self._graph_api = GraphAPI(access_token=self._fb_access_token)
+                    success = True
                 else:
-                    return
+                    break
             elif line.startswith('FAILURE'):
-                return
-
-        if callback:
-            callback()
+                break
+        message = "" if success else _("Login failed.")
+        return success, message
 
     def post_image(self, file_name, message=""):
         if not self._graph_api:
-            return False, _("Not logged in.")
+            return False, _("Login failed.")
         try:
             self._graph_api.put_photo(open(file_name), message=message)
             return True, ""

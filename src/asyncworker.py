@@ -1,6 +1,6 @@
 from threading import Thread
 import Queue
-
+import traceback
 
 class AsyncWorker(Thread):
     """
@@ -18,6 +18,6 @@ class AsyncWorker(Thread):
             try:
                 method, args = self.queue.get()
                 method(*args)
-            except Exception, exception:
-                print "Exception raised in async worker of type ", type(exception)
-                print exception
+            except Exception:
+                print "In worker thread...."
+                print traceback.format_exc()
