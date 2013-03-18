@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, GLib
 
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
@@ -30,6 +30,12 @@ class PhotosView(object):
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_viewer.set_presenter(presenter)
+
+    # This should be called to update the UI from outside of GTK's thread. It
+    # will call an update function fn to be called on the main thread at the
+    # next opportunity.
+    def update_async(self, fn):
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, lambda dummy: fn(), None)
 
     def get_window(self):
         return self._window

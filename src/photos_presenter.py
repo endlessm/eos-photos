@@ -1,7 +1,5 @@
 import os
 
-from gi.repository import Gtk, Gdk
-
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
 import share.emailer
@@ -52,44 +50,49 @@ class PhotosPresenter(object):
         return filename
 
     def _lock_ui(self):
-        Gdk.threads_enter()
         self._lock = True
         self._view.show_spinner()
-        Gdk.threads_leave()
 
     def _unlock_ui(self):
-        Gdk.threads_enter()
         self._lock = False
         self._view.hide_spinner()
-        Gdk.threads_leave()
 
     def _run_method_with_handler(self, method, args, callback, callback_args=()):
         method(*args)
         callback(*callback_args)
 
-    def _run_asynch_task(self, method, args):
+    def _run_async_task(self, method, args):
         worker = AsyncWorker()
-        worker.add_task(self._lock_ui, ())
+        worker.add_task(self._view.update_async, (self._lock_ui,))
         worker.add_task(method, args)
-        worker.add_task(self._unlock_ui, ())
+        worker.add_task(self._view.update_async, (self._unlock_ui,))
         worker.start()
 
     def _do_post_to_facebook(self, message):
+        success = False
+        message = ""
         if not self._facebook_post.is_user_loged_in():
-            self._facebook_post.fb_login()
-        filename = self._model.save_to_tempfile()
-        success, message = self._facebook_post.post_image(filename, message)
+            success, message = self._facebook_post.fb_login()
+        if success:
+            filename = self._model.save_to_tempfile()
+            success, message = self._facebook_post.post_image(filename, message)
         if not success:
-            Gdk.threads_enter()
-            self._view.show_message(text=message, warning=True)
-            Gdk.threads_leave()
+            self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
 
     def _do_send_email(self, name, recipient, message):
         filename = self._model.save_to_tempfile()
         if not share.emailer.email_photo(name, recipient, message, filename):
-            Gdk.threads_enter()
-            self._view.show_message(text="Email failed", warning=True)
-            Gdk.threads_leave()
+            self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
+
+    def _do_open(self):
+        filename = self._view.show_open_dialog()
+        if filename is not None:
+            self.open_image(filename)
+
+    def _do_filter_select(self, filter_name):
+        self._model.apply_filter(filter_name)
+        self._view.update_async(self._update_view)
+        self._view.update_async(lambda: self._view.select_filter(filter_name))
 
     #UI callbacks...
     def on_close(self):
@@ -110,11 +113,6 @@ class PhotosPresenter(object):
         if self._lock:
             return
         self._view.minimize_window()
-
-    def _do_open(self):
-        filename = self._view.show_open_dialog()
-        if filename is not None:
-            self.open_image(filename)
 
     def on_open(self):
         if self._lock:
@@ -159,14 +157,14 @@ class PhotosPresenter(object):
             return
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message"))
         if info:
-            self._run_asynch_task(self._do_post_to_facebook, (info[0],))
+            self._run_async_task(self._do_post_to_facebook, (info[0],))
 
     def on_email(self):
         if self._lock or not self._model.is_open():
             return
         info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name"), _("Recipient email"), _("Message"))
         if info:
-            self._run_asynch_task(self._do_send_email, (info[0], info[1], info[2]))
+            self._run_async_task(self._do_send_email, (info[0], info[1], info[2]))
 
     def on_fullscreen(self):
         if self._lock or not self._model.is_open():
@@ -186,8 +184,4 @@ class PhotosPresenter(object):
     def on_filter_select(self, filter_name):
         if self._lock or not self._model.is_open():
             return
-
-        # self._run_asynch_task(self._do_on_filter_select, (filter_name,))
-        self._model.apply_filter(filter_name)
-        self._update_view()
-        self._view.select_filter(filter_name)
+        self._run_async_task(self._do_filter_select, (filter_name,))
