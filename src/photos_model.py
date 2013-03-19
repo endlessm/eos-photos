@@ -74,7 +74,7 @@ class PhotosModel(object):
 
     def open(self, filename):
         self._filename = filename
-        self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056))
+        self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
         self._adjusted_image = self._filtered_image = self._source_image
         self._is_saved = True
         self._clear_options()
@@ -92,12 +92,12 @@ class PhotosModel(object):
         if self.is_open():
             filename = ""
             im = self._composite_final_image()
-            if ImageTools.has_alpha(self._composite_final_image()):
-                filename = tempfile.mkstemp('.png')[1]
-                im.save(filename)
-            else:
-                filename = tempfile.mkstemp('.jpg')[1]
-                im.save(filename, quality=95)
+            # PNG would give no loss from current image, but a lot bigger.
+            # Would take longer to upload to facebook/gmail.
+            # filename = tempfile.mkstemp('.png')[1]
+            # im.save(filename)
+            filename = tempfile.mkstemp('.jpg')[1]
+            im.save(filename, quality=95)
             return filename
 
     def is_open(self):

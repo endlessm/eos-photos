@@ -14,12 +14,6 @@ class ImageViewer(Gtk.AspectFrame):
         self._embed.connect('size-allocate', self._on_embed_size_allocate)
         self._stage = self._embed.get_stage()
 
-        self._image_back = Clutter.Texture.new_from_file(images_path + "transparent_tile.png")
-        self._image_back.set_repeat(True, True)
-        self._image_back.add_constraint(Clutter.AlignConstraint(
-            align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
-        self._stage.add_child(self._image_back)
-
         self._image = Clutter.Texture()
         self._image.add_constraint(Clutter.AlignConstraint(
             align_axis=Clutter.AlignAxis.BOTH, factor=0.5, source=self._stage))
@@ -73,7 +67,6 @@ class ImageViewer(Gtk.AspectFrame):
         image_height = allocation.height
         self._image.set_size(image_width, image_height)
         self._border_image.set_size(image_width, image_height)
-        self._image_back.set_size(image_width, image_height)
 
     def replace_base_image_from_data(self, data, width, height):
         self._image.set_from_rgb_data(data, True, width, height, 0, 4, 0)

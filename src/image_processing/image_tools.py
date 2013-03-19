@@ -49,23 +49,14 @@ def apply_saturation(image, value):
     enh = ImageEnhance.Color(image)
     return enh.enhance(value)
 
-def has_alpha(image):
-    return 'a' in image.mode.lower()
-
-def kill_alpha(image):
-    if has_alpha(image):
-        return image.convert("RGB")
-    return image
-
 def color_enhance(image, amount):
-    image = image.convert('RGBA')
     arr = numpy.array(numpy.asarray(image).astype('float'))
-    r, g, b, a = numpy.rollaxis(arr, axis=-1)
+    r, g, b = numpy.rollaxis(arr, axis=-1)
     h, s, v = rgb_to_hsv(r, g, b)
     s = numpy.minimum(1.0, amount * s)
     r, g, b = hsv_to_rgb(h, s, v)
-    arr = numpy.dstack((r, g, b, a))
-    return Image.fromarray(arr.astype('uint8'), 'RGBA')
+    arr = numpy.dstack((r, g, b))
+    return Image.fromarray(arr.astype('uint8'), 'RGB')
 
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
@@ -97,13 +88,11 @@ def pixelate(image, pixel_size=10):
 def texture_overlay(image, texture_file, alpha=0.5):
     texture = Image.open(_TEXTURES_PATH + texture_file)
     texture = texture.resize(image.size)
-    texture = texture.convert(image.mode)
     return Image.blend(image, texture, alpha)
 
 def vignette(image, texture_file):
     black = Image.open(_TEXTURES_PATH + "black.png")
     black = black.resize(image.size)
-    black = black.convert(image.mode)
     texture = Image.open(_TEXTURES_PATH + texture_file)
     texture = texture.resize(image.size)
     return Image.composite(black, image, texture)
@@ -118,20 +107,16 @@ def old_photo(image):
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
-    image = kill_alpha(image)
     image = pixelate(image)
     return image.filter(ImageFilter.FIND_EDGES)
 
 def invert(image):
-    image = kill_alpha(image)
     return ImageOps.invert(image)
 
 def solarize(image):
-    image = kill_alpha(image)
     return ImageOps.solarize(image)
 
 def posterize(image, bits=2):
-    image = kill_alpha(image)
     return ImageOps.posterize(image, bits)
 
 def grayscale(image):
