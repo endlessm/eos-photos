@@ -10,7 +10,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._images_path = images_path
 
         self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._filters_label = Gtk.Label(label=_("FILTROS"), name="filters-title")
+        self._filters_label = Gtk.Label(label=_("FILTER"), name="filters-title")
         self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
         self._filters_title_box.pack_start(self._filters_label, expand=False, fill=False, padding=2)
