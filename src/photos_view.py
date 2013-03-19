@@ -215,13 +215,15 @@ class PhotosView(object):
         dialog.destroy()
         return responses
 
-    def show_spinner(self):
+    def lock_ui(self):
         watch = Gdk.Cursor(Gdk.CursorType.WATCH)
         gdk_window = self._window.get_window()
         gdk_window.set_cursor(watch)
+        self._window.set_sensitive(False)
 
-    def hide_spinner(self):
+    def unlock_ui(self):
         pointer = Gdk.Cursor(Gdk.CursorType.ARROW)
         gdk_window = self._window.get_window()
         gdk_window.set_cursor(pointer)
         self._window.queue_draw()
+        self._window.set_sensitive(True)

@@ -10,7 +10,7 @@ class AsyncWorker(Thread):
         Thread.__init__(self)
         self.queue = Queue.Queue(0)
 
-    def add_task(self, task, args):
+    def add_task(self, task, args=()):
         self.queue.put((task, args))
 
     def run(self):
