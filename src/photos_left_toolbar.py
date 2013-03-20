@@ -14,6 +14,12 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._categories = collections.OrderedDict()
 
+        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
+        filter_align.add(filters)
+        self._categories["filters"] = Category(filter_align,
+            images_path=self._images_path, label=_("FILTERS"),
+            expanded_callback=lambda: self.change_category("filters"))
+
         adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
         adjustments_align.add(adjustments)
         self._categories["adjustments"] = Category(adjustments_align, 
@@ -26,11 +32,7 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, label=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
-        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
-        filter_align.add(filters)
-        self._categories["filters"] = Category(filter_align,
-            images_path=self._images_path, label=_("FILTERS"),
-            expanded_callback=lambda: self.change_category("filters"))
+   
 
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)

@@ -4,6 +4,8 @@ from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
 import share.emailer
 
+from threading import Lock
+
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
 
@@ -33,6 +35,8 @@ class PhotosPresenter(object):
         self._view.select_border(self._model.get_border())
         self._update_base_image()
         self._update_border_image()
+        # Call slider release to avoid infinite loop
+        self.on_slider_release()
 
     def _update_base_image(self):
         im = self._model.get_base_image().convert('RGBA')
@@ -113,11 +117,12 @@ class PhotosPresenter(object):
             self.open_image(filename)
 
     def _do_adjustment_slide(self, value_get, value_set):
-        while not self._slider_target == value_get():
-            value_set(self._slider_target)
-            self._view.update_async(self._update_base_image)
+        while self._sliding:
+            if not self._slider_target == value_get():
+                value_set(self._slider_target)
+                self._view.update_async(self._update_base_image)
         self._view.update_async(self._view.unlock_ui)
-        self._sliding = False
+        
 
     #UI callbacks...
     def on_close(self):
@@ -205,37 +210,33 @@ class PhotosPresenter(object):
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...
     def on_slider_release(self):
-        print "Slider released! Make this safe..."
+        self._sliding = False
+
+
+    def _make_adjustment_change(self, value, get_func, set_func):
+        if not self._model.is_open():
+            return
+        self._slider_target = value
+        if not self._sliding:
+            self._sliding = True
+            self._run_non_locking_task(
+                self._do_adjustment_slide,
+                (get_func, set_func))
+        
+        
 
     def on_contrast_change(self, value):
-        if not self._model.is_open():
-            return
-        if self._sliding:
-            self._run_non_locking_task(
-                self._do_adjustment_slide,
-                (self._model.get_contrast, self._model.set_contrast))
-        else:
-            self._slider_target = value
-            self._sliding = True
+        self._make_adjustment_change(value, 
+            self._model.get_contrast, 
+            self._model.set_contrast)
+        
 
     def on_brightness_change(self, value):
-        if not self._model.is_open():
-            return
-        if self._sliding:
-            self._run_non_locking_task(
-                self._do_adjustment_slide,
-                (self._model.get_brightness, self._model.set_brightness))
-        else:
-            self._slider_target = value
-            self._sliding = True
+        self._make_adjustment_change(value, 
+            self._model.get_brightness, 
+            self._model.set_brightness)
 
     def on_saturation_change(self, value):
-        if not self._model.is_open():
-            return
-        if self._sliding:
-            self._run_non_locking_task(
-                self._do_adjustment_slide,
-                (self._model.get_saturation, self._model.set_saturation))
-        else:
-            self._slider_target = value
-            self._sliding = True
+        self._make_adjustment_change(value, 
+            self._model.get_saturation, 
+            self._model.set_saturation)
