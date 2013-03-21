@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
@@ -61,21 +62,30 @@ class PhotosPresenter(object):
         worker.add_task(method, args)
         worker.start()
 
+    def _get_image_tempfile(self):
+        # PNG would give no loss from current image, but a lot bigger.
+        # Would take longer to upload to facebook/gmail.
+        return tempfile.mkstemp('.jpg')[1].lower()
+
     def _do_post_to_facebook(self, message):
         success = False
         message = ""
         if not self._facebook_post.is_user_loged_in():
             success, message = self._facebook_post.fb_login()
         if success:
-            filename = self._model.save_to_tempfile()
+            filename = self._get_image_tempfile()
+            self._model.save(filename)
             success, message = self._facebook_post.post_image(filename, message)
+            os.remove(filename)
         if not success:
             self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
 
     def _do_send_email(self, name, recipient, message):
-        filename = self._model.save_to_tempfile()
+        filename = self._get_image_tempfile()
+        self._model.save(filename)
         if not share.emailer.email_photo(name, recipient, message, filename):
             self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
+        os.remove(filename)
 
     def _do_filter_select(self, filter_name):
         self._model.set_filter(filter_name)

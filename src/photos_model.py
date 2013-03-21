@@ -1,4 +1,3 @@
-import tempfile
 import collections
 
 import Image
@@ -6,6 +5,7 @@ import ImageFilter
 
 import image_processing.image_tools as ImageTools
 from photos_image_widget import PhotosImageWidget
+
 
 class PhotosModel(object):
     """
@@ -85,26 +85,14 @@ class PhotosModel(object):
         self._update_border_image()
         self._is_saved = True
 
-    def save(self, filename, format=None):
+    def save(self, filename, format=None, quality=95):
         if self.is_open():
             im = self._composite_final_image()
             if format is not None:
-                im.save(filename, format)
+                im.save(filename, format, quality=quality)
             else:
-                im.save(filename)
+                im.save(filename, quality=quality)
             self._is_saved = True
-
-    def save_to_tempfile(self):
-        if self.is_open():
-            filename = ""
-            im = self._composite_final_image()
-            # PNG would give no loss from current image, but a lot bigger.
-            # Would take longer to upload to facebook/gmail.
-            # filename = tempfile.mkstemp('.png')[1]
-            # im.save(filename)
-            filename = tempfile.mkstemp('.jpg')[1]
-            im.save(filename, quality=95)
-            return filename
 
     def is_open(self):
         return self._source_image is not None
