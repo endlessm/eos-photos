@@ -165,7 +165,7 @@ GtkOverlay {
     background-color: #5c5c5c;
 }
 
-#image-viewer{
+#image-container{
     border-color:white;
     border-style: solid;
     border-radius: 0;

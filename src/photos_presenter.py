@@ -16,6 +16,7 @@ class PhotosPresenter(object):
         self._model = model
         self._view = view
         self._view.set_presenter(self)
+        self._view.set_image_widget(self._model.get_image_widget())
         filters = self._model.get_filter_names_and_thumbnails()
         self._view.set_filters(filters)
         borders = self._model.get_border_names_and_thumbnails()
@@ -31,24 +32,6 @@ class PhotosPresenter(object):
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
         self._view.select_border(self._model.get_border())
-        self._update_base_image()
-        self._update_border_image()
-
-    def _update_base_image(self):
-        im = self._model.get_base_image().convert('RGBA')
-        width, height = im.size
-        self._view.replace_base_image_from_data(
-            im.tostring(), width, height)
-
-    def _update_border_image(self):
-        im = self._model.get_border_image()
-        if im is not None:
-            im = im.convert('RGBA')
-            width, height = im.size
-            self._view.replace_border_image_from_data(
-                im.tostring(), width, height)
-        else:
-            self._view.hide_border_image()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
@@ -63,11 +46,6 @@ class PhotosPresenter(object):
         if ext not in VALID_FILE_TYPES:
             return dot_join.join(name_arr) + "." + original_ext
         return filename
-
-
-    def _run_method_with_handler(self, method, args, callback, callback_args=()):
-        method(*args)
-        callback(*callback_args)
 
     def _run_locking_task(self, method, args=()):
         worker = AsyncWorker()
@@ -97,14 +75,8 @@ class PhotosPresenter(object):
         if not share.emailer.email_photo(name, recipient, message, filename):
             self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
 
-    def _do_open(self):
-        filename = self._view.show_open_dialog()
-        if filename is not None:
-            self.open_image(filename)
-
     def _do_filter_select(self, filter_name):
         self._model.set_filter(filter_name)
-        self._view.update_async(self._update_base_image)
         self._view.update_async(lambda: self._view.select_filter(filter_name))
 
     def _do_open(self):
@@ -115,7 +87,6 @@ class PhotosPresenter(object):
     def _do_adjustment_slide(self, value_get, value_set):
         while not self._slider_target == value_get():
             value_set(self._slider_target)
-            self._view.update_async(self._update_base_image)
         self._view.update_async(self._view.unlock_ui)
         self._sliding = False
 
@@ -147,7 +118,7 @@ class PhotosPresenter(object):
 
         # Check to see if a file exists with current name
         # If so, we need to add a version extenstion, e.g. (1), (2)
-        file_path_list = self._model.get_curr_filename().split("/")
+        file_path_list = self._model.get_current_filename().split("/")
         base_name_arr = file_path_list.pop(-1).split(".")
         name = base_name_arr[0]
         ext = base_name_arr[1]
@@ -199,7 +170,6 @@ class PhotosPresenter(object):
 
     def on_border_select(self, border_name):
         self._model.set_border(border_name)
-        self._update_border_image()
         self._view.select_border(border_name)
 
     # Slider has been released! We need to block new changes to the model if

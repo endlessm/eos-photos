@@ -13,18 +13,18 @@ class PhotosWindow(Gtk.Window):
     resizing and packs all the toolbars along with with image viewer into its
     allocated space.
     """
-    def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_viewer=None, **kw):
+    def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
         kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         kw.setdefault('has-resize-grip', False)
         Gtk.Window.__init__(self, **kw)
-        self._image_viewer = image_viewer
+        self._image_container = image_container
 
         self._normal_attach = Gtk.Alignment(
             left_padding=PhotosWindow.PHOTO_VERT_PADDING, right_padding=PhotosWindow.PHOTO_VERT_PADDING,
             top_padding=PhotosWindow.PHOTO_VERT_PADDING, bottom_padding=PhotosWindow.PHOTO_VERT_PADDING)
         # self._normal_attach.set_visible_window(False)
-        self._normal_attach.add(image_viewer)
+        self._normal_attach.add(image_container)
         self._normal_attach.show()
 
         self._fullscreen_attach = Gtk.EventBox(name="fullscreen-back")
@@ -86,12 +86,12 @@ class PhotosWindow(Gtk.Window):
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
             self._notebook.set_current_page(1)
-            self._image_viewer.reparent(self._fullscreen_attach)
-            self._image_viewer.set_fullscreen_mode(True)
+            self._image_container.reparent(self._fullscreen_attach)
+            self._image_container.set_fullscreen_mode(True)
         else:
             self._notebook.set_current_page(0)
-            self._image_viewer.reparent(self._normal_attach)
-            self._image_viewer.set_fullscreen_mode(False)
+            self._image_container.reparent(self._normal_attach)
+            self._image_container.set_fullscreen_mode(False)
 
     def _get_screen_dimensions(self):
         # This ought to return the size of the screen, less any panels or

@@ -7,7 +7,7 @@ from photos_adjustment_toolbar import PhotosAdjustmentToolbar
 from photos_border_toolbar import PhotosBorderToolbar
 from photos_filter_toolbar import PhotosFilterToolbar
 from photos_window import PhotosWindow
-from photos_image_viewer import ImageViewer
+from photos_image_container import ImageContainer
 
 
 class PhotosView(object):
@@ -26,19 +26,19 @@ class PhotosView(object):
                                                filters=self._filters)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
-        self._image_viewer = ImageViewer(images_path=images_path, name="image-viewer")
+        self._image_container = ImageContainer(images_path=images_path, name="image-container")
         self._window = PhotosWindow(images_path=images_path,
                                     top_toolbar=self._top_toolbar,
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
-                                    image_viewer=self._image_viewer)
+                                    image_container=self._image_container)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
         self._top_toolbar.set_presenter(presenter)
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
-        self._image_viewer.set_presenter(presenter)
+        self._image_container.set_presenter(presenter)
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)
@@ -57,6 +57,9 @@ class PhotosView(object):
 
     def minimize_window(self):
         self._window.iconify()
+
+    def set_image_widget(self, widget):
+        self._image_container.set_image_widget(widget)
 
     def set_image_fullscreen(self, fullscreen):
         self._window.set_image_fullscreen(fullscreen)
@@ -81,15 +84,6 @@ class PhotosView(object):
 
     def set_saturation_slider(self, value):
         self._adjustments.set_saturation_slider(value)
-
-    def replace_base_image_from_data(self, data, width, height):
-        self._image_viewer.replace_base_image_from_data(data, width, height)
-
-    def replace_border_image_from_data(self, data, width, height):
-        self._image_viewer.replace_border_image_from_data(data, width, height)
-
-    def hide_border_image(self):
-        self._image_viewer.hide_border_image()
 
     def show_open_dialog(self):
         # Opens a dialog window where the user can choose an image file

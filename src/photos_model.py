@@ -5,7 +5,7 @@ import Image
 import ImageFilter
 
 import image_processing.image_tools as ImageTools
-
+from photos_image_widget import PhotosImageWidget
 
 class PhotosModel(object):
     """
@@ -21,6 +21,7 @@ class PhotosModel(object):
         self._source_image = None
         self._filtered_image = None
         self._adjusted_image = None
+        self._image_widget = PhotosImageWidget()
 
         self._is_saved = True
         self._build_filter_dict()
@@ -59,12 +60,13 @@ class PhotosModel(object):
         ])
 
     def _clear_options(self):
-        self._last_filter = self._filter = self._get_default_filter()
-        self._last_brightness = self._brightness = 1.0
-        self._last_contrast = self._contrast = 1.0
-        self._last_saturation = self._saturation = 1.0
+        self._filter = self._get_default_filter()
+        self._brightness = 1.0
+        self._contrast = 1.0
+        self._saturation = 1.0
+        self._last_filter = ""
+        self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
-        self._border_image = None
 
     def _get_default_filter(self):
         return self._filter_dict.keys()[0]
@@ -72,12 +74,16 @@ class PhotosModel(object):
     def _get_default_border(self):
         return self._border_dict.keys()[0]
 
+    def get_image_widget(self):
+        return self._image_widget
+
     def open(self, filename):
         self._filename = filename
-        self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
-        self._adjusted_image = self._filtered_image = self._source_image
-        self._is_saved = True
         self._clear_options()
+        self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
+        self._update_base_image()
+        self._update_border_image()
+        self._is_saved = True
 
     def save(self, filename, format=None):
         if self.is_open():
@@ -109,16 +115,10 @@ class PhotosModel(object):
     def is_modified(self):
         return self._curr_filter is not self.get_defualt_filter_name()
 
-    def get_curr_filename(self):
+    def get_current_filename(self):
         if not self.is_open():
             return None
         return self._filename
-
-    def get_base_image(self):
-        return self._adjusted_image
-
-    def get_border_image(self):
-        return self._border_image
 
     def get_filter_names(self):
         return self._filter_dict.keys()
@@ -172,12 +172,7 @@ class PhotosModel(object):
         if (not self.is_open()):
             return
         self._border = border_name
-        filename = self._border_dict[border_name]
-        if filename is not None:
-            self._border_image = Image.open(self._textures_path + filename).resize(
-                self._source_image.size, Image.BILINEAR)
-        else:
-            self._border_image = None
+        self._update_border_image()
 
     def _update_base_image(self):
         if (not self.is_open()):
@@ -194,14 +189,30 @@ class PhotosModel(object):
                         and self._last_contrast == self._contrast
                         and self._last_saturation == self._saturation)
         if filtered or adjusted:
-            self._adjust_base_image()
+            # adjust image
+            im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
+            im = ImageTools.apply_brightness(im, self._brightness)
+            im = ImageTools.apply_saturation(im, self._saturation)
+            self._adjusted_image = im
+            # update widget
+            width, height = self._adjusted_image.size
+            self._image_widget.replace_base_image(
+                self._adjusted_image.tostring(), width, height)
             self._is_saved = False
 
-    def _adjust_base_image(self):
-        im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
-        im = ImageTools.apply_brightness(im, self._brightness)
-        im = ImageTools.apply_saturation(im, self._saturation)
-        self._adjusted_image = im
+    def _update_border_image(self):
+        filename = self._border_dict[self._border]
+        if filename is not None:
+            self._border_image = Image.open(self._textures_path + filename).resize(
+                self._source_image.size, Image.BILINEAR)
+            width, height = self._border_image.size
+            self._image_widget.replace_border_image(
+                self._border_image.tostring(), width, height)
+        else:
+            self._border_image = None
+            self._image_widget.hide_border_image()
 
     def _composite_final_image(self):
-        return Image.composite(self.get_border_image(), self.get_base_image(), self.get_border_image())
+        if self._border_image is None:
+            return self._adjusted_image
+        return Image.composite(self._border_image, self._adjusted_image, self._border_image)
