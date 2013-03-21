@@ -15,6 +15,9 @@ class PhotosAdjustmentToolbar(Gtk.VBox):
         self._brightness_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_brightness_change(adjust.get_value()))
         self._brightness_slider.connect('button-release-event', lambda w, e: self._presenter.on_slider_release())
+
+        self._brightness_slider.connect('key-press-event', lambda w, e: True)
+
         self.pack_start(self._brightness_slider, False, False, 5)
 
         self._contrast_label = Gtk.Label(name="filter-label", label="Contrast")
@@ -24,6 +27,7 @@ class PhotosAdjustmentToolbar(Gtk.VBox):
         self._contrast_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_contrast_change(adjust.get_value()))
         self._contrast_slider.connect('button-release-event', lambda w, e: self._presenter.on_slider_release())
+        self._contrast_slider.connect('key-press-event', lambda w, e: True)
         self.pack_start(self._contrast_slider, False, False, 5)
 
         self._saturation_label = Gtk.Label(name="filter-label", label="Saturation")
@@ -33,6 +37,7 @@ class PhotosAdjustmentToolbar(Gtk.VBox):
         self._saturation_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_saturation_change(adjust.get_value()))
         self._saturation_slider.connect('button-release-event', lambda w, e: self._presenter.on_slider_release())
+        self._saturation_slider.connect('key-press-event', lambda w, e: True)
         self.pack_start(self._saturation_slider, False, False, 5)
 
         self.show_all()
