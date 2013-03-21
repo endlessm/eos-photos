@@ -82,7 +82,7 @@ class PhotosPresenter(object):
     def _do_send_email(self, name, recipient, message):
         filename = self._model.save_to_tempfile()
         if not share.emailer.email_photo(name, recipient, message, filename):
-            self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
+            self._view.update_async(lambda: self._view.show_message(text=_("Email failed."), warning=True))
 
     def _do_open(self):
         filename = self._view.show_open_dialog()

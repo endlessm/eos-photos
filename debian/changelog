@@ -1,3 +1,9 @@
+endlessos-base-photos (1.3) unstable; urgency=low
+
+  * Shows spinners when calculating filters. Bug fixes.
+
+ -- dev1 <endlessmobile@gmail.com>  Wed, 20 Mar 2013 23:55:41 -0700
+
 endlessos-base-photos (1.2) unstable; urgency=low
 
   * Updated fonts and translations. Changed filters.
