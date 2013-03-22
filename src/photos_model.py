@@ -167,7 +167,6 @@ class PhotosModel(object):
             return
         self._border = border_name
         filename = self._border_dict[border_name]
-        print filename
         if filename is not None:
             self._border_image = Image.open(self._borders_path + filename).resize(
                 self._source_image.size, Image.BILINEAR)
@@ -205,7 +204,7 @@ class PhotosModel(object):
     def _update_border_image(self):
         filename = self._border_dict[self._border]
         if filename is not None:
-            self._border_image = Image.open(self._textures_path + filename).resize(
+            self._border_image = Image.open(self._borders_path + filename).resize(
                 self._source_image.size, Image.BILINEAR)
             width, height = self._border_image.size
             self._image_widget.replace_border_image(
