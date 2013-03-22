@@ -121,6 +121,7 @@ def posterize(image, bits=2):
 
 def grayscale(image):
     image = ImageOps.grayscale(image)
+    image = image.convert('RGB')
     return vignette(image, "light_vignette.png")
 
 def grunge(image):
