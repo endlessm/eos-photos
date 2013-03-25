@@ -11,8 +11,8 @@ from photos_presenter import PhotosPresenter
 
 
 class EndlessPhotos(Gtk.Application):
-    ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
-    # ABS_PHOTOS_PATH = '.'
+    #ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
+    ABS_PHOTOS_PATH = '.'
     """
     The photo application.
 
@@ -30,6 +30,7 @@ class EndlessPhotos(Gtk.Application):
         Gtk.Application.__init__(self,
                                  application_id='com.endlessm.endless-photos',
                                  flags=Gio.ApplicationFlags.HANDLES_OPEN)
+        print "Ohai, this is a test pull. | (• ◡•) | and (❍ᴥ❍ʋ)"
 
     def do_startup(self):
         """
