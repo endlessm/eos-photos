@@ -66,7 +66,7 @@ class Category(Gtk.Expander):
 
         self._expanded_callback = expanded_callback
         self._images_path = images_path
-        self._title_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
+        self._title_image = Gtk.Image.new_from_file(images_path + "icon_effects_hover.png")
         self._title_label = Gtk.Label(label=label, name="filters-title")
         self._title_box = Gtk.HBox(homogeneous=False, spacing=0)
         self._title_box.pack_start(self._title_image, expand=False, fill=False, padding=0)

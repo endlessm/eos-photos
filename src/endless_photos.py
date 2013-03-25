@@ -11,7 +11,7 @@ from photos_presenter import PhotosPresenter
 
 
 class EndlessPhotos(Gtk.Application):
-    #ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
+    # ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
     ABS_PHOTOS_PATH = '.'
     """
     The photo application.
