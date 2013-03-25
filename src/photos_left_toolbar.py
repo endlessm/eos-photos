@@ -32,11 +32,10 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, label=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
-   
-
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)
 
+        self.set_vexpand(True)
         self.show_all()
 
     def set_presenter(self, presenter):

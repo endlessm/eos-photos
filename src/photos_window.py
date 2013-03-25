@@ -19,6 +19,12 @@ class PhotosWindow(Gtk.Window):
         kw.setdefault('has-resize-grip', False)
         Gtk.Window.__init__(self, **kw)
         self._image_container = image_container
+        self._top_toolbar = top_toolbar
+        self._left_toolbar = left_toolbar
+        self._right_toolbar = right_toolbar
+
+        self._left_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
+        self._right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
 
         self._normal_attach = Gtk.Alignment(
             left_padding=PhotosWindow.PHOTO_VERT_PADDING, right_padding=PhotosWindow.PHOTO_VERT_PADDING,
@@ -31,13 +37,11 @@ class PhotosWindow(Gtk.Window):
         self._fullscreen_attach.show()
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        left_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
-        right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
         self._hbox.pack_start(
-            left_toolbar, expand=False, fill=False, padding=0)
+            left_toolbar, expand=False, fill=True, padding=0)
         self._hbox.pack_start(
             self._normal_attach, expand=True, fill=True, padding=0)
-        self._hbox.pack_end(right_toolbar, expand=False, fill=False, padding=0)
+        self._hbox.pack_end(right_toolbar, expand=False, fill=True, padding=0)
         self._hbox.show()
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
@@ -108,7 +112,11 @@ class PhotosWindow(Gtk.Window):
     def _resize_to_fullscreen(self, screen):
         # When anything about the Gdk.Screen or Gdk.Monitor changes, resize the
         # window to fullscreen.
-        self._screen_width, self._screen_height = self._get_screen_dimensions()
-        self.set_default_size(self._screen_width, self._screen_height)
-        # self.resize(800, 600)
-        self.resize(self._screen_width, self._screen_height)
+        width, height = self._get_screen_dimensions()
+        # width, height = 800, 600
+        self.set_default_size(width, height)
+        self.resize(width, height)
+        # Might be a better way to do this. But for now, this set_size_request
+        # was the best way I could figure out to make sure the window does not
+        # shrink to its contents.
+        self.set_size_request(width, height)

@@ -15,9 +15,7 @@ class PhotosAdjustmentToolbar(Gtk.VBox):
         self._brightness_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_brightness_change(adjust.get_value()))
         self._brightness_slider.connect('button-release-event', lambda w, e: self._presenter.on_slider_release())
-
         self._brightness_slider.connect('key-press-event', lambda w, e: True)
-
         self.pack_start(self._brightness_slider, False, False, 5)
 
         self._contrast_label = Gtk.Label(name="filter-label", label="Contrast")
