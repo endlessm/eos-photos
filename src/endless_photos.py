@@ -11,8 +11,8 @@ from photos_presenter import PhotosPresenter
 
 
 class EndlessPhotos(Gtk.Application):
-    ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
-    # ABS_PHOTOS_PATH = '.'
+    #ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
+    ABS_PHOTOS_PATH = '.'
     """
     The photo application.
 
@@ -52,7 +52,8 @@ class EndlessPhotos(Gtk.Application):
         # application.
         self._model = PhotosModel(
             textures_path=self.get_images_path() + "textures/",
-            curves_path=self.get_data_path() + "curves/")
+            curves_path=self.get_data_path() + "curves/",
+            borders_path=self.get_images_path() + "borders/")
         self._view = PhotosView(images_path=self.get_images_path())
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()

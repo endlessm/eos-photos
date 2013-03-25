@@ -187,6 +187,7 @@ class PhotosPresenter(object):
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...
     def on_slider_release(self):
+        print "Released"
         self._sliding = False
 
     def _make_adjustment_change(self, value, get_func, set_func):

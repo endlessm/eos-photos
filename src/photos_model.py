@@ -12,12 +12,13 @@ class PhotosModel(object):
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
-    def __init__(self, textures_path="", curves_path=""):
+    def __init__(self, textures_path="", curves_path="", borders_path=""):
         super(PhotosModel, self).__init__()
         ImageTools.set_textures_path(textures_path)
         self._textures_path = textures_path
         ImageTools.set_curves_path(curves_path)
         self._curves_path = curves_path
+        self._borders_path = borders_path
         self._source_image = None
         self._filtered_image = None
         self._adjusted_image = None
@@ -56,7 +57,12 @@ class PhotosModel(object):
         self._border_dict = collections.OrderedDict([
             (_("NONE"), None),
             (_("HORIZONTAL BARS"), "horizontal_bars.png"),
-            (_("SIDE BARS"), "vertical_bars.png")
+            (_("SIDE BARS"), "vertical_bars.png"),
+            (_("TEST"), "border-1.png"),
+            (_("TEST2"), "border-2.png"),
+            (_("TEST3"), "border-3.png"),
+            (_("TEST4"), "border-4.png"),
+            (_("TEST5"), "border-5.png")
         ])
 
     def _clear_options(self):
@@ -160,6 +166,13 @@ class PhotosModel(object):
         if (not self.is_open()):
             return
         self._border = border_name
+        filename = self._border_dict[border_name]
+        if filename is not None:
+            self._border_image = Image.open(self._borders_path + filename).resize(
+                self._source_image.size, Image.BILINEAR)
+        else:
+            self._border_image = None
+
         self._update_border_image()
 
     def _update_base_image(self):
@@ -191,7 +204,7 @@ class PhotosModel(object):
     def _update_border_image(self):
         filename = self._border_dict[self._border]
         if filename is not None:
-            self._border_image = Image.open(self._textures_path + filename).resize(
+            self._border_image = Image.open(self._borders_path + filename).resize(
                 self._source_image.size, Image.BILINEAR)
             width, height = self._border_image.size
             self._image_widget.replace_border_image(
