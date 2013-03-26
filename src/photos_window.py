@@ -1,8 +1,6 @@
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
-from widgets.image_text_button import ImageTextButton
-
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
     # Constants
@@ -14,13 +12,14 @@ class PhotosWindow(Gtk.Window):
     resizing and packs all the toolbars along with with image viewer into its
     allocated space.
     """
-    def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
+    def __init__(self, images_path="", splash_screen=None, photos_top_toolbar=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
         kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         kw.setdefault('has-resize-grip', False)
         Gtk.Window.__init__(self, **kw)
         self._image_container = image_container
-        self._top_toolbar = top_toolbar
+        self._splash_screen = splash_screen
+        self._photos_top_toolbar = photos_top_toolbar
         self._left_toolbar = left_toolbar
         self._right_toolbar = right_toolbar
 
@@ -46,42 +45,9 @@ class PhotosWindow(Gtk.Window):
         self._hbox.show()
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(top_toolbar, expand=False, fill=False, padding=0)
+        self._vbox.pack_start(self._photos_top_toolbar, expand=False, fill=False, padding=0)
         self._vbox.pack_start(self._hbox, expand=True, fill=True, padding=0)
         self._vbox.show()
-
-        self._splash_open_button = ImageTextButton(normal_path=images_path + "icon_topbar_OpenPhoto_normal.png",
-                                            hover_path=images_path + "icon_topbar_OpenPhoto_hover.png",
-                                            down_path=images_path + "icon_topbar_OpenPhoto_normal.png",
-                                            label=_("OPEN IMAGE"),
-                                            name="splash-open-photos-button",
-                                            expand=False)
-        self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
-
-        splash_label = Gtk.Label(_("Choose one of your photos to begin!"), name="splash-label", expand=False)
-        splash_label.set_max_width_chars(20)
-        splash_label.set_alignment(0, 0)
-        splash_label.set_size_request(300, -1)
-        splash_label.set_line_wrap(True)
-        splash_label.set_margin_bottom(10)
-        
-        # These hboxes are used to prevent GTK from ignoring expand flags and auto-expanding the
-        # button and label to the maximum window width.
-        label_hbox = Gtk.HBox()
-        label_hbox.pack_start(splash_label, expand=False, fill=False, padding=0)
-
-        button_hbox = Gtk.HBox()
-        button_hbox.pack_start(self._splash_open_button, expand=False, fill=False, padding=0)
-
-        self._splash_grid = Gtk.VBox(expand=False)
-        self._splash_grid.set_margin_left(60)
-        self._splash_grid.set_margin_top(65)
-        self._splash_grid.pack_start(label_hbox, expand=False, fill=False, padding=0)
-        self._splash_grid.pack_start(button_hbox, expand=False, fill=False, padding=0)
-
-        self._splash_screen = Gtk.EventBox(name="splash-eventbox")
-        self._splash_screen.add(self._splash_grid)
-        self._splash_screen.show_all()
 
         self._notebook = Gtk.Notebook()
         self._notebook.set_show_tabs(False)
