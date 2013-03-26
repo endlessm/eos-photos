@@ -95,6 +95,7 @@ class PhotosPresenter(object):
         filename = self._view.show_open_dialog()
         if filename is not None:
             self.open_image(filename)
+            self._view.set_photo_editor_active()
 
     def _do_adjustment_slide(self, value_get, value_set):
         while self._sliding:

@@ -1,6 +1,7 @@
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
+from widgets.image_text_button import ImageTextButton
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
@@ -49,9 +50,40 @@ class PhotosWindow(Gtk.Window):
         self._vbox.pack_start(self._hbox, expand=True, fill=True, padding=0)
         self._vbox.show()
 
+        self._splash_open_button = ImageTextButton(normal_path=images_path + "icon_topbar_OpenPhoto_normal.png",
+                                            hover_path=images_path + "icon_topbar_OpenPhoto_hover.png",
+                                            down_path=images_path + "icon_topbar_OpenPhoto_normal.png",
+                                            label=_("OPEN IMAGE"),
+                                            name="splash-open-photos-button",
+                                            expand=False)
+        self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
+
+        splash_label = Gtk.Label("I CAN HAZ PHOTOZ?!", name="splash-label")
+        splash_label.set_line_wrap(True)
+        splash_label.set_margin_bottom(10)
+        
+        # These hboxes are used to prevent GTK from ignoring expand flags and auto-expanding the
+        # button and label to the maximum window width.
+        label_hbox = Gtk.HBox()
+        label_hbox.pack_start(splash_label, expand=False, fill=False, padding=0)
+
+        button_hbox = Gtk.HBox()
+        button_hbox.pack_start(self._splash_open_button, expand=False, fill=False, padding=0)
+
+        self._splash_grid = Gtk.VBox(expand=False)
+        self._splash_grid.set_margin_left(60)
+        self._splash_grid.set_margin_top(65)
+        self._splash_grid.pack_start(label_hbox, expand=False, fill=False, padding=0)
+        self._splash_grid.pack_start(button_hbox, expand=False, fill=False, padding=0)
+
+        self._splash_screen = Gtk.EventBox(name="splash-eventbox")
+        self._splash_screen.add(self._splash_grid)
+        self._splash_screen.show_all()
+
         self._notebook = Gtk.Notebook()
         self._notebook.set_show_tabs(False)
         self._notebook.set_show_border(False)
+        self._notebook.append_page(self._splash_screen, None)
         self._notebook.append_page(self._vbox, None)
         self._notebook.append_page(self._fullscreen_attach, None)
         self._notebook.show()
@@ -87,13 +119,16 @@ class PhotosWindow(Gtk.Window):
     def close(self):
         self.destroy()
 
+    def set_photo_editor_active(self):
+        self._notebook.set_current_page(self._notebook.page_num(self._vbox))
+
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
-            self._notebook.set_current_page(1)
+            self._notebook.set_current_page(self._notebook.page_num(self._fullscreen_attach))
             self._image_container.reparent(self._fullscreen_attach)
             self._image_container.set_fullscreen_mode(True)
         else:
-            self._notebook.set_current_page(0)
+            self._notebook.set_current_page(self._notebook.page_num(self._vbox))
             self._image_container.reparent(self._normal_attach)
             self._image_container.set_fullscreen_mode(False)
 
@@ -120,3 +155,6 @@ class PhotosWindow(Gtk.Window):
         # was the best way I could figure out to make sure the window does not
         # shrink to its contents.
         self.set_size_request(width, height)
+
+    def set_presenter(self, presenter):
+        self._presenter = presenter
