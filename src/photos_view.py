@@ -42,6 +42,7 @@ class PhotosView(object):
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)
+        self._window.set_presenter(presenter)
 
     # This should be called to update the UI from outside of GTK's thread. It
     # will call an update function fn to be called on the main thread at the
@@ -60,6 +61,9 @@ class PhotosView(object):
 
     def set_image_widget(self, widget):
         self._image_container.set_image_widget(widget)
+
+    def set_photo_editor_active(self):
+        self._window.set_photo_editor_active()
 
     def set_image_fullscreen(self, fullscreen):
         self._window.set_image_fullscreen(fullscreen)
