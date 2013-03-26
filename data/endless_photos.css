@@ -19,6 +19,18 @@ GtkOverlay {
     background-color: transparent;
 }
 
+#splash-label {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-size: 46;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* TODO: Fix the hardcoded path. */
+#splash-eventbox {
+    background-image: url("../images/background_splash.jpg");
+}
+
 #fullscreen-back {
     background-color: black;
 }
@@ -107,6 +119,19 @@ GtkOverlay {
                                      color-stop(1.0, #303030));
 }
 
+#splash-open-photos-button {
+    -GtkWidget-focus-line-width: 0;
+    border-width: 1px;
+    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
+                                     from (#5c5c5c),
+                                     to (rgba(1,2,2,0.34)));
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     color-stop(0.0, #484848),
+                                     color-stop(1.0, #303030));
+    padding: 5px 9px 5px 9px;
+}
+
+#splash-open-photos-button GtkLabel,
 #open-photos-button GtkLabel {
     font-family: Ubuntu;
     font-style: normal;
@@ -116,10 +141,12 @@ GtkOverlay {
     color: #787878;
 }
 
+#splash-open-photos-button GtkLabel:hover,
 #open-photos-button GtkLabel:hover {
     color: #888888;
 }
 
+#splash-open-photos-button:hover,
 #open-photos-button:hover {
     -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
                                      from (#676767),
@@ -129,6 +156,7 @@ GtkOverlay {
                                      color-stop(1.0, #343434));
 }
 
+#splash-open-photos-button:active,
 #open-photos-button:active {
     -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
                                      from (#191919),
