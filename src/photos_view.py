@@ -1,5 +1,7 @@
 from gi.repository import Gtk, Gdk, GLib
 
+from top_toolbar import TopToolbar
+from splash_screen import SplashScreen
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
@@ -24,18 +26,23 @@ class PhotosView(object):
                                                adjustments=self._adjustments,
                                                borders=self._borders,
                                                filters=self._filters)
-        self._top_toolbar = PhotosTopToolbar(images_path=images_path)
+        self._splash_top_toolbar = TopToolbar(images_path=images_path)
+        self._splash_screen = SplashScreen(splash_top_toolbar=self._splash_top_toolbar, images_path=images_path, name="splash-eventbox")
+        self._photos_top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
         self._window = PhotosWindow(images_path=images_path,
-                                    top_toolbar=self._top_toolbar,
+                                    splash_screen=self._splash_screen,
+                                    photos_top_toolbar=self._photos_top_toolbar,
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
                                     image_container=self._image_container)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
-        self._top_toolbar.set_presenter(presenter)
+        self._splash_top_toolbar.set_presenter(presenter)
+        self._splash_screen.set_presenter(presenter)
+        self._photos_top_toolbar.set_presenter(presenter)
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_container.set_presenter(presenter)
