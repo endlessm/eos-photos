@@ -58,7 +58,10 @@ class PhotosWindow(Gtk.Window):
                                             expand=False)
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
 
-        splash_label = Gtk.Label("I CAN HAZ PHOTOZ?!", name="splash-label")
+        splash_label = Gtk.Label(_("Choose one of your photos to begin!"), name="splash-label", expand=False)
+        splash_label.set_max_width_chars(20)
+        splash_label.set_alignment(0, 0)
+        splash_label.set_size_request(300, -1)
         splash_label.set_line_wrap(True)
         splash_label.set_margin_bottom(10)
         

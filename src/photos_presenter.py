@@ -35,6 +35,7 @@ class PhotosPresenter(object):
         self._view.select_border(self._model.get_border())
         # Call slider release to avoid infinite loop
         self.on_slider_release()
+        self._view.set_photo_editor_active()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
@@ -95,7 +96,6 @@ class PhotosPresenter(object):
         filename = self._view.show_open_dialog()
         if filename is not None:
             self.open_image(filename)
-            self._view.set_photo_editor_active()
 
     def _do_adjustment_slide(self, value_get, value_set):
         while self._sliding:
