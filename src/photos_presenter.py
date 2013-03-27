@@ -71,24 +71,23 @@ class PhotosPresenter(object):
         # Would take longer to upload to facebook/gmail.
         return tempfile.mkstemp('.jpg')[1].lower()
 
-    def _do_post_to_facebook(self, message):
-        success = False
-        message = ""
+    def _do_post_to_facebook(self, photo_message):
+        success = True
         if not self._facebook_post.is_user_loged_in():
-            success, message = self._facebook_post.fb_login()
+            success, err_message = self._facebook_post.fb_login()
         if success:
             filename = self._get_image_tempfile()
             self._model.save(filename)
-            success, message = self._facebook_post.post_image(filename, message)
+            success, message = self._facebook_post.post_image(filename, photo_message)
             os.remove(filename)
         if not success:
-            self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
+            self._view.update_async(lambda: self._view.show_message(text=_(err_message), warning=True))
 
     def _do_send_email(self, name, recipient, message):
         filename = self._get_image_tempfile()
         self._model.save(filename)
         if not share.emailer.email_photo(name, recipient, message, filename):
-            self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
+            self._view.update_async(lambda: self._view.show_message(text=_("Email failed."), warning=True))
         os.remove(filename)
 
     def _do_filter_select(self, filter_name):
