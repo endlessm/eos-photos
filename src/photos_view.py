@@ -221,9 +221,8 @@ class PhotosView(object):
 
         dialog.show_all()
         result = dialog.run()
-
         # If user clicks cancel, return having done nothing
-        if result == Gtk.ResponseType.CANCEL:
+        if result == Gtk.ResponseType.CANCEL or result == Gtk.ResponseType.DELETE_EVENT:
             dialog.destroy()
             return None
 
