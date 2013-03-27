@@ -16,7 +16,7 @@ class PhotosBorderToolbar(OptionList):
 
     def _add_border_option(self, name_and_thumb):
         border_name = name_and_thumb[0]
-        thumbnail_path = self._images_path + name_and_thumb[1]
+        thumbnail_path = self._images_path + "border_thumbnails/" + name_and_thumb[1]
         self.add_option("filter", thumbnail_path, border_name, lambda: self._presenter.on_border_select(border_name))
         self.show_all()
 

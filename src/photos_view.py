@@ -6,6 +6,7 @@ from photos_right_toolbar import PhotosRightToolbar
 from photos_adjustment_toolbar import PhotosAdjustmentToolbar
 from photos_border_toolbar import PhotosBorderToolbar
 from photos_filter_toolbar import PhotosFilterToolbar
+from photos_distort_toolbar import PhotosDistortToolbar
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 
@@ -20,10 +21,12 @@ class PhotosView(object):
         self._adjustments = PhotosAdjustmentToolbar(images_path=images_path)
         self._borders = PhotosBorderToolbar(images_path=images_path)
         self._filters = PhotosFilterToolbar(images_path=images_path)
+        self._distorts = PhotosDistortToolbar(images_path=images_path)
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                adjustments=self._adjustments,
                                                borders=self._borders,
-                                               filters=self._filters)
+                                               filters=self._filters,
+                                               distortions=self._distorts)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
@@ -42,6 +45,7 @@ class PhotosView(object):
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)
+        self._distorts.set_presenter(presenter)
 
     # This should be called to update the UI from outside of GTK's thread. It
     # will call an update function fn to be called on the main thread at the
@@ -70,11 +74,17 @@ class PhotosView(object):
     def set_borders(self, borders):
         self._borders.set_borders(borders)
 
+    def set_distortions(self, distortions):
+        self._distorts.set_distortions(distortions)
+
     def select_filter(self, filter_name):
         self._filters.select_filter(filter_name)
 
     def select_border(self, border_name):
         self._borders.select_border(border_name)
+
+    def select_distortion(self, distort_name):
+        self._distorts.select_distortion(distort_name)
 
     def set_brightness_slider(self, value):
         self._adjustments.set_brightness_slider(value)

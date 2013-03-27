@@ -27,6 +27,7 @@ class PhotosModel(object):
         self._is_saved = True
         self._build_filter_dict()
         self._build_border_dict()
+        self._build_distortions_dict()
         self._clear_options()
 
     def _build_filter_dict(self):
@@ -59,10 +60,19 @@ class PhotosModel(object):
             (_("HORIZONTAL BARS"), "horizontal_bars.png"),
             (_("SIDE BARS"), "vertical_bars.png"),
             (_("TEST"), "border-1.png"),
-            (_("TEST2"), "border-2.png"),
-            (_("TEST3"), "border-3.png"),
-            (_("TEST4"), "border-4.png"),
-            (_("TEST5"), "border-5.png")
+            (_("CRAYON"), "frame_3x2_crayon.png"),
+            (_("GRUNGE"), "frame_3x2_grunge.png"),
+            (_("SPRAY"), "frame_3x2_spray.png"),
+            (_("BRUSH"), "frame_3x2_brush.png")
+        ])
+
+    def _build_distortions_dict(self):
+        self._distortions_dict = collections.OrderedDict([
+            (_("NONE"), None),
+            (_("FISH EYE"), "horizontal_bars.png"),
+            (_("BULGE"), "vertical_bars.png"),
+            (_("PINCH"), "border-1.png"),
+            (_("SWIRL"), "frame_3x2_crayon.png")
         ])
 
     def _clear_options(self):
@@ -79,6 +89,9 @@ class PhotosModel(object):
 
     def _get_default_border(self):
         return self._border_dict.keys()[0]
+
+    def _get_default_distortion(self):
+        return self._distortions_dict.keys()[0]
 
     def get_image_widget(self):
         return self._image_widget
@@ -127,8 +140,18 @@ class PhotosModel(object):
 
     def get_border_names_and_thumbnails(self):
         names_and_thumbs = []
+        border_no = 0
         for name in self._border_dict.keys():
-            names_and_thumbs.append((name, "Filters_Example-Picture_01.jpg"))
+            names_and_thumbs.append((name, "border_" + str(border_no) + ".png"))
+            border_no += 1
+        return names_and_thumbs
+
+    def get_distortion_names_and_thumbnails(self):
+        names_and_thumbs = []
+        distort_no = 0
+        for name in self._distortions_dict.keys():
+            names_and_thumbs.append((name, "border_" + str(distort_no) + ".png"))
+            distort_no += 1
         return names_and_thumbs
 
     def get_contrast(self):
@@ -166,14 +189,16 @@ class PhotosModel(object):
         if (not self.is_open()):
             return
         self._border = border_name
-        filename = self._border_dict[border_name]
-        if filename is not None:
-            self._border_image = Image.open(self._borders_path + filename).resize(
-                self._source_image.size, Image.BILINEAR)
-        else:
-            self._border_image = None
-
         self._update_border_image()
+
+    def set_distortion(self, distort_name):
+        im = ImageTools.distortion(self._filtered_image, distort_name)
+        self._adjusted_image = im
+        # update widget
+        width, height = self._adjusted_image.size
+        self._image_widget.replace_base_image(
+            self._adjusted_image.tostring(), width, height)
+        self._is_saved = False
 
     def _update_base_image(self):
         if (not self.is_open()):
@@ -209,6 +234,7 @@ class PhotosModel(object):
             width, height = self._border_image.size
             self._image_widget.replace_border_image(
                 self._border_image.tostring(), width, height)
+            self._is_saved = False
         else:
             self._border_image = None
             self._image_widget.hide_border_image()
