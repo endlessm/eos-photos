@@ -150,7 +150,7 @@ class PhotosModel(object):
         names_and_thumbs = []
         distort_no = 0
         for name in self._distortions_dict.keys():
-            names_and_thumbs.append((name, "border_" + str(distort_no) + ".png"))
+            names_and_thumbs.append((name, "distort_" + str(distort_no) + ".jpg"))
             distort_no += 1
         return names_and_thumbs
 
