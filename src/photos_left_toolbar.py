@@ -1,7 +1,8 @@
 import collections
+import cairo
+from gi.repository import Gtk, Gdk, GdkPixbuf
 
-from gi.repository import Gtk
-from widgets.option_list import OptionList
+from widgets.toolbar_separator import ToolbarSeparator
 
 
 class PhotosLeftToolbar(Gtk.VBox):
@@ -33,7 +34,7 @@ class PhotosLeftToolbar(Gtk.VBox):
             expanded_callback=lambda: self.change_category("borders"))
 
         for category in self._categories.values():
-            self.pack_start(category, expand=False, fill=True, padding=20)
+            self.pack_start(category, expand=False, fill=True, padding=0)
 
         self.set_vexpand(True)
         self.show_all()
@@ -47,9 +48,9 @@ class PhotosLeftToolbar(Gtk.VBox):
                 category.deselect()
 
 
-class CatagoryScrollWindow(Gtk.ScrolledWindow):
-    def __init__(self, **kw):
-        super(CatagoryScrollWindow, self).__init__(**kw)
+class CategoryScrollWindow(Gtk.ScrolledWindow):
+    def __init__(self, images_path="", **kw):
+        super(CategoryScrollWindow, self).__init__(**kw)
 
     def do_get_preferred_height(self):
         children = self.get_children()
@@ -60,6 +61,40 @@ class CatagoryScrollWindow(Gtk.ScrolledWindow):
         return min_height, natural_height
 
 
+class ScrollWindowDropShadow(Gtk.Widget):
+    def __init__(self, images_path="", **kw):
+        super(ScrollWindowDropShadow, self).__init__(**kw)
+        self._top_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_top-shadow.png")
+        self._top_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_black.png")
+        self._bottom_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_bottom-shadow.png")
+        self._bottom_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_white.png")
+        self.set_has_window(False)
+        self.set_app_paintable(True)
+        self.connect('draw', self._draw)
+        self.connect_after('realize', self._realize)
+
+    def _realize(self, w):
+        # Big old hack to keep from getting input in this widget. Sets the Gdk
+        # input region to be none so events will propagate down.
+        # set_child_input_shapes set this widget to have the input region of
+        # its children and since it has no children this is an empty area.
+        # Other input region methods are not introspectable.
+        window = self.get_window()
+        window.set_child_input_shapes()
+
+    def _draw(self, w, cr):
+        alloc = self.get_allocation()
+        Gdk.cairo_set_source_pixbuf(cr, self._top_shadow, 0, 0)
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._top_separator, 0, 0)
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._bottom_shadow, 0, alloc.height - self._bottom_shadow.get_height())
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._bottom_separator, 0, alloc.height - self._bottom_separator.get_height())
+        cr.paint()
+        return True
+
+
 class Category(Gtk.Expander):
     def __init__(self, widget, images_path="", label="", expanded_callback=None, **kw):
         super(Category, self).__init__(**kw)
@@ -68,38 +103,34 @@ class Category(Gtk.Expander):
         self._images_path = images_path
         self._title_image = Gtk.Image.new_from_file(images_path + "icon_effects_hover.png")
         self._title_label = Gtk.Label(label=label, name="filters-title")
-        self._title_box = Gtk.HBox(homogeneous=False, spacing=0)
-        self._title_box.pack_start(self._title_image, expand=False, fill=False, padding=0)
-        self._title_box.pack_start(self._title_label, expand=False, fill=False, padding=2)
-        self.set_label_widget(self._title_box)
-        #self._title_allign = Gtk.HBox(homogeneous=False, spacing=0)
-        #self._title_allign.pack_start(borders_title_box, expand=False, fill=False, padding=10)
+        self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
+        self._hbox.pack_start(self._title_image, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._title_label, expand=False, fill=False, padding=0)
+
+        self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
+        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
+        self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=8)
+        self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
+        self.set_label_widget(self._vbox)
 
         self._widget = widget
-        self._scroll_area = CatagoryScrollWindow(name="filters-scroll-area")
+        self._scroll_area = CategoryScrollWindow(name="filters-scroll-area")
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self._scroll_area.add_with_viewport(self._widget)
-
-        # self._separator = Gtk.Separator.new(Gtk.Orientation.HORIZONTAL)
-        # self.add(self._separator)
-
-        # self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
-        # self._drop_shadow.set_halign(Gtk.Align.CENTER)
-        # self._drop_shadow.set_valign(Gtk.Align.START)
-        # self._overlay = Gtk.Overlay()
-        # self._overlay.add(self._scroll_area)
-        # self._overlay.add_overlay(self._drop_shadow)
+        self._drop_shadow = ScrollWindowDropShadow(images_path=images_path)
+        self._overlay = Gtk.Overlay()
+        self._overlay.add(self._scroll_area)
+        self._overlay.add_overlay(self._drop_shadow)
+        self.add(self._overlay)
 
         self.connect('notify::expanded', self.expanded_cb)
-        self.set_resize_toplevel(True)
 
     def expanded_cb(self, widget, event):
         if self.get_expanded():
-            # self._title_box.select()
-            self.add(self._scroll_area)
+            self._vbox.remove(self._separator)
             self._expanded_callback()
         else:
-            self.remove(self._scroll_area)
+            self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
             # self._title_box.deselect()
         self.show_all()
 

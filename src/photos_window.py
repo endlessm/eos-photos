@@ -112,8 +112,8 @@ class PhotosWindow(Gtk.Window):
     def _resize_to_fullscreen(self, screen):
         # When anything about the Gdk.Screen or Gdk.Monitor changes, resize the
         # window to fullscreen.
-        width, height = self._get_screen_dimensions()
-        # width, height = 800, 600
+        # width, height = self._get_screen_dimensions()
+        width, height = 800, 600
         self.set_default_size(width, height)
         self.resize(width, height)
         # Might be a better way to do this. But for now, this set_size_request

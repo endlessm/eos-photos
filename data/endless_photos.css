@@ -1,9 +1,26 @@
 * {
+    /*defaults*/
     engine: unico;
+    -GtkWidget-focus-line-width: 0px;
+    -GtkExpander-expander-size: 0px;
+    -GtkExpander-focus-line-width: 0px;
+    -GtkExpander-expander-spacing: 0px;
+    -GtkExpander-focus-padding: 0px;
 }
 
 GtkExpander:hover {
     background-color: transparent;
+}
+
+GtkExpander {
+    -unico-border-gradient: none;
+    -unico-inner-stroke-gradient: none;
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
 }
 
 GtkButton {
@@ -90,14 +107,12 @@ GtkOverlay {
 #email-button,
 #close-button,
 #minimize-button {
-    -GtkWidget-focus-line-width: 0;
     background-color: transparent;
     background-image: none;
     border-width: 0;
 }
 
 #open-photos-button {
-    -GtkWidget-focus-line-width: 0;
     border-width: 1px;
     -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
                                      from (#5c5c5c),
