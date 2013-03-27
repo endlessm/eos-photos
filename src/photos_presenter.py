@@ -22,6 +22,9 @@ class PhotosPresenter(object):
         self._view.set_filters(filters)
         borders = self._model.get_border_names_and_thumbnails()
         self._view.set_borders(borders)
+
+        distortions = self._model.get_distortion_names_and_thumbnails()
+        self._view.set_distortions(distortions)
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
@@ -91,6 +94,10 @@ class PhotosPresenter(object):
     def _do_filter_select(self, filter_name):
         self._model.set_filter(filter_name)
         self._view.update_async(lambda: self._view.select_filter(filter_name))
+
+    def _do_distort(self, distort_name):
+        self._model.set_distortion(distort_name)
+        self._view.update_async(lambda: self._view.select_distortion(distort_name))
 
     def _do_open(self):
         filename = self._view.show_open_dialog()
@@ -182,8 +189,16 @@ class PhotosPresenter(object):
         self._run_locking_task(self._do_filter_select, (filter_name,))
 
     def on_border_select(self, border_name):
+        if not self._model.is_open():
+            return
         self._model.set_border(border_name)
         self._view.select_border(border_name)
+
+    def on_distortion_select(self, distort_name):
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_distort, (distort_name,))
+        
 
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...

@@ -8,6 +8,8 @@ import colorsys
 from curve import Curve
 from curve import CurveManager
 
+from distortions import Distortion
+
 """
 Pretty much all the image processing functionality we coded right now. Maybe
 someday split into filters, basic tools, etc.
@@ -158,10 +160,18 @@ def lumo(image):
 def trains(image):
     image = apply_curve(image, "trains.acv")
     return vignette(image, "heavy_vignette.png")
-    return image
 
 def colorful(image):
     image = apply_contrast(image, 1.3)
     image = color_enhance(image, 1.4)
     image = vignette(image, "light_vignette.png")
     return image
+
+def distortion(image, disort_name):
+    if disort_name == "NONE":
+        return image
+    image_array = numpy.array(image)
+    distortion = Distortion(image_array)
+    result = distortion.apply(disort_name)
+    return Image.fromarray(result, 'RGB')
+    
