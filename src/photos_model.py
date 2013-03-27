@@ -21,6 +21,7 @@ class PhotosModel(object):
         self._borders_path = borders_path
         self._source_image = None
         self._filtered_image = None
+        self._distorted_image = None
         self._adjusted_image = None
         self._image_widget = PhotosImageWidget()
 
@@ -77,10 +78,12 @@ class PhotosModel(object):
 
     def _clear_options(self):
         self._filter = self._get_default_filter()
+        self._distort = self._get_default_distortion()
         self._brightness = 1.0
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_filter = ""
+        self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
 
@@ -192,13 +195,9 @@ class PhotosModel(object):
         self._update_border_image()
 
     def set_distortion(self, distort_name):
-        im = ImageTools.distortion(self._filtered_image, distort_name)
-        self._adjusted_image = im
-        # update widget
-        width, height = self._adjusted_image.size
-        self._image_widget.replace_base_image(
-            self._adjusted_image.tostring(), width, height)
-        self._is_saved = False
+        self._distort = distort_name
+        self._update_base_image()
+
 
     def _update_base_image(self):
         if (not self.is_open()):
@@ -211,12 +210,19 @@ class PhotosModel(object):
                 self._filtered_image = self._filter_dict[self._filter](self._source_image)
             else:
                 print "Filter not supported!"
+
+        if not self._distort == self._last_distort or filtered:
+            self._distorted_image = ImageTools.distortion(self._filtered_image, self._distort)
+            distorted = True
+            self._last_distort = self._distort
+
         adjusted = not (self._last_brightness == self._brightness
                         and self._last_contrast == self._contrast
                         and self._last_saturation == self._saturation)
-        if filtered or adjusted:
+
+        if filtered or adjusted or distorted:
             # adjust image
-            im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
+            im = ImageTools.apply_contrast(self._distorted_image, self._contrast)
             im = ImageTools.apply_brightness(im, self._brightness)
             im = ImageTools.apply_saturation(im, self._saturation)
             self._adjusted_image = im
