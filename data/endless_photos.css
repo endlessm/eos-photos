@@ -70,14 +70,17 @@ GtkOverlay {
     color: #ffffff;
 }
 
-#filters-title {
+#category-label {
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
     font-size: 13;
-    color: #ffffff;
+    color: #999999;
 }
 
+#category-label:hover {
+    color: #ffffff;
+}
 
 #save-button GtkLabel,
 #share-button GtkLabel,

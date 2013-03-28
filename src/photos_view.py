@@ -3,9 +3,7 @@ from gi.repository import Gtk, Gdk, GLib
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
-from photos_adjustment_toolbar import PhotosAdjustmentToolbar
-from photos_border_toolbar import PhotosBorderToolbar
-from photos_filter_toolbar import PhotosFilterToolbar
+from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 
@@ -17,13 +15,12 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, images_path=""):
-        self._adjustments = PhotosAdjustmentToolbar(images_path=images_path)
-        self._borders = PhotosBorderToolbar(images_path=images_path)
-        self._filters = PhotosFilterToolbar(images_path=images_path)
+        self._adjustments = AdjustmentToolbar(images_path=images_path)
+        self._filters = FilterToolbar(images_path=images_path)
+        self._borders = BorderToolbar(images_path=images_path)
+        categories = [self._adjustments, self._filters, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
-                                               adjustments=self._adjustments,
-                                               borders=self._borders,
-                                               filters=self._filters)
+                                               categories=categories)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
@@ -65,16 +62,16 @@ class PhotosView(object):
         self._window.set_image_fullscreen(fullscreen)
 
     def set_filters(self, filters):
-        self._filters.set_filters(filters)
+        self._filters.set_options(filters)
 
     def set_borders(self, borders):
-        self._borders.set_borders(borders)
+        self._borders.set_options(borders)
 
     def select_filter(self, filter_name):
-        self._filters.select_filter(filter_name)
+        self._filters.select(filter_name)
 
     def select_border(self, border_name):
-        self._borders.select_border(border_name)
+        self._borders.select(border_name)
 
     def set_brightness_slider(self, value):
         self._adjustments.set_brightness_slider(value)

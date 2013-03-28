@@ -9,33 +9,15 @@ class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, images_path="", adjustments=None, borders=None, filters=None, **kw):
+    def __init__(self, images_path="", categories=[], **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
-        self._categories = collections.OrderedDict()
-
-        filter_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
-        filter_align.add(filters)
-        self._categories["filters"] = Category(filter_align,
-            images_path=self._images_path, label=_("FILTERS"),
-            expanded_callback=lambda: self.change_category("filters"))
-
-        adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0,
-            top_padding=10, bottom_padding=10, left_padding=15, right_padding=15)
-        adjustments_align.add(adjustments)
-        self._categories["adjustments"] = Category(adjustments_align, 
-            images_path=self._images_path, label=_("ADJUST"),
-            expanded_callback=lambda: self.change_category("adjustments"))
-
-        border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
-        border_align.add(borders)
-        self._categories["borders"] = Category(border_align,
-            images_path=self._images_path, label=_("BORDERS"),
-            expanded_callback=lambda: self.change_category("borders"))
-
-        for category in self._categories.values():
-            self.pack_start(category, expand=False, fill=True, padding=0)
+        self._categories = {}
+        for category in categories:
+            label = category.get_label()
+            self._categories[label] = CategoryExpander(images_path, category)
+            self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
 
         self.set_vexpand(True)
         self.show_all()
@@ -43,9 +25,9 @@ class PhotosLeftToolbar(Gtk.VBox):
     def set_presenter(self, presenter):
         self._presenter = presenter
 
-    def change_category(self, category_name):
-        for name, category in self._categories.items():
-            if not name == category_name:
+    def change_category(self, category_label):
+        for label, category in self._categories.items():
+            if not label == category_label:
                 category.deselect()
 
 
@@ -96,17 +78,19 @@ class ScrollWindowDropShadow(Gtk.Widget):
         return True
 
 
-class Category(Gtk.Expander):
-    def __init__(self, widget, images_path="", label="", expanded_callback=None, **kw):
-        super(Category, self).__init__(**kw)
+class CategoryExpander(Gtk.Expander):
+    def __init__(self, images_path, widget, **kw):
+        super(CategoryExpander, self).__init__(**kw)
 
-        self._expanded_callback = expanded_callback
         self._images_path = images_path
-        self._title_image = Gtk.Image.new_from_file(images_path + "icon_effects_hover.png")
-        self._title_label = Gtk.Label(label=label, name="filters-title")
+        self._normal_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_normal_icon_path())
+        self._hover_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_hover_icon_path())
+
+        self._category_icon = Gtk.Image.new_from_pixbuf(self._normal_icon_pixbuf)
+        self._category_label = Gtk.Label(label=widget.get_label(), name="category-label")
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._title_image, expand=False, fill=False, padding=9)
-        self._hbox.pack_start(self._title_label, expand=False, fill=False, padding=0)
+        self._hbox.pack_start(self._category_icon, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
 
         self._up_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-up.png")
         self._down_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-down.png")
@@ -138,18 +122,24 @@ class Category(Gtk.Expander):
     def _on_expanded(self, widget, event):
         if self.get_expanded():
             self._vbox.remove(self._separator)
-            self._expanded_callback()
             self._arrow.set_from_pixbuf(self._up_pixbuf)
+            self.get_parent().change_category(self._widget.get_label())
         else:
             self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
             self._arrow.set_from_pixbuf(self._down_pixbuf)
         self.show_all()
 
     def _on_mouse_enter(self, widget, event):
+        self._category_icon.set_from_pixbuf(self._hover_icon_pixbuf)
+        # flags = self._category_label.get_state_flags() | Gtk.StateFlags.PRELIGHT
+        # self._category_label.set_state_flags(flags)
         self._hbox.pack_end(self._arrow, expand=False, fill=False, padding=8)
         self.show_all()
 
     def _on_mouse_leave(self, widget, event):
+        self._category_icon.set_from_pixbuf(self._normal_icon_pixbuf)
+        # flags = Gtk.StateFlags(self._category_label.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
+        # self._category_label.set_state_flags(flags)
         self._hbox.remove(self._arrow)
         self.show_all()
 

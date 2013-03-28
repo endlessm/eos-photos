@@ -81,12 +81,6 @@ class PhotosWindow(Gtk.Window):
         if event.keyval == Gdk.KEY_Escape and self.fullscreen:
             self.set_image_fullscreen(False)
 
-    def minimize(self):
-        self.iconify()
-
-    def close(self):
-        self.destroy()
-
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
             self._notebook.set_current_page(1)
