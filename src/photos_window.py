@@ -1,5 +1,8 @@
 import cairo
+import math
+
 from gi.repository import Gtk, Gdk, GdkPixbuf
+from drop_shadow_alignment import DropShadowAlignment
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
@@ -7,6 +10,7 @@ class PhotosWindow(Gtk.Window):
     TOOLBAR_WIDTH = 180
     PHOTO_HORIZ_PADDING = 35
     PHOTO_VERT_PADDING = 35
+    DROP_SHADOW_WIDTH = 7
     """
     The main window of the photo application. This class handles fullscreen,
     resizing and packs all the toolbars along with with image viewer into its
@@ -26,15 +30,18 @@ class PhotosWindow(Gtk.Window):
         self._left_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
         self._right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
 
-        self._normal_attach = Gtk.Alignment(
-            left_padding=PhotosWindow.PHOTO_VERT_PADDING, right_padding=PhotosWindow.PHOTO_VERT_PADDING,
-            top_padding=PhotosWindow.PHOTO_VERT_PADDING, bottom_padding=PhotosWindow.PHOTO_VERT_PADDING)
-        # self._normal_attach.set_visible_window(False)
-        self._normal_attach.add(image_container)
-        self._normal_attach.show()
+        self._normal_attach = DropShadowAlignment(
+            shadowed_widget=self._image_container.get_child(), left_padding=PhotosWindow.PHOTO_HORIZ_PADDING,
+            right_padding=PhotosWindow.PHOTO_HORIZ_PADDING, top_padding=PhotosWindow.PHOTO_VERT_PADDING,
+            bottom_padding=PhotosWindow.PHOTO_VERT_PADDING)
+
+        self._normal_attach.add(self._image_container)
+
+        # Send a draw signal to due alignment widget to make sure it draws its drop shadow
+        # when the size allocation occurs and never before the allocation.
+        self._image_container.connect("size-allocate", lambda w, e: self._normal_attach.queue_draw())
 
         self._fullscreen_attach = Gtk.EventBox(name="fullscreen-back")
-        self._fullscreen_attach.show()
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
         self._hbox.pack_start(
@@ -42,12 +49,10 @@ class PhotosWindow(Gtk.Window):
         self._hbox.pack_start(
             self._normal_attach, expand=True, fill=True, padding=0)
         self._hbox.pack_end(right_toolbar, expand=False, fill=True, padding=0)
-        self._hbox.show()
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
         self._vbox.pack_start(self._photos_top_toolbar, expand=False, fill=False, padding=0)
         self._vbox.pack_start(self._hbox, expand=True, fill=True, padding=0)
-        self._vbox.show()
 
         self._notebook = Gtk.Notebook()
         self._notebook.set_show_tabs(False)
@@ -55,9 +60,10 @@ class PhotosWindow(Gtk.Window):
         self._notebook.append_page(self._splash_screen, None)
         self._notebook.append_page(self._vbox, None)
         self._notebook.append_page(self._fullscreen_attach, None)
-        self._notebook.show()
 
         self.add(self._notebook)
+
+        self._border_image = GdkPixbuf.Pixbuf.new_from_file(images_path + "btn_OpenPhoto_down.png")
 
         self._back_image = GdkPixbuf.Pixbuf.new_from_file(images_path + "background-tile.jpg")
         self.connect('draw', self._draw)
@@ -111,7 +117,7 @@ class PhotosWindow(Gtk.Window):
         # When anything about the Gdk.Screen or Gdk.Monitor changes, resize the
         # window to fullscreen.
         width, height = self._get_screen_dimensions()
-        # width, height = 800, 600
+        #width, height = 800, 600
         self.set_default_size(width, height)
         self.resize(width, height)
         # Might be a better way to do this. But for now, this set_size_request

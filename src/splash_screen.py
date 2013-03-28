@@ -58,7 +58,5 @@ class SplashScreen(Gtk.EventBox):
 
 		self.add(self._splash_vbox)
 
-		self.show_all()
-
 	def set_presenter(self, presenter):
 		self._presenter = presenter

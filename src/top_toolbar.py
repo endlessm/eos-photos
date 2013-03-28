@@ -33,8 +33,6 @@ class TopToolbar(Gtk.EventBox):
 
         self.add(self._hbox)
 
-        self.show_all()
-
     def set_presenter(self, presenter):
         self._presenter = presenter
 

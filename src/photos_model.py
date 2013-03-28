@@ -197,7 +197,13 @@ class PhotosModel(object):
     def set_distortion(self, distort_name):
         self._distort = distort_name
         self._update_base_image()
-
+        im = ImageTools.distortion(self._filtered_image, distort_name)
+        self._adjusted_image = im
+        # update widget
+        width, height = self._adjusted_image.size
+        self._image_widget.replace_base_image(
+            self._adjusted_image.tostring(), width, height)
+        self._is_saved = False
 
     def _update_base_image(self):
         if (not self.is_open()):

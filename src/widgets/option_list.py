@@ -85,7 +85,6 @@ class OptionList(Gtk.VBox):
             clicked_callback=clicked_callback)
         self._icons[label] = option
         self.pack_start(option, expand=False, fill=False, padding=0)
-        self.show_all()
 
     def select_option(self, label_name):
         for name, icon in self._icons.items():
