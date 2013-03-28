@@ -19,9 +19,9 @@ class PhotosTopToolbar(TopToolbar):
                                             name="open-photos-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())
 
-        self._left_side = Gtk.Alignment(top_padding=4, bottom_padding=3)
+        self._left_side = Gtk.Alignment(top_padding=0, bottom_padding=0)
         self._left_side.add(self._open_button)
 
-        self.get_toolbar_container().pack_start(self._left_side, expand=False, fill=False, padding=7)
+        self.get_toolbar_container().pack_start(self._left_side, expand=False, fill=False, padding=0)
 
         self.show_all()

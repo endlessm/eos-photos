@@ -161,44 +161,41 @@ GtkOverlay {
 }
 
 #open-photos-button {
-    border-width: 1px;
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#5c5c5c),
-                                     to (rgba(1,2,2,0.34)));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #484848),
-                                     color-stop(1.0, #303030));
+    padding: 7px 0px 7px 0px;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    border-width: 0;
 }
 
-#open-photos-button GtkLabel {
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12;
-    text-shadow: 0 -1 rgba(0,0,0,0.75);
-    color: #787878;
-}
-
-#open-photos-button GtkLabel:hover {
-    color: #888888;
+#open-photos-button GtkImage {
+    padding: 0px 3px 0px 9px;
 }
 
 #open-photos-button:hover {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#676767),
-                                     to (rgba(1,2,2,0.4)));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #565656),
-                                     color-stop(1.0, #343434));
+    background-image: url("../images/topbar_OpenPhoto_hover_bg.png");
 }
 
 #open-photos-button:active {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#191919),
-                                     to (#282828));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (#1a1a1a),
-                                     to (#292929));
+    background-image: url("../images/topbar_OpenPhoto_down_bg.png");
+}
+
+#open-photos-button GtkLabel {
+    padding: 0px 10px 0px 0px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10;
+    text-shadow: 0 -1 rgba(0,0,0,0.75);
+    color: #999999;
+}
+
+#open-photos-button GtkLabel:hover {
+    color: #ffffff;
+}
+
+#open-photos-button GtkLabel:active {
+    color: #999999;
 }
 
 #filters-scroll-area > GtkViewport {
