@@ -1,9 +1,26 @@
 * {
+    /*defaults*/
     engine: unico;
+    -GtkWidget-focus-line-width: 0px;
+    -GtkExpander-expander-size: 0px;
+    -GtkExpander-focus-line-width: 0px;
+    -GtkExpander-expander-spacing: 0px;
+    -GtkExpander-focus-padding: 0px;
 }
 
 GtkExpander:hover {
     background-color: transparent;
+}
+
+GtkExpander {
+    -unico-border-gradient: none;
+    -unico-inner-stroke-gradient: none;
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
 }
 
 GtkButton {
@@ -65,14 +82,17 @@ GtkOverlay {
     color: #ffffff;
 }
 
-#filters-title {
+#category-label {
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
     font-size: 13;
-    color: #ffffff;
+    color: #999999;
 }
 
+#category-label:hover {
+    color: #ffffff;
+}
 
 #save-button GtkLabel,
 #share-button GtkLabel,
@@ -102,7 +122,6 @@ GtkOverlay {
 #email-button,
 #close-button,
 #minimize-button {
-    -GtkWidget-focus-line-width: 0;
     background-color: transparent;
     background-image: none;
     border-width: 0;
@@ -142,45 +161,41 @@ GtkOverlay {
 }
 
 #open-photos-button {
-    -GtkWidget-focus-line-width: 0;
-    border-width: 1px;
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#5c5c5c),
-                                     to (rgba(1,2,2,0.34)));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #484848),
-                                     color-stop(1.0, #303030));
+    padding: 7px 0px 7px 0px;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    border-width: 0;
 }
 
-#open-photos-button GtkLabel {
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12;
-    text-shadow: 0 -1 rgba(0,0,0,0.75);
-    color: #787878;
-}
-
-#open-photos-button GtkLabel:hover {
-    color: #888888;
+#open-photos-button GtkImage {
+    padding: 0px 3px 0px 9px;
 }
 
 #open-photos-button:hover {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#676767),
-                                     to (rgba(1,2,2,0.4)));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #565656),
-                                     color-stop(1.0, #343434));
+    background-image: url("../images/topbar_OpenPhoto_hover_bg.png");
 }
 
 #open-photos-button:active {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#191919),
-                                     to (#282828));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (#1a1a1a),
-                                     to (#292929));
+    background-image: url("../images/topbar_OpenPhoto_down_bg.png");
+}
+
+#open-photos-button GtkLabel {
+    padding: 0px 10px 0px 0px;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10;
+    text-shadow: 0 -1 rgba(0,0,0,0.75);
+    color: #999999;
+}
+
+#open-photos-button GtkLabel:hover {
+    color: #ffffff;
+}
+
+#open-photos-button GtkLabel:active {
+    color: #999999;
 }
 
 #filters-scroll-area > GtkViewport {
