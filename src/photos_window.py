@@ -1,7 +1,6 @@
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
-
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
     # Constants
@@ -13,13 +12,14 @@ class PhotosWindow(Gtk.Window):
     resizing and packs all the toolbars along with with image viewer into its
     allocated space.
     """
-    def __init__(self, images_path="", top_toolbar=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
+    def __init__(self, images_path="", splash_screen=None, photos_top_toolbar=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
         kw.setdefault('decorated', False)
         kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
         kw.setdefault('has-resize-grip', False)
         Gtk.Window.__init__(self, **kw)
         self._image_container = image_container
-        self._top_toolbar = top_toolbar
+        self._splash_screen = splash_screen
+        self._photos_top_toolbar = photos_top_toolbar
         self._left_toolbar = left_toolbar
         self._right_toolbar = right_toolbar
 
@@ -45,13 +45,14 @@ class PhotosWindow(Gtk.Window):
         self._hbox.show()
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(top_toolbar, expand=False, fill=False, padding=0)
+        self._vbox.pack_start(self._photos_top_toolbar, expand=False, fill=False, padding=0)
         self._vbox.pack_start(self._hbox, expand=True, fill=True, padding=0)
         self._vbox.show()
 
         self._notebook = Gtk.Notebook()
         self._notebook.set_show_tabs(False)
         self._notebook.set_show_border(False)
+        self._notebook.append_page(self._splash_screen, None)
         self._notebook.append_page(self._vbox, None)
         self._notebook.append_page(self._fullscreen_attach, None)
         self._notebook.show()
@@ -81,13 +82,16 @@ class PhotosWindow(Gtk.Window):
         if event.keyval == Gdk.KEY_Escape and self.fullscreen:
             self.set_image_fullscreen(False)
 
+    def set_photo_editor_active(self):
+        self._notebook.set_current_page(self._notebook.page_num(self._vbox))
+
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
-            self._notebook.set_current_page(1)
+            self._notebook.set_current_page(self._notebook.page_num(self._fullscreen_attach))
             self._image_container.reparent(self._fullscreen_attach)
             self._image_container.set_fullscreen_mode(True)
         else:
-            self._notebook.set_current_page(0)
+            self._notebook.set_current_page(self._notebook.page_num(self._vbox))
             self._image_container.reparent(self._normal_attach)
             self._image_container.set_fullscreen_mode(False)
 
@@ -114,3 +118,6 @@ class PhotosWindow(Gtk.Window):
         # was the best way I could figure out to make sure the window does not
         # shrink to its contents.
         self.set_size_request(width, height)
+
+    def set_presenter(self, presenter):
+        self._presenter = presenter

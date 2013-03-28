@@ -77,6 +77,9 @@ class BorderToolbar(OptionListToolbar):
     def get_hover_icon_path(self):
         return "icon_border_hover.png"
 
+    def get_thumbnail_prefix(self):
+        return "border_thumbnails/"
+
     def clicked_callback(self, option_name):
         self._presenter.on_border_select(option_name)
 
@@ -103,6 +106,28 @@ class FilterToolbar(OptionListToolbar):
     def clicked_callback(self, option_name):
         self._presenter.on_filter_select(option_name)
 
+
+class DistortToolbar(OptionListToolbar):
+    """
+    A widget showing a list of filters. Part of left toolbar.
+    """
+    def __init__(self, **kw):
+        super(DistortToolbar, self).__init__(**kw)
+
+    def get_label(self):
+        return _("Distortions")
+
+    def get_normal_icon_path(self):
+        return "icon_deform_normal.png"
+
+    def get_hover_icon_path(self):
+        return "icon_deform_hover.png"
+
+    def get_thumbnail_prefix(self):
+        return "distortion_thumbnails/"
+
+    def clicked_callback(self, option_name):
+        self._presenter.on_distortion_select(option_name)
 
 class AdjustmentToolbar(CategoryToolbar):
     """

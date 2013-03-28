@@ -22,6 +22,9 @@ class PhotosPresenter(object):
         self._view.set_filters(filters)
         borders = self._model.get_border_names_and_thumbnails()
         self._view.set_borders(borders)
+
+        distortions = self._model.get_distortion_names_and_thumbnails()
+        self._view.set_distortions(distortions)
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
@@ -35,6 +38,7 @@ class PhotosPresenter(object):
         self._view.select_border(self._model.get_border())
         # Call slider release to avoid infinite loop
         self.on_slider_release()
+        self._view.set_photo_editor_active()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
@@ -67,29 +71,32 @@ class PhotosPresenter(object):
         # Would take longer to upload to facebook/gmail.
         return tempfile.mkstemp('.jpg')[1].lower()
 
-    def _do_post_to_facebook(self, message):
-        success = False
-        message = ""
+    def _do_post_to_facebook(self, photo_message):
+        success = True
         if not self._facebook_post.is_user_loged_in():
-            success, message = self._facebook_post.fb_login()
+            success, err_message = self._facebook_post.fb_login()
         if success:
             filename = self._get_image_tempfile()
             self._model.save(filename)
-            success, message = self._facebook_post.post_image(filename, message)
+            success, message = self._facebook_post.post_image(filename, photo_message)
             os.remove(filename)
         if not success:
-            self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
+            self._view.update_async(lambda: self._view.show_message(text=_(err_message), warning=True))
 
     def _do_send_email(self, name, recipient, message):
         filename = self._get_image_tempfile()
         self._model.save(filename)
         if not share.emailer.email_photo(name, recipient, message, filename):
-            self._view.update_async(lambda: self._view.show_message(text="Email failed.", warning=True))
+            self._view.update_async(lambda: self._view.show_message(text=_("Email failed."), warning=True))
         os.remove(filename)
 
     def _do_filter_select(self, filter_name):
         self._model.set_filter(filter_name)
         self._view.update_async(lambda: self._view.select_filter(filter_name))
+
+    def _do_distort(self, distort_name):
+        self._model.set_distortion(distort_name)
+        self._view.update_async(lambda: self._view.select_distortion(distort_name))
 
     def _do_open(self):
         filename = self._view.show_open_dialog()
@@ -181,8 +188,16 @@ class PhotosPresenter(object):
         self._run_locking_task(self._do_filter_select, (filter_name,))
 
     def on_border_select(self, border_name):
+        if not self._model.is_open():
+            return
         self._model.set_border(border_name)
         self._view.select_border(border_name)
+
+    def on_distortion_select(self, distort_name):
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_distort, (distort_name,))
+        
 
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...

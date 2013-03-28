@@ -21,12 +21,14 @@ class PhotosModel(object):
         self._borders_path = borders_path
         self._source_image = None
         self._filtered_image = None
+        self._distorted_image = None
         self._adjusted_image = None
         self._image_widget = PhotosImageWidget()
 
         self._is_saved = True
         self._build_filter_dict()
         self._build_border_dict()
+        self._build_distortions_dict()
         self._clear_options()
 
     def _build_filter_dict(self):
@@ -59,18 +61,29 @@ class PhotosModel(object):
             (_("HORIZONTAL BARS"), "horizontal_bars.png"),
             (_("SIDE BARS"), "vertical_bars.png"),
             (_("TEST"), "border-1.png"),
-            (_("TEST2"), "border-2.png"),
-            (_("TEST3"), "border-3.png"),
-            (_("TEST4"), "border-4.png"),
-            (_("TEST5"), "border-5.png")
+            (_("CRAYON"), "frame_3x2_crayon.png"),
+            (_("GRUNGE"), "frame_3x2_grunge.png"),
+            (_("SPRAY"), "frame_3x2_spray.png"),
+            (_("BRUSH"), "frame_3x2_brush.png")
+        ])
+
+    def _build_distortions_dict(self):
+        self._distortions_dict = collections.OrderedDict([
+            (_("NONE"), None),
+            (_("FISH EYE"), "horizontal_bars.png"),
+            (_("BULGE"), "vertical_bars.png"),
+            (_("PINCH"), "border-1.png"),
+            (_("SWIRL"), "frame_3x2_crayon.png")
         ])
 
     def _clear_options(self):
         self._filter = self._get_default_filter()
+        self._distort = self._get_default_distortion()
         self._brightness = 1.0
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_filter = ""
+        self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
 
@@ -79,6 +92,9 @@ class PhotosModel(object):
 
     def _get_default_border(self):
         return self._border_dict.keys()[0]
+
+    def _get_default_distortion(self):
+        return self._distortions_dict.keys()[0]
 
     def get_image_widget(self):
         return self._image_widget
@@ -127,8 +143,18 @@ class PhotosModel(object):
 
     def get_border_names_and_thumbnails(self):
         names_and_thumbs = []
+        border_no = 0
         for name in self._border_dict.keys():
-            names_and_thumbs.append((name, "Filters_Example-Picture_01.jpg"))
+            names_and_thumbs.append((name, "border_" + str(border_no) + ".png"))
+            border_no += 1
+        return names_and_thumbs
+
+    def get_distortion_names_and_thumbnails(self):
+        names_and_thumbs = []
+        distort_no = 0
+        for name in self._distortions_dict.keys():
+            names_and_thumbs.append((name, "distort_" + str(distort_no) + ".jpg"))
+            distort_no += 1
         return names_and_thumbs
 
     def get_contrast(self):
@@ -166,14 +192,12 @@ class PhotosModel(object):
         if (not self.is_open()):
             return
         self._border = border_name
-        filename = self._border_dict[border_name]
-        if filename is not None:
-            self._border_image = Image.open(self._borders_path + filename).resize(
-                self._source_image.size, Image.BILINEAR)
-        else:
-            self._border_image = None
-
         self._update_border_image()
+
+    def set_distortion(self, distort_name):
+        self._distort = distort_name
+        self._update_base_image()
+
 
     def _update_base_image(self):
         if (not self.is_open()):
@@ -186,12 +210,19 @@ class PhotosModel(object):
                 self._filtered_image = self._filter_dict[self._filter](self._source_image)
             else:
                 print "Filter not supported!"
+
+        if not self._distort == self._last_distort or filtered:
+            self._distorted_image = ImageTools.distortion(self._filtered_image, self._distort)
+            distorted = True
+            self._last_distort = self._distort
+
         adjusted = not (self._last_brightness == self._brightness
                         and self._last_contrast == self._contrast
                         and self._last_saturation == self._saturation)
-        if filtered or adjusted:
+
+        if filtered or adjusted or distorted:
             # adjust image
-            im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
+            im = ImageTools.apply_contrast(self._distorted_image, self._contrast)
             im = ImageTools.apply_brightness(im, self._brightness)
             im = ImageTools.apply_saturation(im, self._saturation)
             self._adjusted_image = im
@@ -209,6 +240,7 @@ class PhotosModel(object):
             width, height = self._border_image.size
             self._image_widget.replace_border_image(
                 self._border_image.tostring(), width, height)
+            self._is_saved = False
         else:
             self._border_image = None
             self._image_widget.hide_border_image()
