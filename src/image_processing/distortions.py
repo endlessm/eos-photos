@@ -19,7 +19,7 @@ class Distortion:
     def pinch(self, radius_d):
         return numpy.sqrt(radius_d)  
 
-    def radius_distort(self, xy, width, height, radius_func):
+    def radius_distort(self, xy, width, height, radius_func, zoom_factor):
         x, y = xy.T
 
         # scale image down to -1 to 1 scale
@@ -39,10 +39,11 @@ class Distortion:
 
         x = x0 + (unit_x * radius_u)
         y = y0 + (unit_y * radius_u)
-
+    
         #zoom zoom!
-        x /= 1.5
-        y /= 1.5
+        x /= zoom_factor
+        y /= zoom_factor
+
         xy[..., 0] = (x + 1) * width / 2
         xy[..., 1] = (y + 1) * height / 2 
 
@@ -60,12 +61,15 @@ class Distortion:
                 radius=radius, order=1)
         elif distort_name == "FISH EYE":
             warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.8, radius_d)
+            warp_args['zoom_factor'] = 1.5
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "BULGE":
             warp_args['radius_func'] = lambda radius_d: self.bulge(radius_d)
+            warp_args['zoom_factor'] = 1
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "PINCH":
             warp_args['radius_func'] = lambda radius_d: self.pinch(radius_d)
+            warp_args['zoom_factor'] = 1
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         else:
             result = self._image_array

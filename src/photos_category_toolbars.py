@@ -163,7 +163,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._vbox.pack_start(self._contrast_slider, False, False, 0)
 
         self._saturation_label = Gtk.Label(name="filter-label", label="Saturation")
-        saturation_adjust = Gtk.Adjustment(1.0, 0.0, 1.0, 0.01, 0, 0)
+        saturation_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._saturation_slider = Gtk.HScale(adjustment=saturation_adjust, draw_value=False)
         self._saturation_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_saturation_change(adjust.get_value()))
