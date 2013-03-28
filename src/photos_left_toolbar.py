@@ -21,10 +21,11 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, label=_("FILTERS"),
             expanded_callback=lambda: self.change_category("filters"))
 
-        adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
+        adjustments_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0,
+            top_padding=10, bottom_padding=10, left_padding=15, right_padding=15)
         adjustments_align.add(adjustments)
         self._categories["adjustments"] = Category(adjustments_align, 
-            images_path=self._images_path, label=_("ADJUSTMENTS"),
+            images_path=self._images_path, label=_("ADJUST"),
             expanded_callback=lambda: self.change_category("adjustments"))
 
         border_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=0.0, yscale=0.0, left_padding=30)
@@ -107,10 +108,17 @@ class Category(Gtk.Expander):
         self._hbox.pack_start(self._title_image, expand=False, fill=False, padding=9)
         self._hbox.pack_start(self._title_label, expand=False, fill=False, padding=0)
 
+        self._up_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-up.png")
+        self._down_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-down.png")
+        self._arrow = Gtk.Image.new_from_pixbuf(self._down_pixbuf)
+
         self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
         self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=8)
         self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
+        # This hackish line keeps the expander widget from downsizing
+        # horizontally after the separator is removed.
+        self._vbox.connect("size-allocate", lambda w, alloc: self._vbox.set_size_request(alloc.width, -1))
         self.set_label_widget(self._vbox)
 
         self._widget = widget
@@ -123,15 +131,26 @@ class Category(Gtk.Expander):
         self._overlay.add_overlay(self._drop_shadow)
         self.add(self._overlay)
 
-        self.connect('notify::expanded', self.expanded_cb)
+        self.connect('notify::expanded', self._on_expanded)
+        self.connect('enter-notify-event', self._on_mouse_enter)
+        self.connect('leave-notify-event', self._on_mouse_leave)
 
-    def expanded_cb(self, widget, event):
+    def _on_expanded(self, widget, event):
         if self.get_expanded():
             self._vbox.remove(self._separator)
             self._expanded_callback()
+            self._arrow.set_from_pixbuf(self._up_pixbuf)
         else:
             self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
-            # self._title_box.deselect()
+            self._arrow.set_from_pixbuf(self._down_pixbuf)
+        self.show_all()
+
+    def _on_mouse_enter(self, widget, event):
+        self._hbox.pack_end(self._arrow, expand=False, fill=False, padding=8)
+        self.show_all()
+
+    def _on_mouse_leave(self, widget, event):
+        self._hbox.remove(self._arrow)
         self.show_all()
 
     def get_widget(self):
