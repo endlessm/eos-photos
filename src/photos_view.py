@@ -18,7 +18,7 @@ class PhotosView(object):
         self._adjustments = AdjustmentToolbar(images_path=images_path)
         self._filters = FilterToolbar(images_path=images_path)
         self._borders = BorderToolbar(images_path=images_path)
-        categories = [self._adjustments, self._filters, self._borders]
+        categories = [self._filters, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                categories=categories)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)

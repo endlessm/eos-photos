@@ -43,14 +43,19 @@ class OptionListToolbar(CategoryToolbar):
         self.show_all()
 
     def set_options(self, options):
-        for option in options:
-            option_name = option[0]
-            thumbnail_path = self._images_path + "filter_thumbnails/" + option[1]
-            self._list.add_option("filter", thumbnail_path, option_name, lambda: self.clicked_callback(option_name))
-            self.show_all()
+        map(self._set_option, options)
+
+    def _set_option(self, name_and_thumb):
+        option_name = name_and_thumb[0]
+        thumbnail_path = self._images_path + self.get_thumbnail_prefix() + name_and_thumb[1]
+        self._list.add_option("filter", thumbnail_path, option_name, lambda: self.clicked_callback(option_name))
+        self.show_all()
 
     def select(self, option):
         self._list.select_option(option)
+
+    def get_thumbnail_prefix(self):
+        return ""
 
     def clicked_callback(self, option_name):
         pass
@@ -91,6 +96,9 @@ class FilterToolbar(OptionListToolbar):
 
     def get_hover_icon_path(self):
         return "icon_effects_hover.png"
+
+    def get_thumbnail_prefix(self):
+        return "filter_thumbnails/"
 
     def clicked_callback(self, option_name):
         self._presenter.on_filter_select(option_name)
