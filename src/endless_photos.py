@@ -58,7 +58,7 @@ class EndlessPhotos(Gtk.Application):
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()
         self.add_window(self._window)
-        self._window.show()
+        self._window.show_all()
         # hacky way of handling file open args as the proper way has python
         # binding issues.
         for arg in sys.argv[1:]:

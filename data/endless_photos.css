@@ -226,10 +226,10 @@ GtkOverlay {
 }
 
 #image-container{
-    border-color:white;
+    border-color: white;
     border-style: solid;
     border-radius: 0;
-    border-width: 7px;
+    border-width: 0px;
     -unico-border-gradient: none;
 }
 

@@ -38,7 +38,6 @@ class ImageContainer(Gtk.AspectFrame):
         self.set_hexpand(True)
         self.set_vexpand(True)
         self.add(self._embed)
-        self.show()
 
     def set_image_widget(self, image_widget):
         self._stage.add_child(image_widget)
@@ -51,7 +50,6 @@ class ImageContainer(Gtk.AspectFrame):
         self.set_property("ratio", self._image_widget.get_property("ratio"))
         # TODO: we are using the ratio changed signal to detect when to show
         # the clutter stage for the first time. And that's hella hacky
-        self._embed.show_all()
 
     def set_fullscreen_mode(self, fullscreen):
         self._fullscreen_mode = fullscreen

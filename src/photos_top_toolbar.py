@@ -22,6 +22,4 @@ class PhotosTopToolbar(TopToolbar):
         self._left_side = Gtk.Alignment(top_padding=0, bottom_padding=0)
         self._left_side.add(self._open_button)
 
-        self.get_toolbar_container().pack_start(self._left_side, expand=False, fill=False, padding=0)
-
-        self.show_all()
+        self.get_toolbar_container().pack_start(self._left_side, expand=False, fill=False, padding=7)

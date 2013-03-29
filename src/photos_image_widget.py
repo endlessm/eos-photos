@@ -32,7 +32,6 @@ class PhotosImageWidget(Clutter.Actor):
         self._border_image.add_constraint(Clutter.BindConstraint(
             coordinate=Clutter.BindCoordinate.SIZE, source=self))
         self.add_child(self._border_image)
-        self.show_all()
 
     def do_get_property(self, property):
         if property.name == "ratio":
