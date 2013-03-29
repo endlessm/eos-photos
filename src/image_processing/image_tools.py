@@ -1,7 +1,9 @@
 import numpy
+import math
 from scipy import ndimage
 import Image
 import ImageOps
+import ImageDraw
 import ImageFilter
 import ImageEnhance
 import colorsys
@@ -106,15 +108,56 @@ def old_photo(image):
     image = sepia_tone(image)
     return texture_overlay(image, "old_film.jpg", 0.25)
 
+
+
+def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
+    c = int(height * center_pct)
+    rot_angle = 90.0
+    mask = Image.new('L', (1,height))
+    draw = ImageDraw.Draw(mask)
+    l_slope = math.tan(math.radians(rot_angle + angle))
+    l_max = -l_slope * c
+    l_intercept = l_max
+    print(l_slope)
+    print(l_intercept)
+    r_slope = math.tan(math.radians(rot_angle - angle))
+    r_max = r_slope * (height - c)
+    r_intercept = -r_slope * c
+    for y in range(0,c):
+	raw = l_slope * y + l_intercept
+        raw = (raw / l_max) * amplitude
+	normalized = raw if raw < 255 else 255
+        draw.point((0,y), normalized)
+    for y in range(c,height):
+	raw = r_slope * y + r_intercept
+        raw = (raw / r_max) * amplitude
+	normalized = raw if raw < 255 else 255
+        draw.point((0,y), normalized)
+
+    return mask
+
 def tilt_shift_blur(image):
-    return boring_blur(image)
+    im_mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.7, 350)
+    
+    return blur_with_mask(image, im_mask, 8)
 
 def depth_of_field_blur(image):
     return boring_blur(image)
 
 def boring_blur(image):
-    im1 = image.filter(ImageFilter.BLUR)
-    return im1
+    return image.filter(ImageFilter.BLUR)
+
+def blur_with_mask(image, mask, amount):
+    blur_size = amount
+
+    im_base = image.copy()
+    im_mask = mask.resize(im_base.size)
+    im_blurred = numpy.array(im_base, dtype=float)
+    im_blurred = ndimage.gaussian_filter(im_blurred, sigma=[blur_size,blur_size,0])
+    im_blurred = Image.fromarray(numpy.uint8(im_blurred))
+    
+    im_base.paste(im_blurred, (0,0), im_mask)
+    return im_base
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
