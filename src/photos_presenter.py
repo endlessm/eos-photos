@@ -108,7 +108,7 @@ class PhotosPresenter(object):
             self.open_image(filename)
 
     def _do_adjustment_slide(self, value_get, value_set):
-        while self._sliding:
+        while self._sliding or not self._slider_target == value_get():
             if not self._slider_target == value_get():
                 value_set(self._slider_target)
         self._view.update_async(self._view.unlock_ui)
