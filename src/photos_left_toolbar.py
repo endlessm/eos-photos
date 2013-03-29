@@ -29,9 +29,11 @@ class PhotosLeftToolbar(Gtk.VBox):
         self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
         self._separator = ToolbarSeparator(images_path=images_path)
         self.pack_end(self._separator, expand=False, fill=False, padding=0)
+        self._removed_separator = False
 
         self.set_vexpand(True)
         self.show_all()
+        self.connect('size-allocate', self._check_full)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -40,6 +42,17 @@ class PhotosLeftToolbar(Gtk.VBox):
         for label, category in self._categories.items():
             if not label == category_label:
                 category.deselect()
+
+    def _check_full(self, w, alloc):
+        if alloc.height <= self.get_preferred_height()[1]:
+            if not self._removed_separator:
+                self._removed_separator = True
+                self._separator.hide()
+                # self.remove(self._separator)
+        elif self._removed_separator:
+            self._removed_separator = False
+            self._separator.show()
+            # self.pack_end(self._separator, expand=False, fill=False, padding=0)
 
 
 class CategoryScrollWindow(Gtk.ScrolledWindow):
