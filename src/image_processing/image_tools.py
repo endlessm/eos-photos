@@ -1,4 +1,5 @@
 import numpy
+from scipy import ndimage
 import Image
 import ImageOps
 import ImageFilter
@@ -104,6 +105,16 @@ def old_photo(image):
     image = apply_curve(image, "lumo.acv")
     image = sepia_tone(image)
     return texture_overlay(image, "old_film.jpg", 0.25)
+
+def tilt_shift_blur(image):
+    return boring_blur(image)
+
+def depth_of_field_blur(image):
+    return boring_blur(image)
+
+def boring_blur(image):
+    im1 = image.filter(ImageFilter.BLUR)
+    return im1
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):

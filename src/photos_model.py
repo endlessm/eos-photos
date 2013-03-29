@@ -20,13 +20,22 @@ class PhotosModel(object):
         self._curves_path = curves_path
         self._source_image = None
         self._filtered_image = None
+	self._blurred_image = None
         self._adjusted_image = None
         self._image_widget = PhotosImageWidget()
 
         self._is_saved = True
         self._build_filter_dict()
         self._build_border_dict()
+	self._build_blur_dict()
         self._clear_options()
+
+    def _build_blur_dict(self):
+	self._blur_dict = collections.OrderedDict([
+	    (_("NONE"), lambda im: im),
+	    (_("TILT-SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
+	    (_("DEPTH-OF-FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
+	])
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -65,6 +74,8 @@ class PhotosModel(object):
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_filter = ""
+	self._last_blur_type = ""
+	self._blur_type = "NONE"
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
 
@@ -135,6 +146,10 @@ class PhotosModel(object):
     def get_brightness(self):
         return self._brightness
 
+    def set_blur_type(self, value):
+	self._blur_type = value
+	self._update_base_image()
+
     def set_brightness(self, value):
         self._brightness = value
         self._update_base_image()
@@ -176,9 +191,19 @@ class PhotosModel(object):
         adjusted = not (self._last_brightness == self._brightness
                         and self._last_contrast == self._contrast
                         and self._last_saturation == self._saturation)
-        if filtered or adjusted:
+	blurred = False
+	if not self._last_blur_type == self._blur_type:
+	    if self._blur_type in self._blur_dict:
+	        print self._blur_type
+    	        blurred = True
+    	        self._last_blur_type = self._blur_type
+	        self._blurred_image = self._blur_dict[self._blur_type](self._filtered_image)
+	    else:
+	        print "Blur not supported!"
+
+        if filtered or adjusted or blurred:
             # adjust image
-            im = ImageTools.apply_contrast(self._filtered_image, self._contrast)
+            im = ImageTools.apply_contrast(self._blurred_image, self._contrast)
             im = ImageTools.apply_brightness(im, self._brightness)
             im = ImageTools.apply_saturation(im, self._saturation)
             self._adjusted_image = im

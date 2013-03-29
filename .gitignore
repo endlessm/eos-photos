@@ -2,6 +2,7 @@
 *.changes
 *.build
 *.py[co]
+*.swp
 
 # Packages
 *.egg

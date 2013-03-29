@@ -102,6 +102,9 @@ class PhotosPresenter(object):
                 value_set(self._slider_target)
         self._view.update_async(self._view.unlock_ui)
 
+    def _do_blur_select(self, blur_type):
+	self._model.set_blur_type(blur_type)
+
     #UI callbacks...
     def on_close(self):
         # Prompt for save before quitting
@@ -210,3 +213,15 @@ class PhotosPresenter(object):
     def on_saturation_change(self, value):
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation)
+
+    def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
+	if toggleAction.get_active():
+	    self._do_blur_select("TILT-SHIFT")
+
+    def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
+	if toggleAction.get_active():
+	    self._do_blur_select("DEPTH-OF-FIELD")
+
+    def on_noblur_toggle(self, toggleAction):
+	if toggleAction.get_active():
+	    self._do_blur_select("NONE")
