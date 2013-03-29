@@ -32,10 +32,11 @@ class PhotosPresenter(object):
     def open_image(self, filename):
         self._model.open(filename)
         self._view.select_filter(self._model.get_filter())
+        self._view.select_border(self._model.get_border())
+        self._view.select_distortion(self._model.get_distortion())
         self._view.set_brightness_slider(self._model.get_brightness())
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
-        self._view.select_border(self._model.get_border())
         # Call slider release to avoid infinite loop
         self.on_slider_release()
         self._view.set_photo_editor_active()
