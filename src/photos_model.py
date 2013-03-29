@@ -29,7 +29,7 @@ class PhotosModel(object):
         self._build_filter_dict()
         self._build_border_dict()
         self._build_distortions_dict()
-        self._clear_options()
+        self.clear_options()
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -76,7 +76,7 @@ class PhotosModel(object):
             (_("SWIRL"), "frame_3x2_crayon.png")
         ])
 
-    def _clear_options(self):
+    def clear_options(self):
         self._filter = self._get_default_filter()
         self._distort = self._get_default_distortion()
         self._brightness = 1.0
@@ -86,6 +86,10 @@ class PhotosModel(object):
         self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
+        if self.is_open():
+            self._update_base_image()
+            self._update_border_image()
+            self._is_saved = True
 
     def _get_default_filter(self):
         return self._filter_dict.keys()[0]
@@ -101,11 +105,8 @@ class PhotosModel(object):
 
     def open(self, filename):
         self._filename = filename
-        self._clear_options()
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
-        self._update_base_image()
-        self._update_border_image()
-        self._is_saved = True
+        self.clear_options()
 
     def save(self, filename, format=None, quality=95):
         if self.is_open():

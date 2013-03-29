@@ -3,6 +3,7 @@ import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 from widgets.toolbar_separator import ToolbarSeparator
+from widgets.image_text_button import ImageTextButton
 
 
 class PhotosLeftToolbar(Gtk.VBox):
@@ -18,6 +19,14 @@ class PhotosLeftToolbar(Gtk.VBox):
             label = category.get_label()
             self._categories[label] = CategoryExpander(images_path, category)
             self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
+
+        self._revert_button = ImageTextButton(normal_path=images_path + "icon_restore-photo_normal.png",
+                                              hover_path=images_path + "icon_restore-photo_hover.png",
+                                              down_path=images_path + "icon_restore-photo_normal.png",
+                                              label=_("REVERT TO ORIGINAL"),
+                                              name="revert-button")
+        self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
+        self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
 
         self.set_vexpand(True)
         self.show_all()

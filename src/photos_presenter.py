@@ -31,6 +31,10 @@ class PhotosPresenter(object):
 
     def open_image(self, filename):
         self._model.open(filename)
+        self._sync_photo_options()
+        self._view.set_photo_editor_active()
+
+    def _sync_photo_options(self):
         self._view.select_filter(self._model.get_filter())
         self._view.select_border(self._model.get_border())
         self._view.select_distortion(self._model.get_distortion())
@@ -39,7 +43,6 @@ class PhotosPresenter(object):
         self._view.set_saturation_slider(self._model.get_saturation())
         # Call slider release to avoid infinite loop
         self.on_slider_release()
-        self._view.set_photo_editor_active()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
@@ -198,7 +201,6 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_distort, (distort_name,))
-        
 
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...
@@ -227,3 +229,7 @@ class PhotosPresenter(object):
     def on_saturation_change(self, value):
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation)
+
+    def on_revert(self):
+        self._model.clear_options()
+        self._sync_photo_options()
