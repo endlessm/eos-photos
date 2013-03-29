@@ -27,6 +27,8 @@ class PhotosLeftToolbar(Gtk.VBox):
                                               name="revert-button")
         self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
         self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
+        self._separator = ToolbarSeparator(images_path=images_path)
+        self.pack_end(self._separator, expand=False, fill=False, padding=0)
 
         self.set_vexpand(True)
         self.show_all()
