@@ -154,12 +154,49 @@ GtkOverlay {
                                      to (#AAAF03));
 }
 
+#revert-button,
 #open-photos-button {
     padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
     border-radius: 0;
     border-width: 0;
+}
+
+#revert-button GtkLabel,
+#open-photos-button GtkLabel {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10;
+    text-shadow: 0 -1 rgba(0,0,0,0.75);
+    color: #999999;
+}
+
+#revert-button GtkLabel:hover,
+#open-photos-button GtkLabel:hover {
+    color: #ffffff;
+}
+
+#revert-button GtkLabel:active,
+#open-photos-button GtkLabel:active {
+    color: #999999;
+}
+
+#revert-button GtkImage {
+    padding: 0px 3px 0px 5px;
+}
+
+#revert-button:hover {
+    background-image: url("../images/restore-photo_bg_hover.png");
+}
+
+#revert-button:active {
+    background-image: url("../images/restore-photo_bg_down.png");
+}
+
+#revert-button GtkLabel {
+    padding: 0px 3px 0px 0px;
 }
 
 #open-photos-button GtkImage {
@@ -176,20 +213,6 @@ GtkOverlay {
 
 #open-photos-button GtkLabel {
     padding: 0px 10px 0px 0px;
-    font-family: Ubuntu;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 10;
-    text-shadow: 0 -1 rgba(0,0,0,0.75);
-    color: #999999;
-}
-
-#open-photos-button GtkLabel:hover {
-    color: #ffffff;
-}
-
-#open-photos-button GtkLabel:active {
-    color: #999999;
 }
 
 #filters-scroll-area > GtkViewport {

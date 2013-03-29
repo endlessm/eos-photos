@@ -3,6 +3,7 @@ import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 from widgets.toolbar_separator import ToolbarSeparator
+from widgets.image_text_button import ImageTextButton
 
 
 class PhotosLeftToolbar(Gtk.VBox):
@@ -19,8 +20,20 @@ class PhotosLeftToolbar(Gtk.VBox):
             self._categories[label] = CategoryExpander(images_path, category)
             self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
 
+        self._revert_button = ImageTextButton(normal_path=images_path + "icon_restore-photo_normal.png",
+                                              hover_path=images_path + "icon_restore-photo_hover.png",
+                                              down_path=images_path + "icon_restore-photo_normal.png",
+                                              label=_("REVERT TO ORIGINAL"),
+                                              name="revert-button")
+        self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
+        self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
+        self._separator = ToolbarSeparator(images_path=images_path)
+        self.pack_end(self._separator, expand=False, fill=False, padding=0)
+        self._removed_separator = False
+
         self.set_vexpand(True)
         self.show_all()
+        self.connect('size-allocate', self._check_full)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -29,6 +42,17 @@ class PhotosLeftToolbar(Gtk.VBox):
         for label, category in self._categories.items():
             if not label == category_label:
                 category.deselect()
+
+    def _check_full(self, w, alloc):
+        if alloc.height <= self.get_preferred_height()[1]:
+            if not self._removed_separator:
+                self._removed_separator = True
+                self._separator.hide()
+                # self.remove(self._separator)
+        elif self._removed_separator:
+            self._removed_separator = False
+            self._separator.show()
+            # self.pack_end(self._separator, expand=False, fill=False, padding=0)
 
 
 class CategoryScrollWindow(Gtk.ScrolledWindow):
