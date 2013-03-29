@@ -237,3 +237,19 @@ GtkOverlay {
     background-image: -gtk-gradient(linear, center top, center bottom,
         color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
 }
+
+.scale.slider {
+    background-image: url("../images/slider_knob_normal_resized.png");
+}
+
+.menubar .menuitem .scale.slider:hover,
+.scale.slider:hover {
+    background-image: url("../images/slider_knob_hover_resized.png");
+}
+
+/*
+.scale.mark {
+    border-color: shade (@bg_color, 0.8);
+}
+
+*/
