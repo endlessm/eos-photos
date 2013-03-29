@@ -238,18 +238,35 @@ GtkOverlay {
         color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
 }
 
+GtkScale {
+    -GtkRange-slider-width: 18;
+    -GtkRange-trough-border: 0;
+    -GtkScale-slider-length: 18;
+    -unico-focus-fill-color: transparent;
+}
+
 .scale.slider {
-    background-image: url("../images/slider_knob_normal_resized.png");
+    background-image: url("../images/slider_knob_normal.png");
 }
 
-.menubar .menuitem .scale.slider:hover,
 .scale.slider:hover {
-    background-image: url("../images/slider_knob_hover_resized.png");
+    background-image: url("../images/slider_knob_hover.png");
 }
 
-/*
-.scale.mark {
-    border-color: shade (@bg_color, 0.8);
+.scale.highlight.left{
+    background-image: none;
+    background-color: black;
+    border-width: 0px;
+
+    -unico-inner-stroke-width: 0px;
 }
 
-*/
+
+.scale.trough{
+    background-image: none;
+    background-color: black;
+    border-width: 0px;
+
+}
+
+
