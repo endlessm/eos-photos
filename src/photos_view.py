@@ -51,7 +51,6 @@ class PhotosView(object):
         self._filters.set_presenter(presenter)
         self._distorts.set_presenter(presenter)
         self._window.set_presenter(presenter)
-        
 
     # This should be called to update the UI from outside of GTK's thread. It
     # will call an update function fn to be called on the main thread at the

@@ -198,6 +198,9 @@ class PhotosModel(object):
         self._distort = distort_name
         self._update_base_image()
 
+    def get_distortion(self):
+        return self._distort
+
     def _update_base_image(self):
         if (not self.is_open()):
             return

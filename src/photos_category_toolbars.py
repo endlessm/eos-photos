@@ -129,6 +129,7 @@ class DistortToolbar(OptionListToolbar):
     def clicked_callback(self, option_name):
         self._presenter.on_distortion_select(option_name)
 
+
 class AdjustmentToolbar(CategoryToolbar):
     """
     Widget presenting sliders for image adjustments. Part of the left toolbar.
@@ -170,7 +171,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._saturation_slider.connect('button-release-event', lambda w, e: self._presenter.on_slider_release())
         self._saturation_slider.connect('key-press-event', lambda w, e: True)
         self._vbox.pack_start(self._saturation_label, False, False, 0)
-        self._vbox.pack_start(self._saturation_slider, False, False, 5)
+        self._vbox.pack_start(self._saturation_slider, False, False, 0)
 
         self.add(self._vbox)
         self.show_all()

@@ -52,22 +52,20 @@ GtkOverlay {
     background-color: black;
 }
 
-#filter-event-box {
+#filter-button {
+    -GtkButton-child-displacement-x: 0;
+    -GtkButton-child-displacement-y: 0;
     background-color: transparent;
+    background-image: none;
+    border-width: 0;
 }
 
-#filter-image {
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent;
+#filter-button:hover {
+    background-color: rgba(122, 122, 122, 0.15);
 }
 
-#filter-image:hover {
-    border-color: #404040;
-}
-
-#filter-image:selected {
-    border-color: white;
+#filter-button:selected {
+    background-color: white;
 }
 
 #filter-label {
@@ -76,10 +74,6 @@ GtkOverlay {
     font-weight: bold;
     font-size: 12;
     color: #7e7e7e;
-}
-
-#filter-label:selected {
-    color: #ffffff;
 }
 
 #category-label {
@@ -161,7 +155,7 @@ GtkOverlay {
 }
 
 #open-photos-button {
-    padding: 7px 0px 7px 0px;
+    padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
     border-radius: 0;
@@ -169,7 +163,7 @@ GtkOverlay {
 }
 
 #open-photos-button GtkImage {
-    padding: 0px 3px 0px 9px;
+    padding: 0px 5px 0px 9px;
 }
 
 #open-photos-button:hover {

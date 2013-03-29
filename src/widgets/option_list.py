@@ -16,54 +16,35 @@ class OptionLabel(Gtk.Label):
         return Gtk.Label.do_get_preferred_width()
 
 
-class Option(Gtk.EventBox):
+class Option(Gtk.Button):
     """
     Options for the OptionList, these widgets display a thumbnail and a label
     fit underneath.
     """
     def __init__(self, name="", image_path="", label="", clicked_callback=None):
-        super(Option, self).__init__(name=name+"-event-box")
+        super(Option, self).__init__(name=name+"-button")
 
         self._clicked_callback = clicked_callback
         self._image = Gtk.Image(name=name+"-image", file=image_path)
         self._label = OptionLabel(image=self._image, name=name+"-label", label=label)
         self._label.set_line_wrap(True)
 
-        self._box = Gtk.VBox(homogeneous=False, spacing=0)
+        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
+        self._vbox.pack_start(self._image, expand=False, fill=False, padding=0)
+        self._vbox.pack_start(self._label, expand=True, fill=True, padding=0)
 
-        self._box.pack_start(self._image, expand=False, fill=False, padding=0)
-        self._box.pack_start(self._label, expand=True, fill=True, padding=0)
-
-        self.add(self._box)
-
-        self.connect('leave-notify-event', self._on_mouse_leave)
-        self.connect('enter-notify-event', self._on_mouse_enter)
-        self.connect('button-release-event', self._on_button_release)
+        self.add(self._vbox)
+        self.connect('clicked', self._on_click)
 
     def select(self):
-        flags = self._image.get_state_flags() | Gtk.StateFlags.SELECTED
-        self._image.set_state_flags(flags, True)
-        self._label.set_state_flags(flags, True)
+        flags = self.get_state_flags() | Gtk.StateFlags.SELECTED
+        self.set_state_flags(flags, True)
 
     def deselect(self):
-        flags = Gtk.StateFlags(self._image.get_state_flags() & ~Gtk.StateFlags.SELECTED)
-        self._image.set_state_flags(flags, True)
-        self._label.set_state_flags(flags, True)
+        flags = Gtk.StateFlags(self.get_state_flags() & ~Gtk.StateFlags.SELECTED)
+        self.set_state_flags(flags, True)
 
-    def _on_mouse_enter(self, event, data=None):
-        flags = self._image.get_state_flags() | Gtk.StateFlags.PRELIGHT
-        self._image.set_state_flags(flags, True)
-        self._label.set_state_flags(flags, True)
-
-    def _on_mouse_leave(self, event, data=None):
-        flags = Gtk.StateFlags(self._image.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
-        self._image.set_state_flags(flags, True)
-        self._label.set_state_flags(flags, True)
-
-    def _on_button_release(self, event, data=None):
-        #if mouse is no longer over eventbox, don't select the filter
-        if self._image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0:
-            return
+    def _on_click(self, event, data=None):
         if self._clicked_callback is not None:
             self._clicked_callback()
 
@@ -84,7 +65,7 @@ class OptionList(Gtk.VBox):
             name=name, image_path=thumbnail_path, label=label,
             clicked_callback=clicked_callback)
         self._icons[label] = option
-        self.pack_start(option, expand=False, fill=False, padding=0)
+        self.pack_start(option, expand=False, fill=False, padding=6)
 
     def select_option(self, label_name):
         for name, icon in self._icons.items():
