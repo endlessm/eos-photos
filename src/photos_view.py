@@ -71,11 +71,17 @@ class PhotosView(object):
     def set_filters(self, filters):
         self._filters.set_filters(filters)
 
+    def set_blurs(self, blurs):
+        self._blurs.set_blurs(blurs)
+
     def set_borders(self, borders):
         self._borders.set_borders(borders)
 
     def select_filter(self, filter_name):
         self._filters.select_filter(filter_name)
+
+    def select_blur(self, blur_name):
+        self._blurs.select_blur(blur_name)
 
     def select_border(self, border_name):
         self._borders.select_border(border_name)

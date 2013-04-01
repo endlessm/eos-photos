@@ -22,6 +22,8 @@ class PhotosPresenter(object):
         self._view.set_filters(filters)
         borders = self._model.get_border_names_and_thumbnails()
         self._view.set_borders(borders)
+        blurs = self._model.get_blur_names_and_thumbnails()
+        self._view.set_blurs(blurs)
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
@@ -182,6 +184,11 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_filter_select, (filter_name,))
+
+    def on_blur_select(self, blur_name):
+        if not self._model.is_open():
+            return
+        self._do_blur_select(blur_name)
 
     def on_border_select(self, border_name):
         self._model.set_border(border_name)

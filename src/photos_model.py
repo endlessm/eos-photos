@@ -119,6 +119,17 @@ class PhotosModel(object):
             return None
         return self._filename
 
+    def get_blur_names(self):
+        return self._blur_dict.keys()
+
+    def get_blur_names_and_thumbnails(self):
+        names_and_thumbs = []
+        blur_no = 0
+        for name in self._blur_dict.keys():
+            names_and_thumbs.append((name, "blur_" + str(blur_no) + ".jpg"))
+            blur_no += 1
+        return names_and_thumbs
+
     def get_filter_names(self):
         return self._filter_dict.keys()
 
