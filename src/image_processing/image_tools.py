@@ -1,6 +1,6 @@
 import numpy
 import math
-from scipy import ndimage
+from scipy import ndimage, stats
 import Image
 import ImageOps
 import ImageDraw
@@ -108,9 +108,25 @@ def old_photo(image):
     image = sepia_tone(image)
     return texture_overlay(image, "old_film.jpg", 0.25)
 
+def _depth_of_field_mask(center_x, center_y, (height, width), radius):
+    # center_x/center_y: the (x,y) coordinate of the transparent disk
+    # radius: radius of the transparent disk
+    # height/width: dimensions of the blur mask
+    yy, xx = numpy.mgrid[0:height, 0:width]
+    xx = xx - center_x
+    yy = yy - center_y
+    rad = numpy.sqrt(numpy.power(xx, 2) + numpy.power(yy, 2))
+    rad = stats.threshold(rad, threshmax=radius, newval=radius)
+    rad = (rad / radius) * 255
+    mask = Image.fromarray(numpy.uint8(rad))
 
+    return mask
 
 def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
+    # angle: the slope of the linear blur gradient, measured from rot_angle
+    # rot_angle: corresponds to the angle of the plane of focus
+    # center_pct: value from (0,1) indicating where the focus is on the y axis
+    # amplitude: scales the blur after normalization
     c = int(height * center_pct)
     rot_angle = 90.0
     mask = Image.new('L', (1,height))
@@ -118,20 +134,18 @@ def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
     l_slope = math.tan(math.radians(rot_angle + angle))
     l_max = -l_slope * c
     l_intercept = l_max
-    print(l_slope)
-    print(l_intercept)
     r_slope = math.tan(math.radians(rot_angle - angle))
     r_max = r_slope * (height - c)
     r_intercept = -r_slope * c
     for y in range(0,c):
-	raw = l_slope * y + l_intercept
+        raw = l_slope * y + l_intercept
         raw = (raw / l_max) * amplitude
-	normalized = raw if raw < 255 else 255
+        normalized = raw if raw < 255 else 255
         draw.point((0,y), normalized)
     for y in range(c,height):
-	raw = r_slope * y + r_intercept
+        raw = r_slope * y + r_intercept
         raw = (raw / r_max) * amplitude
-	normalized = raw if raw < 255 else 255
+        normalized = raw if raw < 255 else 255
         draw.point((0,y), normalized)
 
     return mask
@@ -142,7 +156,9 @@ def tilt_shift_blur(image):
     return blur_with_mask(image, im_mask, 8)
 
 def depth_of_field_blur(image):
-    return boring_blur(image)
+    im_mask = _depth_of_field_mask(500, 500, image.size, 800)
+    
+    return blur_with_mask(image, im_mask, 8)
 
 def boring_blur(image):
     return image.filter(ImageFilter.BLUR)
