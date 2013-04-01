@@ -151,14 +151,14 @@ def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
     return mask
 
 def tilt_shift_blur(image):
-    im_mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.7, 350)
+    mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.7, 350)
     
-    return blur_with_mask(image, im_mask, 8)
+    return blur_with_mask(image, mask, 8)
 
 def depth_of_field_blur(image):
-    im_mask = _depth_of_field_mask(500, 500, image.size, 800)
+    mask = _depth_of_field_mask(500, 500, image.size, 800)
     
-    return blur_with_mask(image, im_mask, 8)
+    return blur_with_mask(image, mask, 8)
 
 def boring_blur(image):
     return image.filter(ImageFilter.BLUR)
@@ -166,14 +166,15 @@ def boring_blur(image):
 def blur_with_mask(image, mask, amount):
     blur_size = amount
 
-    im_base = image.copy()
-    im_mask = mask.resize(im_base.size)
-    im_blurred = numpy.array(im_base, dtype=float)
-    im_blurred = ndimage.gaussian_filter(im_blurred, sigma=[blur_size,blur_size,0])
-    im_blurred = Image.fromarray(numpy.uint8(im_blurred))
+    base = image.copy()
+    mask = mask.resize(base.size)
+    blurred = numpy.array(base, dtype=float)
+    blurred = ndimage.gaussian_filter(blurred, sigma=[blur_size,blur_size,0])
+    blurred = Image.fromarray(numpy.uint8(blurred))
     
-    im_base.paste(im_blurred, (0,0), im_mask)
-    return im_base
+    # paste the blurred image onto the original, using the alpha mask
+    base.paste(blurred, (0,0), mask)
+    return base
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):

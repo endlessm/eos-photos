@@ -1,5 +1,6 @@
 from gi.repository import Gtk, Gdk, GLib
 
+from photos_blur_toolbar import PhotosBlurToolbar
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
@@ -17,10 +18,12 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, images_path=""):
+        self._blurs = PhotosBlurToolbar(images_path=images_path)
         self._adjustments = PhotosAdjustmentToolbar(images_path=images_path)
         self._borders = PhotosBorderToolbar(images_path=images_path)
         self._filters = PhotosFilterToolbar(images_path=images_path)
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
+                                               blurs=self._blurs,
                                                adjustments=self._adjustments,
                                                borders=self._borders,
                                                filters=self._filters)
@@ -39,6 +42,7 @@ class PhotosView(object):
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_container.set_presenter(presenter)
+        self._blurs.set_presenter(presenter)
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)

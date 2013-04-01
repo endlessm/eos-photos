@@ -8,7 +8,7 @@ class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, images_path="", adjustments=None, borders=None, filters=None, **kw):
+    def __init__(self, images_path="", blurs=None, adjustments=None, borders=None, filters=None, **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
@@ -32,7 +32,11 @@ class PhotosLeftToolbar(Gtk.VBox):
             images_path=self._images_path, label=_("BORDERS"),
             expanded_callback=lambda: self.change_category("borders"))
 
-   
+        blur_align = Gtk.Alignment(xalign=0.0, yalign=0.0, xscale=1.0, yscale=0.0, left_padding=15)
+        blur_align.add(blurs)
+        self._categories["blurs"] = Category(blur_align,
+            images_path=self._images_path, label=_("BLURS"),
+            expanded_callback=lambda: self.change_category("blurs"))
 
         for category in self._categories.values():
             self.pack_start(category, expand=False, fill=True, padding=20)
