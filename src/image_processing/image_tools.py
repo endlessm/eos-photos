@@ -151,12 +151,13 @@ def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
     return mask
 
 def tilt_shift_blur(image):
-    mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.7, 350)
+    mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.5, 350)
     
     return blur_with_mask(image, mask, 8)
 
 def depth_of_field_blur(image):
-    mask = _depth_of_field_mask(500, 500, image.size, 800)
+    height, width = image.size
+    mask = _depth_of_field_mask(width/2, height/2, image.size, width/2)
     
     return blur_with_mask(image, mask, 8)
 
