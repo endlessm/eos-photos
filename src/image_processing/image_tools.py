@@ -11,6 +11,8 @@ import colorsys
 from curve import Curve
 from curve import CurveManager
 
+from distortions import Distortion
+
 """
 Pretty much all the image processing functionality we coded right now. Maybe
 someday split into filters, basic tools, etc.
@@ -19,8 +21,6 @@ someday split into filters, basic tools, etc.
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
 
-rgb_to_hsv = numpy.vectorize(colorsys.rgb_to_hsv)
-hsv_to_rgb = numpy.vectorize(colorsys.hsv_to_rgb)
 
 def set_curves_path(curves_path):
     global _CURVES_PATH
@@ -51,15 +51,6 @@ def apply_brightness(image, value):
 def apply_saturation(image, value):
     enh = ImageEnhance.Color(image)
     return enh.enhance(value)
-
-def color_enhance(image, amount):
-    arr = numpy.array(numpy.asarray(image).astype('float'))
-    r, g, b = numpy.rollaxis(arr, axis=-1)
-    h, s, v = rgb_to_hsv(r, g, b)
-    s = numpy.minimum(1.0, amount * s)
-    r, g, b = hsv_to_rgb(h, s, v)
-    arr = numpy.dstack((r, g, b))
-    return Image.fromarray(arr.astype('uint8'), 'RGB')
 
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
@@ -222,7 +213,7 @@ def desert(image):
     return vignette(image, "weird_vignette.png")
 
 def lumo(image):
-    image = color_enhance(image, 1.2)
+    image = apply_saturation(image, 1.2)
     image = texture_overlay(image, "paper.jpg", 0.15)
     image = apply_curve(image, "lumo.acv")
     return vignette(image, "heavy_vignette.png")
@@ -230,10 +221,18 @@ def lumo(image):
 def trains(image):
     image = apply_curve(image, "trains.acv")
     return vignette(image, "heavy_vignette.png")
-    return image
 
 def colorful(image):
     image = apply_contrast(image, 1.3)
-    image = color_enhance(image, 1.4)
+    image = apply_saturation(image, 1.4)
     image = vignette(image, "light_vignette.png")
     return image
+
+def distortion(image, disort_name):
+    if disort_name == "NONE":
+        return image
+    image_array = numpy.array(image)
+    distortion = Distortion(image_array)
+    result = distortion.apply(disort_name)
+    return Image.fromarray(result, 'RGB')
+    

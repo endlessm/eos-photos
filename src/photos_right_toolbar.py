@@ -44,7 +44,7 @@ class PhotosRightToolbar(Gtk.Alignment):
 
         self.add(self._button_box)
 
-        self.show_all()
+        self.set_vexpand(True)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

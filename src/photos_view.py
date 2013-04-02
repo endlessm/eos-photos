@@ -1,12 +1,11 @@
 from gi.repository import Gtk, Gdk, GLib
 
-from photos_blur_toolbar import PhotosBlurToolbar
+from top_toolbar import TopToolbar
+from splash_screen import SplashScreen
 from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
-from photos_adjustment_toolbar import PhotosAdjustmentToolbar
-from photos_border_toolbar import PhotosBorderToolbar
-from photos_filter_toolbar import PhotosFilterToolbar
+from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 
@@ -18,27 +17,33 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, images_path=""):
-        self._blurs = PhotosBlurToolbar(images_path=images_path)
-        self._adjustments = PhotosAdjustmentToolbar(images_path=images_path)
-        self._borders = PhotosBorderToolbar(images_path=images_path)
-        self._filters = PhotosFilterToolbar(images_path=images_path)
+        self._adjustments = AdjustmentToolbar(images_path=images_path)
+        self._blurs = BlurToolbar(images_path=images_path)
+        self._filters = FilterToolbar(images_path=images_path)
+        self._borders = BorderToolbar(images_path=images_path)
+        self._distorts = DistortToolbar(images_path=images_path)
+        categories = [self._filters, self._distorts, self._blurs, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
-                                               blurs=self._blurs,
-                                               adjustments=self._adjustments,
-                                               borders=self._borders,
-                                               filters=self._filters)
+                                               categories=categories)
+        self._splash_top_toolbar = TopToolbar(images_path=images_path)
+        self._splash_screen = SplashScreen(splash_top_toolbar=self._splash_top_toolbar, images_path=images_path, name="splash-eventbox")
+        self._photos_top_toolbar = PhotosTopToolbar(images_path=images_path)
         self._top_toolbar = PhotosTopToolbar(images_path=images_path)
+
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
         self._window = PhotosWindow(images_path=images_path,
-                                    top_toolbar=self._top_toolbar,
+                                    splash_screen=self._splash_screen,
+                                    photos_top_toolbar=self._photos_top_toolbar,
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
                                     image_container=self._image_container)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
-        self._top_toolbar.set_presenter(presenter)
+        self._splash_top_toolbar.set_presenter(presenter)
+        self._splash_screen.set_presenter(presenter)
+        self._photos_top_toolbar.set_presenter(presenter)
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_container.set_presenter(presenter)
@@ -46,6 +51,8 @@ class PhotosView(object):
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)
+        self._distorts.set_presenter(presenter)
+        self._window.set_presenter(presenter)
 
     # This should be called to update the UI from outside of GTK's thread. It
     # will call an update function fn to be called on the main thread at the
@@ -65,26 +72,35 @@ class PhotosView(object):
     def set_image_widget(self, widget):
         self._image_container.set_image_widget(widget)
 
+    def set_photo_editor_active(self):
+        self._window.set_photo_editor_active()
+
     def set_image_fullscreen(self, fullscreen):
         self._window.set_image_fullscreen(fullscreen)
 
     def set_filters(self, filters):
-        self._filters.set_filters(filters)
+        self._filters.set_options(filters)
 
     def set_blurs(self, blurs):
         self._blurs.set_blurs(blurs)
 
     def set_borders(self, borders):
-        self._borders.set_borders(borders)
+        self._borders.set_options(borders)
+
+    def set_distortions(self, distortions):
+        self._distorts.set_options(distortions)
 
     def select_filter(self, filter_name):
-        self._filters.select_filter(filter_name)
+        self._filters.select(filter_name)
 
     def select_blur(self, blur_name):
         self._blurs.select_blur(blur_name)
 
     def select_border(self, border_name):
-        self._borders.select_border(border_name)
+        self._borders.select(border_name)
+
+    def select_distortion(self, distort_name):
+        self._distorts.select(distort_name)
 
     def set_brightness_slider(self, value):
         self._adjustments.set_brightness_slider(value)
@@ -207,9 +223,8 @@ class PhotosView(object):
 
         dialog.show_all()
         result = dialog.run()
-
         # If user clicks cancel, return having done nothing
-        if result == Gtk.ResponseType.CANCEL:
+        if result == Gtk.ResponseType.CANCEL or result == Gtk.ResponseType.DELETE_EVENT:
             dialog.destroy()
             return None
 

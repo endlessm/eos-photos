@@ -1,3 +1,9 @@
+endlessos-base-photos (2.0) unstable; urgency=low
+
+  * First release of version 2 with distortions, borders and adjustments
+
+ -- dev1 <endlessmobile@gmail.com>  Fri, 29 Mar 2013 16:16:12 -0700
+
 endlessos-base-photos (1.2) unstable; urgency=low
 
   * Updated fonts and translations. Changed filters.
