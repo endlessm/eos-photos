@@ -68,7 +68,6 @@ class PhotosModel(object):
             (_("NONE"), None),
             (_("HORIZONTAL BARS"), "horizontal_bars.png"),
             (_("SIDE BARS"), "vertical_bars.png"),
-            (_("TEST"), "border-1.png"),
             (_("CRAYON"), "frame_3x2_crayon.png"),
             (_("GRUNGE"), "frame_3x2_grunge.png"),
             (_("SPRAY"), "frame_3x2_spray.png"),
