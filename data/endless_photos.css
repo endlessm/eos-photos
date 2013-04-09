@@ -8,6 +8,10 @@
     -GtkExpander-focus-padding: 0px;
 }
 
+:insensitive {
+    text-shadow: none;
+}
+
 GtkExpander:hover {
     background-color: transparent;
 }
@@ -70,6 +74,7 @@ GtkOverlay {
 
 #filter-label {
     font-family: Ubuntu;
+    text-shadow: none;
     font-style: normal;
     font-weight: bold;
     font-size: 12;
@@ -78,6 +83,7 @@ GtkOverlay {
 
 #category-label {
     font-family: Ubuntu;
+    text-shadow: none;
     font-style: normal;
     font-weight: bold;
     font-size: 13;
