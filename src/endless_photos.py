@@ -66,15 +66,6 @@ class EndlessPhotos(Gtk.Application):
                 self._presenter.open_image(arg)
                 break
 
-        Gdk.threads_enter()
-        Gtk.main()
-        Gdk.threads_leave()
-
-        # Run the main loop, to make sure the window is shown and therefore
-        # seems responsive
-        # while Gtk.events_pending():
-        #     Gtk.main_iteration()
-
     # This is the proper way to handle opening files, but it doesn't work with
     # the python bindings. The file list is always empty. This is a known bug
     # that may be fixed in newer versions of GTK
@@ -89,7 +80,7 @@ class EndlessPhotos(Gtk.Application):
         It is required to override this in a subclass of Gio.Application, but it
         does not do anything right now.
         """
-        pass
+        self._window.deiconify()
 
     def get_images_path(self):
         """
