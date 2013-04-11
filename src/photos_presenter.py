@@ -22,9 +22,11 @@ class PhotosPresenter(object):
         self._view.set_filters(filters)
         borders = self._model.get_border_names_and_thumbnails()
         self._view.set_borders(borders)
-
+        blurs = self._model.get_blur_names_and_thumbnails()
+        self._view.set_blurs(blurs)
         distortions = self._model.get_distortion_names_and_thumbnails()
         self._view.set_distortions(distortions)
+
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
@@ -113,6 +115,9 @@ class PhotosPresenter(object):
                 value_set(self._slider_target)
         self._view.update_async(self._view.unlock_ui)
 
+    def _do_blur_select(self, blur_type):
+	self._model.set_blur_type(blur_type)
+
     #UI callbacks...
     def on_close(self):
         # Prompt for save before quitting
@@ -191,6 +196,11 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_filter_select, (filter_name,))
 
+    def on_blur_select(self, blur_name):
+        if not self._model.is_open():
+            return
+        self._do_blur_select(blur_name)
+
     def on_border_select(self, border_name):
         if not self._model.is_open():
             return
@@ -229,6 +239,18 @@ class PhotosPresenter(object):
     def on_saturation_change(self, value):
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation)
+
+    def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
+	if toggleAction.get_active():
+	    self._do_blur_select("TILT-SHIFT")
+
+    def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
+	if toggleAction.get_active():
+	    self._do_blur_select("DEPTH-OF-FIELD")
+
+    def on_noblur_toggle(self, toggleAction):
+	if toggleAction.get_active():
+	    self._do_blur_select("NONE")
 
     def on_revert(self):
         self._model.clear_options()

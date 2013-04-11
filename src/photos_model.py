@@ -21,6 +21,7 @@ class PhotosModel(object):
         self._borders_path = borders_path
         self._source_image = None
         self._filtered_image = None
+        self._blurred_image = None
         self._distorted_image = None
         self._adjusted_image = None
         self._image_widget = PhotosImageWidget()
@@ -28,8 +29,15 @@ class PhotosModel(object):
         self._is_saved = True
         self._build_filter_dict()
         self._build_border_dict()
+        self._build_blur_dict()
         self._build_distortions_dict()
-        self.clear_options()
+
+    def _build_blur_dict(self):
+	self._blur_dict = collections.OrderedDict([
+	    (_("NONE"), lambda im: im),
+	    (_("TILT-SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
+	    (_("DEPTH-OF-FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
+	])
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -82,6 +90,8 @@ class PhotosModel(object):
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_filter = ""
+        self._last_blur_type = ""
+        self._blur_type = "NONE"
         self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
@@ -130,6 +140,17 @@ class PhotosModel(object):
             return None
         return self._filename
 
+    def get_blur_names(self):
+        return self._blur_dict.keys()
+
+    def get_blur_names_and_thumbnails(self):
+        names_and_thumbs = []
+        blur_no = 0
+        for name in self._blur_dict.keys():
+            names_and_thumbs.append((name, "blur_" + str(blur_no) + ".jpg"))
+            blur_no += 1
+        return names_and_thumbs
+
     def get_filter_names(self):
         return self._filter_dict.keys()
 
@@ -166,6 +187,10 @@ class PhotosModel(object):
 
     def get_brightness(self):
         return self._brightness
+
+    def set_blur_type(self, value):
+	self._blur_type = value
+	self._update_base_image()
 
     def set_brightness(self, value):
         self._brightness = value
@@ -213,6 +238,7 @@ class PhotosModel(object):
             else:
                 print "Filter not supported!"
 
+        distorted = False
         if not self._distort == self._last_distort or filtered:
             self._distorted_image = ImageTools.distortion(self._filtered_image, self._distort)
             distorted = True
@@ -221,10 +247,18 @@ class PhotosModel(object):
         adjusted = not (self._last_brightness == self._brightness
                         and self._last_contrast == self._contrast
                         and self._last_saturation == self._saturation)
+        blurred = False
+        if not self._last_blur_type == self._blur_type or distorted:
+            if self._blur_type in self._blur_dict:
+                blurred = True
+                self._last_blur_type = self._blur_type
+                self._blurred_image = self._blur_dict[self._blur_type](self._distorted_image)
+            else:
+                print "Blur not supported!"
 
-        if filtered or adjusted or distorted:
+        if filtered or adjusted or blurred or distorted:
             # adjust image
-            im = ImageTools.apply_contrast(self._distorted_image, self._contrast)
+            im = ImageTools.apply_contrast(self._blurred_image, self._contrast)
             im = ImageTools.apply_brightness(im, self._brightness)
             im = ImageTools.apply_saturation(im, self._saturation)
             self._adjusted_image = im
