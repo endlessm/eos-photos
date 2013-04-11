@@ -60,6 +60,29 @@ class OptionListToolbar(CategoryToolbar):
     def clicked_callback(self, option_name):
         pass
 
+class BlurToolbar(OptionListToolbar):
+    def __init__(self, images_path="", **kw):
+        super(BlurToolbar, self).__init__(**kw)
+        self._images_path = images_path
+
+    def set_blurs(self, blurs):
+        self.set_options(blurs)
+
+    def get_label(self):
+        return _("Blurs")
+
+    def get_normal_icon_path(self):
+        return "icon_blur_normal.png"
+
+    def get_hover_icon_path(self):
+        return "icon_blur_hover.png"
+
+    def get_thumbnail_prefix(self):
+        return "blur_thumbnails/"
+
+    def clicked_callback(self, blur_name):
+        self._presenter.on_blur_select(blur_name)
+
 
 class BorderToolbar(OptionListToolbar):
     """
