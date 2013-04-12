@@ -192,6 +192,9 @@ class PhotosModel(object):
         self._blur_type = value
         self._update_base_image()
 
+    def get_blur_type(self):
+        return self._blur_type
+
     def set_brightness(self, value):
         self._brightness = value
         self._update_base_image()
