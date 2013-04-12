@@ -1,118 +1,180 @@
-from gi.repository import Gtk
+import collections
+import cairo
+from gi.repository import Gtk, Gdk, GdkPixbuf
+
+from widgets.toolbar_separator import ToolbarSeparator
+from widgets.image_text_button import ImageTextButton
 
 
 class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, images_path="", categories=[], **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._images_path = images_path
 
-        self._filters_image = Gtk.Image.new_from_file(images_path + "Filter-icon.png")
-        self._filters_label = Gtk.Label(label=_("FILTER"), name="filters-title")
-        self._filters_title_box = Gtk.HBox(homogeneous=False, spacing=0)
-        self._filters_title_box.pack_start(self._filters_image, expand=False, fill=False, padding=0)
-        self._filters_title_box.pack_start(self._filters_label, expand=False, fill=False, padding=2)
-        self._filters_title_allign = Gtk.HBox(homogeneous=False, spacing=0)
-        self._filters_title_allign.pack_start(self._filters_title_box, expand=False, fill=False, padding=10)
+        self._categories = {}
+        for category in categories:
+            label = category.get_label()
+            self._categories[label] = CategoryExpander(images_path, category)
+            self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
 
-        self._scroll_contents = Gtk.VBox(homogeneous=False, spacing=8)
-        self._filter_options = {}
+        self._revert_button = ImageTextButton(normal_path=images_path + "icon_restore-photo_normal.png",
+                                              hover_path=images_path + "icon_restore-photo_hover.png",
+                                              down_path=images_path + "icon_restore-photo_normal.png",
+                                              label=_("REVERT TO ORIGINAL"),
+                                              name="revert-button")
+        self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
+        self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
+        self._separator = ToolbarSeparator(images_path=images_path)
+        self.pack_end(self._separator, expand=False, fill=False, padding=0)
+        self._removed_separator = False
 
-        self._scroll_area = Gtk.ScrolledWindow(name="filters-scroll-area")
-        self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        self._scroll_area.add_with_viewport(self._scroll_contents)
-
-        self._drop_shadow = Gtk.Image.new_from_file(images_path + "Filter-mask-shadow.png")
-        self._drop_shadow.set_halign(Gtk.Align.CENTER)
-        self._drop_shadow.set_valign(Gtk.Align.START)
-        self._overlay = Gtk.Overlay()
-        self._overlay.add(self._scroll_area)
-        self._overlay.add_overlay(self._drop_shadow)
-
-        self.pack_start(self._filters_title_allign, expand=False, fill=False, padding=20)
-        self.pack_start(self._overlay, expand=True, fill=True, padding=0)
-
+        self.set_vexpand(True)
         self.show_all()
-
-    def set_filters(self, filters, default):
-        map(self._add_filter_option, filters)
-        self._filter_options[default].select()
-
-    def _add_filter_option(self, name_and_thumb):
-        filter_name = name_and_thumb[0]
-        thumbnail_path = self._images_path + "filter_thumbnails/" + name_and_thumb[1]
-        option = FilterOption(
-            thumbnail_path=thumbnail_path, filter_name=filter_name,
-            clicked_callback=lambda: self._presenter.on_filter_select(filter_name))
-        self._filter_options[filter_name] = option
-        align = Gtk.HBox(homogeneous=False, spacing=0)
-        align.pack_start(option, expand=False, fill=False, padding=30)
-        self._scroll_contents.pack_start(align, expand=False, fill=False, padding=0)
-        self.show_all()
-
-    def select_filter(self, filter_name):
-        for name, option in self._filter_options.items():
-            if name == filter_name:
-                option.select()
-            else:
-                option.deselect()
+        self.connect('size-allocate', self._check_full)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
 
+    def change_category(self, category_label):
+        for label, category in self._categories.items():
+            if not label == category_label:
+                category.deselect()
 
-class FilterOption(Gtk.EventBox):
-    __gtype_name__ = 'FilterOption'
+    def _check_full(self, w, alloc):
+        if alloc.height <= self.get_preferred_height()[1]:
+            if not self._removed_separator:
+                self._removed_separator = True
+                self._separator.hide()
+                # self.remove(self._separator)
+        elif self._removed_separator:
+            self._removed_separator = False
+            self._separator.show()
+            # self.pack_end(self._separator, expand=False, fill=False, padding=0)
 
-    """
-    A selectable filter option with an image and caption.
-    """
-    def __init__(self, thumbnail_path="", filter_name="NORMAL", clicked_callback=None):
-        super(FilterOption, self).__init__(name="filter-event-box")
-        self._filter_name = filter_name
-        self._clicked_callback = clicked_callback
-        self._filter_image = Gtk.Image(name="filter-image", file=thumbnail_path)
-        self._filter_label = Gtk.Label(name="filter-label", label=filter_name)
-	self._filter_label.set_line_wrap(True)
-        self._filter_label.set_size_request(150, -1)
-	table = Gtk.Table(1, 1, False)
-        table.attach(self._filter_label, 0, 1, 0, 1, Gtk.AttachOptions.SHRINK | Gtk.AttachOptions.FILL)
 
+class CategoryScrollWindow(Gtk.ScrolledWindow):
+    def __init__(self, images_path="", **kw):
+        super(CategoryScrollWindow, self).__init__(**kw)
+
+    def do_get_preferred_height(self):
+        children = self.get_children()
+        min_height = Gtk.ScrolledWindow.do_get_preferred_height(self)[0]
+        natural_height = min_height
+        if children:
+            natural_height = max(children[0].get_preferred_height()[1], natural_height)
+        return min_height, natural_height
+
+
+class ScrollWindowDropShadow(Gtk.Widget):
+    def __init__(self, images_path="", **kw):
+        super(ScrollWindowDropShadow, self).__init__(**kw)
+        self._top_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_top-shadow.png")
+        self._top_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_black.png")
+        self._bottom_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_bottom-shadow.png")
+        self._bottom_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_white.png")
+        self.set_has_window(False)
+        self.set_app_paintable(True)
+        self.connect('draw', self._draw)
+        self.connect_after('realize', self._realize)
+
+    def _realize(self, w):
+        # Big old hack to keep from getting input in this widget. Sets the Gdk
+        # input region to be none so events will propagate down.
+        # set_child_input_shapes set this widget to have the input region of
+        # its children and since it has no children this is an empty area.
+        # Other input region methods are not introspectable.
+        window = self.get_window()
+        window.set_child_input_shapes()
+
+    def _draw(self, w, cr):
+        alloc = self.get_allocation()
+        Gdk.cairo_set_source_pixbuf(cr, self._top_shadow, 0, 0)
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._top_separator, 0, 0)
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._bottom_shadow, 0, alloc.height - self._bottom_shadow.get_height())
+        cr.paint()
+        Gdk.cairo_set_source_pixbuf(cr, self._bottom_separator, 0, alloc.height - self._bottom_separator.get_height())
+        cr.paint()
+        return True
+
+
+class CategoryExpander(Gtk.Expander):
+    def __init__(self, images_path, widget, **kw):
+        super(CategoryExpander, self).__init__(**kw)
+
+        self._images_path = images_path
+        self._normal_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_normal_icon_path())
+        self._hover_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_hover_icon_path())
+
+        self._category_icon = Gtk.Image.new_from_pixbuf(self._normal_icon_pixbuf)
+        self._category_label = Gtk.Label(label=widget.get_label(), name="category-label")
+        self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
+        self._hbox.pack_start(self._category_icon, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
+
+        self._up_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-up.png")
+        self._down_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-down.png")
+        self._arrow = Gtk.Image.new_from_pixbuf(self._down_pixbuf)
+
+        self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(self._filter_image, expand=False, fill=False, padding=0)
-        self._vbox.pack_start(table, expand=False, fill=False, padding=2)
+        self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=8)
+        self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
+        # This hackish line keeps the expander widget from downsizing
+        # horizontally after the separator is removed.
+        self._vbox.connect("size-allocate", lambda w, alloc: self._vbox.set_size_request(alloc.width, -1))
+        self.set_label_widget(self._vbox)
 
-        self.add(self._vbox)
+        self._widget = widget
+        self._scroll_area = CategoryScrollWindow(name="filters-scroll-area")
+        self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        self._scroll_area.add_with_viewport(self._widget)
+        self._drop_shadow = ScrollWindowDropShadow(images_path=images_path)
+        self._overlay = Gtk.Overlay()
+        self._overlay.add(self._scroll_area)
+        self._overlay.add_overlay(self._drop_shadow)
+        self.add(self._overlay)
 
-        self.connect('leave-notify-event', self._on_mouse_leave)
+        self.connect('notify::expanded', self._on_expanded)
         self.connect('enter-notify-event', self._on_mouse_enter)
-        self.connect('button-release-event', self._on_button_release)
+        self.connect('leave-notify-event', self._on_mouse_leave)
+
+    def _on_expanded(self, widget, event):
+        if self.get_expanded():
+            self._vbox.remove(self._separator)
+            self._arrow.set_from_pixbuf(self._up_pixbuf)
+            self.get_parent().change_category(self._widget.get_label())
+        else:
+            self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
+            self._arrow.set_from_pixbuf(self._down_pixbuf)
+        self.show_all()
+
+    def _on_mouse_enter(self, widget, event):
+        self._category_icon.set_from_pixbuf(self._hover_icon_pixbuf)
+        # flags = self._category_label.get_state_flags() | Gtk.StateFlags.PRELIGHT
+        # self._category_label.set_state_flags(flags)
+        self._hbox.pack_end(self._arrow, expand=False, fill=False, padding=8)
+        self.show_all()
+
+    def _on_mouse_leave(self, widget, event):
+        self._category_icon.set_from_pixbuf(self._normal_icon_pixbuf)
+        # flags = Gtk.StateFlags(self._category_label.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
+        # self._category_label.set_state_flags(flags)
+        self._hbox.remove(self._arrow)
+        self.show_all()
+
+    def get_widget(self):
+        return self._widget
 
     def select(self):
-        flags = self._filter_image.get_state_flags() | Gtk.StateFlags.SELECTED
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
+        self.set_expanded(True)
 
     def deselect(self):
-        flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.SELECTED)
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
+        self.set_expanded(False)
 
-    def _on_mouse_enter(self, event, data=None):
-        flags = self._filter_image.get_state_flags() | Gtk.StateFlags.PRELIGHT
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
-
-    def _on_mouse_leave(self, event, data=None):
-        flags = Gtk.StateFlags(self._filter_image.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
-        self._filter_image.set_state_flags(flags, True)
-        self._filter_label.set_state_flags(flags, True)
-
-    def _on_button_release(self, event, data=None):
-        #if mouse is no longer over eventbox, don't select the filter
-        if self._filter_image.get_state_flags() & Gtk.StateFlags.PRELIGHT == 0:
-            return
-        if self._clicked_callback is not None:
-            self._clicked_callback()
+    def is_selected(self):
+        return self.get_expanded()

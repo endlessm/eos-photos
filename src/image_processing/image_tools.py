@@ -8,11 +8,16 @@ import colorsys
 from curve import Curve
 from curve import CurveManager
 
+from distortions import Distortion
+
+"""
+Pretty much all the image processing functionality we coded right now. Maybe
+someday split into filters, basic tools, etc.
+"""
+
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
 
-rgb_to_hsv = numpy.vectorize(colorsys.rgb_to_hsv)
-hsv_to_rgb = numpy.vectorize(colorsys.hsv_to_rgb)
 
 def set_curves_path(curves_path):
     global _CURVES_PATH
@@ -32,31 +37,17 @@ def limit_size(image, size_limits):
         new_size = map(int, (width * scale, height * scale))
         return image.resize(new_size, Image.BILINEAR)
 
-def has_alpha(image):
-    return 'a' in image.mode.lower()
+def apply_contrast(image, value):
+    enh = ImageEnhance.Contrast(image)
+    return enh.enhance(value)
 
-def kill_alpha(image):
-    if has_alpha(image):
-        return image.convert("RGB")
-    return image
+def apply_brightness(image, value):
+    enh = ImageEnhance.Brightness(image)
+    return enh.enhance(value)
 
-def apply_brightness(image, brightness):
-    enhancer = ImageEnhance.Brightness(image)
-    return enhancer.enhance(brightness)
-
-def apply_contrast(image, contrast):
-    enhancer = ImageEnhance.Contrast(image)
-    return enhancer.enhance(contrast)
-
-def saturate(image, saturation):
-    image = image.convert('RGBA')
-    arr = numpy.array(numpy.asarray(image).astype('float'))
-    r, g, b, a = numpy.rollaxis(arr, axis=-1)
-    h, s, v = rgb_to_hsv(r, g, b)
-    s = numpy.minimum(1.0, saturation * s)
-    r, g, b = hsv_to_rgb(h, s, v)
-    arr = numpy.dstack((r, g, b, a))
-    return Image.fromarray(arr.astype('uint8'), 'RGBA')
+def apply_saturation(image, value):
+    enh = ImageEnhance.Color(image)
+    return enh.enhance(value)
 
 def apply_curve(image, curve_file):
     img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
@@ -88,13 +79,11 @@ def pixelate(image, pixel_size=10):
 def texture_overlay(image, texture_file, alpha=0.5):
     texture = Image.open(_TEXTURES_PATH + texture_file)
     texture = texture.resize(image.size)
-    texture = texture.convert(image.mode)
     return Image.blend(image, texture, alpha)
 
 def vignette(image, texture_file):
     black = Image.open(_TEXTURES_PATH + "black.png")
     black = black.resize(image.size)
-    black = black.convert(image.mode)
     texture = Image.open(_TEXTURES_PATH + texture_file)
     texture = texture.resize(image.size)
     return Image.composite(black, image, texture)
@@ -109,24 +98,21 @@ def old_photo(image):
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
-    image = kill_alpha(image)
     image = pixelate(image)
     return image.filter(ImageFilter.FIND_EDGES)
 
 def invert(image):
-    image = kill_alpha(image)
     return ImageOps.invert(image)
 
 def solarize(image):
-    image = kill_alpha(image)
     return ImageOps.solarize(image)
 
 def posterize(image, bits=2):
-    image = kill_alpha(image)
     return ImageOps.posterize(image, bits)
 
 def grayscale(image):
     image = ImageOps.grayscale(image)
+    image = image.convert('RGB')
     return vignette(image, "light_vignette.png")
 
 def grunge(image):
@@ -155,7 +141,7 @@ def desert(image):
     return vignette(image, "weird_vignette.png")
 
 def lumo(image):
-    image = saturate(image, 1.2)
+    image = apply_saturation(image, 1.2)
     image = texture_overlay(image, "paper.jpg", 0.15)
     image = apply_curve(image, "lumo.acv")
     return vignette(image, "heavy_vignette.png")
@@ -163,10 +149,18 @@ def lumo(image):
 def trains(image):
     image = apply_curve(image, "trains.acv")
     return vignette(image, "heavy_vignette.png")
-    return image
 
 def colorful(image):
     image = apply_contrast(image, 1.3)
-    image = saturate(image, 1.4)
+    image = apply_saturation(image, 1.4)
     image = vignette(image, "light_vignette.png")
     return image
+
+def distortion(image, disort_name):
+    if disort_name == "NONE":
+        return image
+    image_array = numpy.array(image)
+    distortion = Distortion(image_array)
+    result = distortion.apply(disort_name)
+    return Image.fromarray(result, 'RGB')
+    

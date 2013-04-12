@@ -3,12 +3,14 @@ import Queue
 import traceback
 
 class AsyncWorker(Thread):
-
+    """
+    Tiny class to queue up tasks to run on a worker thread.
+    """
     def __init__(self):
         Thread.__init__(self)
         self.queue = Queue.Queue(0)
 
-    def add_task(self, task, args):
+    def add_task(self, task, args=()):
         self.queue.put((task, args))
 
     def run(self):

@@ -1,3 +1,15 @@
+endlessos-base-photos (2.1) unstable; urgency=low
+
+  * Small font styling fix, and maximizes when relaunched from desktop.
+
+ -- dev1 <endlessmobile@gmail.com>  Wed, 10 Apr 2013 06:16:45 -0700
+
+endlessos-base-photos (2.0) unstable; urgency=low
+
+  * First release of version 2 with distortions, borders and adjustments
+
+ -- dev1 <endlessmobile@gmail.com>  Fri, 29 Mar 2013 16:16:12 -0700
+
 endlessos-base-photos (1.3) unstable; urgency=low
 
   * Shows spinners when calculating filters. Bug fixes.

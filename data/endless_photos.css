@@ -1,5 +1,30 @@
 * {
+    /*defaults*/
     engine: unico;
+    -GtkWidget-focus-line-width: 0px;
+    -GtkExpander-expander-size: 0px;
+    -GtkExpander-focus-line-width: 0px;
+    -GtkExpander-expander-spacing: 0px;
+    -GtkExpander-focus-padding: 0px;
+}
+
+:insensitive {
+    text-shadow: none;
+}
+
+GtkExpander:hover {
+    background-color: transparent;
+}
+
+GtkExpander {
+    -unico-border-gradient: none;
+    -unico-inner-stroke-gradient: none;
+    -unico-focus-fill-color: transparent;
+    -unico-inner-stroke-width: 0;
+    -unico-outer-stroke-width: 0;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
 }
 
 GtkButton {
@@ -15,48 +40,59 @@ GtkOverlay {
     background-color: transparent;
 }
 
+#splash-label {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-size: 46;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* TODO: Fix the hardcoded path. */
+#splash-eventbox {
+    background-image: url("../images/background_splash.jpg");
+}
+
 #fullscreen-back {
     background-color: black;
 }
 
-#filter-event-box {
+#filter-button {
+    -GtkButton-child-displacement-x: 0;
+    -GtkButton-child-displacement-y: 0;
     background-color: transparent;
+    background-image: none;
+    border-width: 0;
 }
 
-#filter-image {
-    border-style: solid;
-    border-width: 2px;
-    border-color: transparent;
+#filter-button:hover {
+    background-color: rgba(122, 122, 122, 0.15);
 }
 
-#filter-image:hover {
-    border-color: #404040;
-}
-
-#filter-image:selected {
-    border-color: white;
+#filter-button:selected {
+    background-color: white;
 }
 
 #filter-label {
     font-family: Ubuntu;
+    text-shadow: none;
     font-style: normal;
     font-weight: bold;
     font-size: 12;
     color: #7e7e7e;
 }
 
-#filter-label:selected {
-    color: #ffffff;
-}
-
-#filters-title {
+#category-label {
     font-family: Ubuntu;
+    text-shadow: none;
     font-style: normal;
     font-weight: bold;
     font-size: 13;
-    color: #ffffff;
+    color: #999999;
 }
 
+#category-label:hover {
+    color: #ffffff;
+}
 
 #save-button GtkLabel,
 #share-button GtkLabel,
@@ -86,52 +122,103 @@ GtkOverlay {
 #email-button,
 #close-button,
 #minimize-button {
-    -GtkWidget-focus-line-width: 0;
     background-color: transparent;
     background-image: none;
     border-width: 0;
 }
 
-#open-photos-button {
+#splash-open-photos-button {
     -GtkWidget-focus-line-width: 0;
-    border-width: 1px;
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#5c5c5c),
-                                     to (rgba(1,2,2,0.34)));
+    border-width: 0px;
     background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #484848),
-                                     color-stop(1.0, #303030));
+                                     color-stop(0.0, #A6AC00),
+                                     color-stop(1.0, #A6AC00));
+    padding: 5px 9px 5px 9px;
 }
 
+#splash-open-photos-button GtkLabel {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-size: 12;
+    padding-left: 3px;
+    color: #FFFFFF;
+}
+
+#splash-open-photos-button GtkLabel:hover {
+    color: #FFFFFF;
+}
+
+#splash-open-photos-button:hover {
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     color-stop(0.0, #B5BC08),
+                                     color-stop(1.0, #A6AC00));
+}
+
+#splash-open-photos-button:active {
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     from (#898E07),
+                                     to (#AAAF03));
+}
+
+#revert-button,
+#open-photos-button {
+    padding: 8px 0px 8px 0px;
+    background-color: transparent;
+    background-image: none;
+    border-radius: 0;
+    border-width: 0;
+}
+
+#revert-button GtkLabel,
 #open-photos-button GtkLabel {
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
-    font-size: 12;
+    font-size: 10;
     text-shadow: 0 -1 rgba(0,0,0,0.75);
-    color: #787878;
+    color: #999999;
 }
 
+#revert-button GtkLabel:hover,
 #open-photos-button GtkLabel:hover {
-    color: #888888;
+    color: #ffffff;
+}
+
+#revert-button GtkLabel:active,
+#open-photos-button GtkLabel:active {
+    color: #999999;
+}
+
+#revert-button GtkImage {
+    padding: 0px 3px 0px 5px;
+}
+
+#revert-button:hover {
+    background-image: url("../images/restore-photo_bg_hover.png");
+}
+
+#revert-button:active {
+    background-image: url("../images/restore-photo_bg_down.png");
+}
+
+#revert-button GtkLabel {
+    padding: 0px 3px 0px 0px;
+}
+
+#open-photos-button GtkImage {
+    padding: 0px 5px 0px 9px;
 }
 
 #open-photos-button:hover {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#676767),
-                                     to (rgba(1,2,2,0.4)));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     color-stop(0.0, #565656),
-                                     color-stop(1.0, #343434));
+    background-image: url("../images/topbar_OpenPhoto_hover_bg.png");
 }
 
 #open-photos-button:active {
-    -unico-border-gradient: -gtk-gradient (linear, left top, left bottom,
-                                     from (#191919),
-                                     to (#282828));
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from (#1a1a1a),
-                                     to (#292929));
+    background-image: url("../images/topbar_OpenPhoto_down_bg.png");
+}
+
+#open-photos-button GtkLabel {
+    padding: 0px 10px 0px 0px;
 }
 
 #filters-scroll-area > GtkViewport {
@@ -161,7 +248,48 @@ GtkOverlay {
     background-color: #5c5c5c;
 }
 
+#image-container{
+    border-color: white;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 0px;
+    -unico-border-gradient: none;
+}
+
 .primary-toolbar {
     background-image: -gtk-gradient(linear, center top, center bottom,
         color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
 }
+
+GtkScale {
+    -GtkRange-slider-width: 18;
+    -GtkRange-trough-border: 0;
+    -GtkScale-slider-length: 18;
+    -unico-focus-fill-color: transparent;
+}
+
+.scale.slider {
+    background-image: url("../images/slider_knob_normal.png");
+}
+
+.scale.slider:hover {
+    background-image: url("../images/slider_knob_hover.png");
+}
+
+.scale.highlight.left{
+    background-image: none;
+    background-color: black;
+    border-width: 0px;
+
+    -unico-inner-stroke-width: 0px;
+}
+
+
+.scale.trough{
+    background-image: none;
+    background-color: black;
+    border-width: 0px;
+
+}
+
+
