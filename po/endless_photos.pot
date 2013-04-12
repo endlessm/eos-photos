@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-21 02:23-0700\n"
+"POT-Creation-Date: 2013-04-12 03:08-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,59 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/photos_model.py:49
+#: src/photos_category_toolbars.py:212
+msgid "Adjust"
+msgstr ""
+
+#: src/photos_model.py:63
 msgid "BOXELATE"
 msgstr ""
 
-#: src/photos_model.py:35
+#: src/photos_model.py:74
+msgid "BRUSH"
+msgstr ""
+
+#: src/photos_model.py:81
+msgid "BULGE"
+msgstr ""
+
+#: src/photos_category_toolbars.py:72
+msgid "Blurs"
+msgstr ""
+
+#: src/photos_category_toolbars.py:95
+msgid "Borders"
+msgstr ""
+
+#: src/photos_model.py:49
 msgid "COLORFUL"
 msgstr ""
 
-#: src/photos_model.py:32
+#: src/photos_model.py:46
 msgid "COUNTRY"
 msgstr ""
 
-#: src/photos_model.py:43
+#: src/photos_model.py:71
+msgid "CRAYON"
+msgstr ""
+
+#: src/splash_screen.py:37
+msgid "Choose one of your photos to begin!"
+msgstr ""
+
+#: src/photos_model.py:39
+msgid "DEPTH-OF-FIELD"
+msgstr ""
+
+#: src/photos_model.py:57
 msgid "DESERT"
 msgstr ""
 
-#: src/photos_model.py:47
+#: src/photos_category_toolbars.py:141
+msgid "Distortions"
+msgstr ""
+
+#: src/photos_model.py:61
 msgid "EDGES"
 msgstr ""
 
@@ -41,19 +77,19 @@ msgstr ""
 msgid "EMAIL"
 msgstr ""
 
-#: src/photos_model.py:46
+#: src/photos_model.py:60
 msgid "EMBOSS"
 msgstr ""
 
-#: src/photos_presenter.py:85
+#: src/photos_presenter.py:96
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:165
+#: src/photos_presenter.py:182
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:158
+#: src/photos_presenter.py:175
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
@@ -61,27 +97,39 @@ msgstr ""
 msgid "FACEBOOK"
 msgstr ""
 
-#: src/photos_left_toolbar.py:13
-msgid "FILTER"
+#: src/photos_model.py:80
+msgid "FISH EYE"
 msgstr ""
 
-#: src/photos_model.py:40
+#: src/photos_model.py:54
 msgid "FOGGY BLUE"
 msgstr ""
 
-#: src/photos_model.py:31
-msgid "GRAYSCALE"
-msgstr ""
-
-#: src/photos_model.py:33
-msgid "GRUNGIFY"
+#: src/photos_category_toolbars.py:118
+msgid "Filters"
 msgstr ""
 
 #: src/photos_model.py:45
+msgid "GRAYSCALE"
+msgstr ""
+
+#: src/photos_model.py:72
+msgid "GRUNGE"
+msgstr ""
+
+#: src/photos_model.py:47
+msgid "GRUNGIFY"
+msgstr ""
+
+#: src/photos_model.py:69
+msgid "HORIZONTAL BARS"
+msgstr ""
+
+#: src/photos_model.py:59
 msgid "INVERT"
 msgstr ""
 
-#: src/photos_model.py:37
+#: src/photos_model.py:51
 msgid "LUMO"
 msgstr ""
 
@@ -90,11 +138,15 @@ msgstr ""
 msgid "Login failed."
 msgstr ""
 
-#: src/photos_presenter.py:158 src/photos_presenter.py:165
+#: src/photos_presenter.py:175 src/photos_presenter.py:182
 msgid "Message"
 msgstr ""
 
-#: src/photos_model.py:30
+#: src/photos_model.py:37 src/photos_model.py:68 src/photos_model.py:79
+msgid "NONE"
+msgstr ""
+
+#: src/photos_model.py:44
 msgid "NORMAL"
 msgstr ""
 
@@ -104,31 +156,35 @@ msgid ""
 "again."
 msgstr ""
 
-#: src/photos_model.py:34
+#: src/photos_model.py:48
 msgid "OLD PHOTO"
 msgstr ""
 
-#: src/photos_top_toolbar.py:30
+#: src/photos_top_toolbar.py:18
 msgid "OPEN IMAGE"
 msgstr ""
 
-#: src/photos_view.py:70
+#: src/photos_view.py:117 src/splash_screen.py:33
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:119
+#: src/photos_view.py:166
 msgid "Open New Photo Without Save?"
 msgstr ""
 
-#: src/photos_model.py:41
+#: src/photos_model.py:55
 msgid "PAPER"
 msgstr ""
 
-#: src/photos_model.py:48
+#: src/photos_model.py:82
+msgid "PINCH"
+msgstr ""
+
+#: src/photos_model.py:62
 msgid "PIXELATE"
 msgstr ""
 
-#: src/photos_model.py:44
+#: src/photos_model.py:58
 msgid "POSTERIZE"
 msgstr ""
 
@@ -141,11 +197,15 @@ msgstr ""
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr ""
 
-#: src/photos_view.py:133
+#: src/photos_view.py:180
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_presenter.py:165
+#: src/photos_left_toolbar.py:26
+msgid "REVERT TO ORIGINAL"
+msgstr ""
+
+#: src/photos_presenter.py:182
 msgid "Recipient email"
 msgstr ""
 
@@ -157,7 +217,19 @@ msgstr ""
 msgid "SAVE"
 msgstr ""
 
-#: src/photos_view.py:96
+#: src/photos_model.py:70
+msgid "SIDE BARS"
+msgstr ""
+
+#: src/photos_model.py:73
+msgid "SPRAY"
+msgstr ""
+
+#: src/photos_model.py:83
+msgid "SWIRL"
+msgstr ""
+
+#: src/photos_view.py:143
 msgid "Save Image"
 msgstr ""
 
@@ -165,21 +237,29 @@ msgstr ""
 msgid "Someone"
 msgstr ""
 
-#: src/photos_model.py:42
+#: src/photos_model.py:38
+msgid "TILT-SHIFT"
+msgstr ""
+
+#: src/photos_model.py:56
 msgid "TRAINS"
 msgstr ""
 
-#: src/photos_presenter.py:165
+#: src/photos_category_toolbars.py:24
+msgid "Untitled"
+msgstr ""
+
+#: src/photos_presenter.py:182
 msgid "Your Name"
 msgstr ""
 
-#: src/photos_view.py:120
+#: src/photos_view.py:167
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:134
+#: src/photos_view.py:181
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr ""
 

@@ -1,6 +1,9 @@
 import numpy
+import math
+from scipy import ndimage, stats
 import Image
 import ImageOps
+import ImageDraw
 import ImageFilter
 import ImageEnhance
 import colorsys
@@ -95,6 +98,75 @@ def old_photo(image):
     image = apply_curve(image, "lumo.acv")
     image = sepia_tone(image)
     return texture_overlay(image, "old_film.jpg", 0.25)
+
+def _depth_of_field_mask(center_x, center_y, (height, width), radius):
+    # center_x/center_y: the (x,y) coordinate of the transparent disk
+    # radius: radius of the transparent disk
+    # height/width: dimensions of the blur mask
+    yy, xx = numpy.mgrid[0:height, 0:width]
+    xx = xx - center_x
+    yy = yy - center_y
+    rad = numpy.sqrt(numpy.power(xx, 2) + numpy.power(yy, 2))
+    rad = stats.threshold(rad, threshmax=radius, newval=radius)
+    rad = (rad / radius) * 255
+    mask = Image.fromarray(numpy.uint8(rad))
+
+    return mask
+
+def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
+    # angle: the slope of the linear blur gradient, measured from rot_angle
+    # rot_angle: corresponds to the angle of the plane of focus
+    # center_pct: value from (0,1) indicating where the focus is on the y axis
+    # amplitude: scales the blur after normalization
+    c = int(height * center_pct)
+    rot_angle = 90.0
+    mask = Image.new('L', (1,height))
+    draw = ImageDraw.Draw(mask)
+    l_slope = math.tan(math.radians(rot_angle + angle))
+    l_max = -l_slope * c
+    l_intercept = l_max
+    r_slope = math.tan(math.radians(rot_angle - angle))
+    r_max = r_slope * (height - c)
+    r_intercept = -r_slope * c
+    for y in range(0,c):
+        raw = l_slope * y + l_intercept
+        raw = (raw / l_max) * amplitude
+        normalized = raw if raw < 255 else 255
+        draw.point((0,y), normalized)
+    for y in range(c,height):
+        raw = r_slope * y + r_intercept
+        raw = (raw / r_max) * amplitude
+        normalized = raw if raw < 255 else 255
+        draw.point((0,y), normalized)
+
+    return mask
+
+def tilt_shift_blur(image):
+    mask = _tilt_shift_mask(30.0, 90.0, image.size, 0.5, 350)
+    
+    return blur_with_mask(image, mask, 8)
+
+def depth_of_field_blur(image):
+    height, width = image.size
+    mask = _depth_of_field_mask(width/2, height/2, image.size, width/2)
+    
+    return blur_with_mask(image, mask, 8)
+
+def boring_blur(image):
+    return image.filter(ImageFilter.BLUR)
+
+def blur_with_mask(image, mask, amount):
+    blur_size = amount
+
+    base = image.copy()
+    mask = mask.resize(base.size)
+    blurred = numpy.array(base, dtype=float)
+    blurred = ndimage.gaussian_filter(blurred, sigma=[blur_size,blur_size,0])
+    blurred = Image.fromarray(numpy.uint8(blurred))
+    
+    # paste the blurred image onto the original, using the alpha mask
+    base.paste(blurred, (0,0), mask)
+    return base
 
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
