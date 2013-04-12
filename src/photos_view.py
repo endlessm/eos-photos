@@ -94,7 +94,7 @@ class PhotosView(object):
         self._filters.select(filter_name)
 
     def select_blur(self, blur_name):
-        self._blurs.select_blur(blur_name)
+        self._blurs.select(blur_name)
 
     def select_border(self, border_name):
         self._borders.select(border_name)
