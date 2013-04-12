@@ -33,11 +33,11 @@ class PhotosModel(object):
         self._build_distortions_dict()
 
     def _build_blur_dict(self):
-	self._blur_dict = collections.OrderedDict([
-	    (_("NONE"), lambda im: im),
-	    (_("TILT-SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
-	    (_("DEPTH-OF-FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
-	])
+        self._blur_dict = collections.OrderedDict([
+            (_("NONE"), lambda im: im),
+            (_("TILT-SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
+            (_("DEPTH-OF-FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
+        ])
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
@@ -189,8 +189,8 @@ class PhotosModel(object):
         return self._brightness
 
     def set_blur_type(self, value):
-	self._blur_type = value
-	self._update_base_image()
+        self._blur_type = value
+        self._update_base_image()
 
     def set_brightness(self, value):
         self._brightness = value
@@ -229,40 +229,44 @@ class PhotosModel(object):
     def _update_base_image(self):
         if (not self.is_open()):
             return
-        filtered = False
+        modified = False
+        # filter
         if not self._filter == self._last_filter:
             if self._filter in self._filter_dict:
-                filtered = True
+                modified = True
                 self._last_filter = self._filter
                 self._filtered_image = self._filter_dict[self._filter](self._source_image)
             else:
                 print "Filter not supported!"
 
-        distorted = False
-        if not self._distort == self._last_distort or filtered:
+        # distort
+        if not self._distort == self._last_distort or modified:
+            modified = True
             self._distorted_image = ImageTools.distortion(self._filtered_image, self._distort)
-            distorted = True
             self._last_distort = self._distort
 
-        adjusted = not (self._last_brightness == self._brightness
-                        and self._last_contrast == self._contrast
-                        and self._last_saturation == self._saturation)
-        blurred = False
-        if not self._last_blur_type == self._blur_type or distorted:
+        # blur
+        if not self._last_blur_type == self._blur_type or modified:
             if self._blur_type in self._blur_dict:
-                blurred = True
+                modified = True
                 self._last_blur_type = self._blur_type
                 self._blurred_image = self._blur_dict[self._blur_type](self._distorted_image)
             else:
                 print "Blur not supported!"
 
-        if filtered or adjusted or blurred or distorted:
-            # adjust image
+        # adjust
+        adjusted = not (self._last_brightness == self._brightness
+                        and self._last_contrast == self._contrast
+                        and self._last_saturation == self._saturation)
+        if adjusted or modified:
+            modified = True
             im = ImageTools.apply_contrast(self._blurred_image, self._contrast)
             im = ImageTools.apply_brightness(im, self._brightness)
             im = ImageTools.apply_saturation(im, self._saturation)
             self._adjusted_image = im
-            # update widget
+
+        # update widget
+        if modified:
             width, height = self._adjusted_image.size
             self._image_widget.replace_base_image(
                 self._adjusted_image.tostring(), width, height)

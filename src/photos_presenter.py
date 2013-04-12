@@ -116,7 +116,7 @@ class PhotosPresenter(object):
         self._view.update_async(self._view.unlock_ui)
 
     def _do_blur_select(self, blur_type):
-	self._model.set_blur_type(blur_type)
+        self._model.set_blur_type(blur_type)
 
     #UI callbacks...
     def on_close(self):
@@ -241,16 +241,16 @@ class PhotosPresenter(object):
             value, self._model.get_saturation, self._model.set_saturation)
 
     def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
-	if toggleAction.get_active():
-	    self._do_blur_select("TILT-SHIFT")
+        if toggleAction.get_active():
+            self._do_blur_select("TILT-SHIFT")
 
     def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
-	if toggleAction.get_active():
-	    self._do_blur_select("DEPTH-OF-FIELD")
+        if toggleAction.get_active():
+            self._do_blur_select("DEPTH-OF-FIELD")
 
     def on_noblur_toggle(self, toggleAction):
-	if toggleAction.get_active():
-	    self._do_blur_select("NONE")
+        if toggleAction.get_active():
+            self._do_blur_select("NONE")
 
     def on_revert(self):
         self._model.clear_options()
