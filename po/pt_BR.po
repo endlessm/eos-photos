@@ -11,27 +11,27 @@ msgstr ""
 
 #: src/photos_category_toolbars.py:212
 msgid "Adjust"
-msgstr ""
+msgstr "Ajustar"
 
 #: src/photos_model.py:63
 msgid "BOXELATE"
-msgstr ""
+msgstr "BOXELATE"
 
 #: src/photos_model.py:74
 msgid "BRUSH"
-msgstr ""
+msgstr "ESCOVAR"
 
 #: src/photos_model.py:81
 msgid "BULGE"
-msgstr ""
+msgstr "INCHAR"
 
 #: src/photos_category_toolbars.py:72
 msgid "Blurs"
-msgstr ""
+msgstr "Ofuscar"
 
 #: src/photos_category_toolbars.py:95
 msgid "Borders"
-msgstr ""
+msgstr "Fronteiras"
 
 #: src/photos_model.py:49
 msgid "COLORFUL"
@@ -39,19 +39,19 @@ msgstr "COLORIDO"
 
 #: src/photos_model.py:46
 msgid "COUNTRY"
-msgstr "PAÍS"
+msgstr "PROVINCIA"
 
 #: src/photos_model.py:71
 msgid "CRAYON"
-msgstr ""
+msgstr "CRAYON"
 
 #: src/splash_screen.py:37
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "Escolha uma de suas fotos para começar!"
 
 #: src/photos_model.py:39
 msgid "DEPTH-OF-FIELD"
-msgstr ""
+msgstr "PROFUNDIDADE-DE-CAMPO"
 
 #: src/photos_model.py:57
 msgid "DESERT"
@@ -59,7 +59,7 @@ msgstr "DESERTO"
 
 #: src/photos_category_toolbars.py:141
 msgid "Distortions"
-msgstr ""
+msgstr "Distorções"
 
 #: src/photos_model.py:61
 msgid "EDGES"
@@ -92,7 +92,7 @@ msgstr "FACEBOOK"
 
 #: src/photos_model.py:80
 msgid "FISH EYE"
-msgstr ""
+msgstr "FISH EYE"
 
 #: src/photos_model.py:54
 msgid "FOGGY BLUE"
@@ -100,7 +100,7 @@ msgstr "NÉVOA AZUL"
 
 #: src/photos_category_toolbars.py:118
 msgid "Filters"
-msgstr ""
+msgstr "Filtros"
 
 #: src/photos_model.py:45
 msgid "GRAYSCALE"
@@ -108,15 +108,15 @@ msgstr "TONS DE CINZA"
 
 #: src/photos_model.py:72
 msgid "GRUNGE"
-msgstr ""
+msgstr "GRUNGE"
 
 #: src/photos_model.py:47
 msgid "GRUNGIFY"
-msgstr ""
+msgstr "GRUNGIFICAR"
 
 #: src/photos_model.py:69
 msgid "HORIZONTAL BARS"
-msgstr ""
+msgstr "BARRAS HORIZONTAIS"
 
 #: src/photos_model.py:59
 msgid "INVERT"
@@ -124,7 +124,7 @@ msgstr "INVERTER"
 
 #: src/photos_model.py:51
 msgid "LUMO"
-msgstr ""
+msgstr "LUMO"
 
 #: src/share/facebook_post.py:37 src/share/facebook_post.py:42
 #: src/share/facebook_post.py:70
@@ -137,7 +137,7 @@ msgstr "Mensagem"
 
 #: src/photos_model.py:37 src/photos_model.py:68 src/photos_model.py:79
 msgid "NONE"
-msgstr ""
+msgstr "NENHUM"
 
 #: src/photos_model.py:44
 msgid "NORMAL"
@@ -165,7 +165,7 @@ msgstr "Abrir Imagem"
 
 #: src/photos_view.py:166
 msgid "Open New Photo Without Save?"
-msgstr "Abra Nova Foto Sem Salvar?"
+msgstr "Abrir Nova Foto Sem Salvar?"
 
 #: src/photos_model.py:55
 msgid "PAPER"
@@ -173,7 +173,7 @@ msgstr "PAPEL"
 
 #: src/photos_model.py:82
 msgid "PINCH"
-msgstr ""
+msgstr "BELISCAR"
 
 #: src/photos_model.py:62
 msgid "PIXELATE"
@@ -200,7 +200,7 @@ msgstr "Sair Sem Salvar?"
 
 #: src/photos_left_toolbar.py:26
 msgid "REVERT TO ORIGINAL"
-msgstr ""
+msgstr "REGRESSAR AO ORIGINAL"
 
 #: src/photos_presenter.py:182
 msgid "Recipient email"
@@ -218,15 +218,15 @@ msgstr "SALVAR"
 
 #: src/photos_model.py:70
 msgid "SIDE BARS"
-msgstr ""
+msgstr "BARRAS LATERAIS"
 
 #: src/photos_model.py:73
 msgid "SPRAY"
-msgstr ""
+msgstr "SPRAY"
 
 #: src/photos_model.py:83
 msgid "SWIRL"
-msgstr ""
+msgstr "REDEMOINHO"
 
 #: src/photos_view.py:143
 msgid "Save Image"
@@ -246,7 +246,7 @@ msgstr ""
 
 #: src/photos_category_toolbars.py:24
 msgid "Untitled"
-msgstr ""
+msgstr "Sem Título"
 
 #: src/photos_presenter.py:182
 msgid "Your Name"
