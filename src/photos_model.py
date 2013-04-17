@@ -35,8 +35,8 @@ class PhotosModel(object):
     def _build_blur_dict(self):
         self._blur_dict = collections.OrderedDict([
             (_("NONE"), lambda im: im),
-            (_("TILT-SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
-            (_("DEPTH-OF-FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
+            (_("TILT SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
+            (_("DEPTH OF FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
         ])
 
     def _build_filter_dict(self):
@@ -56,18 +56,18 @@ class PhotosModel(object):
             (_("TRAINS"), lambda im: ImageTools.trains(im)),
             (_("DESERT"), lambda im: ImageTools.desert(im)),
             (_("POSTERIZE"), lambda im: ImageTools.posterize(im)),
-            (_("INVERT"), lambda im: ImageTools.invert(im)),
-            (_("EMBOSS"), lambda im: im.filter(ImageFilter.EMBOSS)),
+            # (_("INVERT"), lambda im: ImageTools.invert(im)),
+            # (_("EMBOSS"), lambda im: im.filter(ImageFilter.EMBOSS)),
             (_("EDGES"), lambda im: im.filter(ImageFilter.FIND_EDGES)),
-            (_("PIXELATE"), lambda im: ImageTools.pixelate(im)),
-            (_("BOXELATE"), lambda im: ImageTools.boxelate(im)),
+            # (_("PIXELATE"), lambda im: ImageTools.pixelate(im)),
+            # (_("BOXELATE"), lambda im: ImageTools.boxelate(im)),
         ])
 
     def _build_border_dict(self):
         self._border_dict = collections.OrderedDict([
             (_("NONE"), None),
-            (_("HORIZONTAL BARS"), "horizontal_bars.png"),
-            (_("SIDE BARS"), "vertical_bars.png"),
+            # (_("HORIZONTAL BARS"), "horizontal_bars.png"),
+            # (_("SIDE BARS"), "vertical_bars.png"),
             (_("CRAYON"), "frame_3x2_crayon.png"),
             (_("GRUNGE"), "frame_3x2_grunge.png"),
             (_("SPRAY"), "frame_3x2_spray.png"),
@@ -86,12 +86,12 @@ class PhotosModel(object):
     def clear_options(self):
         self._filter = self._get_default_filter()
         self._distort = self._get_default_distortion()
+        self._blur_type = self._get_default_blur()
         self._brightness = 1.0
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_filter = ""
         self._last_blur_type = ""
-        self._blur_type = "NONE"
         self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
@@ -108,6 +108,9 @@ class PhotosModel(object):
 
     def _get_default_distortion(self):
         return self._distortions_dict.keys()[0]
+
+    def _get_default_blur(self):
+        return self._blur_dict.keys()[0]
 
     def get_image_widget(self):
         return self._image_widget
@@ -162,6 +165,9 @@ class PhotosModel(object):
             filter_no += 1
         return names_and_thumbs
 
+    def get_border_names(self):
+        return self._border_dict.keys()
+
     def get_border_names_and_thumbnails(self):
         names_and_thumbs = []
         border_no = 0
@@ -169,6 +175,9 @@ class PhotosModel(object):
             names_and_thumbs.append((name, "border_" + str(border_no) + ".png"))
             border_no += 1
         return names_and_thumbs
+
+    def get_distortion_names(self):
+        return self._distortions_dict.keys()
 
     def get_distortion_names_and_thumbnails(self):
         names_and_thumbs = []
@@ -188,11 +197,11 @@ class PhotosModel(object):
     def get_brightness(self):
         return self._brightness
 
-    def set_blur_type(self, value):
+    def set_blur(self, value):
         self._blur_type = value
         self._update_base_image()
 
-    def get_blur_type(self):
+    def get_blur(self):
         return self._blur_type
 
     def set_brightness(self, value):

@@ -6,6 +6,7 @@ images/*.jpg usr/share/endless-os-photos/images
 images/border_thumbnails/* usr/share/endless-os-photos/images/border_thumbnails
 images/distortion_thumbnails/* usr/share/endless-os-photos/images/distortion_thumbnails
 images/filter_thumbnails/* usr/share/endless-os-photos/images/filter_thumbnails
+images/blur_thumbnails/* usr/share/endless-os-photos/images/blur_thumbnails
 images/borders/* usr/share/endless-os-photos/images/borders
 images/textures/* usr/share/endless-os-photos/images/textures
 fonts/* usr/share/fonts/opentype/endless-os-photos
