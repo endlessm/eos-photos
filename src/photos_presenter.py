@@ -40,7 +40,7 @@ class PhotosPresenter(object):
         self._view.select_filter(self._model.get_filter())
         self._view.select_border(self._model.get_border())
         self._view.select_distortion(self._model.get_distortion())
-        self._view.select_blur(self._model.get_blur_type())
+        self._view.select_blur(self._model.get_blur())
         self._view.set_brightness_slider(self._model.get_brightness())
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
@@ -117,7 +117,7 @@ class PhotosPresenter(object):
         self._view.update_async(self._view.unlock_ui)
 
     def _do_blur_select(self, blur_type):
-        self._model.set_blur_type(blur_type)
+        self._model.set_blur(blur_type)
         self._view.update_async(lambda: self._view.select_blur(blur_type))
 
     #UI callbacks...
@@ -174,14 +174,14 @@ class PhotosPresenter(object):
     def on_share(self):
         if not self._model.is_open():
             return
-        info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message"))
+        info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
         if info:
             self._run_locking_task(self._do_post_to_facebook, (info[0],))
 
     def on_email(self):
         if not self._model.is_open():
             return
-        info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name"), _("Recipient email"), _("Message"))
+        info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name:"), _("Recipient email:"), _("Message:"))
         if info:
             self._run_locking_task(self._do_send_email, (info[0], info[1], info[2]))
 

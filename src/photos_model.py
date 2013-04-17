@@ -86,7 +86,7 @@ class PhotosModel(object):
     def clear_options(self):
         self._filter = self._get_default_filter()
         self._distort = self._get_default_distortion()
-        self._blur_type = "NONE"
+        self._blur_type = self._get_default_blur()
         self._brightness = 1.0
         self._contrast = 1.0
         self._saturation = 1.0
@@ -108,6 +108,9 @@ class PhotosModel(object):
 
     def _get_default_distortion(self):
         return self._distortions_dict.keys()[0]
+
+    def _get_default_blur(self):
+        return self._blur_dict.keys()[0]
 
     def get_image_widget(self):
         return self._image_widget
@@ -162,6 +165,9 @@ class PhotosModel(object):
             filter_no += 1
         return names_and_thumbs
 
+    def get_border_names(self):
+        return self._border_dict.keys()
+
     def get_border_names_and_thumbnails(self):
         names_and_thumbs = []
         border_no = 0
@@ -169,6 +175,9 @@ class PhotosModel(object):
             names_and_thumbs.append((name, "border_" + str(border_no) + ".png"))
             border_no += 1
         return names_and_thumbs
+
+    def get_distortion_names(self):
+        return self._distortions_dict.keys()
 
     def get_distortion_names_and_thumbnails(self):
         names_and_thumbs = []
@@ -188,11 +197,11 @@ class PhotosModel(object):
     def get_brightness(self):
         return self._brightness
 
-    def set_blur_type(self, value):
+    def set_blur(self, value):
         self._blur_type = value
         self._update_base_image()
 
-    def get_blur_type(self):
+    def get_blur(self):
         return self._blur_type
 
     def set_brightness(self, value):
