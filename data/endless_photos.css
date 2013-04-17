@@ -45,6 +45,7 @@ GtkOverlay {
     font-style: normal;
     font-size: 46;
     color: rgba(255, 255, 255, 0.6);
+    padding: 0px 0px 20px 0px;
 }
 
 /* TODO: Fix the hardcoded path. */
@@ -79,6 +80,7 @@ GtkOverlay {
     font-weight: bold;
     font-size: 12;
     color: #7e7e7e;
+    padding: 3px 0px 0px 0px;
 }
 
 #category-label {
@@ -139,9 +141,10 @@ GtkOverlay {
 #splash-open-photos-button GtkLabel {
     font-family: Ubuntu;
     font-style: normal;
-    font-size: 12;
+    font-size: 14;
     padding-left: 3px;
     color: #FFFFFF;
+    padding: 2px 4px 2px 4px;
 }
 
 #splash-open-photos-button GtkLabel:hover {
