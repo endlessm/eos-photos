@@ -206,33 +206,41 @@ class PhotosView(object):
     # from the user.
     def get_message(self, prompt, *args):
         dialog = Gtk.MessageDialog(
-            self.get_window(), 0,
-            Gtk.MessageType.OTHER, Gtk.ButtonsType.OK_CANCEL,
-            prompt)
-        dialog.set_default_response(Gtk.ResponseType.OK)
+            image=None,
+            parent=self.get_window(),
+            use_markup=True,
+            message_type=Gtk.MessageType.WARNING)
+        dialog.set_markup("<big><b>" + prompt + "</b></big>")
+        dialog.add_button(Gtk.STOCK_OK, 1)
+        dialog.add_button(Gtk.STOCK_CANCEL, 0)
+        dialog.set_default_response(1)
+        dialog.set_size_request(400, -1)
 
         entries = []
         # Create an entry for each of the requested responses
         for msg in args:
             entry = Gtk.Entry()
+            entry.set_size_request(-1, 30)
             entries.append(entry)
-            hbox = Gtk.HBox()
-            hbox.pack_start(Gtk.Label(msg), False, 5, 5)
-            hbox.pack_end(entry, True, True, 0)
-            dialog.vbox.pack_start(hbox, True, True, 0)
+            align = Gtk.Alignment(xalign=0, yalign=0, xscale=0, yscale=0)
+            align.add(Gtk.Label(msg))
+            vbox = Gtk.VBox()
+            vbox.pack_start(align, False, 5, 5)
+            vbox.pack_end(entry, True, True, 0)
+            dialog.get_message_area().pack_start(vbox, True, True, 0)
 
         dialog.show_all()
-        result = dialog.run()
-        # If user clicks cancel, return having done nothing
-        if result == Gtk.ResponseType.CANCEL or result == Gtk.ResponseType.DELETE_EVENT:
-            dialog.destroy()
-            return None
-
-        # Store the responses from user in this list
-        responses = []
-        map(lambda x: responses.append(x.get_text()), entries)
+        confirm = dialog.run()
         dialog.destroy()
-        return responses
+        # If user clicks cancel, return having done nothing
+        if confirm == 1:
+            # Store the responses from user in this list
+            responses = []
+            map(lambda x: responses.append(x.get_text()), entries)
+            print "HEY"
+            return responses
+        else:
+            return None
 
     def lock_ui(self):
         watch = Gdk.Cursor(Gdk.CursorType.WATCH)
