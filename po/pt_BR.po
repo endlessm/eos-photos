@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-18 11:00-0700\n"
+"POT-Creation-Date: 2013-04-18 12:33-0700\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Fronteiras"
 
 #: src/photos_category_toolbars.py:169
 msgid "Brightness"
-msgstr ""
+msgstr "Brilho"
 
 #: src/photos_model.py:49
 msgid "COLORFUL"
@@ -51,12 +51,11 @@ msgstr "Escolha uma de suas fotos para começar!"
 
 #: src/photos_category_toolbars.py:179
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #: src/photos_model.py:39
-#, fuzzy
 msgid "DEPTH OF FIELD"
-msgstr "PROFUNDIDADE-DE-CAMPO"
+msgstr "PROFUND. DE CAMPO"
 
 #: src/photos_model.py:57
 msgid "DESERT"
@@ -121,9 +120,8 @@ msgid "Login failed."
 msgstr "Falha na conexão."
 
 #: src/photos_presenter.py:177 src/photos_presenter.py:184
-#, fuzzy
 msgid "Message:"
-msgstr "Mensagem"
+msgstr "Mensagem:"
 
 #: src/photos_model.py:37 src/photos_model.py:68 src/photos_model.py:79
 msgid "NONE"
@@ -186,7 +184,7 @@ msgstr "Sair Sem Salvar?"
 
 #: src/photos_left_toolbar.py:26
 msgid "REVERT TO ORIGINAL"
-msgstr "REGRESSAR AO ORIGINAL"
+msgstr "VOLTAR AO ORIGINAL"
 
 #: src/photos_presenter.py:184
 #, fuzzy
