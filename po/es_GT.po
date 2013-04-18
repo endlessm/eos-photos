@@ -70,7 +70,6 @@ msgid "EDGES"
 msgstr "BORDES"
 
 #: src/photos_presenter.py:97
-#, fuzzy
 msgid "Email failed."
 msgstr "Email falló."
 
@@ -87,12 +86,10 @@ msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
 #: src/photos_model.py:81
-#, fuzzy
 msgid "FISH EYE HEAVY"
 msgstr "FISH-EYE PESADO"
 
 #: src/photos_model.py:80
-#, fuzzy
 msgid "FISH EYE LIGHT"
 msgstr "FISH-EYE LIGERO"
 
@@ -193,7 +190,6 @@ msgid "REVERT TO ORIGINAL"
 msgstr "VOLVER AL ORIGINAL"
 
 #: src/photos_presenter.py:184
-#, fuzzy
 msgid "Recipient email:"
 msgstr "Email del destinatário"
 
@@ -240,7 +236,6 @@ msgid "Untitled"
 msgstr "Sin Título"
 
 #: src/photos_presenter.py:184
-#, fuzzy
 msgid "Your Name:"
 msgstr "Tu Nombre"
 
@@ -308,7 +303,6 @@ msgstr "Te envié una foto a través de Endless Photos!"
 #~ msgid "SHARPEN"
 #~ msgstr "ACENTUAR"
 
-#, fuzzy
 #~ msgid "SMOOTH"
 #~ msgstr "SUAVIZAR"
 
