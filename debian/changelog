@@ -1,3 +1,9 @@
+endlessos-base-photos (2.2) unstable; urgency=low
+
+  * Updated translations. Design tweaks. Blurs.
+
+ -- matt <endlessmobile@gmail.com>  Thu, 18 Apr 2013 10:50:11 -0700
+
 endlessos-base-photos (2.1) unstable; urgency=low
 
   * Small font styling fix, and maximizes when relaunched from desktop.

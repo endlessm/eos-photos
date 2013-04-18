@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-12 03:08-0700\n"
+"POT-Creation-Date: 2013-04-18 11:00-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,6 @@ msgstr ""
 
 #: src/photos_category_toolbars.py:212
 msgid "Adjust"
-msgstr ""
-
-#: src/photos_model.py:63
-msgid "BOXELATE"
 msgstr ""
 
 #: src/photos_model.py:74
@@ -41,6 +37,10 @@ msgstr ""
 msgid "Borders"
 msgstr ""
 
+#: src/photos_category_toolbars.py:169
+msgid "Brightness"
+msgstr ""
+
 #: src/photos_model.py:49
 msgid "COLORFUL"
 msgstr ""
@@ -53,12 +53,16 @@ msgstr ""
 msgid "CRAYON"
 msgstr ""
 
-#: src/splash_screen.py:37
+#: src/splash_screen.py:38
 msgid "Choose one of your photos to begin!"
 msgstr ""
 
+#: src/photos_category_toolbars.py:179
+msgid "Contrast"
+msgstr ""
+
 #: src/photos_model.py:39
-msgid "DEPTH-OF-FIELD"
+msgid "DEPTH OF FIELD"
 msgstr ""
 
 #: src/photos_model.py:57
@@ -73,23 +77,15 @@ msgstr ""
 msgid "EDGES"
 msgstr ""
 
-#: src/photos_right_toolbar.py:35
-msgid "EMAIL"
-msgstr ""
-
-#: src/photos_model.py:60
-msgid "EMBOSS"
-msgstr ""
-
-#: src/photos_presenter.py:96
+#: src/photos_presenter.py:97
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:182
+#: src/photos_presenter.py:184
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:175
+#: src/photos_presenter.py:177
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
@@ -121,14 +117,6 @@ msgstr ""
 msgid "GRUNGIFY"
 msgstr ""
 
-#: src/photos_model.py:69
-msgid "HORIZONTAL BARS"
-msgstr ""
-
-#: src/photos_model.py:59
-msgid "INVERT"
-msgstr ""
-
 #: src/photos_model.py:51
 msgid "LUMO"
 msgstr ""
@@ -138,8 +126,8 @@ msgstr ""
 msgid "Login failed."
 msgstr ""
 
-#: src/photos_presenter.py:175 src/photos_presenter.py:182
-msgid "Message"
+#: src/photos_presenter.py:177 src/photos_presenter.py:184
+msgid "Message:"
 msgstr ""
 
 #: src/photos_model.py:37 src/photos_model.py:68 src/photos_model.py:79
@@ -164,7 +152,7 @@ msgstr ""
 msgid "OPEN IMAGE"
 msgstr ""
 
-#: src/photos_view.py:117 src/splash_screen.py:33
+#: src/photos_view.py:117 src/splash_screen.py:34
 msgid "Open Image"
 msgstr ""
 
@@ -178,10 +166,6 @@ msgstr ""
 
 #: src/photos_model.py:82
 msgid "PINCH"
-msgstr ""
-
-#: src/photos_model.py:62
-msgid "PIXELATE"
 msgstr ""
 
 #: src/photos_model.py:58
@@ -205,8 +189,8 @@ msgstr ""
 msgid "REVERT TO ORIGINAL"
 msgstr ""
 
-#: src/photos_presenter.py:182
-msgid "Recipient email"
+#: src/photos_presenter.py:184
+msgid "Recipient email:"
 msgstr ""
 
 #: src/share/facebook_post.py:67
@@ -217,16 +201,16 @@ msgstr ""
 msgid "SAVE"
 msgstr ""
 
-#: src/photos_model.py:70
-msgid "SIDE BARS"
-msgstr ""
-
 #: src/photos_model.py:73
 msgid "SPRAY"
 msgstr ""
 
 #: src/photos_model.py:83
 msgid "SWIRL"
+msgstr ""
+
+#: src/photos_category_toolbars.py:189
+msgid "Saturation"
 msgstr ""
 
 #: src/photos_view.py:143
@@ -238,7 +222,7 @@ msgid "Someone"
 msgstr ""
 
 #: src/photos_model.py:38
-msgid "TILT-SHIFT"
+msgid "TILT SHIFT"
 msgstr ""
 
 #: src/photos_model.py:56
@@ -249,8 +233,8 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/photos_presenter.py:182
-msgid "Your Name"
+#: src/photos_presenter.py:184
+msgid "Your Name:"
 msgstr ""
 
 #: src/photos_view.py:167

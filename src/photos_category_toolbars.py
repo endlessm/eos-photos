@@ -166,7 +166,7 @@ class AdjustmentToolbar(CategoryToolbar):
         super(AdjustmentToolbar, self).__init__(**kw)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
 
-        self._brightness_label = Gtk.Label(name="filter-label", label="Brightness")
+        self._brightness_label = Gtk.Label(name="filter-label", label=_("Brightness"))
         brightness_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._brightness_slider = Gtk.HScale(adjustment=brightness_adjust, draw_value=False)
         self._brightness_slider.connect(
@@ -176,7 +176,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._vbox.pack_start(self._brightness_label, False, False, 0)
         self._vbox.pack_start(self._brightness_slider, False, False, 0)
 
-        self._contrast_label = Gtk.Label(name="filter-label", label="Contrast")
+        self._contrast_label = Gtk.Label(name="filter-label", label=_("Contrast"))
         contrast_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._contrast_slider = Gtk.HScale(adjustment=contrast_adjust, draw_value=False)
         self._contrast_slider.connect(
@@ -186,7 +186,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._vbox.pack_start(self._contrast_label, False, False, 0)
         self._vbox.pack_start(self._contrast_slider, False, False, 0)
 
-        self._saturation_label = Gtk.Label(name="filter-label", label="Saturation")
+        self._saturation_label = Gtk.Label(name="filter-label", label=_("Saturation"))
         saturation_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._saturation_slider = Gtk.HScale(adjustment=saturation_adjust, draw_value=False)
         self._saturation_slider.connect(
