@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-12 03:08-0700\n"
+"POT-Creation-Date: 2013-04-18 12:33-0700\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -12,10 +12,6 @@ msgstr ""
 #: src/photos_category_toolbars.py:212
 msgid "Adjust"
 msgstr "Ajustar"
-
-#: src/photos_model.py:63
-msgid "BOXELATE"
-msgstr "BOXELATE"
 
 #: src/photos_model.py:74
 msgid "BRUSH"
@@ -33,6 +29,10 @@ msgstr "Difuminar"
 msgid "Borders"
 msgstr "Fronteras"
 
+#: src/photos_category_toolbars.py:169
+msgid "Brightness"
+msgstr "Brillo"
+
 #: src/photos_model.py:49
 msgid "COLORFUL"
 msgstr "COLORIDO"
@@ -45,13 +45,17 @@ msgstr "CAMPO"
 msgid "CRAYON"
 msgstr "CRAYOLA"
 
-#: src/splash_screen.py:37
+#: src/splash_screen.py:38
 msgid "Choose one of your photos to begin!"
 msgstr "Escoge una de tus fotos para empezar!"
 
+#: src/photos_category_toolbars.py:179
+msgid "Contrast"
+msgstr "Contraste"
+
 #: src/photos_model.py:39
-msgid "DEPTH-OF-FIELD"
-msgstr "PROFUNDIDAD-DE-CAMPO"
+msgid "DEPTH OF FIELD"
+msgstr "PROFUND. DE CAMPO"
 
 #: src/photos_model.py:57
 msgid "DESERT"
@@ -65,24 +69,16 @@ msgstr "Distorsión"
 msgid "EDGES"
 msgstr "BORDES"
 
-#: src/photos_right_toolbar.py:35
-msgid "EMAIL"
-msgstr "EMAIL"
-
-#: src/photos_model.py:60
-msgid "EMBOSS"
-msgstr "REALZAR"
-
-#: src/photos_presenter.py:96
+#: src/photos_presenter.py:97
 #, fuzzy
 msgid "Email failed."
 msgstr "Email falló."
 
-#: src/photos_presenter.py:182
+#: src/photos_presenter.py:184
 msgid "Enter a message to add to the e-mail"
 msgstr "Escribe un mensaje para agregar al e-mail"
 
-#: src/photos_presenter.py:175
+#: src/photos_presenter.py:177
 msgid "Enter a message to add to your photo!"
 msgstr "Escribe un mensaje para agregar a tu foto!"
 
@@ -114,14 +110,6 @@ msgstr "GRUNGE"
 msgid "GRUNGIFY"
 msgstr "GRUNGIFICAR"
 
-#: src/photos_model.py:69
-msgid "HORIZONTAL BARS"
-msgstr "BARRAS HORIZONTALES"
-
-#: src/photos_model.py:59
-msgid "INVERT"
-msgstr "INVERTIR"
-
 #: src/photos_model.py:51
 msgid "LUMO"
 msgstr "LUMO"
@@ -131,9 +119,9 @@ msgstr "LUMO"
 msgid "Login failed."
 msgstr "Falla en el login."
 
-#: src/photos_presenter.py:175 src/photos_presenter.py:182
-msgid "Message"
-msgstr "Mensaje"
+#: src/photos_presenter.py:177 src/photos_presenter.py:184
+msgid "Message:"
+msgstr "Mensaje:"
 
 #: src/photos_model.py:37 src/photos_model.py:68 src/photos_model.py:79
 msgid "NONE"
@@ -159,7 +147,7 @@ msgstr "FOTO ANTIGUA"
 msgid "OPEN IMAGE"
 msgstr "ABRIR IMAGEN"
 
-#: src/photos_view.py:117 src/splash_screen.py:33
+#: src/photos_view.py:117 src/splash_screen.py:34
 msgid "Open Image"
 msgstr "Abrir Imagen"
 
@@ -175,10 +163,6 @@ msgstr "PAPEL"
 msgid "PINCH"
 msgstr "PELLIZCAR"
 
-#: src/photos_model.py:62
-msgid "PIXELATE"
-msgstr "PIXELEAR"
-
 #: src/photos_model.py:58
 msgid "POSTERIZE"
 msgstr "POSTERIZAR"
@@ -187,8 +171,8 @@ msgstr "POSTERIZAR"
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr ""
-"Por favor, no responda a este e-mail. Las respuestas son enviadas a una"
-"bandeja de entrada no monitoreada."
+"Por favor, no responda a este e-mail. Las respuestas son enviadas a "
+"unabandeja de entrada no monitoreada."
 
 #: src/share/facebook_post.py:52
 msgid "Post failed. We're not really sure what happened sorry!"
@@ -202,8 +186,9 @@ msgstr "¿Salir Sin Guardar?"
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLVER AL ORIGINAL"
 
-#: src/photos_presenter.py:182
-msgid "Recipient email"
+#: src/photos_presenter.py:184
+#, fuzzy
+msgid "Recipient email:"
 msgstr "Email del destinatário"
 
 #: src/share/facebook_post.py:67
@@ -216,10 +201,6 @@ msgstr ""
 msgid "SAVE"
 msgstr "GUARDAR"
 
-#: src/photos_model.py:70
-msgid "SIDE BARS"
-msgstr "BARRAS LATERALES"
-
 #: src/photos_model.py:73
 msgid "SPRAY"
 msgstr "SPRAY"
@@ -227,6 +208,10 @@ msgstr "SPRAY"
 #: src/photos_model.py:83
 msgid "SWIRL"
 msgstr "REMOLINO"
+
+#: src/photos_category_toolbars.py:189
+msgid "Saturation"
+msgstr "Saturación"
 
 #: src/photos_view.py:143
 msgid "Save Image"
@@ -237,8 +222,8 @@ msgid "Someone"
 msgstr "Alguien"
 
 #: src/photos_model.py:38
-msgid "TILT-SHIFT"
-msgstr "TILT-SHIFT"
+msgid "TILT SHIFT"
+msgstr "TILT SHIFT"
 
 #: src/photos_model.py:56
 msgid "TRAINS"
@@ -248,8 +233,9 @@ msgstr "TRENES"
 msgid "Untitled"
 msgstr "Sin Título"
 
-#: src/photos_presenter.py:182
-msgid "Your Name"
+#: src/photos_presenter.py:184
+#, fuzzy
+msgid "Your Name:"
 msgstr "Tu Nombre"
 
 #: src/photos_view.py:167
@@ -257,8 +243,8 @@ msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
-"Tus cambios no fueron guardados. ¿Estás seguro que deseas abrir una nueva"
-"foto sin guardar?"
+"Tus cambios no fueron guardados. ¿Estás seguro que deseas abrir una "
+"nuevafoto sin guardar?"
 
 #: src/photos_view.py:181
 msgid "Your changes have not been saved. Are you sure you want to quit?"
@@ -267,6 +253,27 @@ msgstr "Tus cambios no han sido guardados. ¿Estás seguro que deseas salir?"
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
 msgstr "Te envié una foto a través de Endless Photos!"
+
+#~ msgid "BOXELATE"
+#~ msgstr "BOXELATE"
+
+#~ msgid "EMAIL"
+#~ msgstr "EMAIL"
+
+#~ msgid "EMBOSS"
+#~ msgstr "REALZAR"
+
+#~ msgid "HORIZONTAL BARS"
+#~ msgstr "BARRAS HORIZONTALES"
+
+#~ msgid "INVERT"
+#~ msgstr "INVERTIR"
+
+#~ msgid "PIXELATE"
+#~ msgstr "PIXELEAR"
+
+#~ msgid "SIDE BARS"
+#~ msgstr "BARRAS LATERALES"
 
 #~ msgid "BLUR"
 #~ msgstr "DIFUMINAR"

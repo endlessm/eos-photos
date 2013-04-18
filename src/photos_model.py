@@ -76,11 +76,11 @@ class PhotosModel(object):
 
     def _build_distortions_dict(self):
         self._distortions_dict = collections.OrderedDict([
-            (_("NONE"), None),
-            (_("FISH EYE"), "horizontal_bars.png"),
-            (_("BULGE"), "vertical_bars.png"),
-            (_("PINCH"), "border-1.png"),
-            (_("SWIRL"), "frame_3x2_crayon.png")
+            (_("NONE"), lambda im: im),
+            (_("FISH EYE"), lambda im: ImageTools.distortion(im, "FISH EYE")),
+            (_("BULGE"), lambda im: ImageTools.distortion(im, "BULGE")),
+            (_("PINCH"), lambda im: ImageTools.distortion(im, "PINCH")),
+            (_("SWIRL"), lambda im: ImageTools.distortion(im, "SWIRL"))
         ])
 
     def clear_options(self):
@@ -254,8 +254,8 @@ class PhotosModel(object):
         # distort
         if not self._distort == self._last_distort or modified:
             modified = True
-            self._distorted_image = ImageTools.distortion(self._filtered_image, self._distort)
             self._last_distort = self._distort
+            self._distorted_image = self._distortions_dict[self._distort](self._filtered_image)
 
         # blur
         if not self._last_blur_type == self._blur_type or modified:
