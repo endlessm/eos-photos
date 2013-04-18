@@ -77,7 +77,8 @@ class PhotosModel(object):
     def _build_distortions_dict(self):
         self._distortions_dict = collections.OrderedDict([
             (_("NONE"), lambda im: im),
-            (_("FISH EYE"), lambda im: ImageTools.distortion(im, "FISH EYE")),
+            (_("FISH EYE LIGHT"), lambda im: ImageTools.distortion(im, "FISH EYE LIGHT")),
+            (_("FISH EYE HEAVY"), lambda im: ImageTools.distortion(im, "FISH EYE HEAVY")),
             (_("BULGE"), lambda im: ImageTools.distortion(im, "BULGE")),
             (_("PINCH"), lambda im: ImageTools.distortion(im, "PINCH")),
             (_("SWIRL"), lambda im: ImageTools.distortion(im, "SWIRL"))

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-18 12:33-0700\n"
+"POT-Creation-Date: 2013-04-18 13:25-0700\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,7 +17,7 @@ msgstr "Ajustar"
 msgid "BRUSH"
 msgstr "ESCOVAR"
 
-#: src/photos_model.py:81
+#: src/photos_model.py:82
 msgid "BULGE"
 msgstr "INCHAR"
 
@@ -70,7 +70,6 @@ msgid "EDGES"
 msgstr "BORDAS"
 
 #: src/photos_presenter.py:97
-#, fuzzy
 msgid "Email failed."
 msgstr "Falha na conexão."
 
@@ -86,9 +85,13 @@ msgstr "Digite uma mensagem para adicionar a sua foto!"
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
+#: src/photos_model.py:81
+msgid "FISH EYE HEAVY"
+msgstr "FISH-EYE PESADO"
+
 #: src/photos_model.py:80
-msgid "FISH EYE"
-msgstr "FISH EYE"
+msgid "FISH EYE LIGHT"
+msgstr "FISH-EYE LEVE"
 
 #: src/photos_model.py:54
 msgid "FOGGY BLUE"
@@ -147,7 +150,7 @@ msgstr "FOTO ANTIGA"
 msgid "OPEN IMAGE"
 msgstr "ABRIR IMAGEM"
 
-#: src/photos_view.py:117 src/splash_screen.py:34
+#: src/splash_screen.py:34 src/photos_view.py:117
 msgid "Open Image"
 msgstr "Abrir Imagem"
 
@@ -159,7 +162,7 @@ msgstr "Abrir Nova Foto Sem Salvar?"
 msgid "PAPER"
 msgstr "PAPEL"
 
-#: src/photos_model.py:82
+#: src/photos_model.py:83
 msgid "PINCH"
 msgstr "BELISCAR"
 
@@ -187,7 +190,6 @@ msgid "REVERT TO ORIGINAL"
 msgstr "VOLTAR AO ORIGINAL"
 
 #: src/photos_presenter.py:184
-#, fuzzy
 msgid "Recipient email:"
 msgstr "Email do destinatário"
 
@@ -205,7 +207,7 @@ msgstr "SALVAR"
 msgid "SPRAY"
 msgstr "SPRAY"
 
-#: src/photos_model.py:83
+#: src/photos_model.py:84
 msgid "SWIRL"
 msgstr "REDEMOINHO"
 
@@ -234,7 +236,6 @@ msgid "Untitled"
 msgstr "Sem Título"
 
 #: src/photos_presenter.py:184
-#, fuzzy
 msgid "Your Name:"
 msgstr "Seu Nome"
 
@@ -302,7 +303,6 @@ msgstr "enviei-lhe uma foto de Endless Photos!"
 #~ msgid "SHARPEN"
 #~ msgstr "TORNAR NÍTIDA"
 
-#, fuzzy
 #~ msgid "SMOOTH"
 #~ msgstr "ALISAR"
 
