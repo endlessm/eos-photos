@@ -61,15 +61,15 @@ class Distortion:
                 radius=radius, order=1)
         elif distort_name == "FISH EYE LIGHT":
             warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.4, radius_d)
-            warp_args['zoom_factor'] = 1.7
+            warp_args['zoom_factor'] = 1.8
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "FISH EYE HEAVY":
             warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.8, radius_d)
-            warp_args['zoom_factor'] = 2.3
+            warp_args['zoom_factor'] = 2.6
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "BULGE":
             warp_args['radius_func'] = lambda radius_d: self.bulge(radius_d)
-            warp_args['zoom_factor'] = 1.3
+            warp_args['zoom_factor'] = 1.45
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "PINCH":
             warp_args['radius_func'] = lambda radius_d: self.pinch(radius_d)
