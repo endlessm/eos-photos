@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-18 12:33-0700\n"
+"POT-Creation-Date: 2013-04-18 13:25-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "BRUSH"
 msgstr ""
 
-#: src/photos_model.py:81
+#: src/photos_model.py:82
 msgid "BULGE"
 msgstr ""
 
@@ -93,8 +93,12 @@ msgstr ""
 msgid "FACEBOOK"
 msgstr ""
 
+#: src/photos_model.py:81
+msgid "FISH EYE HEAVY"
+msgstr ""
+
 #: src/photos_model.py:80
-msgid "FISH EYE"
+msgid "FISH EYE LIGHT"
 msgstr ""
 
 #: src/photos_model.py:54
@@ -152,7 +156,7 @@ msgstr ""
 msgid "OPEN IMAGE"
 msgstr ""
 
-#: src/photos_view.py:117 src/splash_screen.py:34
+#: src/splash_screen.py:34 src/photos_view.py:117
 msgid "Open Image"
 msgstr ""
 
@@ -164,7 +168,7 @@ msgstr ""
 msgid "PAPER"
 msgstr ""
 
-#: src/photos_model.py:82
+#: src/photos_model.py:83
 msgid "PINCH"
 msgstr ""
 
@@ -205,7 +209,7 @@ msgstr ""
 msgid "SPRAY"
 msgstr ""
 
-#: src/photos_model.py:83
+#: src/photos_model.py:84
 msgid "SWIRL"
 msgstr ""
 
