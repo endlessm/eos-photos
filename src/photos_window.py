@@ -71,9 +71,9 @@ class PhotosWindow(Gtk.Window):
 
         # Endless applications are fullscreen
         screen = Gdk.Screen.get_default()
-        self._resize_to_fullscreen(screen)
-        screen.connect('monitors-changed', self._resize_to_fullscreen)
-        screen.connect('size-changed', self._resize_to_fullscreen)
+        # self._resize_to_fullscreen(screen)
+        # screen.connect('monitors-changed', self._resize_to_fullscreen)
+        # screen.connect('size-changed', self._resize_to_fullscreen)
         self.connect('key_press_event', self._on_keypress)
         self.connect('destroy', lambda w: Gtk.main_quit())
 
