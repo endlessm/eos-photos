@@ -11,5 +11,5 @@ images/borders/* usr/share/endless-os-photos/images/borders
 images/textures/* usr/share/endless-os-photos/images/textures
 fonts/* usr/share/fonts/opentype/endless-os-photos
 src/* usr/share/endless-os-photos/src
-po/endless_photos.mo usr/share/locale/pt_BR/LC_MESSAGES/
+mo/* usr/share/locale
 endless-os-photos /usr/bin

@@ -2,7 +2,8 @@ Source: endlessos-base-photos
 Section: non-free/misc
 Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
-Build-Depends: debhelper (>= 7.0.0)
+Build-Depends: debhelper (>= 7.0.0),
+               python
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 

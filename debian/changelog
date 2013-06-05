@@ -1,3 +1,9 @@
+endlessos-base-photos (2.3) unstable; urgency=low
+
+  * Added es_GT mo file to package.
+
+ -- matt <endlessmobile@gmail.com>  Wed, 24 Apr 2013 12:17:49 -0700
+
 endlessos-base-photos (2.2) unstable; urgency=low
 
   * Updated translations. Design tweaks. Blurs.
