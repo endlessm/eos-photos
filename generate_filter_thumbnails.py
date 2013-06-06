@@ -1,11 +1,7 @@
 #!/usr/bin/env python
-from gi.repository import GtkClutter
-
 from src.photos_model import PhotosModel
 
 if __name__ == '__main__':
-    GtkClutter.init([])
-
     name = "Filters_Example-Picture_01"
     model = PhotosModel(textures_path="images/textures/",
                         curves_path="data/curves/",

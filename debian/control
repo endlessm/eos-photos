@@ -5,7 +5,12 @@ Maintainer: EndlessMobile <endlessmobile@gmail.com>
 Build-Depends: debhelper (>= 7.0.0),
                python,
                devscripts,
-               gir1.2-gtkclutter-1.0
+               gir1.2-gtkclutter-1.0,
+               python-gobject-dev,
+               python-skimage (>=0.6.1),
+               python-scipy,
+               python-imaging,
+               python-cairo
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 
