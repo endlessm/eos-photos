@@ -1,3 +1,9 @@
+endlessos-base-photos (2.31) unstable; urgency=low
+
+  * Quick fixes for new shell.
+
+ -- matt <endlessmobile@gmail.com>  Tue, 04 Jun 2013 15:53:47 -0700
+
 endlessos-base-photos (2.3) unstable; urgency=low
 
   * Added es_GT mo file to package.
