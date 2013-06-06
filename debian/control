@@ -3,7 +3,9 @@ Section: non-free/misc
 Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
 Build-Depends: debhelper (>= 7.0.0),
-               python
+               python,
+               devscripts,
+               gir1.2-gtkclutter-1.0
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 

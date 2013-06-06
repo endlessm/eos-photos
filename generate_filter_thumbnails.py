@@ -7,7 +7,10 @@ if __name__ == '__main__':
     GtkClutter.init([])
 
     name = "Filters_Example-Picture_01"
-    model = PhotosModel(textures_path="images/textures/", curves_path="data/curves/", borders_path="images/borders/")
+    model = PhotosModel(textures_path="images/textures/",
+                        curves_path="data/curves/",
+                        borders_path="images/borders/",
+                        displayable=False)
 
     model.open("images/" + name + ".jpg")
     filter_no = 0
