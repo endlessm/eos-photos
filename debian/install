@@ -1,0 +1,15 @@
+data/endless_photos.css usr/share/endless-os-photos/data
+data/curves/* usr/share/endless-os-photos/data/curves
+data/photos.desktop usr/share/applications
+images/*.png usr/share/endless-os-photos/images
+images/*.jpg usr/share/endless-os-photos/images
+images/border_thumbnails/* usr/share/endless-os-photos/images/border_thumbnails
+images/distortion_thumbnails/* usr/share/endless-os-photos/images/distortion_thumbnails
+images/filter_thumbnails/* usr/share/endless-os-photos/images/filter_thumbnails
+images/blur_thumbnails/* usr/share/endless-os-photos/images/blur_thumbnails
+images/borders/* usr/share/endless-os-photos/images/borders
+images/textures/* usr/share/endless-os-photos/images/textures
+fonts/* usr/share/fonts/opentype/endless-os-photos
+src/* usr/share/endless-os-photos/src
+mo/* usr/share/locale
+endless-os-photos /usr/bin

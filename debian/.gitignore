@@ -1,0 +1,6 @@
+files
+*.substvars
+*.log
+*~
+endlessos-base-photos
+*.debhelper
