@@ -12,7 +12,7 @@ class PhotosModel(object):
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
-    def __init__(self, textures_path="", curves_path="", borders_path=""):
+    def __init__(self, textures_path="", curves_path="", borders_path="", displayable=True):
         super(PhotosModel, self).__init__()
         ImageTools.set_textures_path(textures_path)
         self._textures_path = textures_path
@@ -24,7 +24,12 @@ class PhotosModel(object):
         self._blurred_image = None
         self._distorted_image = None
         self._adjusted_image = None
-        self._image_widget = PhotosImageWidget()
+
+        self._displayable = displayable
+        if displayable:
+            self._image_widget = PhotosImageWidget()
+        else:
+            self._image_widget = None
 
         self._is_saved = True
         self._build_filter_dict()
@@ -281,8 +286,9 @@ class PhotosModel(object):
         # update widget
         if modified:
             width, height = self._adjusted_image.size
-            self._image_widget.replace_base_image(
-                self._adjusted_image.tostring(), width, height)
+            if self._displayable:
+                self._image_widget.replace_base_image(
+                    self._adjusted_image.tostring(), width, height)
             self._is_saved = False
 
     def _update_border_image(self):
@@ -291,12 +297,14 @@ class PhotosModel(object):
             self._border_image = Image.open(self._borders_path + filename).resize(
                 self._source_image.size, Image.BILINEAR)
             width, height = self._border_image.size
-            self._image_widget.replace_border_image(
-                self._border_image.tostring(), width, height)
+            if self._displayable:
+                self._image_widget.replace_border_image(
+                    self._border_image.tostring(), width, height)
             self._is_saved = False
         else:
             self._border_image = None
-            self._image_widget.hide_border_image()
+            if self._displayable:
+                self._image_widget.hide_border_image()
 
     def _composite_final_image(self):
         if self._border_image is None:
