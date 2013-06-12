@@ -1,3 +1,9 @@
+endlessos-base-photos (1.1.1~dev5) unstable; urgency=low
+
+  * Updating version to 1.1.1~dev5
+
+ -- Roddy Shuler <roddy@endlessm.com>  Wed, 12 Jun 2013 13:59:34 -0500
+
 endlessos-base-photos (2.31) unstable; urgency=low
 
   * Quick fixes for new shell.
