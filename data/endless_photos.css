@@ -1,6 +1,5 @@
 * {
     /*defaults*/
-    engine: unico;
     -GtkWidget-focus-line-width: 0px;
     -GtkExpander-expander-size: 0px;
     -GtkExpander-focus-line-width: 0px;
@@ -8,42 +7,40 @@
     -GtkExpander-focus-padding: 0px;
 }
 
-:insensitive {
+/* Undo Adwaita insensitive themeing we don't want */
+*:insensitive {
+    background-color: transparent;
     text-shadow: none;
+}
+
+PhotosWindow {
+    background-image: url("../images/background-tile.jpg");
+}
+
+GtkExpander {
+    border-width: 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 GtkExpander:hover {
     background-color: transparent;
 }
 
-GtkExpander {
-    -unico-border-gradient: none;
-    -unico-inner-stroke-gradient: none;
-    -unico-focus-fill-color: transparent;
-    -unico-inner-stroke-width: 0;
-    -unico-outer-stroke-width: 0;
-    border-width: 0;
-    padding: 0;
-    margin: 0;
-}
-
-GtkButton {
-    -unico-glow-radius: 0;
-    -unico-border-gradient: none;
-    -unico-inner-stroke-gradient: none;
-    -unico-focus-fill-color: transparent;
-    -unico-inner-stroke-width: 0;
-    -unico-outer-stroke-width: 0;
-}
-
 GtkOverlay {
     background-color: transparent;
 }
 
+.primary-toolbar {
+    background-image: -gtk-gradient(linear, center top, center bottom,
+        color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
+}
+
+/*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
     font-family: Ubuntu;
     font-style: normal;
-    font-size: 46;
+    font-size: 46px;
     color: rgba(255, 255, 255, 0.6);
     padding: 0px 0px 20px 0px;
 }
@@ -51,6 +48,7 @@ GtkOverlay {
 /* TODO: Fix the hardcoded path. */
 #splash-eventbox {
     background-image: url("../images/background_splash.jpg");
+    background-size: 100% 100%;
 }
 
 #fullscreen-back {
@@ -58,11 +56,12 @@ GtkOverlay {
 }
 
 #filter-button {
-    -GtkButton-child-displacement-x: 0;
-    -GtkButton-child-displacement-y: 0;
+    -GtkButton-child-displacement-x: 0px;
+    -GtkButton-child-displacement-y: 0px;
     background-color: transparent;
     background-image: none;
-    border-width: 0;
+    border-width: 0px;
+    border-image: none;
 }
 
 #filter-button:hover {
@@ -78,9 +77,14 @@ GtkOverlay {
     text-shadow: none;
     font-style: normal;
     font-weight: bold;
-    font-size: 12;
+    font-size: 12px;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
+}
+
+
+#filter-label:selected {
+    background-color: transparent;
 }
 
 #category-label {
@@ -88,7 +92,7 @@ GtkOverlay {
     text-shadow: none;
     font-style: normal;
     font-weight: bold;
-    font-size: 13;
+    font-size: 13px;
     color: #999999;
 }
 
@@ -102,8 +106,8 @@ GtkOverlay {
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
-    font-size: 12;
-    text-shadow: 0 1 rgba(0,0,0,0.75);
+    font-size: 12px;
+    text-shadow: 0px 1px rgba(0,0,0,0.75);
     color: #464646;
 }
 
@@ -126,24 +130,26 @@ GtkOverlay {
 #minimize-button {
     background-color: transparent;
     background-image: none;
-    border-width: 0;
+    border-width: 0px;
     border-image: none;
     box-shadow: none;
 }
 
 #splash-open-photos-button {
-    -GtkWidget-focus-line-width: 0;
-    border-width: 0px;
+    -GtkWidget-focus-line-width: 0px;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      color-stop(0.0, #A6AC00),
                                      color-stop(1.0, #A6AC00));
     padding: 5px 9px 5px 9px;
+    border-width: 0px;
+    border-image: none;
+    box-shadow: none;
 }
 
 #splash-open-photos-button GtkLabel {
     font-family: Ubuntu;
     font-style: normal;
-    font-size: 14;
+    font-size: 14px;
     padding-left: 3px;
     color: #FFFFFF;
     padding: 2px 4px 2px 4px;
@@ -170,8 +176,8 @@ GtkOverlay {
     padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
-    border-radius: 0;
-    border-width: 0;
+    border-radius: 0px;
+    border-width: 0px;
     border-image: none;
     box-shadow: none;
     background-size: 100% 100%;
@@ -182,8 +188,8 @@ GtkOverlay {
     font-family: Ubuntu;
     font-style: normal;
     font-weight: bold;
-    font-size: 10;
-    text-shadow: 0 -1 rgba(0,0,0,0.75);
+    font-size: 10px;
+    text-shadow: 0px -1px rgba(0,0,0,0.75);
     color: #999999;
 }
 
@@ -238,42 +244,34 @@ GtkOverlay {
     -GtkRange-trough-border: 0;
 }
 
-#filters-scroll-area > .scrollbar.trough{
+#filters-scroll-area > .scrollbar.trough {
     border-width: 0px;
     background-color: transparent;
     background-image: none;
 }
 
-#filters-scroll-area > .scrollbar.slider{
+#filters-scroll-area > .scrollbar.slider {
     border-width: 0px;
     background-image: none;
     background-color: #3f3f3f;
-    -unico-inner-stroke-width: 0px;
-    -unico-centroid-texture: none;
 }
 
-#filters-scroll-area > .scrollbar.slider:hover{
+#filters-scroll-area > .scrollbar.slider:hover {
     background-color: #5c5c5c;
 }
 
 #image-container{
     border-color: white;
     border-style: solid;
-    border-radius: 0;
+    border-radius: 0px;
     border-width: 0px;
-    -unico-border-gradient: none;
 }
 
-.primary-toolbar {
-    background-image: -gtk-gradient(linear, center top, center bottom,
-        color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
-}
-
+/* Scale themeing */
 GtkScale {
-    -GtkRange-slider-width: 18;
-    -GtkRange-trough-border: 0;
-    -GtkScale-slider-length: 18;
-    -unico-focus-fill-color: transparent;
+    -GtkRange-slider-width: 18px;
+    -GtkRange-trough-border: 2px;
+    -GtkScale-slider-length: 18px;
 }
 
 .scale.slider {
@@ -288,16 +286,11 @@ GtkScale {
     background-image: none;
     background-color: black;
     border-width: 0px;
-
-    -unico-inner-stroke-width: 0px;
 }
-
 
 .scale.trough{
     background-image: none;
     background-color: black;
     border-width: 0px;
-
+    box-shadow: inset 0 -1px alpha(#ffffff, 0.25);
 }
-
-

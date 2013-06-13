@@ -1,8 +1,6 @@
-import cairo
-import math
-
 from gi.repository import Gtk, Gdk, GdkPixbuf
 from drop_shadow_alignment import DropShadowAlignment
+
 
 class PhotosWindow(Gtk.Window):
     __gtype_name__ = 'PhotosWindow'
@@ -63,26 +61,7 @@ class PhotosWindow(Gtk.Window):
 
         self.add(self._notebook)
 
-        self._border_image = GdkPixbuf.Pixbuf.new_from_file(images_path + "btn_OpenPhoto_down.png")
-
-        self._back_image = GdkPixbuf.Pixbuf.new_from_file(images_path + "background-tile.jpg")
-        self.connect('draw', self._draw)
-        self.set_app_paintable(True)
-
-        # Endless applications are fullscreen
-        screen = Gdk.Screen.get_default()
-        # self._resize_to_fullscreen(screen)
-        # screen.connect('monitors-changed', self._resize_to_fullscreen)
-        # screen.connect('size-changed', self._resize_to_fullscreen)
         self.connect('key_press_event', self._on_keypress)
-        self.connect('destroy', lambda w: Gtk.main_quit())
-
-    def _draw(self, w, cr):
-        cr.save()
-        Gdk.cairo_set_source_pixbuf(cr, self._back_image, 0, 0)
-        cr.get_source().set_extend(cairo.EXTEND_REPEAT)
-        cr.paint()
-        cr.restore()
 
     def _on_keypress(self, widget, event):
         if event.keyval == Gdk.KEY_Escape and self.fullscreen:
@@ -100,30 +79,6 @@ class PhotosWindow(Gtk.Window):
             self._notebook.set_current_page(self._notebook.page_num(self._vbox))
             self._image_container.reparent(self._normal_attach)
             self._image_container.set_fullscreen_mode(False)
-
-    def _get_screen_dimensions(self):
-        # This ought to return the size of the screen, less any panels or
-        # docks.
-        screen = Gdk.Screen.get_default()
-        if screen.get_n_monitors() == 1:
-            monitor = 0
-        else:
-            self.realize()  # so that self.get_window() is not None
-            monitor = screen.get_monitor_at_window(self.get_window())
-        rect = screen.get_monitor_workarea(monitor)
-        return rect.width, rect.height
-
-    def _resize_to_fullscreen(self, screen):
-        # When anything about the Gdk.Screen or Gdk.Monitor changes, resize the
-        # window to fullscreen.
-        width, height = self._get_screen_dimensions()
-        #width, height = 800, 600
-        self.set_default_size(width, height)
-        self.resize(width, height)
-        # Might be a better way to do this. But for now, this set_size_request
-        # was the best way I could figure out to make sure the window does not
-        # shrink to its contents.
-        self.set_size_request(width, height)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
