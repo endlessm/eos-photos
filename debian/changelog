@@ -1,8 +1,50 @@
-endlessos-base-photos (1.1.1~dev5) unstable; urgency=low
+endlessos-base-photos (1.1.1~rc15) unstable; urgency=low
 
-  * Updating version to 1.1.1~dev5
+  * Updating version to 1.1.1~rc15
 
- -- Roddy Shuler <roddy@endlessm.com>  Wed, 12 Jun 2013 13:59:34 -0500
+ -- Roddy Shuler <roddy@endlessm.com>  Wed, 19 Jun 2013 17:55:55 -0500
+
+endlessos-base-photos (1.1.1~rc14) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc14
+
+ -- Roddy Shuler <roddy@endlessm.com>  Tue, 18 Jun 2013 01:40:42 -0500
+
+endlessos-base-photos (1.1.1~rc13) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc13
+
+ -- Roddy Shuler <roddy@endlessm.com>  Mon, 17 Jun 2013 17:14:42 -0500
+
+endlessos-base-photos (1.1.1~rc12) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc12
+
+ -- Roddy Shuler <roddy@endlessm.com>  Fri, 14 Jun 2013 12:32:45 -0500
+
+endlessos-base-photos (1.1.1~rc11) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc11
+
+ -- Roddy Shuler <roddy@endlessm.com>  Thu, 13 Jun 2013 15:16:31 -0500
+
+endlessos-base-photos (1.1.1~rc10) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc10
+
+ -- Roddy Shuler <roddy@endlessm.com>  Thu, 13 Jun 2013 13:30:52 -0500
+
+endlessos-base-photos (1.1.1~rc9) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc9
+
+ -- Roddy Shuler <roddy@endlessm.com>  Thu, 13 Jun 2013 11:24:55 -0500
+
+endlessos-base-photos (1.1.1~rc8) unstable; urgency=low
+
+  * Updating version to 1.1.1~rc8
+
+ -- Roddy Shuler <roddy@endlessm.com>  Thu, 13 Jun 2013 10:31:05 -0500
 
 endlessos-base-photos (2.31) unstable; urgency=low
 
