@@ -56,7 +56,6 @@ class PhotosImageWidget(Clutter.Actor):
         self.set_property('ratio', float(width)/height)
 
     def replace_border_image(self, data, width, height):
-        self._border_image.show()
         Gdk.threads_add_idle(
             GLib.PRIORITY_DEFAULT_IDLE,
             lambda dummy: self._replace_border_image_callback(data, width, height),
