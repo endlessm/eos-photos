@@ -64,7 +64,9 @@ class PhotosWindow(Gtk.Window):
         self.connect('key_press_event', self._on_keypress)
 
     def _on_keypress(self, widget, event):
-        if event.keyval == Gdk.KEY_Escape and self.fullscreen:
+        # Fullscreen page is index number 2.  We only call set_fullscreen to
+        # false if we are on the fullscreen page
+        if event.keyval == Gdk.KEY_Escape and self._notebook.get_current_page() == 2:
             self.set_image_fullscreen(False)
 
     def set_photo_editor_active(self):
