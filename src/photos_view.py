@@ -111,11 +111,14 @@ class PhotosView(object):
     def set_saturation_slider(self, value):
         self._adjustments.set_saturation_slider(value)
 
-    def show_open_dialog(self):
+    def show_open_dialog(self, starting_dir=None):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog(
             _("Open Image"), self.get_window(),
             Gtk.FileChooserAction.OPEN)
+
+        if starting_dir != None:
+            dialog.set_current_folder(starting_dir)
 
         # Adds 'Cancel' and 'OK' buttons
         dialog.add_button(Gtk.STOCK_CANCEL, 0)

@@ -1,5 +1,6 @@
 import os
 import tempfile
+from gi.repository import GLib
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
@@ -110,7 +111,11 @@ class PhotosPresenter(object):
         self._view.update_async(lambda: self._view.select_distortion(distort_name))
 
     def _do_open(self):
-        filename = self._view.show_open_dialog()
+        pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
+        if os.path.isdir(pictures_path):
+            filename = self._view.show_open_dialog(pictures_path)
+        else:
+            filename = self._view.show_open_dialog()
         if filename is not None:
             self.open_image(filename)
 
