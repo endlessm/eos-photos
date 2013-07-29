@@ -27,6 +27,9 @@ class PhotosPresenter(object):
         distortions = self._model.get_distortion_names_and_thumbnails()
         self._view.set_distortions(distortions)
 
+        #Track threads in use
+        self._active_threads = []
+
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
@@ -68,10 +71,11 @@ class PhotosPresenter(object):
         worker.add_task(self._view.update_async, (self._view.unlock_ui,))
         worker.start()
 
-    def _run_non_locking_task(self, method, args=()):
-        worker = AsyncWorker()
+    def _run_non_locking_task(self, method, args=(), name=""):
+        worker = AsyncWorker(name)
         worker.add_task(method, args)
         worker.start()
+        self._active_threads.append(worker)
 
     def _get_image_tempfile(self):
         # PNG would give no loss from current image, but a lot bigger.
@@ -114,6 +118,7 @@ class PhotosPresenter(object):
         while self._sliding or not self._slider_target == value_get():
             if not self._slider_target == value_get():
                 value_set(self._slider_target)
+        # TODO: Why are we unlocking the UI?
         self._view.update_async(self._view.unlock_ui)
 
     def _do_blur_select(self, blur_type):
@@ -217,30 +222,43 @@ class PhotosPresenter(object):
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...
     def on_slider_release(self):
-        print "Released"
         self._sliding = False
 
-    def _make_adjustment_change(self, value, get_func, set_func):
+    def _prune_active_threads(self):
+        ''' Clears out old threads from the
+        active thread list. ''' 
+        self._active_threads = [x for x in self._active_threads if x.finished == False]
+
+    def _active_thread_exists(self, thread_name):
+        ''' Returns true if a thread with the given name already
+        exists. '''
+        self._prune_active_threads()
+        return thread_name in [x.name for x in self._active_threads] 
+
+    def _make_adjustment_change(self, value, get_func, set_func, thread_name="Slider Thread"):
         if not self._model.is_open():
             return
         self._slider_target = value
         if not self._sliding:
+            if self._active_thread_exists(thread_name):
+                return
             self._sliding = True
             self._run_non_locking_task(
                 self._do_adjustment_slide,
-                (get_func, set_func))
+                (get_func, set_func),
+                thread_name)
 
     def on_contrast_change(self, value):
         self._make_adjustment_change(
-            value, self._model.get_contrast, self._model.set_contrast)
+            value, self._model.get_contrast, self._model.set_contrast, "Contrast Slider Thread")
 
     def on_brightness_change(self, value):
         self._make_adjustment_change(
-            value, self._model.get_brightness, self._model.set_brightness)
+            value, self._model.get_brightness, self._model.set_brightness, "Brightness Slider Thread")
 
     def on_saturation_change(self, value):
         self._make_adjustment_change(
-            value, self._model.get_saturation, self._model.set_saturation)
+            value, self._model.get_saturation, self._model.set_saturation, "Saturation Slider Thread")
 
     def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
         if not self._model.is_open():

@@ -6,9 +6,11 @@ class AsyncWorker(Thread):
     """
     Tiny class to queue up tasks to run on a worker thread.
     """
-    def __init__(self):
+    def __init__(self, name=""):
         Thread.__init__(self)
         self.queue = Queue.Queue(0)
+        self.name = name
+        self.finished = False
 
     def add_task(self, task, args=()):
         self.queue.put((task, args))
@@ -21,3 +23,4 @@ class AsyncWorker(Thread):
             except Exception:
                 print "In worker thread...."
                 print traceback.format_exc()
+        self.finished = True
