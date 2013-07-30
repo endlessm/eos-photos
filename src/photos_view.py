@@ -234,15 +234,15 @@ class PhotosView(object):
 
         dialog.show_all()
         confirm = dialog.run()
-        dialog.destroy()
         # If user clicks cancel, return having done nothing
         if confirm == 1:
             # Store the responses from user in this list
             responses = []
             map(lambda x: responses.append(x.get_text()), entries)
-            print "HEY"
+            dialog.destroy()
             return responses
         else:
+            dialog.destroy()
             return None
 
     def lock_ui(self):
