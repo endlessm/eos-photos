@@ -17,16 +17,12 @@ class WrappingLabel(Gtk.Label):
         return Gtk.Label.do_get_preferred_width()
 
 
-class SplashScreen(Gtk.EventBox):
+class SplashScreen(Gtk.VBox):
     MINIMUM_HEIGHT = 37 # Set this minimum height of the toolbar to 37 to prevent size changes
                         # when switching to the photo editor.
 
-    def __init__(self, splash_top_toolbar=None, images_path=None, **kw):
+    def __init__(self, images_path=None, **kw):
         super(SplashScreen, self).__init__(**kw)
-
-        self._splash_top_toolbar = splash_top_toolbar
-
-        self._splash_top_toolbar.set_size_request(-1, SplashScreen.MINIMUM_HEIGHT)
 
         self._splash_open_button = ImageTextButton(normal_path=images_path + "icon_topbar_OpenPhoto_hover.png",
                                             hover_path=images_path + "icon_topbar_OpenPhoto_hover.png",
@@ -47,17 +43,10 @@ class SplashScreen(Gtk.EventBox):
         button_hbox = Gtk.HBox()
         button_hbox.pack_start(self._splash_open_button, expand=False, fill=False, padding=0)
 
-        splash_container = Gtk.VBox()
-        splash_container.set_margin_left(60)
-        splash_container.set_margin_top(65)
-        splash_container.pack_start(label_hbox, expand=False, fill=False, padding=0)
-        splash_container.pack_start(button_hbox, expand=False, fill=False, padding=0)
-
-        self._splash_vbox = Gtk.VBox(expand=False)
-        self._splash_vbox.pack_start(self._splash_top_toolbar, expand=False, fill=False, padding=0)
-        self._splash_vbox.pack_start(splash_container, expand=False, fill=False, padding=0)
-
-        self.add(self._splash_vbox)
+        self.set_margin_left(60)
+        self.set_margin_top(65)
+        self.pack_start(label_hbox, expand=False, fill=False, padding=0)
+        self.pack_start(button_hbox, expand=False, fill=False, padding=0)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

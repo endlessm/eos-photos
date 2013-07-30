@@ -1,8 +1,6 @@
 from gi.repository import Gtk, Gdk, GLib
 
-from top_toolbar import TopToolbar
 from splash_screen import SplashScreen
-from photos_top_toolbar import PhotosTopToolbar
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
 from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar
@@ -16,7 +14,7 @@ class PhotosView(object):
     presenter calls to the appropriate UI elements. PhotosWindow does the
     actual toplevel layout of the toolbars and central view.
     """
-    def __init__(self, images_path=""):
+    def __init__(self, application=None, images_path=""):
         self._adjustments = AdjustmentToolbar(images_path=images_path)
         self._blurs = BlurToolbar(images_path=images_path)
         self._filters = FilterToolbar(images_path=images_path)
@@ -25,25 +23,20 @@ class PhotosView(object):
         categories = [self._filters, self._distorts, self._blurs, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                categories=categories)
-        self._splash_top_toolbar = TopToolbar(images_path=images_path)
-        self._splash_screen = SplashScreen(splash_top_toolbar=self._splash_top_toolbar, images_path=images_path, name="splash-eventbox")
-        self._photos_top_toolbar = PhotosTopToolbar(images_path=images_path)
-        self._top_toolbar = PhotosTopToolbar(images_path=images_path)
+        self._splash_screen = SplashScreen(images_path=images_path, name="splash-eventbox")
 
         self._right_toolbar = PhotosRightToolbar(images_path=images_path)
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
         self._window = PhotosWindow(images_path=images_path,
                                     splash_screen=self._splash_screen,
-                                    photos_top_toolbar=self._photos_top_toolbar,
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
-                                    image_container=self._image_container)
+                                    image_container=self._image_container,
+                                    application=application)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
-        self._splash_top_toolbar.set_presenter(presenter)
         self._splash_screen.set_presenter(presenter)
-        self._photos_top_toolbar.set_presenter(presenter)
         self._left_toolbar.set_presenter(presenter)
         self._right_toolbar.set_presenter(presenter)
         self._image_container.set_presenter(presenter)
