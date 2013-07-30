@@ -5,50 +5,20 @@
     -GtkExpander-focus-line-width: 0px;
     -GtkExpander-expander-spacing: 0px;
     -GtkExpander-focus-padding: 0px;
+    font-family: Ubuntu;
+    font-style: normal;
 }
 
-/* Undo Adwaita insensitive themeing we don't want */
 *:insensitive {
     background-color: transparent;
     text-shadow: none;
 }
 
-PhotosWindow {
-    background-image: url("../images/background-tile.jpg");
-}
-
-GtkExpander {
-    border-width: 0px;
-    padding: 0px;
-    margin: 0px;
-}
-
-GtkExpander:hover {
-    background-color: transparent;
-}
-
-GtkOverlay {
-    background-color: transparent;
-}
-
-.primary-toolbar {
-    background-image: -gtk-gradient(linear, center top, center bottom,
-        color-stop(0, #363636), color-stop(0.6, #323232), color-stop(0.8, #222222), color-stop(1, #0c0c0c));
-}
-
 /*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
-    font-family: Ubuntu;
-    font-style: normal;
     font-size: 46px;
     color: rgba(255, 255, 255, 0.6);
     padding: 0px 0px 20px 0px;
-}
-
-/* TODO: Fix the hardcoded path. */
-#splash-eventbox {
-    background-image: url("../images/background_splash.jpg");
-    background-size: 100% 100%;
 }
 
 #fullscreen-back {
@@ -56,12 +26,11 @@ GtkOverlay {
 }
 
 #filter-button {
-    -GtkButton-child-displacement-x: 0px;
-    -GtkButton-child-displacement-y: 0px;
     background-color: transparent;
     background-image: none;
     border-width: 0px;
     border-image: none;
+    border-radius: 2px;
 }
 
 #filter-button:hover {
@@ -73,9 +42,7 @@ GtkOverlay {
 }
 
 #filter-label {
-    font-family: Ubuntu;
     text-shadow: none;
-    font-style: normal;
     font-weight: bold;
     font-size: 12px;
     color: #7e7e7e;
@@ -88,9 +55,7 @@ GtkOverlay {
 }
 
 #category-label {
-    font-family: Ubuntu;
     text-shadow: none;
-    font-style: normal;
     font-weight: bold;
     font-size: 13px;
     color: #999999;
@@ -103,8 +68,6 @@ GtkOverlay {
 #save-button GtkLabel,
 #share-button GtkLabel,
 #email-button GtkLabel {
-    font-family: Ubuntu;
-    font-style: normal;
     font-weight: bold;
     font-size: 12px;
     text-shadow: 0px 1px rgba(0,0,0,0.75);
@@ -132,7 +95,6 @@ GtkOverlay {
     background-image: none;
     border-width: 0px;
     border-image: none;
-    box-shadow: none;
 }
 
 #splash-open-photos-button {
@@ -147,8 +109,6 @@ GtkOverlay {
 }
 
 #splash-open-photos-button GtkLabel {
-    font-family: Ubuntu;
-    font-style: normal;
     font-size: 14px;
     padding-left: 3px;
     color: #FFFFFF;
@@ -185,8 +145,6 @@ GtkOverlay {
 
 #revert-button GtkLabel,
 #open-photos-button GtkLabel {
-    font-family: Ubuntu;
-    font-style: normal;
     font-weight: bold;
     font-size: 10px;
     text-shadow: 0px -1px rgba(0,0,0,0.75);
@@ -261,9 +219,6 @@ GtkOverlay {
 }
 
 #image-container{
-    border-color: white;
-    border-style: solid;
-    border-radius: 0px;
     border-width: 0px;
 }
 
