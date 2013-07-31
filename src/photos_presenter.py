@@ -34,6 +34,7 @@ class PhotosPresenter(object):
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._sliding = False
+        self._locked = False
 
     def open_image(self, filename):
         self._model.open(filename)
@@ -65,11 +66,19 @@ class PhotosPresenter(object):
             return dot_join.join(name_arr) + "." + original_ext
         return filename
 
+    def _lock_ui(self):
+        self._locked = True
+        self._view.lock_ui()
+
+    def _unlock_ui(self):
+        self._locked = False
+        self._view.unlock_ui()
+
     def _run_locking_task(self, method, args=()):
         worker = AsyncWorker()
-        worker.add_task(self._view.update_async, (self._view.lock_ui,))
+        worker.add_task(self._view.update_async, (self._lock_ui,))
         worker.add_task(method, args)
-        worker.add_task(self._view.update_async, (self._view.unlock_ui,))
+        worker.add_task(self._view.update_async, (self._unlock_ui,))
         worker.start()
 
     def _run_non_locking_task(self, method, args=(), name=""):
@@ -132,6 +141,8 @@ class PhotosPresenter(object):
 
     #UI callbacks...
     def on_close(self):
+        if self._locked:
+            return
         # Prompt for save before quitting
         if not self._model.is_saved():
             confirm = self._view.show_confirm_close()
@@ -143,9 +154,13 @@ class PhotosPresenter(object):
         self._view.close_window()
 
     def on_minimize(self):
+        if self._locked:
+            return
         self._view.minimize_window()
 
     def on_open(self):
+        if self._locked:
+            return
         if not self._model.is_saved():
             confirm = self._view.show_confirm_open_new()
             if not confirm:
@@ -153,6 +168,8 @@ class PhotosPresenter(object):
         self._do_open()
 
     def on_save(self):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
 
@@ -182,6 +199,8 @@ class PhotosPresenter(object):
             self._model.save(filename)
 
     def on_share(self):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
@@ -189,6 +208,8 @@ class PhotosPresenter(object):
             self._run_locking_task(self._do_post_to_facebook, (info[0],))
 
     def on_email(self):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name:"), _("Recipient email:"), _("Message:"))
@@ -196,30 +217,42 @@ class PhotosPresenter(object):
             self._run_locking_task(self._do_send_email, (info[0], info[1], info[2]))
 
     def on_fullscreen(self):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         self._view.set_image_fullscreen(True)
 
     def on_unfullscreen(self):
+        if self._locked:
+            return
         self._view.set_image_fullscreen(False)
 
     def on_filter_select(self, filter_name):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_filter_select, (filter_name,))
 
     def on_blur_select(self, blur_name):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_blur_select, (blur_name,))
 
     def on_border_select(self, border_name):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         self._model.set_border(border_name)
         self._view.select_border(border_name)
 
     def on_distortion_select(self, distort_name):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_distort, (distort_name,))
@@ -227,6 +260,8 @@ class PhotosPresenter(object):
     # Slider has been released! We need to block new changes to the model if
     # we are still processing the slide...
     def on_slider_release(self):
+        if self._locked:
+            return
         self._sliding = False
 
     def _prune_active_threads(self):
@@ -254,35 +289,49 @@ class PhotosPresenter(object):
                 thread_name)
 
     def on_contrast_change(self, value):
+        if self._locked:
+            return
         self._make_adjustment_change(
             value, self._model.get_contrast, self._model.set_contrast, "Contrast Slider Thread")
 
     def on_brightness_change(self, value):
+        if self._locked:
+            return
         self._make_adjustment_change(
             value, self._model.get_brightness, self._model.set_brightness, "Brightness Slider Thread")
 
     def on_saturation_change(self, value):
+        if self._locked:
+            return
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation, "Saturation Slider Thread")
 
     def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("TILT-SHIFT",))
 
     def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("DEPTH-OF-FIELD",))
 
     def on_noblur_toggle(self, toggleAction):
+        if self._locked:
+            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("NONE",))
 
     def on_revert(self):
+        if self._locked:
+            return
         self._model.clear_options()
         self._sync_photo_options()
