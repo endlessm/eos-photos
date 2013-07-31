@@ -1,5 +1,6 @@
 import os
 import tempfile
+import urllib2
 from gi.repository import GLib
 
 from asyncworker import AsyncWorker
@@ -181,8 +182,22 @@ class PhotosPresenter(object):
             filename = self._check_extension(filename, ext)
             self._model.save(filename)
 
+    def has_internet(self):
+        '''
+        If Google is down, this will generate false negatives.
+        '''
+        try:
+            test_request = urllib2.Request("http://www.google.com")
+            urllib2.urlopen(test_request)
+            return True
+        except:
+            return False
+
     def on_share(self):
         if not self._model.is_open():
+            return
+        if not self.has_internet():
+            self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
             return
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
         if info:
