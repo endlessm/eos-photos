@@ -2,7 +2,7 @@
 
 import sys
 sys.path.append('/usr/share/endless-os-photos')
-from src import EndlessPhotos
+from src.endless_photos import EndlessPhotos
 from gi.repository import GtkClutter, GLib, Gdk
 
 app = EndlessPhotos()
