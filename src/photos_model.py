@@ -39,54 +39,54 @@ class PhotosModel(object):
 
     def _build_blur_dict(self):
         self._blur_dict = collections.OrderedDict([
-            (_("NONE"), lambda im: im),
-            (_("TILT SHIFT"), lambda im: ImageTools.tilt_shift_blur(im)),
-            (_("DEPTH OF FIELD"), lambda im: ImageTools.depth_of_field_blur(im))
+            (_("None"), lambda im: im),
+            (_("Tilt Shift"), lambda im: ImageTools.tilt_shift_blur(im)),
+            (_("Depth of Field"), lambda im: ImageTools.depth_of_field_blur(im))
         ])
 
     def _build_filter_dict(self):
         self._filter_dict = collections.OrderedDict([
-            (_("NORMAL"), lambda im: im),
-            (_("GRAYSCALE"), lambda im: ImageTools.grayscale(im)),
-            (_("COUNTRY"), lambda im: ImageTools.country(im)),
-            (_("GRUNGIFY"), lambda im: ImageTools.grunge(im)),
-            (_("OLD PHOTO"), lambda im: ImageTools.old_photo(im)),
-            (_("COLORFUL"), lambda im: ImageTools.colorful(im)),
+            (_("None"), lambda im: im),
+            (_("Grayscale"), lambda im: ImageTools.grayscale(im)),
+            (_("Country"), lambda im: ImageTools.country(im)),
+            (_("Grungify"), lambda im: ImageTools.grunge(im)),
+            (_("Old Photo"), lambda im: ImageTools.old_photo(im)),
+            (_("Colorful"), lambda im: ImageTools.colorful(im)),
             # (_("BUMPY"), lambda im: ImageTools.bumpy(im)),
-            (_("LUMO"), lambda im: ImageTools.lumo(im)),
+            (_("Lomo"), lambda im: ImageTools.lumo(im)),
             # (_("SMOOTH"), lambda im: im.filter(ImageFilter.SMOOTH_MORE)),
             # (_("SHARPEN"), lambda im: im.filter(ImageFilter.SHARPEN)),
-            (_("FOGGY BLUE"), lambda im: ImageTools.foggy_blue(im)),
-            (_("PAPER"), lambda im: ImageTools.paper(im)),
-            (_("TRAINS"), lambda im: ImageTools.trains(im)),
-            (_("DESERT"), lambda im: ImageTools.desert(im)),
-            (_("POSTERIZE"), lambda im: ImageTools.posterize(im)),
+            (_("Foggy Blue"), lambda im: ImageTools.foggy_blue(im)),
+            (_("Paper"), lambda im: ImageTools.paper(im)),
+            (_("Trains"), lambda im: ImageTools.trains(im)),
+            (_("Desert"), lambda im: ImageTools.desert(im)),
+            (_("Posterize"), lambda im: ImageTools.posterize(im)),
             # (_("INVERT"), lambda im: ImageTools.invert(im)),
             # (_("EMBOSS"), lambda im: im.filter(ImageFilter.EMBOSS)),
-            (_("EDGES"), lambda im: im.filter(ImageFilter.FIND_EDGES)),
+            (_("Edges"), lambda im: im.filter(ImageFilter.FIND_EDGES)),
             # (_("PIXELATE"), lambda im: ImageTools.pixelate(im)),
             # (_("BOXELATE"), lambda im: ImageTools.boxelate(im)),
         ])
 
     def _build_border_dict(self):
         self._border_dict = collections.OrderedDict([
-            (_("NONE"), None),
+            (_("None"), None),
             # (_("HORIZONTAL BARS"), "horizontal_bars.png"),
             # (_("SIDE BARS"), "vertical_bars.png"),
-            (_("CRAYON"), "frame_3x2_crayon.png"),
-            (_("GRUNGE"), "frame_3x2_grunge.png"),
-            (_("SPRAY"), "frame_3x2_spray.png"),
-            (_("BRUSH"), "frame_3x2_brush.png")
+            (_("Crayon"), "frame_3x2_crayon.png"),
+            (_("Grunge"), "frame_3x2_grunge.png"),
+            (_("Spray"), "frame_3x2_spray.png"),
+            (_("Brush"), "frame_3x2_brush.png")
         ])
 
     def _build_distortions_dict(self):
         self._distortions_dict = collections.OrderedDict([
-            (_("NONE"), lambda im: im),
-            (_("FISH EYE LIGHT"), lambda im: ImageTools.distortion(im, "FISH EYE LIGHT")),
-            (_("FISH EYE HEAVY"), lambda im: ImageTools.distortion(im, "FISH EYE HEAVY")),
-            (_("PINCH LIGHT"), lambda im: ImageTools.distortion(im, "PINCH LIGHT")),
-            (_("PINCH HEAVY"), lambda im: ImageTools.distortion(im, "PINCH HEAVY")),
-            (_("SWIRL"), lambda im: ImageTools.distortion(im, "SWIRL"))
+            (_("None"), lambda im: im),
+            (_("Fish Eye Light"), lambda im: ImageTools.distortion(im, "FISH EYE LIGHT")),
+            (_("Fish Eye Heavy"), lambda im: ImageTools.distortion(im, "FISH EYE HEAVY")),
+            (_("Pinch Light"), lambda im: ImageTools.distortion(im, "PINCH LIGHT")),
+            (_("Pinch Heavy"), lambda im: ImageTools.distortion(im, "PINCH HEAVY")),
+            (_("Swirl"), lambda im: ImageTools.distortion(im, "SWIRL"))
         ])
 
     def clear_options(self):

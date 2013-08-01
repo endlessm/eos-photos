@@ -159,7 +159,7 @@ class PhotosView(object):
     def show_confirm_open_new(self):
         dialog = Gtk.MessageDialog(
             parent=self.get_window(),
-            text=_("Open New Photo Without Save?"),
+            text=_("Open new photo without save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to open a new photo without saving?"),
             message_type=Gtk.MessageType.WARNING)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
