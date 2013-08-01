@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+import gettext
+gettext.install('endless_photos')
+
 from src.photos_model import PhotosModel
 
 if __name__ == '__main__':
