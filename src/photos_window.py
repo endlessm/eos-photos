@@ -49,10 +49,9 @@ class PhotosWindow(Endless.Window):
             self._normal_attach, expand=True, fill=True, padding=0)
         self._hbox.pack_end(right_toolbar, expand=False, fill=True, padding=0)
 
-        self._open_button = ImageTextButton(normal_path=images_path + "icon_topbar_OpenPhoto_normal.png",
-                                            hover_path=images_path + "icon_topbar_OpenPhoto_hover.png",
-                                            down_path=images_path + "icon_topbar_OpenPhoto_normal.png",
-                                            label=_("OPEN IMAGE"),
+        self._open_button = ImageTextButton(label=_("OPEN IMAGE"),
+                                            image_size_x=21,
+                                            image_size_y=19,
                                             name="open-photos-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())
         self._open_button.show_all();

@@ -23,13 +23,6 @@ class CategoryToolbar(Gtk.Alignment):
     def get_label(self):
         return _("Untitled")
 
-    def get_normal_icon_path(self):
-        return "icon_effects_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_effects_hover.png"
-
-
 class OptionListToolbar(CategoryToolbar):
     """
     A widget showing a list of clickable options.
@@ -48,7 +41,7 @@ class OptionListToolbar(CategoryToolbar):
     def _set_option(self, name_and_thumb):
         option_name = name_and_thumb[0]
         thumbnail_path = self._images_path + self.get_thumbnail_prefix() + name_and_thumb[1]
-        self._list.add_option("filter", thumbnail_path, option_name, lambda: self.clicked_callback(option_name))
+        self._list.add_option(thumbnail_path, option_name, lambda: self.clicked_callback(option_name))
         self.show_all()
 
     def select(self, option):
@@ -61,21 +54,15 @@ class OptionListToolbar(CategoryToolbar):
         pass
 
 class BlurToolbar(OptionListToolbar):
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
+        kw["name"] = "blur"
         super(BlurToolbar, self).__init__(**kw)
-        self._images_path = images_path
 
     def set_blurs(self, blurs):
         self.set_options(blurs)
 
     def get_label(self):
         return _("Blurs")
-
-    def get_normal_icon_path(self):
-        return "icon_blur_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_blur_hover.png"
 
     def get_thumbnail_prefix(self):
         return "blur_thumbnails/"
@@ -89,16 +76,11 @@ class BorderToolbar(OptionListToolbar):
     A widget showing a list of borders. Part of left toolbar.
     """
     def __init__(self, **kw):
+        kw["name"] = "border"
         super(BorderToolbar, self).__init__(**kw)
 
     def get_label(self):
         return _("Borders")
-
-    def get_normal_icon_path(self):
-        return "icon_border_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_border_hover.png"
 
     def get_thumbnail_prefix(self):
         return "border_thumbnails/"
@@ -112,16 +94,11 @@ class FilterToolbar(OptionListToolbar):
     A widget showing a list of filters. Part of left toolbar.
     """
     def __init__(self, **kw):
+        kw["name"] = "filter"
         super(FilterToolbar, self).__init__(**kw)
 
     def get_label(self):
         return _("Filters")
-
-    def get_normal_icon_path(self):
-        return "icon_effects_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_effects_hover.png"
 
     def get_thumbnail_prefix(self):
         return "filter_thumbnails/"
@@ -135,16 +112,11 @@ class DistortToolbar(OptionListToolbar):
     A widget showing a list of filters. Part of left toolbar.
     """
     def __init__(self, **kw):
+        kw["name"] = "distort"
         super(DistortToolbar, self).__init__(**kw)
 
     def get_label(self):
         return _("Distortions")
-
-    def get_normal_icon_path(self):
-        return "icon_deform_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_deform_hover.png"
 
     def get_thumbnail_prefix(self):
         return "distortion_thumbnails/"
@@ -158,6 +130,7 @@ class AdjustmentToolbar(CategoryToolbar):
     Widget presenting sliders for image adjustments. Part of the left toolbar.
     """
     def __init__(self, images_path="", **kw):
+        kw["name"] = "adjustment"
         kw.setdefault("left-padding", 10)
         kw.setdefault("right-padding", 15)
         kw.setdefault("top-padding", 10)
@@ -166,7 +139,8 @@ class AdjustmentToolbar(CategoryToolbar):
         super(AdjustmentToolbar, self).__init__(**kw)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
 
-        self._brightness_label = Gtk.Label(name="filter-label", label=_("Brightness"))
+        self._brightness_label = Gtk.Label(label=_("Brightness"))
+        self._brightness_label.get_style_context().add_class("slider-label")
         brightness_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._brightness_slider = Gtk.HScale(adjustment=brightness_adjust, draw_value=False)
         self._brightness_slider.connect(
@@ -176,7 +150,8 @@ class AdjustmentToolbar(CategoryToolbar):
         self._vbox.pack_start(self._brightness_label, False, False, 0)
         self._vbox.pack_start(self._brightness_slider, False, False, 0)
 
-        self._contrast_label = Gtk.Label(name="filter-label", label=_("Contrast"))
+        self._contrast_label = Gtk.Label(label=_("Contrast"))
+        self._contrast_label.get_style_context().add_class("slider-label")
         contrast_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._contrast_slider = Gtk.HScale(adjustment=contrast_adjust, draw_value=False)
         self._contrast_slider.connect(
@@ -186,7 +161,8 @@ class AdjustmentToolbar(CategoryToolbar):
         self._vbox.pack_start(self._contrast_label, False, False, 0)
         self._vbox.pack_start(self._contrast_slider, False, False, 0)
 
-        self._saturation_label = Gtk.Label(name="filter-label", label=_("Saturation"))
+        self._saturation_label = Gtk.Label(label=_("Saturation"))
+        self._saturation_label.get_style_context().add_class("slider-label")
         saturation_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
         self._saturation_slider = Gtk.HScale(adjustment=saturation_adjust, draw_value=False)
         self._saturation_slider.connect(
@@ -210,9 +186,3 @@ class AdjustmentToolbar(CategoryToolbar):
 
     def get_label(self):
         return _("Adjust")
-
-    def get_normal_icon_path(self):
-        return "icon_adjusments_normal.png"
-
-    def get_hover_icon_path(self):
-        return "icon_adjusments_hover.png"
