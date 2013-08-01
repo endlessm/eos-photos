@@ -16,8 +16,8 @@ class Distortion:
     def bulge(self, radius_d):
         return radius_d ** 2
 
-    def pinch(self, radius_d):
-        return numpy.sqrt(radius_d)  
+    def pinch(self, k, radius_d):
+        return radius_d ** k 
 
     def radius_distort(self, xy, width, height, radius_func, zoom_factor):
         x, y = xy.T
@@ -60,19 +60,23 @@ class Distortion:
             result = swirl(self._image_array, center=(shape[1]/2, shape[0]/2), strength=5, 
                 radius=radius, order=1)
         elif distort_name == "FISH EYE LIGHT":
-            warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.4, radius_d)
-            warp_args['zoom_factor'] = 1.8
+            warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.3, radius_d)
+            warp_args['zoom_factor'] = 1.6
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "FISH EYE HEAVY":
-            warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.8, radius_d)
-            warp_args['zoom_factor'] = 2.6
+            warp_args['radius_func'] = lambda radius_d: self.fish_eye(0.6, radius_d)
+            warp_args['zoom_factor'] = 2.2
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         elif distort_name == "BULGE":
             warp_args['radius_func'] = lambda radius_d: self.bulge(radius_d)
             warp_args['zoom_factor'] = 1.45
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
-        elif distort_name == "PINCH":
-            warp_args['radius_func'] = lambda radius_d: self.pinch(radius_d)
+        elif distort_name == "PINCH LIGHT":
+            warp_args['radius_func'] = lambda radius_d: self.pinch(0.8, radius_d)
+            warp_args['zoom_factor'] = 1
+            result = warp(self._image_array, self.radius_distort, map_args=warp_args)
+        elif distort_name == "PINCH HEAVY":
+            warp_args['radius_func'] = lambda radius_d: self.pinch(0.5, radius_d)
             warp_args['zoom_factor'] = 1
             result = warp(self._image_array, self.radius_distort, map_args=warp_args)
         else:

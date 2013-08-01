@@ -84,8 +84,8 @@ class PhotosModel(object):
             (_("NONE"), lambda im: im),
             (_("FISH EYE LIGHT"), lambda im: ImageTools.distortion(im, "FISH EYE LIGHT")),
             (_("FISH EYE HEAVY"), lambda im: ImageTools.distortion(im, "FISH EYE HEAVY")),
-            (_("BULGE"), lambda im: ImageTools.distortion(im, "BULGE")),
-            (_("PINCH"), lambda im: ImageTools.distortion(im, "PINCH")),
+            (_("PINCH LIGHT"), lambda im: ImageTools.distortion(im, "PINCH LIGHT")),
+            (_("PINCH HEAVY"), lambda im: ImageTools.distortion(im, "PINCH HEAVY")),
             (_("SWIRL"), lambda im: ImageTools.distortion(im, "SWIRL"))
         ])
 
