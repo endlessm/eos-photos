@@ -21,12 +21,15 @@ class Option(Gtk.Button):
     Options for the OptionList, these widgets display a thumbnail and a label
     fit underneath.
     """
-    def __init__(self, name="", image_path="", label="", clicked_callback=None):
-        super(Option, self).__init__(name=name+"-button")
+    def __init__(self, image_path="", label="", clicked_callback=None):
+        super(Option, self).__init__()
+        self.get_style_context().add_class("option-button")
 
         self._clicked_callback = clicked_callback
-        self._image = Gtk.Image(name=name+"-image", file=image_path)
-        self._label = OptionLabel(image=self._image, name=name+"-label", label=label)
+        self._image = Gtk.Image(file=image_path)
+        self._image.get_style_context().add_class("option-image")
+        self._label = OptionLabel(image=self._image, label=label)
+        self._label.get_style_context().add_class("option-label")
         self._label.set_line_wrap(True)
 
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
@@ -60,9 +63,9 @@ class OptionList(Gtk.VBox):
         super(OptionList, self).__init__(homogeneous=False, spacing=0)
         self._icons = {}
 
-    def add_option(self, name, thumbnail_path, label, clicked_callback):
+    def add_option(self, thumbnail_path, label, clicked_callback):
         option = Option(
-            name=name, image_path=thumbnail_path, label=label,
+            image_path=thumbnail_path, label=label,
             clicked_callback=clicked_callback)
         self._icons[label] = option
         self.pack_start(option, expand=False, fill=False, padding=6)
