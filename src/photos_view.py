@@ -23,9 +23,9 @@ class PhotosView(object):
         categories = [self._filters, self._distorts, self._blurs, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                categories=categories)
-        self._splash_screen = SplashScreen(images_path=images_path, name="splash-eventbox")
+        self._splash_screen = SplashScreen(name="splash-eventbox")
 
-        self._right_toolbar = PhotosRightToolbar(images_path=images_path)
+        self._right_toolbar = PhotosRightToolbar()
         self._image_container = ImageContainer(images_path=images_path, name="image-container")
         self._window = PhotosWindow(images_path=images_path,
                                     splash_screen=self._splash_screen,

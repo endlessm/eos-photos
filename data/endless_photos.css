@@ -14,6 +14,21 @@
     text-shadow: none;
 }
 
+GtkButton {
+    transition:background-image 200ms ease-in-out;
+}
+
+GtkLabel {
+    transition:color 200ms ease-in-out;
+}
+
+.arrow-frame,
+.image-frame {
+    border-width: 0px;
+    background-size: 100% 100%;
+    transition:background-image 200ms ease-in-out;
+}
+
 /*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
     font-size: 46px;
@@ -25,7 +40,8 @@
     background-color: black;
 }
 
-#filter-button {
+.option-button {
+    transition:background-color 200ms ease-in-out;
     background-color: transparent;
     background-image: none;
     border-width: 0px;
@@ -33,15 +49,16 @@
     border-radius: 2px;
 }
 
-#filter-button:hover {
+.option-button:hover {
     background-color: rgba(122, 122, 122, 0.15);
 }
 
-#filter-button:selected {
+.option-button:selected {
     background-color: white;
 }
 
-#filter-label {
+.slider-label,
+.option-label {
     text-shadow: none;
     font-weight: bold;
     font-size: 12px;
@@ -49,46 +66,72 @@
     padding: 3px 0px 0px 0px;
 }
 
-
-#filter-label:selected {
+.slider-label,
+.option-label:selected {
     background-color: transparent;
 }
 
-#category-label {
+.category-expander .arrow-frame:hover {
+    background-image: url("../images/icon_arrow-down.png");
+}
+
+.category-expander .arrow-frame:active {
+    background-image: url("../images/icon_arrow-up.png");
+}
+
+.category-label {
     text-shadow: none;
     font-weight: bold;
     font-size: 13px;
     color: #999999;
 }
 
-#category-label:hover {
+.category-label:hover {
     color: #ffffff;
 }
 
-#save-button GtkLabel,
-#share-button GtkLabel,
-#email-button GtkLabel {
-    font-weight: bold;
-    font-size: 12px;
-    text-shadow: 0px 1px rgba(0,0,0,0.75);
-    color: #464646;
+#blur-expander .image-frame {
+    background-image: url("../images/icon_blur_normal.png");
 }
 
-#save-button GtkLabel:hover,
-#share-button GtkLabel:hover,
-#email-button GtkLabel:hover {
-    color: #a1a1a1;
+#blur-expander .image-frame:hover {
+    background-image: url("../images/icon_blur_hover.png");
 }
 
-#save-button GtkLabel:active,
-#share-button GtkLabel:active,
-#email-button GtkLabel:active {
-    color: #464646;
+#border-expander .image-frame {
+    background-image: url("../images/icon_border_normal.png");
+}
+
+#border-expander .image-frame:hover {
+    background-image: url("../images/icon_border_hover.png");
+}
+
+#filter-expander .image-frame {
+    background-image: url("../images/icon_effects_normal.png");
+}
+
+#filter-expander .image-frame:hover {
+    background-image: url("../images/icon_effects_hover.png");
+}
+
+#distort-expander .image-frame {
+    background-image: url("../images/icon_deform_normal.png");
+}
+
+#distort-expander .image-frame:hover {
+    background-image: url("../images/icon_deform_hover.png");
+}
+
+#adjustment-expander .image-frame {
+    background-image: url("../images/icon_adjustments_normal.png");
+}
+
+#adjustment-expander .image-frame:hover {
+    background-image: url("../images/icon_adjustments_hover.png");
 }
 
 #save-button,
 #share-button,
-#email-button,
 #close-button,
 #minimize-button {
     background-color: transparent;
@@ -97,7 +140,50 @@
     border-image: none;
 }
 
+#save-button GtkLabel,
+#share-button GtkLabel {
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: 0px 1px rgba(0,0,0,0.75);
+    color: #464646;
+}
+
+#save-button GtkLabel:hover,
+#share-button GtkLabel:hover {
+    color: #a1a1a1;
+}
+
+#save-button GtkLabel:active,
+#share-button GtkLabel:active {
+    color: #464646;
+}
+
+#save-button .image-frame {
+    background-image: url("../images/save_normal.png");
+}
+
+#save-button .image-frame:hover {
+    background-image: url("../images/save_hover.png");
+}
+
+#save-button .image-frame:active {
+    background-image: url("../images/save_down.png");
+}
+
+#share-button .image-frame {
+    background-image: url("../images/facebook_normal.png");
+}
+
+#share-button .image-frame:hover {
+    background-image: url("../images/facebook_hover.png");
+}
+
+#share-button .image-frame:active {
+    background-image: url("../images/facebook_down.png");
+}
+
 #splash-open-photos-button {
+    transition:background-image 200ms ease-in-out;
     -GtkWidget-focus-line-width: 0px;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      color-stop(0.0, #A6AC00),
@@ -131,8 +217,13 @@
                                      to (#AAAF03));
 }
 
+#splash-open-photos-button .image-frame {
+    background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
+}
+
 #revert-button,
 #open-photos-button {
+    transition:background-image 200ms ease-in-out;
     padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
@@ -177,6 +268,18 @@
     padding: 0px 3px 0px 0px;
 }
 
+#revert-button .image-frame {
+    background-image: url("../images/icon_restore-photo_normal.png");
+}
+
+#revert-button .image-frame:hover {
+    background-image: url("../images/icon_restore-photo_hover.png");
+}
+
+#revert-button .image-frame:active {
+    background-image: url("../images/icon_restore-photo_normal.png");
+}
+
 #open-photos-button GtkImage {
     padding: 0px 5px 0px 9px;
 }
@@ -189,32 +292,46 @@
     background-image: url("../images/topbar_OpenPhoto_down_bg.png");
 }
 
+#open-photos-button .image-frame {
+    background-image: url("../images/icon_topbar_OpenPhoto_normal.png");
+}
+
+#open-photos-button .image-frame:hover {
+    background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
+}
+
+#open-photos-button .image-frame:active {
+    background-image: url("../images/icon_topbar_OpenPhoto_normal.png");
+}
+
 #open-photos-button GtkLabel {
     padding: 0px 10px 0px 0px;
 }
 
-#filters-scroll-area > GtkViewport {
+.filters-scroll-area > GtkViewport {
     background-color: transparent;
 }
 
-#filters-scroll-area > .scrollbar {
+.filters-scroll-area > .scrollbar {
     -GtkRange-slider-width: 8;
     -GtkRange-trough-border: 0;
 }
 
-#filters-scroll-area > .scrollbar.trough {
+.filters-scroll-area > .scrollbar.trough {
     border-width: 0px;
     background-color: transparent;
     background-image: none;
 }
 
-#filters-scroll-area > .scrollbar.slider {
+.filters-scroll-area > .scrollbar.slider {
+    /* this transition doesn't seem to work */
+    transition:background-color 200ms ease-in-out;
     border-width: 0px;
     background-image: none;
     background-color: #3f3f3f;
 }
 
-#filters-scroll-area > .scrollbar.slider:hover {
+.filters-scroll-area > .scrollbar.slider:hover {
     background-color: #5c5c5c;
 }
 
@@ -230,6 +347,8 @@ GtkScale {
 }
 
 .scale.slider {
+    /* this transition doesn't seem to work */
+    transition:background-image 200ms ease-in-out;
     background-image: url("../images/slider_knob_normal.png");
 }
 
