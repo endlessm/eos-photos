@@ -53,14 +53,17 @@ class ImageContainer(Gtk.AspectFrame):
 
     def set_fullscreen_mode(self, fullscreen):
         self._fullscreen_mode = fullscreen
-        if fullscreen:
-            self._stage.add_child(self._unfullscreen_button)
-            if self._fullscreen_button.get_parent() == self._stage:
-                self._stage.remove_child(self._fullscreen_button)
-        else:
-            self._stage.add_child(self._fullscreen_button)
-            if self._unfullscreen_button.get_parent() == self._stage:
-                self._stage.remove_child(self._unfullscreen_button)
+        # We may bring the fullscreen back someday so for now I'm removing the
+        # code that adds the fullscreen button to the scene
+
+        # if fullscreen:
+        #     self._stage.add_child(self._unfullscreen_button)
+        #     if self._fullscreen_button.get_parent() == self._stage:
+        #         self._stage.remove_child(self._fullscreen_button)
+        # else:
+        #     self._stage.add_child(self._fullscreen_button)
+        #     if self._unfullscreen_button.get_parent() == self._stage:
+        #         self._stage.remove_child(self._unfullscreen_button)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
