@@ -1,6 +1,6 @@
 import sys
 import os
-from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio
+from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio, Endless
 
 import gettext
 gettext.install('endless_photos')
@@ -10,7 +10,7 @@ from photos_view import PhotosView
 from photos_presenter import PhotosPresenter
 
 
-class EndlessPhotos(Gtk.Application):
+class EndlessPhotos(Endless.Application):
     ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
     # ABS_PHOTOS_PATH = '.'
     """
@@ -54,7 +54,7 @@ class EndlessPhotos(Gtk.Application):
             textures_path=self.get_images_path() + "textures/",
             curves_path=self.get_data_path() + "curves/",
             borders_path=self.get_images_path() + "borders/")
-        self._view = PhotosView(images_path=self.get_images_path())
+        self._view = PhotosView(application=self, images_path=self.get_images_path())
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._window = self._view.get_window()
         self.add_window(self._window)

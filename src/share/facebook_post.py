@@ -23,7 +23,6 @@ class FacebookPost:
         proc = subprocess.Popen(['python', '/usr/share/endless-os-photos/src/share/fb_auth_window.pyc'], stdout=subprocess.PIPE)
         success = False
         for line in proc.stdout:
-            print line
             if line.startswith('ACCESS_TOKEN:'):
                 token = line.split(':')[1]
                 if self.is_token_valid(token):
