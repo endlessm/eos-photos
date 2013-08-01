@@ -7,22 +7,20 @@ class PhotosRightToolbar(Gtk.Alignment):
     """
     The right toolbar with post to facebook and save buttons.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
         super(PhotosRightToolbar, self).__init__(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0, **kw)
 
         self._save_button = ImageTextButton(
-            normal_path=images_path + "save_normal.png",
-            hover_path=images_path + "save_hover.png",
-            down_path=images_path + "save_down.png",
+            image_size_x=ImageTextButton.SIZE_LARGE,
+            image_size_y=ImageTextButton.SIZE_LARGE,
             label=_("SAVE"),
             name="save-button",
             vertical=True)
         self._save_button.connect('clicked', lambda w: self._presenter.on_save())
 
         self._share_button = ImageTextButton(
-            normal_path=images_path + "facebook_normal.png",
-            hover_path=images_path + "facebook_hover.png",
-            down_path=images_path + "facebook_down.png",
+            image_size_x=ImageTextButton.SIZE_MEDIUM,
+            image_size_y=ImageTextButton.SIZE_MEDIUM,
             label=_("FACEBOOK"),
             name="share-button",
             vertical=True)

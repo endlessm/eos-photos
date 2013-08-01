@@ -20,10 +20,7 @@ class PhotosLeftToolbar(Gtk.VBox):
             self._categories[label] = CategoryExpander(images_path, category)
             self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
 
-        self._revert_button = ImageTextButton(normal_path=images_path + "icon_restore-photo_normal.png",
-                                              hover_path=images_path + "icon_restore-photo_hover.png",
-                                              down_path=images_path + "icon_restore-photo_normal.png",
-                                              label=_("REVERT TO ORIGINAL"),
+        self._revert_button = ImageTextButton(label=_("REVERT TO ORIGINAL"),
                                               name="revert-button")
         self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
         self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
@@ -104,21 +101,25 @@ class ScrollWindowDropShadow(Gtk.Widget):
 
 class CategoryExpander(Gtk.Expander):
     def __init__(self, images_path, widget, **kw):
+        kw["name"] = widget.get_name() + "-expander"
         super(CategoryExpander, self).__init__(**kw)
+        self.get_style_context().add_class("category-expander")
 
-        self._images_path = images_path
-        self._normal_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_normal_icon_path())
-        self._hover_icon_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + widget.get_hover_icon_path())
+        self._icon_frame = Gtk.Frame()
+        self._icon_frame.get_style_context().add_class("image-frame")
+        self._icon_frame.set_size_request(21, 21)
 
-        self._category_icon = Gtk.Image.new_from_pixbuf(self._normal_icon_pixbuf)
         self._category_label = Gtk.Label(label=widget.get_label(), name="category-label")
+        self._category_label.get_style_context().add_class("category-label")
+
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._category_icon, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._icon_frame, expand=False, fill=False, padding=9)
         self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
 
-        self._up_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-up.png")
-        self._down_pixbuf = GdkPixbuf.Pixbuf.new_from_file(images_path + "icon_arrow-down.png")
-        self._arrow = Gtk.Image.new_from_pixbuf(self._down_pixbuf)
+        self._arrow_frame = Gtk.Frame()
+        self._arrow_frame.get_style_context().add_class("arrow-frame")
+        self._arrow_frame.set_size_request(21, 21)
+        self._hbox.pack_end(self._arrow_frame, expand=False, fill=False, padding=8)
 
         self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
@@ -130,7 +131,8 @@ class CategoryExpander(Gtk.Expander):
         self.set_label_widget(self._vbox)
 
         self._widget = widget
-        self._scroll_area = CategoryScrollWindow(name="filters-scroll-area")
+        self._scroll_area = CategoryScrollWindow()
+        self._scroll_area.get_style_context().add_class("filters-scroll-area")
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         self._scroll_area.add_with_viewport(self._widget)
         self._drop_shadow = ScrollWindowDropShadow(images_path=images_path)
@@ -146,26 +148,26 @@ class CategoryExpander(Gtk.Expander):
     def _on_expanded(self, widget, event):
         if self.get_expanded():
             self._vbox.remove(self._separator)
-            self._arrow.set_from_pixbuf(self._up_pixbuf)
             self.get_parent().change_category(self._widget.get_label())
+            flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.ACTIVE
+            self._arrow_frame.set_state_flags(flags, True)
         else:
             self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
-            self._arrow.set_from_pixbuf(self._down_pixbuf)
+            flags = Gtk.StateFlags(self._arrow_frame.get_state_flags() & ~Gtk.StateFlags.ACTIVE)
+            self._arrow_frame.set_state_flags(flags, True)
         self.show_all()
 
     def _on_mouse_enter(self, widget, event):
-        self._category_icon.set_from_pixbuf(self._hover_icon_pixbuf)
-        # flags = self._category_label.get_state_flags() | Gtk.StateFlags.PRELIGHT
-        # self._category_label.set_state_flags(flags)
-        self._hbox.pack_end(self._arrow, expand=False, fill=False, padding=8)
-        self.show_all()
+        flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.PRELIGHT
+        if self.get_expanded():
+            flags = flags | Gtk.StateFlags.ACTIVE
+        self._arrow_frame.set_state_flags(flags, True)
 
     def _on_mouse_leave(self, widget, event):
-        self._category_icon.set_from_pixbuf(self._normal_icon_pixbuf)
-        # flags = Gtk.StateFlags(self._category_label.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
-        # self._category_label.set_state_flags(flags)
-        self._hbox.remove(self._arrow)
-        self.show_all()
+        flags = Gtk.StateFlags(self._arrow_frame.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
+        if self.get_expanded():
+            flags = Gtk.StateFlags(flags & ~Gtk.StateFlags.ACTIVE)
+        self._arrow_frame.set_state_flags(flags, True)
 
     def get_widget(self):
         return self._widget

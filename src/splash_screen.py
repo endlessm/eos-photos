@@ -21,14 +21,11 @@ class SplashScreen(Gtk.VBox):
     MINIMUM_HEIGHT = 37 # Set this minimum height of the toolbar to 37 to prevent size changes
                         # when switching to the photo editor.
 
-    def __init__(self, images_path=None, **kw):
+    def __init__(self, **kw):
         super(SplashScreen, self).__init__(**kw)
 
-        self._splash_open_button = ImageTextButton(normal_path=images_path + "icon_topbar_OpenPhoto_hover.png",
-                                            hover_path=images_path + "icon_topbar_OpenPhoto_hover.png",
-                                            down_path=images_path + "icon_topbar_OpenPhoto_hover.png",
-                                            label=_("Open Image"),
-                                            name="splash-open-photos-button")
+        self._splash_open_button = ImageTextButton(label=_("Open Image"),
+                                                   name="splash-open-photos-button")
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
 
         splash_label = WrappingLabel(width=600, label=_("Choose one of your photos to begin!"), name="splash-label", expand=False)
