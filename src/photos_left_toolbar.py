@@ -16,9 +16,9 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self._categories = {}
         for category in categories:
-            label = category.get_label()
-            self._categories[label] = CategoryExpander(images_path, category)
-            self.pack_start(self._categories[label], expand=False, fill=True, padding=0)
+            name = category.get_name()
+            self._categories[name] = CategoryExpander(images_path, category)
+            self.pack_start(self._categories[name], expand=False, fill=True, padding=0)
 
         self._revert_button = ImageTextButton(label=_("REVERT TO ORIGINAL"),
                                               name="revert-button")
@@ -30,14 +30,15 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.set_vexpand(True)
         self.show_all()
+        self._categories["filter"].set_expanded(True)
         self.connect('size-allocate', self._check_full)
 
     def set_presenter(self, presenter):
         self._presenter = presenter
 
     def change_category(self, category_label):
-        for label, category in self._categories.items():
-            if not label == category_label:
+        for name, category in self._categories.items():
+            if not name == category_label:
                 category.deselect()
 
     def _check_full(self, w, alloc):
@@ -131,8 +132,9 @@ class CategoryExpander(Gtk.Expander):
         self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=8)
         self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
         # This hackish line keeps the expander widget from downsizing
-        # horizontally after the separator is removed.
-        self._vbox.connect("size-allocate", lambda w, alloc: self._vbox.set_size_request(alloc.width, -1))
+        # horizontally after the separator is removed. 183 is the width of the
+        # separator image
+        self._hbox.set_size_request(183, -1)
         self.set_label_widget(self._vbox)
 
         self._widget = widget
@@ -153,13 +155,19 @@ class CategoryExpander(Gtk.Expander):
     def _on_expanded(self, widget, event):
         if self.get_expanded():
             self._vbox.remove(self._separator)
-            self.get_parent().change_category(self._widget.get_label())
+            self.get_parent().change_category(self._widget.get_name())
             flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.ACTIVE
-            self._arrow_frame.set_state_flags(flags, True)
+            self._icon_frame.set_state_flags(flags, True)
+            self._category_label.set_state_flags(flags, True)
+            # Don't set arrow active unless mouse is currently over category.
+            if self._arrow_frame.get_state_flags() & Gtk.StateFlags.PRELIGHT:
+                self._arrow_frame.set_state_flags(flags, True)
         else:
             self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
             flags = Gtk.StateFlags(self._arrow_frame.get_state_flags() & ~Gtk.StateFlags.ACTIVE)
             self._arrow_frame.set_state_flags(flags, True)
+            self._category_label.set_state_flags(flags, True)
+            self._icon_frame.set_state_flags(flags, True)
         self.show_all()
 
     def _on_mouse_enter(self, widget, event):
