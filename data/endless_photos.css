@@ -221,8 +221,7 @@ GtkLabel {
     background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
 }
 
-#revert-button,
-#open-photos-button {
+#revert-button {
     transition:background-image 200ms ease-in-out;
     padding: 8px 0px 8px 0px;
     background-color: transparent;
@@ -278,18 +277,6 @@ GtkLabel {
 
 #revert-button .image-frame:active {
     background-image: url("../images/icon_restore-photo_normal.png");
-}
-
-#open-photos-button GtkImage {
-    padding: 0px 5px 0px 9px;
-}
-
-#open-photos-button:hover {
-    background-image: url("../images/topbar_OpenPhoto_hover_bg.png");
-}
-
-#open-photos-button:active {
-    background-image: url("../images/topbar_OpenPhoto_down_bg.png");
 }
 
 #open-photos-button .image-frame {
