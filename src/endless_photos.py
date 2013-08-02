@@ -11,8 +11,8 @@ from photos_presenter import PhotosPresenter
 
 
 class EndlessPhotos(Endless.Application):
-    ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
-    # ABS_PHOTOS_PATH = '.'
+    # ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
+    ABS_PHOTOS_PATH = '.'
     """
     The photo application.
 
