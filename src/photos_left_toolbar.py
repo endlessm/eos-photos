@@ -109,22 +109,17 @@ class CategoryExpander(Gtk.Expander):
         self._icon_frame.get_style_context().add_class("image-frame")
         self._icon_frame.set_size_request(21, 21)
 
-        self._icon_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
-        self._icon_align.add(self._icon_frame)
-
         self._category_label = Gtk.Label(label=widget.get_label(), name="category-label")
         self._category_label.get_style_context().add_class("category-label")
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._icon_frame, expand=False, fill=False, padding=9)
         self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
 
         self._arrow_frame = Gtk.Frame()
         self._arrow_frame.get_style_context().add_class("arrow-frame")
         self._arrow_frame.set_size_request(21, 21)
-        self._arrow_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
-        self._arrow_align.add(self._arrow_frame)
-        self._hbox.pack_end(self._arrow_align, expand=False, fill=False, padding=8)
+        self._hbox.pack_end(self._arrow_frame, expand=False, fill=False, padding=8)
 
         self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)

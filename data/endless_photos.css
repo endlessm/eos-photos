@@ -5,7 +5,7 @@
     -GtkExpander-focus-line-width: 0px;
     -GtkExpander-expander-spacing: 0px;
     -GtkExpander-focus-padding: 0px;
-    font-family: Source Sans Pro Semibold;
+    font-family: Ubuntu;
     font-style: normal;
 }
 
@@ -31,9 +31,7 @@ GtkLabel {
 
 /*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
-    font-family: Source Sans Pro Light;
-    text-shadow: 0px 1px 1px rgba(0,0,0,0.25);
-    font-size: 50px;
+    font-size: 46px;
     color: rgba(255, 255, 255, 0.6);
     padding: 0px 0px 20px 0px;
 }
@@ -62,6 +60,7 @@ GtkLabel {
 .slider-label,
 .option-label {
     text-shadow: none;
+    font-weight: bold;
     font-size: 12px;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
@@ -81,8 +80,9 @@ GtkLabel {
 }
 
 .category-label {
-    font-size: 13px;
     text-shadow: none;
+    font-weight: bold;
+    font-size: 13px;
     color: #999999;
 }
 
@@ -131,7 +131,9 @@ GtkLabel {
 }
 
 #save-button,
-#share-button {
+#share-button,
+#close-button,
+#minimize-button {
     background-color: transparent;
     background-image: none;
     border-width: 0px;
@@ -140,8 +142,9 @@ GtkLabel {
 
 #save-button GtkLabel,
 #share-button GtkLabel {
+    font-weight: bold;
     font-size: 12px;
-    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
+    text-shadow: 0px 1px rgba(0,0,0,0.75);
     color: #464646;
 }
 
@@ -185,15 +188,14 @@ GtkLabel {
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      color-stop(0.0, #A6AC00),
                                      color-stop(1.0, #A6AC00));
-    padding: 0px 9px 0px 9px;
+    padding: 5px 9px 5px 9px;
     border-width: 0px;
     border-image: none;
     box-shadow: none;
 }
 
 #splash-open-photos-button GtkLabel {
-    font-family: Source Sans Pro Light;
-    font-size: 20px;
+    font-size: 14px;
     padding-left: 3px;
     color: #FFFFFF;
     padding: 2px 4px 2px 4px;
@@ -201,10 +203,6 @@ GtkLabel {
 
 #splash-open-photos-button GtkLabel:hover {
     color: #FFFFFF;
-}
-
-#splash-open-photos-button GtkLabel:active {
-    text-shadow: none;
 }
 
 #splash-open-photos-button:hover {
@@ -223,10 +221,9 @@ GtkLabel {
     background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
 }
 
-#revert-button,
-#open-photos-button {
+#revert-button {
     transition:background-image 200ms ease-in-out;
-    padding: 8px 0px 8px 3px;
+    padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
     border-radius: 0px;
@@ -238,9 +235,9 @@ GtkLabel {
 
 #revert-button GtkLabel,
 #open-photos-button GtkLabel {
-    font-family: Source Sans Pro Semibold;
-    font-size: 12px;
-    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0px -1px rgba(0,0,0,0.75);
     color: #999999;
 }
 
@@ -254,6 +251,10 @@ GtkLabel {
     color: #999999;
 }
 
+#revert-button GtkImage {
+    padding: 0px 3px 0px 5px;
+}
+
 #revert-button:hover {
     background-image: url("../images/restore-photo_bg_hover.png");
 }
@@ -263,7 +264,7 @@ GtkLabel {
 }
 
 #revert-button GtkLabel {
-    padding: 0px 3px 0px 3px;
+    padding: 0px 3px 0px 0px;
 }
 
 #revert-button .image-frame {
@@ -278,12 +279,8 @@ GtkLabel {
     background-image: url("../images/icon_restore-photo_normal.png");
 }
 
-#open-photos-button:hover {
-    background-image: url("../images/topbar_OpenPhoto_hover_bg.png");
-}
-
-#open-photos-button:active {
-    background-image: url("../images/topbar_OpenPhoto_down_bg.png");
+#open-photos-button GtkImage {
+    padding: 0px 5px 0px 9px;
 }
 
 #open-photos-button .image-frame {
