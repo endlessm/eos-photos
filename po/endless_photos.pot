@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-02 12:37-0700\n"
+"POT-Creation-Date: 2013-08-01 16:49-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,59 +18,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: src/photos_category_toolbars.py:188
-msgid "Adjust"
-msgstr ""
-
-#: src/photos_model.py:79
-msgid "BRUSH"
+msgid "ADJUST"
 msgstr ""
 
 #: src/photos_category_toolbars.py:65
-msgid "Blurs"
+msgid "BLURS"
 msgstr ""
 
 #: src/photos_category_toolbars.py:83
-msgid "Borders"
+msgid "BORDERS"
 msgstr ""
 
 #: src/photos_category_toolbars.py:142
 msgid "Brightness"
 msgstr ""
 
-#: src/photos_model.py:54
-msgid "COLORFUL"
-msgstr ""
-
-#: src/photos_model.py:51
-msgid "COUNTRY"
-msgstr ""
-
-#: src/photos_model.py:76
-msgid "CRAYON"
+#: src/photos_model.py:79
+msgid "Brush"
 msgstr ""
 
 #: src/splash_screen.py:31
 msgid "Choose one of your photos to begin!"
 msgstr ""
 
+#: src/photos_model.py:54
+msgid "Colorful"
+msgstr ""
+
 #: src/photos_category_toolbars.py:153
 msgid "Contrast"
 msgstr ""
 
-#: src/photos_model.py:44
-msgid "DEPTH OF FIELD"
+#: src/photos_model.py:51
+msgid "Country"
 msgstr ""
 
-#: src/photos_model.py:62
-msgid "DESERT"
+#: src/photos_model.py:76
+msgid "Crayon"
 msgstr ""
 
 #: src/photos_category_toolbars.py:119
-msgid "Distortions"
+msgid "DISTORTIONS"
+msgstr ""
+
+#: src/photos_model.py:44
+msgid "Depth of Field"
+msgstr ""
+
+#: src/photos_model.py:62
+msgid "Desert"
 msgstr ""
 
 #: src/photos_model.py:66
-msgid "EDGES"
+msgid "Edges"
 msgstr ""
 
 #: src/photos_presenter.py:112
@@ -89,40 +89,36 @@ msgstr ""
 msgid "FACEBOOK"
 msgstr ""
 
-#: src/photos_model.py:86
-msgid "FISH EYE HEAVY"
-msgstr ""
-
-#: src/photos_model.py:85
-msgid "FISH EYE LIGHT"
-msgstr ""
-
-#: src/photos_model.py:59
-msgid "FOGGY BLUE"
+#: src/photos_category_toolbars.py:101
+msgid "FILTERS"
 msgstr ""
 
 #: src/photos_presenter.py:219
 msgid "Facebook is not available offline."
 msgstr ""
 
-#: src/photos_category_toolbars.py:101
-msgid "Filters"
+#: src/photos_model.py:86
+msgid "Fish Eye Heavy"
+msgstr ""
+
+#: src/photos_model.py:85
+msgid "Fish Eye Light"
+msgstr ""
+
+#: src/photos_model.py:59
+msgid "Foggy Blue"
 msgstr ""
 
 #: src/photos_model.py:50
-msgid "GRAYSCALE"
+msgid "Grayscale"
 msgstr ""
 
 #: src/photos_model.py:77
-msgid "GRUNGE"
+msgid "Grunge"
 msgstr ""
 
 #: src/photos_model.py:52
-msgid "GRUNGIFY"
-msgstr ""
-
-#: src/photos_model.py:56
-msgid "LUMO"
+msgid "Grungify"
 msgstr ""
 
 #: src/share/facebook_post.py:36 src/share/facebook_post.py:41
@@ -130,16 +126,12 @@ msgstr ""
 msgid "Login failed."
 msgstr ""
 
+#: src/photos_model.py:56
+msgid "Lomo"
+msgstr ""
+
 #: src/photos_presenter.py:221 src/photos_presenter.py:230
 msgid "Message:"
-msgstr ""
-
-#: src/photos_model.py:42 src/photos_model.py:73 src/photos_model.py:84
-msgid "NONE"
-msgstr ""
-
-#: src/photos_model.py:49
-msgid "NORMAL"
 msgstr ""
 
 #: src/share/facebook_post.py:74
@@ -148,12 +140,17 @@ msgid ""
 "again."
 msgstr ""
 
-#: src/photos_model.py:53
-msgid "OLD PHOTO"
+#: src/photos_model.py:42 src/photos_model.py:49 src/photos_model.py:73
+#: src/photos_model.py:84
+msgid "None"
 msgstr ""
 
 #: src/photos_window.py:52
 msgid "OPEN IMAGE"
+msgstr ""
+
+#: src/photos_model.py:53
+msgid "Old Photo"
 msgstr ""
 
 #: src/splash_screen.py:27 src/photos_view.py:110
@@ -161,23 +158,19 @@ msgid "Open Image"
 msgstr ""
 
 #: src/photos_view.py:162
-msgid "Open New Photo Without Save?"
+msgid "Open new photo without save?"
 msgstr ""
 
 #: src/photos_model.py:60
-msgid "PAPER"
+msgid "Paper"
 msgstr ""
 
 #: src/photos_model.py:88
-msgid "PINCH HEAVY"
+msgid "Pinch Heavy"
 msgstr ""
 
 #: src/photos_model.py:87
-msgid "PINCH LIGHT"
-msgstr ""
-
-#: src/photos_model.py:63
-msgid "POSTERIZE"
+msgid "Pinch Light"
 msgstr ""
 
 #: src/share/emailer.py:21
@@ -187,6 +180,10 @@ msgstr ""
 
 #: src/share/facebook_post.py:51
 msgid "Post failed. We're not really sure what happened sorry!"
+msgstr ""
+
+#: src/photos_model.py:63
+msgid "Posterize"
 msgstr ""
 
 #: src/photos_view.py:176
@@ -209,14 +206,6 @@ msgstr ""
 msgid "SAVE"
 msgstr ""
 
-#: src/photos_model.py:78
-msgid "SPRAY"
-msgstr ""
-
-#: src/photos_model.py:89
-msgid "SWIRL"
-msgstr ""
-
 #: src/photos_category_toolbars.py:164
 msgid "Saturation"
 msgstr ""
@@ -229,12 +218,20 @@ msgstr ""
 msgid "Someone"
 msgstr ""
 
+#: src/photos_model.py:78
+msgid "Spray"
+msgstr ""
+
+#: src/photos_model.py:89
+msgid "Swirl"
+msgstr ""
+
 #: src/photos_model.py:43
-msgid "TILT SHIFT"
+msgid "Tilt Shift"
 msgstr ""
 
 #: src/photos_model.py:61
-msgid "TRAINS"
+msgid "Trains"
 msgstr ""
 
 #: src/photos_category_toolbars.py:24

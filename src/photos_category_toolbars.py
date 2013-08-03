@@ -62,7 +62,7 @@ class BlurToolbar(OptionListToolbar):
         self.set_options(blurs)
 
     def get_label(self):
-        return _("Blurs")
+        return _("BLURS")
 
     def get_thumbnail_prefix(self):
         return "blur_thumbnails/"
@@ -80,7 +80,7 @@ class BorderToolbar(OptionListToolbar):
         super(BorderToolbar, self).__init__(**kw)
 
     def get_label(self):
-        return _("Borders")
+        return _("BORDERS")
 
     def get_thumbnail_prefix(self):
         return "border_thumbnails/"
@@ -98,7 +98,7 @@ class FilterToolbar(OptionListToolbar):
         super(FilterToolbar, self).__init__(**kw)
 
     def get_label(self):
-        return _("Filters")
+        return _("FILTERS")
 
     def get_thumbnail_prefix(self):
         return "filter_thumbnails/"
@@ -116,7 +116,7 @@ class DistortToolbar(OptionListToolbar):
         super(DistortToolbar, self).__init__(**kw)
 
     def get_label(self):
-        return _("Distortions")
+        return _("DISTORTIONS")
 
     def get_thumbnail_prefix(self):
         return "distortion_thumbnails/"
@@ -185,4 +185,4 @@ class AdjustmentToolbar(CategoryToolbar):
         self._saturation_slider.set_value(value)
 
     def get_label(self):
-        return _("Adjust")
+        return _("ADJUST")

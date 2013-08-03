@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-02 12:37-0700\n"
+"POT-Creation-Date: 2013-08-01 16:49-0700\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -10,60 +10,60 @@ msgstr ""
 "X-Generator: POEditor.com\n"
 
 #: src/photos_category_toolbars.py:188
-msgid "Adjust"
-msgstr "Ajustar"
-
-#: src/photos_model.py:79
-msgid "BRUSH"
-msgstr "ESCOVAR"
+msgid "ADJUST"
+msgstr "AJUSTES"
 
 #: src/photos_category_toolbars.py:65
-msgid "Blurs"
-msgstr "Ofuscar"
+msgid "BLURS"
+msgstr "BLURS"
 
 #: src/photos_category_toolbars.py:83
-msgid "Borders"
-msgstr "Fronteiras"
+msgid "BORDERS"
+msgstr "MOLDURA"
 
 #: src/photos_category_toolbars.py:142
 msgid "Brightness"
 msgstr "Brilho"
 
-#: src/photos_model.py:54
-msgid "COLORFUL"
-msgstr "COLORIDO"
-
-#: src/photos_model.py:51
-msgid "COUNTRY"
-msgstr "PROVINCIA"
-
-#: src/photos_model.py:76
-msgid "CRAYON"
-msgstr "CRAYON"
+#: src/photos_model.py:79
+msgid "Brush"
+msgstr "Pincel"
 
 #: src/splash_screen.py:31
 msgid "Choose one of your photos to begin!"
 msgstr "Escolha uma de suas fotos para começar!"
 
+#: src/photos_model.py:54
+msgid "Colorful"
+msgstr "Colorido"
+
 #: src/photos_category_toolbars.py:153
 msgid "Contrast"
-msgstr "Contraste"
+msgstr "Realçar"
 
-#: src/photos_model.py:44
-msgid "DEPTH OF FIELD"
-msgstr "PROFUND. DE CAMPO"
+#: src/photos_model.py:51
+msgid "Country"
+msgstr "Sertanejo"
 
-#: src/photos_model.py:62
-msgid "DESERT"
-msgstr "DESERTO"
+#: src/photos_model.py:76
+msgid "Crayon"
+msgstr "Lápis de Cera"
 
 #: src/photos_category_toolbars.py:119
-msgid "Distortions"
-msgstr "Distorções"
+msgid "DISTORTIONS"
+msgstr "DEFORMAR"
+
+#: src/photos_model.py:44
+msgid "Depth of Field"
+msgstr "Profundidade de Campo"
+
+#: src/photos_model.py:62
+msgid "Desert"
+msgstr "Deserto"
 
 #: src/photos_model.py:66
-msgid "EDGES"
-msgstr "BORDAS"
+msgid "Edges"
+msgstr "Contornos"
 
 #: src/photos_presenter.py:112
 msgid "Email failed."
@@ -75,64 +75,56 @@ msgstr "Digite uma mensagem para adicionar ao e-mail"
 
 #: src/photos_presenter.py:221
 msgid "Enter a message to add to your photo!"
-msgstr "Digite uma mensagem para adicionar a sua foto!"
+msgstr "Escreva uma mensagem para enviar com usa foto!"
 
 #: src/photos_right_toolbar.py:24
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_model.py:86
-msgid "FISH EYE HEAVY"
-msgstr "FISH-EYE PESADO"
-
-#: src/photos_model.py:85
-msgid "FISH EYE LIGHT"
-msgstr "FISH-EYE LEVE"
-
-#: src/photos_model.py:59
-msgid "FOGGY BLUE"
-msgstr "NÉVOA AZUL"
+#: src/photos_category_toolbars.py:101
+msgid "FILTERS"
+msgstr "Filtros"
 
 #: src/photos_presenter.py:219
 msgid "Facebook is not available offline."
 msgstr "O Facebook não está disponível sem conexão á Internet."
 
-#: src/photos_category_toolbars.py:101
-msgid "Filters"
-msgstr "Filtros"
+#: src/photos_model.py:86
+msgid "Fish Eye Heavy"
+msgstr "Olho de Peixe Gordo"
+
+#: src/photos_model.py:85
+msgid "Fish Eye Light"
+msgstr "Olho de Peixe Magro"
+
+#: src/photos_model.py:59
+msgid "Foggy Blue"
+msgstr "Névoa Azul"
 
 #: src/photos_model.py:50
-msgid "GRAYSCALE"
-msgstr "TONS DE CINZA"
+msgid "Grayscale"
+msgstr "Preto e branco"
 
 #: src/photos_model.py:77
-msgid "GRUNGE"
-msgstr "GRUNGE"
+msgid "Grunge"
+msgstr "Grunge"
 
 #: src/photos_model.py:52
-msgid "GRUNGIFY"
-msgstr "GRUNGIFICAR"
-
-#: src/photos_model.py:56
-msgid "LUMO"
-msgstr "LUMO"
+msgid "Grungify"
+msgstr "Grunge"
 
 #: src/share/facebook_post.py:36 src/share/facebook_post.py:41
 #: src/share/facebook_post.py:69
 msgid "Login failed."
 msgstr "Falha na conexão."
 
+#: src/photos_model.py:56
+msgid "Lomo"
+msgstr "Lomo"
+
 #: src/photos_presenter.py:221 src/photos_presenter.py:230
 msgid "Message:"
 msgstr "Mensagem:"
-
-#: src/photos_model.py:42 src/photos_model.py:73 src/photos_model.py:84
-msgid "NONE"
-msgstr "NENHUM"
-
-#: src/photos_model.py:49
-msgid "NORMAL"
-msgstr "NORMAL"
 
 #: src/share/facebook_post.py:74
 msgid ""
@@ -142,39 +134,38 @@ msgstr ""
 "Problema de rede detectado. Por favor, verifique sua conexão à Internet e "
 "tente novamente."
 
-#: src/photos_model.py:53
-msgid "OLD PHOTO"
-msgstr "FOTO ANTIGA"
+#: src/photos_model.py:42 src/photos_model.py:49 src/photos_model.py:73
+#: src/photos_model.py:84
+msgid "None"
+msgstr "Normal"
 
 #: src/photos_window.py:52
 msgid "OPEN IMAGE"
-msgstr "ABRIR IMAGEM"
+msgstr "ABRIR FOTO"
+
+#: src/photos_model.py:53
+msgid "Old Photo"
+msgstr "Foto Antiga"
 
 #: src/splash_screen.py:27 src/photos_view.py:110
 msgid "Open Image"
 msgstr "Abrir Imagem"
 
 #: src/photos_view.py:162
-msgid "Open New Photo Without Save?"
-msgstr "Abrir Nova Foto Sem Salvar?"
+msgid "Open new photo without save?"
+msgstr "Deseja abrir uma foto sem salvar a atual?"
 
 #: src/photos_model.py:60
-msgid "PAPER"
-msgstr "PAPEL"
+msgid "Paper"
+msgstr "Papel"
 
 #: src/photos_model.py:88
-#, fuzzy
-msgid "PINCH HEAVY"
-msgstr "FISH-EYE PESADO"
+msgid "Pinch Heavy"
+msgstr "Beliscão Gordo"
 
 #: src/photos_model.py:87
-#, fuzzy
-msgid "PINCH LIGHT"
-msgstr "FISH-EYE LEVE"
-
-#: src/photos_model.py:63
-msgid "POSTERIZE"
-msgstr "POSTERIZAR"
+msgid "Pinch Light"
+msgstr "Beliscão Magro"
 
 #: src/share/emailer.py:21
 msgid ""
@@ -186,6 +177,10 @@ msgstr ""
 #: src/share/facebook_post.py:51
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr "Sua publicação falhou. Não temos certeza do que aconteceu, desculpe!"
+
+#: src/photos_model.py:63
+msgid "Posterize"
+msgstr "Posterizar"
 
 #: src/photos_view.py:176
 msgid "Quit Without Save?"
@@ -209,14 +204,6 @@ msgstr ""
 msgid "SAVE"
 msgstr "SALVAR"
 
-#: src/photos_model.py:78
-msgid "SPRAY"
-msgstr "SPRAY"
-
-#: src/photos_model.py:89
-msgid "SWIRL"
-msgstr "REDEMOINHO"
-
 #: src/photos_category_toolbars.py:164
 msgid "Saturation"
 msgstr "Saturação"
@@ -229,13 +216,21 @@ msgstr "Salvar Imagem"
 msgid "Someone"
 msgstr "Alguém"
 
+#: src/photos_model.py:78
+msgid "Spray"
+msgstr "Spray"
+
+#: src/photos_model.py:89
+msgid "Swirl"
+msgstr "Redemoinho"
+
 #: src/photos_model.py:43
-msgid "TILT SHIFT"
-msgstr ""
+msgid "Tilt Shift"
+msgstr "Tilt Shift"
 
 #: src/photos_model.py:61
-msgid "TRAINS"
-msgstr ""
+msgid "Trains"
+msgstr "Caravana"
 
 #: src/photos_category_toolbars.py:24
 msgid "Untitled"
@@ -250,8 +245,8 @@ msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
-"Suas alterações não foram salvas. Tem certeza de que deseja abrir uma nova "
-"foto sem salvar?"
+"A foto que você está trabalhando ainda não foi salva. Abrir nova imagem sem "
+"salvá-la?"
 
 #: src/photos_view.py:177
 msgid "Your changes have not been saved. Are you sure you want to quit?"
@@ -260,66 +255,3 @@ msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
 msgstr "enviei-lhe uma foto de Endless Photos!"
-
-#~ msgid "BULGE"
-#~ msgstr "INCHAR"
-
-#~ msgid "PINCH"
-#~ msgstr "BELISCAR"
-
-#~ msgid "BOXELATE"
-#~ msgstr "BOXELATE"
-
-#~ msgid "EMAIL"
-#~ msgstr "EMAIL"
-
-#~ msgid "EMBOSS"
-#~ msgstr "RELEVO"
-
-#~ msgid "HORIZONTAL BARS"
-#~ msgstr "BARRAS HORIZONTAIS"
-
-#~ msgid "INVERT"
-#~ msgstr "INVERTER"
-
-#~ msgid "PIXELATE"
-#~ msgstr "PIXELAR"
-
-#~ msgid "SIDE BARS"
-#~ msgstr "BARRAS LATERAIS"
-
-#~ msgid "BLUR"
-#~ msgstr "DESFOCAR"
-
-#~ msgid "CONTOUR"
-#~ msgstr "CONTORNO"
-
-#~ msgid "CROSS PROCESS"
-#~ msgstr "PROCESSO CRUZADO"
-
-#~ msgid "FABRIC"
-#~ msgstr "TECIDO"
-
-#~ msgid "FRESH BLUE"
-#~ msgstr "AZUL SUAVE"
-
-#~ msgid "Not logged in."
-#~ msgstr "Desconectado"
-
-#~ msgid "SCRATCH"
-#~ msgstr "ARRANHADO"
-
-#~ msgid "SEPIA"
-#~ msgstr "SÉPIA"
-
-#~ msgid "SHARPEN"
-#~ msgstr "TORNAR NÍTIDA"
-
-#~ msgid "SMOOTH"
-#~ msgstr "ALISAR"
-
-#~ msgid "SOLARIZE"
-#~ msgstr "SOLARIZAR"
-
-#~ msgid "YELLOW BLUE"
-#~ msgstr "AMARELO AZULADO"
