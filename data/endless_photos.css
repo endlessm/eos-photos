@@ -14,6 +14,11 @@
     text-shadow: none;
 }
 
+/* TODO: hack fix until we move from adwaita to our proper SDK theme*/
+.top-bar * {
+  -GtkWidget-focus-padding: 0;
+}
+
 GtkButton {
     transition:background-image 200ms ease-in-out;
 }
