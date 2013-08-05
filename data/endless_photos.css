@@ -19,6 +19,24 @@
   -GtkWidget-focus-padding: 0;
 }
 
+.top-bar {
+    background-image: -gtk-gradient(linear, center top, center bottom,
+        from(#464646), to(#1e1e1e));
+}
+
+.top-bar:backdrop {
+    background-image: -gtk-gradient(linear, center top, center bottom,
+        from(#282828), to(#1e1e1e));
+}
+
+.top-bar .button:backdrop
+.top-bar .button:backdrop:hover,
+.top-bar .button:backdrop:active {
+    color: #646464;
+    icon-shadow: none;
+}
+/* End hackery!! */
+
 GtkButton {
     transition:background-image 200ms ease-in-out;
 }
