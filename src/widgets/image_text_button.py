@@ -12,8 +12,8 @@ class ImageTextButton(Gtk.Button):
     """
     __gtype_name__ = 'EndlessImageTextButton'
     SIZE_SMALL = 21
-    SIZE_MEDIUM = 50
-    SIZE_LARGE = 65
+    SIZE_MEDIUM = 42
+    SIZE_LARGE = 68
 
     def __init__(self,
                  image_size_x=SIZE_SMALL,
