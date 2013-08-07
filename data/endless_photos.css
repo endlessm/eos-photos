@@ -5,8 +5,7 @@
     -GtkExpander-focus-line-width: 0px;
     -GtkExpander-expander-spacing: 0px;
     -GtkExpander-focus-padding: 0px;
-    font-family: Source Sans Pro Semibold;
-    font-style: normal;
+    font-family: Source Sans Pro;
 }
 
 *:insensitive {
@@ -104,12 +103,14 @@ GtkLabel {
 }
 
 .category-label {
+    font-weight: bold;
     font-size: 13px;
     text-shadow: none;
     color: #999999;
 }
 
-.category-label:hover {
+.category-label:hover,
+.category-label:active {
     color: #ffffff;
 }
 
@@ -117,7 +118,8 @@ GtkLabel {
     background-image: url("../images/icon_blur_normal.png");
 }
 
-#blur-expander .image-frame:hover {
+#blur-expander .image-frame:hover,
+#blur-expander .image-frame:active {
     background-image: url("../images/icon_blur_hover.png");
 }
 
@@ -125,7 +127,8 @@ GtkLabel {
     background-image: url("../images/icon_border_normal.png");
 }
 
-#border-expander .image-frame:hover {
+#border-expander .image-frame:hover,
+#border-expander .image-frame:active {
     background-image: url("../images/icon_border_hover.png");
 }
 
@@ -133,7 +136,8 @@ GtkLabel {
     background-image: url("../images/icon_effects_normal.png");
 }
 
-#filter-expander .image-frame:hover {
+#filter-expander .image-frame:hover,
+#filter-expander .image-frame:active {
     background-image: url("../images/icon_effects_hover.png");
 }
 
@@ -141,7 +145,8 @@ GtkLabel {
     background-image: url("../images/icon_deform_normal.png");
 }
 
-#distort-expander .image-frame:hover {
+#distort-expander .image-frame:hover,
+#distort-expander .image-frame:active {
     background-image: url("../images/icon_deform_hover.png");
 }
 
@@ -149,7 +154,8 @@ GtkLabel {
     background-image: url("../images/icon_adjustments_normal.png");
 }
 
-#adjustment-expander .image-frame:hover {
+#adjustment-expander .image-frame:hover,
+#adjustment-expander .image-frame:active {
     background-image: url("../images/icon_adjustments_hover.png");
 }
 
@@ -163,9 +169,10 @@ GtkLabel {
 
 #save-button GtkLabel,
 #share-button GtkLabel {
+    font-weight: bold;
     font-size: 12px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
-    color: #464646;
+    color: #555555;
 }
 
 #save-button GtkLabel:hover,
@@ -175,7 +182,7 @@ GtkLabel {
 
 #save-button GtkLabel:active,
 #share-button GtkLabel:active {
-    color: #464646;
+    color: #555555;
 }
 
 #save-button .image-frame {
@@ -248,7 +255,7 @@ GtkLabel {
 
 #revert-button {
     transition:background-image 200ms ease-in-out;
-    padding: 8px 0px 8px 3px;
+    padding: 8px 0px 8px 0px;
     background-color: transparent;
     background-image: none;
     border-radius: 0px;
@@ -258,9 +265,21 @@ GtkLabel {
     background-size: 100% 100%;
 }
 
-#revert-button GtkLabel,
+#open-photos-button {
+    padding: 3px 0px 3px 3px;
+}
+
 #open-photos-button GtkLabel {
-    font-family: Source Sans Pro Semibold;
+    font-family: Source Sans Pro Regular;
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
+    color: #999999;
+    padding: 0px 3px 0px 8px;
+}
+
+#revert-button GtkLabel {
+    font-weight: bold;
     font-size: 12px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #999999;
@@ -312,9 +331,12 @@ GtkLabel {
     background-image: url("../images/icon_topbar_OpenPhoto_normal.png");
 }
 
-#open-photos-button GtkLabel {
-    padding: 0px 10px 0px 0px;
-}
+/*.filters-scroll-area {
+    background-image: -gtk-gradient (linear, left top, right top,
+                                     color-stop(0.0, alpha(#ffffff, 0.04)),
+                                     color-stop(0.8, alpha(#ffffff, 0.02)),
+                                     color-stop(1.0, alpha(#ffffff, 0.0)));
+}*/
 
 .filters-scroll-area > GtkViewport {
     background-color: transparent;

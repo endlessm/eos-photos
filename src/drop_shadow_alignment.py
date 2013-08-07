@@ -23,7 +23,7 @@ class DropShadowAlignment(Gtk.Alignment):
         # Top drop shadow.
         linear_pattern = cairo.LinearGradient(horizontal_offset, vertical_offset, horizontal_offset,
         vertical_offset - DropShadowAlignment.DROP_SHADOW_WIDTH)
-        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.5)
+        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.3)
         linear_pattern.add_color_stop_rgba(1, 0, 0, 0, 0.0)
 
         cr.set_source(linear_pattern)
@@ -36,7 +36,7 @@ class DropShadowAlignment(Gtk.Alignment):
         # Left drop shadow.
         linear_pattern = cairo.LinearGradient(horizontal_offset, vertical_offset, horizontal_offset - DropShadowAlignment.DROP_SHADOW_WIDTH,
         vertical_offset)
-        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.5)
+        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.3)
         linear_pattern.add_color_stop_rgba(1, 0, 0, 0, 0.0)
 
         cr.set_source(linear_pattern)
@@ -49,7 +49,7 @@ class DropShadowAlignment(Gtk.Alignment):
         # Right drop shadow.
         linear_pattern = cairo.LinearGradient(horizontal_offset + image_width, vertical_offset, horizontal_offset + image_width + DropShadowAlignment.DROP_SHADOW_WIDTH,
         vertical_offset)
-        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.5)
+        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.3)
         linear_pattern.add_color_stop_rgba(1, 0, 0, 0, 0.0)
 
         cr.set_source(linear_pattern)
@@ -62,7 +62,7 @@ class DropShadowAlignment(Gtk.Alignment):
         # Bottom drop shadow.
         linear_pattern = cairo.LinearGradient(horizontal_offset, vertical_offset + image_height, horizontal_offset,
         vertical_offset + image_height + DropShadowAlignment.DROP_SHADOW_WIDTH)
-        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.5)
+        linear_pattern.add_color_stop_rgba(0, 0, 0, 0, 0.3)
         linear_pattern.add_color_stop_rgba(1, 0, 0, 0, 0.0)
 
         cr.set_source(linear_pattern)
