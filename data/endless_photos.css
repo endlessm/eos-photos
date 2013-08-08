@@ -5,7 +5,7 @@
     -GtkExpander-focus-line-width: 0px;
     -GtkExpander-expander-spacing: 0px;
     -GtkExpander-focus-padding: 0px;
-    font-family: Source Sans Pro;
+    font-family: Source Sans Pro Semibold;
 }
 
 *:insensitive {
@@ -103,7 +103,6 @@ GtkLabel {
 }
 
 .category-label {
-    font-weight: bold;
     font-size: 13px;
     text-shadow: none;
     color: #999999;
@@ -169,7 +168,6 @@ GtkLabel {
 
 #save-button GtkLabel,
 #share-button GtkLabel {
-    font-weight: bold;
     font-size: 12px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #555555;
@@ -270,8 +268,6 @@ GtkLabel {
 }
 
 #open-photos-button GtkLabel {
-    font-family: Source Sans Pro Regular;
-    font-weight: bold;
     font-size: 10px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #999999;
@@ -279,7 +275,6 @@ GtkLabel {
 }
 
 #revert-button GtkLabel {
-    font-weight: bold;
     font-size: 12px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #999999;
