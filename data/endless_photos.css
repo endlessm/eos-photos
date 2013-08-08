@@ -28,11 +28,32 @@
         from(#282828), to(#1e1e1e));
 }
 
-.top-bar .button:backdrop
-.top-bar .button:backdrop:hover,
-.top-bar .button:backdrop:active {
+.top-bar .button {
+    border-radius: 2px;
+    color: #8c8c8c;
+    icon-shadow: 0px -1px alpha(black, 0.25);
+}
+
+.top-bar .button:backdrop {
     color: #646464;
+}
+
+.top-bar .button:hover {
+    color: #dcdcdc;
+    icon-shadow: 0px -1px alpha(black, 0.35);
+    background-image: -gtk-gradient(linear, left bottom, left top,
+        color-stop(0.98, rgb(131, 131, 131)),
+        color-stop(0.95, rgb(108, 108, 108)),
+        color-stop(0, rgb(68, 68, 68)));
+}
+
+.top-bar .button:active {
+    color: #787878;
     icon-shadow: none;
+    background-image: -gtk-gradient(linear, left bottom, left top,
+        color-stop(0.98, rgb(79, 79, 79)),
+        color-stop(0.95, rgb(71, 71, 71)),
+        color-stop(0, rgb(67, 67, 67)));
 }
 /* End hackery!! */
 
