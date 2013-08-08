@@ -83,11 +83,11 @@ msgstr "FACEBOOK"
 
 #: src/photos_category_toolbars.py:101
 msgid "FILTERS"
-msgstr "Filtros"
+msgstr "FILTROS"
 
 #: src/photos_presenter.py:219
 msgid "Facebook is not available offline."
-msgstr "O Facebook não está disponível sem conexão á Internet."
+msgstr "Opa! Não conseguimos acessar o facebook. Verifique sua conexão de internet."
 
 #: src/photos_model.py:86
 msgid "Fish Eye Heavy"
