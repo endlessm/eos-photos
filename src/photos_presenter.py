@@ -50,8 +50,6 @@ class PhotosPresenter(object):
         self._view.set_brightness_slider(self._model.get_brightness())
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
-        # Call slider release to avoid infinite loop
-        self.on_slider_release()
 
     def _check_extension(self, filename, original_ext):
         name_arr = filename.split(".")
