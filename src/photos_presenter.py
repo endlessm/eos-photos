@@ -1,6 +1,7 @@
 import os
 import tempfile
 import urllib2
+import time
 from gi.repository import GLib
 
 from asyncworker import AsyncWorker
@@ -34,7 +35,6 @@ class PhotosPresenter(object):
 
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
-        self._sliding = False
         self._locked = False
 
     def open_image(self, filename):
@@ -130,11 +130,19 @@ class PhotosPresenter(object):
             self.open_image(filename)
 
     def _do_adjustment_slide(self, value_get, value_set):
-        while self._sliding or not self._slider_target == value_get():
-            if not self._slider_target == value_get():
+        in_timeout = False
+        while True:
+            if in_timeout and time.time() - start_time > 0.2:
+                break
+            if self._slider_target == value_get():
+                if not in_timeout:
+                    in_timeout = True
+                    start_time = time.time()
+                else:
+                    time.sleep(0.001)
+            else:
                 value_set(self._slider_target)
-        # TODO: Why are we unlocking the UI?
-        self._view.update_async(self._view.unlock_ui)
+                in_timeout = False
 
     def _do_blur_select(self, blur_type):
         self._model.set_blur(blur_type)
@@ -272,13 +280,6 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_distort, (distort_name,))
 
-    # Slider has been released! We need to block new changes to the model if
-    # we are still processing the slide...
-    def on_slider_release(self):
-        if self._locked:
-            return
-        self._sliding = False
-
     def _prune_active_threads(self):
         ''' Clears out old threads from the
         active thread list. ''' 
@@ -294,10 +295,7 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         self._slider_target = value
-        if not self._sliding:
-            if self._active_thread_exists(thread_name):
-                return
-            self._sliding = True
+        if not self._active_thread_exists(thread_name):
             self._run_non_locking_task(
                 self._do_adjustment_slide,
                 (get_func, set_func),
