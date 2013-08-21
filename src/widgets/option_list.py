@@ -13,7 +13,13 @@ class OptionLabel(Gtk.Label):
     def do_get_preferred_width(self):
         if self._image is not None:
             return self._image.get_preferred_width()
-        return Gtk.Label.do_get_preferred_width()
+        return Gtk.Label.do_get_preferred_width(self)
+
+    def do_get_preferred_height(self):
+        if self._image is not None:
+            return Gtk.Label.do_get_preferred_height_for_width(self, self._image.get_preferred_width()[0])
+        return Gtk.Label.do_get_preferred_height_for_width(self)
+
 
 
 class Option(Gtk.Button):
