@@ -243,7 +243,7 @@ GtkLabel {
 
 #splash-open-photos-button GtkLabel {
     font-family: Source Sans Pro Light;
-    font-size: 20px;
+    font-size: 18px;
     padding-left: 3px;
     color: #FFFFFF;
     padding: 2px 4px 2px 4px;
