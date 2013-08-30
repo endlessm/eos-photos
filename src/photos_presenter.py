@@ -160,11 +160,6 @@ class PhotosPresenter(object):
 
         self._view.close_window()
 
-    def on_minimize(self):
-        if self._locked:
-            return
-        self._view.minimize_window()
-
     def on_open(self):
         if self._locked:
             return
