@@ -154,6 +154,13 @@ class CategoryExpander(Gtk.Expander):
 
     def _on_expanded(self, widget, event):
         if self.get_expanded():
+            # Scroll to the selected widget
+            try:
+                scroll_to_height = self._widget.get_desired_scroll_position()
+                self._scroll_area.get_vadjustment().set_value(scroll_to_height)
+            except NotImplementedError:
+                pass
+
             self._vbox.remove(self._separator)
             self.get_parent().change_category(self._widget.get_name())
             flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.ACTIVE
