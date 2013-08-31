@@ -180,6 +180,8 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
 
+        pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
+
         # Check to see if a file exists with current name
         # If so, we need to add a version extenstion, e.g. (1), (2)
         file_path_list = self._model.get_current_filename().split("/")
@@ -187,18 +189,17 @@ class PhotosPresenter(object):
         name = base_name_arr[0]
         ext = base_name_arr[1]
         str_slash = "/"
-        directory_path = str_slash.join(file_path_list)
         i = 1
         curr_name = name
 
         while(1):
-            if not os.path.exists(directory_path + "/" + curr_name + "." + ext):
+            if not os.path.exists(pictures_path + "/" + curr_name + "." + ext):
                 break
             curr_name = name + " (" + str(i) + ")"
             i += 1
 
         # Set this name as placeholder in save dialog
-        filename = self._view.show_save_dialog(curr_name + "." + ext, directory_path)
+        filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
 
         if filename is not None:
             # Check returned value from save dialog to make sure it has a valid extension
