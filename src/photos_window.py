@@ -70,6 +70,11 @@ class PhotosWindow(Endless.Window):
         pm.add(self._fullscreen_attach)
 
         self.connect('key_press_event', self._on_keypress)
+        self.connect('delete-event', self._on_delete)
+
+    def _on_delete(self, widget, event):
+        self._presenter.on_close()
+        return True
 
     def _on_keypress(self, widget, event):
         # We only call set_fullscreen to false if we are on the fullscreen page
