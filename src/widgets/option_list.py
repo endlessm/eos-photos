@@ -53,12 +53,16 @@ class Option(Gtk.Button):
         flags = Gtk.StateFlags(self.get_state_flags() & ~Gtk.StateFlags.SELECTED)
         self.set_state_flags(flags, True)
 
+    def get_label(self):
+        return self._label
+
     def _on_click(self, event, data=None):
         if self._clicked_callback is not None:
             self._clicked_callback()
 
 
 class OptionList(Gtk.VBox):
+    PADDING = 3
     """
     A list of clickable options packed vertically.
 
@@ -67,18 +71,30 @@ class OptionList(Gtk.VBox):
     """
     def __init__(self):
         super(OptionList, self).__init__(homogeneous=False, spacing=0)
-        self._icons = {}
+        self._selected_icon_scroll_height = 0
 
     def add_option(self, thumbnail_path, label, clicked_callback):
         option = Option(
             image_path=thumbnail_path, label=label,
             clicked_callback=clicked_callback)
-        self._icons[label] = option
-        self.pack_start(option, expand=False, fill=False, padding=3)
+        self.pack_start(option, expand=False, fill=False, padding=self.PADDING)
 
     def select_option(self, label_name):
-        for name, icon in self._icons.items():
-            if name == label_name:
+        scroll_adjustment = 0
+        found_selected_icon = False
+
+        # An icon's label is the same as the text in their label
+        for icon in self.get_children():
+            if icon.get_label().get_text() == label_name:
                 icon.select()
+                self._selected_icon_scroll_height = scroll_adjustment - icon.get_allocation().height / 2
+                found_selected_icon = True
             else:
                 icon.deselect()
+
+                if not found_selected_icon:
+                    # Multiply PADDING by 2 for top and bottom padding
+                    scroll_adjustment += icon.get_allocation().height + self.PADDING * 2
+
+    def get_desired_scroll_position(self):
+        return self._selected_icon_scroll_height

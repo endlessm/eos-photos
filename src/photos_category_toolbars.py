@@ -23,6 +23,10 @@ class CategoryToolbar(Gtk.Alignment):
     def get_label(self):
         return _("Untitled")
 
+    # Should be overridden by subclasses that need it.
+    def get_desired_scroll_position(self):
+        raise NotImplementedError
+
 class OptionListToolbar(CategoryToolbar):
     """
     A widget showing a list of clickable options.
@@ -52,6 +56,9 @@ class OptionListToolbar(CategoryToolbar):
 
     def clicked_callback(self, option_name):
         pass
+
+    def get_desired_scroll_position(self):
+        return self._list.get_desired_scroll_position()
 
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
