@@ -201,6 +201,17 @@ class PhotosView(object):
         dialog.destroy()
         return confirm
 
+    def prompt_view_background(self):
+        dialog = Gtk.MessageDialog(
+            parent=self.get_window(),
+            text=_("Image successfully applied to background!"),
+            message_type=Gtk.MessageType.INFO)
+        dialog.add_button(Gtk.STOCK_OK, 0)
+        # set default to cancel
+        dialog.set_default_response(0)
+        confirm = dialog.run()
+        dialog.destroy()
+
     def show_message(self, text="", secondary_text="", warning=False):
         dialog_type = Gtk.MessageType.WARNING if warning else Gtk.MessageType.INFO
         dialog = Gtk.MessageDialog(

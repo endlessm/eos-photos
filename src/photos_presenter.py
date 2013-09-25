@@ -113,6 +113,7 @@ class PhotosPresenter(object):
 
         try:
             result = call(bg_set_img_cmd)
+            self._view.update_async(lambda: self._view.prompt_view_background())
         except:
             print "There was an error setting the background!"
             return
