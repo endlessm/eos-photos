@@ -1,5 +1,6 @@
 import sys
 import os
+import inspect
 from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio, Endless
 
 import gettext
@@ -9,10 +10,13 @@ from photos_model import PhotosModel
 from photos_view import PhotosView
 from photos_presenter import PhotosPresenter
 
+CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
+CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 
 class EndlessPhotos(Endless.Application):
-    ABS_PHOTOS_PATH = '/usr/share/endless-os-photos'
-    # ABS_PHOTOS_PATH = '.'
+    # The parent dir of the current directory (src) is the base of photo app
+    # directory structure
+    ABS_PHOTOS_PATH = os.path.join(CURRENT_DIR, os.pardir)
     """
     The photo application.
 
