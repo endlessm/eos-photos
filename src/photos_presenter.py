@@ -2,6 +2,7 @@ import os
 import tempfile
 import urllib2
 import time
+from subprocess import call
 from gi.repository import GLib
 
 from asyncworker import AsyncWorker
@@ -9,7 +10,6 @@ from share.facebook_post import FacebookPost
 import share.emailer
 
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
-
 
 class PhotosPresenter(object):
     """
@@ -103,6 +103,20 @@ class PhotosPresenter(object):
         if not success:
             self._view.update_async(lambda: self._view.show_message(text=_(err_message), warning=True))
 
+    def _do_set_image_as_background(self):
+        filename = self.generate_filename(suffix='background', show_save_dialog=False, overwrite=True)[0]
+        self._model.save(filename)
+        file_uri = "file://" + filename
+
+        # set the wallpaper background image to the saved file
+        bg_set_img_cmd = ['/usr/bin/gsettings', 'set', 'org.gnome.desktop.background', 'picture-uri', file_uri]
+
+        try:
+            result = call(bg_set_img_cmd)
+        except:
+            print "There was an error setting the background!"
+            return
+
     def _do_send_email(self, name, recipient, message):
         filename = self._get_image_tempfile()
         self._model.save(filename)
@@ -169,32 +183,44 @@ class PhotosPresenter(object):
                 return
         self._do_open()
 
-    def on_save(self):
-        if self._locked:
-            return
-        if not self._model.is_open():
-            return
-
+    def generate_filename(self, suffix=None, show_save_dialog=True, overwrite=False):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
 
         # Check to see if a file exists with current name
         # If so, we need to add a version extenstion, e.g. (1), (2)
         file_path_list = self._model.get_current_filename().split("/")
         base_name_arr = file_path_list.pop(-1).split(".")
-        name = base_name_arr[0]
+        if suffix == None:
+            name = base_name_arr[0]
+        else:
+            name = base_name_arr[0] + '_' + suffix
         ext = base_name_arr[1]
         str_slash = "/"
         i = 1
         curr_name = name
 
-        while(1):
+        while(not overwrite):
             if not os.path.exists(pictures_path + "/" + curr_name + "." + ext):
                 break
             curr_name = name + " (" + str(i) + ")"
             i += 1
 
-        # Set this name as placeholder in save dialog
-        filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
+        if show_save_dialog:
+            # Set this name as placeholder in save dialog
+            filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
+        else:
+            filename = pictures_path + '/' + curr_name + "." + ext
+
+        return [filename, ext]
+        
+
+    def on_save(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+
+        [filename, ext] = self.generate_filename()
 
         if filename is not None:
             # Check returned value from save dialog to make sure it has a valid extension
@@ -223,6 +249,13 @@ class PhotosPresenter(object):
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
         if info:
             self._run_locking_task(self._do_post_to_facebook, (info[0],))
+
+    def on_set_background(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_set_image_as_background)
 
     def on_email(self):
         if self._locked:
