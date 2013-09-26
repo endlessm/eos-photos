@@ -225,7 +225,7 @@ class PhotosPresenter(object):
         if filename is not None:
             # Check returned value from save dialog to make sure it has a valid extension
             filename = self._check_extension(filename, ext)
-            self._model.save(filename)
+            self._model.save(filename, save_point=True)
 
     def has_internet(self):
         '''
