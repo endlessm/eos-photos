@@ -126,14 +126,18 @@ class PhotosModel(object):
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
         self.clear_options()
 
-    def save(self, filename, format=None, quality=95):
+    # format, an image format string will be inferred from filename by default
+    # quality, the quality of the image (100% is max) for lossy image formats
+    # save_point, weather to consider this a save point (i.e. the user triggered this save)
+    def save(self, filename, format=None, quality=95, save_point=False):
         if self.is_open():
             im = self._composite_final_image()
             if format is not None:
                 im.save(filename, format, quality=quality)
             else:
                 im.save(filename, quality=quality)
-            self._is_saved = True
+            if save_point:
+                self._is_saved = True
 
     def is_open(self):
         return self._source_image is not None
