@@ -1,13 +1,21 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Endless Mobile
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-08-01 16:49-0700\n"
-"Language: es\n"
+"PO-Revision-Date: 2013-09-09 19:42+0000\n"
+"Last-Translator: ptomato <philip.chimento@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/teams/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: src/photos_category_toolbars.py:188
 msgid "ADJUST"
@@ -130,9 +138,7 @@ msgstr "Mensaje:"
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr ""
-"Problema de red detectado. Por favor, verifique su conexión a Internet e "
-"intente nuevamente."
+msgstr "Problema de red detectado. Por favor, verifique su conexión a Internet e intente nuevamente."
 
 #: src/photos_model.py:42 src/photos_model.py:49 src/photos_model.py:73
 #: src/photos_model.py:84
@@ -170,9 +176,7 @@ msgstr "Pellizcar Ligero"
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr ""
-"Por favor, no responda a este e-mail. Las respuestas son enviadas a "
-"unabandeja de entrada no monitoreada."
+msgstr "Por favor, no responda a este e-mail. Las respuestas son enviadas a unabandeja de entrada no monitoreada."
 
 #: src/share/facebook_post.py:51
 msgid "Post failed. We're not really sure what happened sorry!"
@@ -195,10 +199,9 @@ msgid "Recipient email:"
 msgstr "Email del destinatário"
 
 #: src/share/facebook_post.py:66
-msgid "Requested action is not possible at the moment. Please try again later."
-msgstr ""
-"No fue posíble realizar la acción solicitada en este momento. Por favor, "
-"intente de nuevo mas tarde."
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr "No fue posíble realizar la acción solicitada en este momento. Por favor, intente de nuevo mas tarde."
 
 #: src/photos_right_toolbar.py:16
 msgid "SAVE"
@@ -244,9 +247,7 @@ msgstr "Tu Nombre"
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
-"Tus cambios no fueron guardados. ¿Estás seguro que deseas abrir una "
-"nuevafoto sin guardar?"
+msgstr "Tus cambios no fueron guardados. ¿Estás seguro que deseas abrir una nuevafoto sin guardar?"
 
 #: src/photos_view.py:177
 msgid "Your changes have not been saved. Are you sure you want to quit?"

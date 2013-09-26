@@ -1,0 +1,9 @@
+[main]
+host = https://www.transifex.com
+
+[eos-photos.app]
+source_file = po/endless_photos.pot
+source_lang = en
+file_filter = po/<lang>.po
+trans.pt = po/pt_BR.po
+type = PO

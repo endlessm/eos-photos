@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-01 16:49-0700\n"
+"POT-Creation-Date: 2013-09-26 13:46-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,19 +17,23 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/photos_category_toolbars.py:188
+#: src/photos_category_toolbars.py:192
 msgid "ADJUST"
 msgstr ""
 
-#: src/photos_category_toolbars.py:65
+#: src/photos_right_toolbar.py:32
+msgid "BACKGROUND"
+msgstr ""
+
+#: src/photos_category_toolbars.py:72
 msgid "BLURS"
 msgstr ""
 
-#: src/photos_category_toolbars.py:83
+#: src/photos_category_toolbars.py:90
 msgid "BORDERS"
 msgstr ""
 
-#: src/photos_category_toolbars.py:142
+#: src/photos_category_toolbars.py:149
 msgid "Brightness"
 msgstr ""
 
@@ -45,7 +49,7 @@ msgstr ""
 msgid "Colorful"
 msgstr ""
 
-#: src/photos_category_toolbars.py:153
+#: src/photos_category_toolbars.py:159
 msgid "Contrast"
 msgstr ""
 
@@ -57,7 +61,7 @@ msgstr ""
 msgid "Crayon"
 msgstr ""
 
-#: src/photos_category_toolbars.py:119
+#: src/photos_category_toolbars.py:126
 msgid "DISTORTIONS"
 msgstr ""
 
@@ -73,15 +77,15 @@ msgstr ""
 msgid "Edges"
 msgstr ""
 
-#: src/photos_presenter.py:112
+#: src/photos_presenter.py:124
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:221
+#: src/photos_presenter.py:249
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
@@ -89,11 +93,11 @@ msgstr ""
 msgid "FACEBOOK"
 msgstr ""
 
-#: src/photos_category_toolbars.py:101
+#: src/photos_category_toolbars.py:108
 msgid "FILTERS"
 msgstr ""
 
-#: src/photos_presenter.py:219
+#: src/photos_presenter.py:247
 msgid "Facebook is not available offline."
 msgstr ""
 
@@ -130,7 +134,7 @@ msgstr ""
 msgid "Lomo"
 msgstr ""
 
-#: src/photos_presenter.py:221 src/photos_presenter.py:230
+#: src/photos_presenter.py:249 src/photos_presenter.py:265
 msgid "Message:"
 msgstr ""
 
@@ -194,7 +198,7 @@ msgstr ""
 msgid "REVERT TO ORIGINAL"
 msgstr ""
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Recipient email:"
 msgstr ""
 
@@ -206,7 +210,7 @@ msgstr ""
 msgid "SAVE"
 msgstr ""
 
-#: src/photos_category_toolbars.py:164
+#: src/photos_category_toolbars.py:169
 msgid "Saturation"
 msgstr ""
 
@@ -238,7 +242,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Your Name:"
 msgstr ""
 
