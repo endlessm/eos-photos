@@ -26,6 +26,14 @@ class PhotosRightToolbar(Gtk.Alignment):
             vertical=True)
         self._share_button.connect('clicked', lambda w: self._presenter.on_share())
 
+        self._bg_button = ImageTextButton(
+            image_size_x=ImageTextButton.SIZE_MEDIUM,
+            image_size_y=ImageTextButton.SIZE_MEDIUM,
+            label=_("BACKGROUND"),
+            name="wallpaper-button",
+            vertical=True)
+        self._bg_button.connect('clicked', lambda w: self._presenter.on_set_background())
+
         # self._email_button = ImageTextButton(
         #     normal_path=images_path + "email_normal.png",
         #     hover_path=images_path + "email_hover.png",
@@ -38,6 +46,7 @@ class PhotosRightToolbar(Gtk.Alignment):
         self._button_box = Gtk.VBox(homogeneous=False, spacing=20)
         self._button_box.pack_start(self._save_button, expand=False, fill=False, padding=0)
         self._button_box.pack_start(self._share_button, expand=False, fill=False, padding=0)
+        self._button_box.pack_start(self._bg_button, expand=False, fill=False, padding=0)
         # self._button_box.pack_start(self._email_button, expand=False, fill=False, padding=0)
 
         self.add(self._button_box)
