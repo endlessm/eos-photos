@@ -181,6 +181,7 @@ GtkLabel {
 }
 
 #save-button,
+#wallpaper-button,
 #share-button {
     background-color: transparent;
     background-image: none;
@@ -189,6 +190,7 @@ GtkLabel {
 }
 
 #save-button GtkLabel,
+#wallpaper-button GtkLabel,
 #share-button GtkLabel {
     font-size: 12px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
@@ -196,13 +198,27 @@ GtkLabel {
 }
 
 #save-button GtkLabel:hover,
+#wallpaper-button GtkLabel:hover,
 #share-button GtkLabel:hover {
     color: #a1a1a1;
 }
 
 #save-button GtkLabel:active,
+#wallpaper-button GtkLabel:active,
 #share-button GtkLabel:active {
     color: #555555;
+}
+
+#wallpaper-button .image-frame {
+    background-image: url("../images/expand-image_normal.png");
+}
+
+#wallpaper-button .image-frame:hover {
+    background-image: url("../images/expand-image_hover.png");
+}
+
+#wallpaper-button .image-frame:active {
+    background-image: url("../images/expand-image_down.png");
 }
 
 #save-button .image-frame {
