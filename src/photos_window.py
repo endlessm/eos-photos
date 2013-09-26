@@ -30,9 +30,9 @@ class PhotosWindow(Endless.Window):
         self._right_toolbar.set_size_request(PhotosWindow.TOOLBAR_WIDTH, -1)
 
         self._normal_attach = DropShadowAlignment(
-            shadowed_widget=self._image_container.get_child(), left_padding=PhotosWindow.PHOTO_HORIZ_PADDING,
+            shadowed_widget=self._image_container, left_padding=PhotosWindow.PHOTO_HORIZ_PADDING,
             right_padding=PhotosWindow.PHOTO_HORIZ_PADDING, top_padding=PhotosWindow.PHOTO_VERT_PADDING,
-            bottom_padding=PhotosWindow.PHOTO_VERT_PADDING)
+            bottom_padding=PhotosWindow.PHOTO_VERT_PADDING, expand=True, halign=Gtk.Align.CENTER, valign=Gtk.Align.CENTER)
 
         self._normal_attach.add(self._image_container)
 
@@ -42,12 +42,10 @@ class PhotosWindow(Endless.Window):
 
         self._fullscreen_attach = Gtk.EventBox(name="fullscreen-back")
 
-        self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(
-            left_toolbar, expand=False, fill=True, padding=0)
-        self._hbox.pack_start(
-            self._normal_attach, expand=True, fill=True, padding=0)
-        self._hbox.pack_end(right_toolbar, expand=False, fill=True, padding=0)
+        self._grid = Gtk.Grid(expand=True)
+        self._grid.attach(left_toolbar, 0, 0, 1, 1)
+        self._grid.attach(self._normal_attach, 1, 0, 1, 1)
+        self._grid.attach(right_toolbar, 2, 0, 1, 1)
 
         self._open_button = ImageTextButton(label=_("OPEN IMAGE"),
                                             image_size_x=21,
@@ -61,11 +59,11 @@ class PhotosWindow(Endless.Window):
         pm.add(self._splash_screen)
         pm.set_page_background_uri(self._splash_screen, images_path + "background_splash.jpg")
         # Main page
-        pm.add(self._hbox)
-        pm.set_page_left_topbar_widget(self._hbox, self._open_button)
-        pm.set_page_background_uri(self._hbox, images_path + "background-tile.jpg")
-        pm.set_page_background_repeats(self._hbox, True)
-        pm.set_page_background_size(self._hbox, "auto")
+        pm.add(self._grid)
+        pm.set_page_left_topbar_widget(self._grid, self._open_button)
+        pm.set_page_background_uri(self._grid, images_path + "background-tile.jpg")
+        pm.set_page_background_repeats(self._grid, True)
+        pm.set_page_background_size(self._grid, "auto")
         # Fullscreen page
         pm.add(self._fullscreen_attach)
 
@@ -82,7 +80,7 @@ class PhotosWindow(Endless.Window):
             self.set_image_fullscreen(False)
 
     def set_photo_editor_active(self):
-        self.get_page_manager().set_visible_page(self._hbox)
+        self.get_page_manager().set_visible_page(self._grid)
 
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
@@ -90,7 +88,7 @@ class PhotosWindow(Endless.Window):
             self._image_container.reparent(self._fullscreen_attach)
             self._image_container.set_fullscreen_mode(True)
         else:
-            self.get_page_manager().set_visible_page(self._hbox)
+            self.get_page_manager().set_visible_page(self._grid)
             self._image_container.reparent(self._normal_attach)
             self._image_container.set_fullscreen_mode(False)
 
