@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-01 16:49-0700\n"
-"PO-Revision-Date: 2013-09-09 19:42+0000\n"
+"POT-Creation-Date: 2013-09-26 13:46-0700\n"
+"PO-Revision-Date: 2013-09-26 20:48+0000\n"
 "Last-Translator: ptomato <philip.chimento@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/teams/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -17,19 +17,23 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/photos_category_toolbars.py:188
+#: src/photos_category_toolbars.py:192
 msgid "ADJUST"
 msgstr "AJUSTES"
 
-#: src/photos_category_toolbars.py:65
+#: src/photos_right_toolbar.py:32
+msgid "BACKGROUND"
+msgstr ""
+
+#: src/photos_category_toolbars.py:72
 msgid "BLURS"
 msgstr "BLURS"
 
-#: src/photos_category_toolbars.py:83
+#: src/photos_category_toolbars.py:90
 msgid "BORDERS"
 msgstr "MOLDURA"
 
-#: src/photos_category_toolbars.py:142
+#: src/photos_category_toolbars.py:149
 msgid "Brightness"
 msgstr "Brilho"
 
@@ -45,7 +49,7 @@ msgstr "Escolha uma de suas fotos para começar!"
 msgid "Colorful"
 msgstr "Colorido"
 
-#: src/photos_category_toolbars.py:153
+#: src/photos_category_toolbars.py:159
 msgid "Contrast"
 msgstr "Realçar"
 
@@ -57,7 +61,7 @@ msgstr "Sertanejo"
 msgid "Crayon"
 msgstr "Lápis de Cera"
 
-#: src/photos_category_toolbars.py:119
+#: src/photos_category_toolbars.py:126
 msgid "DISTORTIONS"
 msgstr "DEFORMAR"
 
@@ -73,15 +77,15 @@ msgstr "Deserto"
 msgid "Edges"
 msgstr "Contornos"
 
-#: src/photos_presenter.py:112
+#: src/photos_presenter.py:124
 msgid "Email failed."
 msgstr "Falha na conexão."
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Enter a message to add to the e-mail"
 msgstr "Digite uma mensagem para adicionar ao e-mail"
 
-#: src/photos_presenter.py:221
+#: src/photos_presenter.py:249
 msgid "Enter a message to add to your photo!"
 msgstr "Escreva uma mensagem para enviar com usa foto!"
 
@@ -89,11 +93,11 @@ msgstr "Escreva uma mensagem para enviar com usa foto!"
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_category_toolbars.py:101
+#: src/photos_category_toolbars.py:108
 msgid "FILTERS"
 msgstr "FILTROS"
 
-#: src/photos_presenter.py:219
+#: src/photos_presenter.py:247
 msgid "Facebook is not available offline."
 msgstr "Opa! Não conseguimos acessar o facebook. Verifique sua conexão de internet."
 
@@ -130,7 +134,7 @@ msgstr "Falha na conexão."
 msgid "Lomo"
 msgstr "Lomo"
 
-#: src/photos_presenter.py:221 src/photos_presenter.py:230
+#: src/photos_presenter.py:249 src/photos_presenter.py:265
 msgid "Message:"
 msgstr "Mensagem:"
 
@@ -194,7 +198,7 @@ msgstr "Sair Sem Salvar?"
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLTAR AO ORIGINAL"
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Recipient email:"
 msgstr "Email do destinatário"
 
@@ -207,7 +211,7 @@ msgstr "Não for possível realisar a ação solicitada  no momento. Por favor, 
 msgid "SAVE"
 msgstr "SALVAR"
 
-#: src/photos_category_toolbars.py:164
+#: src/photos_category_toolbars.py:169
 msgid "Saturation"
 msgstr "Saturação"
 
@@ -239,7 +243,7 @@ msgstr "Caravana"
 msgid "Untitled"
 msgstr "Sem Título"
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Your Name:"
 msgstr "Seu Nome"
 

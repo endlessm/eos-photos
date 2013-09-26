@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# joelmx <joel@endlessm.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-01 16:49-0700\n"
-"PO-Revision-Date: 2013-09-09 19:42+0000\n"
-"Last-Translator: ptomato <philip.chimento@gmail.com>\n"
+"POT-Creation-Date: 2013-09-26 13:46-0700\n"
+"PO-Revision-Date: 2013-09-26 21:21+0000\n"
+"Last-Translator: joelmx <joel@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/teams/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,19 +18,23 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/photos_category_toolbars.py:188
+#: src/photos_category_toolbars.py:192
 msgid "ADJUST"
 msgstr "AJUSTAR"
 
-#: src/photos_category_toolbars.py:65
+#: src/photos_right_toolbar.py:32
+msgid "BACKGROUND"
+msgstr "FONDO"
+
+#: src/photos_category_toolbars.py:72
 msgid "BLURS"
 msgstr "DIFUMINAR"
 
-#: src/photos_category_toolbars.py:83
+#: src/photos_category_toolbars.py:90
 msgid "BORDERS"
-msgstr "FRONTERAS"
+msgstr "MARCOS"
 
-#: src/photos_category_toolbars.py:142
+#: src/photos_category_toolbars.py:149
 msgid "Brightness"
 msgstr "Brillo"
 
@@ -45,7 +50,7 @@ msgstr "Escoge una de tus fotos para empezar!"
 msgid "Colorful"
 msgstr "Colorido"
 
-#: src/photos_category_toolbars.py:153
+#: src/photos_category_toolbars.py:159
 msgid "Contrast"
 msgstr "Contraste"
 
@@ -57,7 +62,7 @@ msgstr "Campo"
 msgid "Crayon"
 msgstr "Crayola"
 
-#: src/photos_category_toolbars.py:119
+#: src/photos_category_toolbars.py:126
 msgid "DISTORTIONS"
 msgstr "DISTORSIÓN"
 
@@ -73,15 +78,15 @@ msgstr "Desierto"
 msgid "Edges"
 msgstr "Bordes"
 
-#: src/photos_presenter.py:112
+#: src/photos_presenter.py:124
 msgid "Email failed."
 msgstr "Email falló."
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Enter a message to add to the e-mail"
 msgstr "Escribe un mensaje para agregar al e-mail"
 
-#: src/photos_presenter.py:221
+#: src/photos_presenter.py:249
 msgid "Enter a message to add to your photo!"
 msgstr "Escribe un mensaje para agregar a tu foto!"
 
@@ -89,11 +94,11 @@ msgstr "Escribe un mensaje para agregar a tu foto!"
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_category_toolbars.py:101
+#: src/photos_category_toolbars.py:108
 msgid "FILTERS"
 msgstr "FILTROS"
 
-#: src/photos_presenter.py:219
+#: src/photos_presenter.py:247
 msgid "Facebook is not available offline."
 msgstr "Facebook no está disponible sin conexión."
 
@@ -130,7 +135,7 @@ msgstr "Falla en el login."
 msgid "Lomo"
 msgstr "Lomo"
 
-#: src/photos_presenter.py:221 src/photos_presenter.py:230
+#: src/photos_presenter.py:249 src/photos_presenter.py:265
 msgid "Message:"
 msgstr "Mensaje:"
 
@@ -194,7 +199,7 @@ msgstr "¿Salir Sin Guardar?"
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLVER AL ORIGINAL"
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Recipient email:"
 msgstr "Email del destinatário"
 
@@ -207,7 +212,7 @@ msgstr "No fue posíble realizar la acción solicitada en este momento. Por favo
 msgid "SAVE"
 msgstr "GUARDAR"
 
-#: src/photos_category_toolbars.py:164
+#: src/photos_category_toolbars.py:169
 msgid "Saturation"
 msgstr "Saturación"
 
@@ -239,7 +244,7 @@ msgstr "Trenes"
 msgid "Untitled"
 msgstr "Sin Título"
 
-#: src/photos_presenter.py:230
+#: src/photos_presenter.py:265
 msgid "Your Name:"
 msgstr "Tu Nombre"
 
