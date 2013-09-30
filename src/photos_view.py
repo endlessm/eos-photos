@@ -6,6 +6,7 @@ from photos_right_toolbar import PhotosRightToolbar
 from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
+from widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
 
 
 class PhotosView(object):
@@ -106,9 +107,10 @@ class PhotosView(object):
 
     def show_open_dialog(self, starting_dir=None):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog(
-            _("Open Image"), self.get_window(),
-            Gtk.FileChooserAction.OPEN)
+        dialog = PreviewFileChooserDialog(
+            title=_("Open Image"),
+            parent=self.get_window(),
+            action=Gtk.FileChooserAction.OPEN)
 
         if starting_dir != None:
             dialog.set_current_folder(starting_dir)
