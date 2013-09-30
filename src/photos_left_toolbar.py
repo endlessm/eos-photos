@@ -30,7 +30,6 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         self.set_vexpand(True)
         self.show_all()
-        self._categories["filter"].set_expanded(True)
         self.connect('size-allocate', self._check_full)
 
     def set_presenter(self, presenter):
