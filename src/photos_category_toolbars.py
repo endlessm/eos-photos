@@ -1,6 +1,7 @@
 from gi.repository import Gtk
 
 from widgets.option_list import OptionList
+from widgets.slider import Slider
 
 
 class CategoryToolbar(Gtk.Alignment):
@@ -149,7 +150,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._brightness_label = Gtk.Label(label=_("Brightness"), halign=Gtk.Align.START)
         self._brightness_label.get_style_context().add_class("slider-label")
         brightness_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
-        self._brightness_slider = Gtk.HScale(adjustment=brightness_adjust, draw_value=False)
+        self._brightness_slider = Slider(adjustment=brightness_adjust)
         self._brightness_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_brightness_change(adjust.get_value()))
         self._brightness_slider.connect('key-press-event', lambda w, e: True)
@@ -159,7 +160,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._contrast_label = Gtk.Label(label=_("Contrast"), halign=Gtk.Align.START)
         self._contrast_label.get_style_context().add_class("slider-label")
         contrast_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
-        self._contrast_slider = Gtk.HScale(adjustment=contrast_adjust, draw_value=False)
+        self._contrast_slider = Slider(adjustment=contrast_adjust)
         self._contrast_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_contrast_change(adjust.get_value()))
         self._contrast_slider.connect('key-press-event', lambda w, e: True)
@@ -169,7 +170,7 @@ class AdjustmentToolbar(CategoryToolbar):
         self._saturation_label = Gtk.Label(label=_("Saturation"), halign=Gtk.Align.START)
         self._saturation_label.get_style_context().add_class("slider-label")
         saturation_adjust = Gtk.Adjustment(1.0, 0.0, 2.0, 0.01, 0, 0)
-        self._saturation_slider = Gtk.HScale(adjustment=saturation_adjust, draw_value=False)
+        self._saturation_slider = Slider(adjustment=saturation_adjust)
         self._saturation_slider.connect(
             "value-changed", lambda adjust: self._presenter.on_saturation_change(adjust.get_value()))
         self._saturation_slider.connect('key-press-event', lambda w, e: True)
