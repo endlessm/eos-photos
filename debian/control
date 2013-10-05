@@ -2,20 +2,30 @@ Source: endlessos-base-photos
 Section: non-free/misc
 Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
-Build-Depends: debhelper (>= 7.0.0),
+Build-Depends: debhelper (>= 9),
                python,
+               gettext,
                devscripts,
-               gir1.2-gtkclutter-1.0,
-               python-gobject-dev,
+               gir1.2-clutter-1.0,
+               gir1.2-gtk-3.0,
+               gir1.2-glib-2.0,
                python-skimage (>=0.6.1),
                python-scipy,
-               python-imaging,
-               python-cairo
+               python-imaging
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 
 Package: endlessos-base-photos
 Architecture: all
-Depends: gir1.2-gtkclutter-1.0, python (>= 2.7), python-webkit, python-scipy, python-skimage (>=0.6.1)
+Depends: gir1.2-gtkclutter-1.0,
+         gir1.2-clutter-1.0,
+         gir1.2-endless-0,
+         gir1.2-glib-2.0,
+         gir1.2-gtk-3.0,
+         gir1.2-gdkpixbuf-2.0,
+         python-imaging,
+         python (>= 2.7),
+         python-scipy,
+         python-skimage (>=0.6.1)
 Description: Endless OS Photos
  This is a photos application for Endless OS

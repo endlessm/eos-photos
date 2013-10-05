@@ -1,3 +1,9 @@
+endlessos-base-photos (1.1.5~dev1ubuntu1) UNRELEASED; urgency=low
+
+  * Updating to OBS compatibility
+
+ -- Will Greenberg <will@endlessm.com>  Fri, 04 Oct 2013 15:31:04 -0700
+
 endlessos-base-photos (1.1.5~dev1) unstable; urgency=low
 
   * Updating version to 1.1.5~dev1
