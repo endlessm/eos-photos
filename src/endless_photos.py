@@ -60,6 +60,8 @@ class EndlessPhotos(Endless.Application):
             borders_path=self.get_images_path() + "borders/")
         self._view = PhotosView(application=self, images_path=self.get_images_path())
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
+        self._view.set_presenter(self._presenter)
+
         self._window = self._view.get_window()
         self.add_window(self._window)
         self._window.show_all()

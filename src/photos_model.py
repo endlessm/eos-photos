@@ -19,12 +19,14 @@ class PhotosModel(object):
         self._curves_path = curves_path
         self._borders_path = borders_path
         self._source_image = None
+        self._cropped_image = None
         self._filtered_image = None
         self._blurred_image = None
         self._distorted_image = None
         self._adjusted_image = None
-        self._transformed_image = None
         self._rotated_image = None
+        self._options_stored = False
+        self._resize_crop_box = True
 
         self._displayable = displayable
         if displayable:
@@ -111,16 +113,51 @@ class PhotosModel(object):
             (_("Swirl"), lambda im: ImageTools.distortion(im, "SWIRL"))
         ])
 
+    # Store options temporarily if nothing has already been stored, then
+    # clear all settings (except orientation) to default in preparation for cropping
+    def push_options(self):
+        if not self._options_stored:
+            self._stored_filter = self._filter
+            self._stored_distort = self._distort
+            self._stored_blur_type = self._blur_type
+            self._stored_brightness = self._brightness
+            self._stored_contrast = self._contrast
+            self._stored_saturation = self._saturation
+            self._stored_orientation = self._orientation
+            self._stored_border = self._border
+            self._stored_last_crop_coordinates = self._last_crop_coordinates
+            self._stored_crop_orientation = self._crop_orientation
+            self._options_stored = True
+            self.clear_options()
+            self._orientation = self._stored_orientation
+            self._crop_orientation = self._stored_crop_orientation
+
+    # Restore all settings after cropping either performed or cancelled (if
+    # any have been stored at all)
+    def pop_options(self):
+        if self._options_stored:
+            self._filter = self._stored_filter 
+            self._distort = self._stored_distort 
+            self._blur_type = self._stored_blur_type 
+            self._brightness = self._stored_brightness 
+            self._contrast = self._stored_contrast 
+            self._border = self._stored_border
+            self._last_crop_coordinates = self._stored_last_crop_coordinates
+            self._saturation = self._stored_saturation 
+            self._options_stored = False
+
     def clear_options(self):
         self._filter = self._get_default_filter()
         self._distort = self._get_default_distortion()
         self._blur_type = self._get_default_blur()
-        self._transformation_type = ""
         self._orientation = 0
+        self._crop_orientation = 0
         self._brightness = 1.0
+        self._crop_coordinates = None
         self._contrast = 1.0
         self._saturation = 1.0
         self._last_orientation = 0
+        self._last_crop_coordinates = None
         self._last_filter = ""
         self._last_blur_type = ""
         self._last_distort = ""
@@ -128,6 +165,7 @@ class PhotosModel(object):
         self._border = self._get_default_border()
 
     def revert_to_original(self):
+        self._image_widget.hide_crop_overlay()
         self.clear_options()
         if self.is_open():
             self._update_base_image()
@@ -151,6 +189,7 @@ class PhotosModel(object):
 
     def open(self, filename):
         self._filename = filename
+        self.queue_crop_box_resize()
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
         self.revert_to_original()
 
@@ -237,12 +276,67 @@ class PhotosModel(object):
 
     def do_rotate(self):
         self.rotate_orientation_clockwise()
+        self.queue_crop_box_resize()
+
+        self._update_base_image()
+        self._update_border_image()
+        
+    def disable_crop(self):
+        # Whenever the crop overlay is to be hidden, reapply all hidden effects,
+        # hide the UI for the overlay, and show the resulting image
+        if self._image_widget.crop_overlay_visible:
+            self.pop_options()
+            self._image_widget.hide_crop_overlay()
+            self._update_base_image()
+
+    # Signals that, upon the next image replace operation, the crop box will
+    # reset its geometry to be a default size on the new image
+    def queue_crop_box_resize(self):
+        self._resize_crop_box = True
+
+    def do_crop_activate(self):
+        # Reset the crop coordinates, dropping any previous croppings
+        self._crop_coordinates = None
+
+        # Store the existing image settings elsewhere, and reset current
+        # settings to default so the image under the crop overlay is
+        # the original one
+        self.push_options()
+        # Make sure the crop overlay is showing
+        self._image_widget.show_crop_overlay()
         
         self._update_base_image()
         self._update_border_image()
 
-    def get_transformation(self):
-        return self._transformation_type
+    def do_crop_apply(self):
+        # Only perform actions if the user has a current crop selection
+        if self._image_widget.crop_overlay_visible:
+
+            # Get the coordinates of the crop overlay square. If the orientation
+            # is such that the image is on its side, transpose the height/width
+            # to reflect this
+            width, height = self._source_image.size
+            if self._orientation in (90, 270):
+                width, height = height, width
+            self._crop_coordinates = self._image_widget.get_crop_selection(width, height)
+            self._crop_orientation = self._orientation
+            self.pop_options()
+            self._image_widget.hide_crop_overlay()
+        
+        self._update_base_image()
+        self._update_border_image()
+
+    def do_crop_cancel(self):
+        # Reclaim all effects which were applied before cropping began,
+        # including crop coordinates (if any)
+        self.pop_options()
+
+        self._image_widget.hide_crop_overlay()
+        
+        # Revert the base image's crop state to what it was before
+        # the crop overlay was activated
+        self._update_base_image(revert_crop=True)
+        self._update_border_image()
 
     def set_blur(self, value):
         self._blur_type = value
@@ -285,17 +379,36 @@ class PhotosModel(object):
     def get_distortion(self):
         return self._distort
 
-    def _update_base_image(self):
+    def _update_base_image(self, revert_crop=False):
         if (not self.is_open()):
             return
         modified = False
 
+        if self._crop_coordinates == None:
+            self._cropped_image = self._source_image
         if self._orientation == 0:
             self._rotated_image = self._source_image
 
-        if not self._last_orientation == self._orientation:
+        # If we need to crop, first rotate the image, then apply the crop, and then
+        # rotate the cropped image back to 0 degrees. The image must first be rotated
+        # because the coordinates are oriented relative to the Clutter widget, not
+        # the image. The image is then rotated back to default orientation so that
+        # rotations on the cropped image are 1:1 with rotations on the base image
+        if self._crop_coordinates not in (None, self._last_crop_coordinates) or revert_crop:
+            if revert_crop:
+                orientation_when_cropped = self._crop_orientation
+                self._crop_coordinates = self._last_crop_coordinates
+            else:
+                orientation_when_cropped = self._orientation
+                self._last_crop_coordinates = self._crop_coordinates
             modified = True
-            self._rotated_image = ImageTools.rotate_by_angle(self._source_image, self._orientation)
+            temp_rotated = ImageTools.rotate_by_angle(self._source_image, orientation_when_cropped)
+            rotated_cropped = temp_rotated.crop(self._crop_coordinates)
+            self._cropped_image = ImageTools.rotate_by_angle(rotated_cropped, -orientation_when_cropped)
+
+        if not self._last_orientation == self._orientation or modified:
+            modified = True
+            self._rotated_image = ImageTools.rotate_by_angle(self._cropped_image, self._orientation)
             self._last_orientation = self._orientation
 
         # filter
@@ -338,7 +451,8 @@ class PhotosModel(object):
             width, height = self._adjusted_image.size
             if self._displayable:
                 self._image_widget.replace_base_image(
-                    self._adjusted_image.tostring(), width, height)
+                    self._adjusted_image.tostring(), width, height, self._resize_crop_box)
+                self._resize_crop_box = False
             self._is_saved = False
 
     def _update_border_image(self):

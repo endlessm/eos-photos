@@ -220,6 +220,54 @@ GtkLabel {
     color: #555555;
 }
 
+#crop-button,
+#apply-button,
+#cancel-button {
+    background-color: transparent;
+    background-image: none;
+    border-image: none;
+}
+
+#crop-button:hover {
+    background-color: alpha(#000000, 0.1);
+}
+
+#crop-button:hover {
+    background-color: alpha(#000000, 0.3);
+}
+
+#crop-options {
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px alpha(#000000, 0.5) inset;
+    border-width: 0px;
+    border-image: none;
+}
+
+#crop-options GtkLabel {
+    font-size: 10px;
+    text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
+    color: #999999;
+}
+
+#crop-options.inactive {
+    background-color: transparent;
+    background-image: none;
+}
+
+#crop-options.active {
+    background-color: alpha(#000000, 0.1);
+    background-image: none;
+}
+
+#crop-label {
+    color: green;
+    padding: 0px 0px 0px 15px;
+}
+
+#crop-button GtkLabel {
+    font-size: 12px;
+}
+
 #rotate-button GtkLabel {
     margin: 10px 3px 8px 0px;
     font-size: 11px;
