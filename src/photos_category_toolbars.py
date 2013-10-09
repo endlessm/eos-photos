@@ -61,6 +61,23 @@ class OptionListToolbar(CategoryToolbar):
     def get_desired_scroll_position(self):
         return self._list.get_desired_scroll_position()
 
+class TransformToolbar(OptionListToolbar):
+    def __init__(self, **kw):
+        kw["name"] = "transform"
+        super(TransformToolbar, self).__init__(**kw)
+
+    def set_transformations(self, transformations):
+        self.set_options(transformations)
+
+    def get_label(self):
+        return _("TRANSFORMATIONS")
+
+    def get_thumbnail_prefix(self):
+        return "transform_thumbnails/"
+
+    def clicked_callback(self, transform_name):
+        self._presenter.on_transformation_select(transform_name)
+
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
         kw["name"] = "blur"

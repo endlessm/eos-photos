@@ -3,7 +3,7 @@ from gi.repository import Gtk, Gdk, GLib
 from splash_screen import SplashScreen
 from photos_left_toolbar import PhotosLeftToolbar
 from photos_right_toolbar import PhotosRightToolbar
-from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar
+from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar, TransformToolbar
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 from widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
@@ -18,10 +18,11 @@ class PhotosView(object):
     def __init__(self, application=None, images_path=""):
         self._adjustments = AdjustmentToolbar(images_path=images_path)
         self._blurs = BlurToolbar(images_path=images_path)
+        self._transformations = TransformToolbar(images_path=images_path)
         self._filters = FilterToolbar(images_path=images_path)
         self._borders = BorderToolbar(images_path=images_path)
         self._distorts = DistortToolbar(images_path=images_path)
-        categories = [self._filters, self._distorts, self._blurs, self._adjustments, self._borders]
+        categories = [self._filters, self._distorts, self._blurs, self._transformations, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                categories=categories)
         self._splash_screen = SplashScreen(name="splash-eventbox")
@@ -42,6 +43,7 @@ class PhotosView(object):
         self._right_toolbar.set_presenter(presenter)
         self._image_container.set_presenter(presenter)
         self._blurs.set_presenter(presenter)
+        self._transformations.set_presenter(presenter)
         self._adjustments.set_presenter(presenter)
         self._borders.set_presenter(presenter)
         self._filters.set_presenter(presenter)
@@ -78,6 +80,9 @@ class PhotosView(object):
     def set_blurs(self, blurs):
         self._blurs.set_blurs(blurs)
 
+    def set_transformations(self, transformations):
+        self._transformations.set_transformations(transformations)
+
     def set_borders(self, borders):
         self._borders.set_options(borders)
 
@@ -89,6 +94,9 @@ class PhotosView(object):
 
     def select_blur(self, blur_name):
         self._blurs.select(blur_name)
+
+    def select_transformation(self, transformation_name):
+        self._transformations.select(transformation_name)
 
     def select_border(self, border_name):
         self._borders.select(border_name)
