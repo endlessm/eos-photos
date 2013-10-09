@@ -22,7 +22,7 @@ class PhotosView(object):
         self._filters = FilterToolbar(images_path=images_path)
         self._borders = BorderToolbar(images_path=images_path)
         self._distorts = DistortToolbar(images_path=images_path)
-        categories = [self._filters, self._distorts, self._blurs, self._transformations, self._adjustments, self._borders]
+        categories = [self._transformations, self._filters, self._distorts, self._blurs, self._adjustments, self._borders]
         self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
                                                categories=categories)
         self._splash_screen = SplashScreen(name="splash-eventbox")
