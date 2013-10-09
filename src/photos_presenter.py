@@ -160,6 +160,9 @@ class PhotosPresenter(object):
         self._model.set_blur(blur_type)
         self._view.update_async(lambda: self._view.select_blur(blur_type))
 
+    def _do_rotate(self):
+        self._model.do_rotate()
+
     #UI callbacks...
     def on_close(self):
         if self._locked:
@@ -292,6 +295,13 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_blur_select, (blur_name,))
 
+    def on_rotate(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_rotate)
+
     def on_border_select(self, border_name):
         if self._locked:
             return
@@ -373,5 +383,5 @@ class PhotosPresenter(object):
     def on_revert(self):
         if self._locked:
             return
-        self._model.clear_options()
+        self._model.revert_to_original()
         self._sync_photo_options()
