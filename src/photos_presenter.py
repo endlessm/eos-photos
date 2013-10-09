@@ -161,7 +161,18 @@ class PhotosPresenter(object):
         self._view.update_async(lambda: self._view.select_blur(blur_type))
 
     def _do_rotate(self):
+        self._model.do_crop_cancel()
+        self._view._transformations.close_crop_options()
         self._model.do_rotate()
+
+    def _do_crop_activate(self):
+        self._model.do_crop_activate()
+
+    def _do_crop_apply(self):
+        self._model.do_crop_apply()
+
+    def _do_crop_cancel(self):
+        self._model.do_crop_cancel()
 
     #UI callbacks...
     def on_close(self):
@@ -302,6 +313,27 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_rotate)
 
+    def on_crop_activate(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_crop_activate)
+
+    def on_crop_apply(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_crop_apply)
+
+    def on_crop_cancel(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_crop_cancel)
+
     def on_border_select(self, border_name):
         if self._locked:
             return
@@ -316,6 +348,17 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_distort, (distort_name,))
+
+    def cancel_crop(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_cancel_crop)
+
+    def _do_cancel_crop(self):
+        self._model.do_crop_cancel()
+        self._view._transformations.close_crop_options()
 
     def _prune_active_threads(self):
         ''' Clears out old threads from the
