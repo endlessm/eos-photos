@@ -135,6 +135,15 @@ GtkLabel {
     color: #ffffff;
 }
 
+#transform-expander .image-frame {
+    background-image: url("../images/icon_transform_normal.png");
+}
+
+#transform-expander .image-frame:hover,
+#transform-expander .image-frame:active {
+    background-image: url("../images/icon_transform_hover.png");
+}
+
 #blur-expander .image-frame {
     background-image: url("../images/icon_blur_normal.png");
 }

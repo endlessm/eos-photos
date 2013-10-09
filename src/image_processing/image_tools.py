@@ -168,6 +168,12 @@ def blur_with_mask(image, mask, amount):
     base.paste(blurred, (0,0), mask)
     return base
 
+def rotate_counter_clockwise(image):
+    return image.copy().transpose(Image.ROTATE_90)
+
+def rotate_clockwise(image):
+    return image.copy().transpose(Image.ROTATE_270)
+
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
     image = pixelate(image)

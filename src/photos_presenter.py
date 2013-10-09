@@ -27,6 +27,8 @@ class PhotosPresenter(object):
         self._view.set_borders(borders)
         blurs = self._model.get_blur_names_and_thumbnails()
         self._view.set_blurs(blurs)
+        transformations = self._model.get_transformation_names_and_thumbnails()
+        self._view.set_transformations(transformations)
         distortions = self._model.get_distortion_names_and_thumbnails()
         self._view.set_distortions(distortions)
 
@@ -47,6 +49,7 @@ class PhotosPresenter(object):
         self._view.select_border(self._model.get_border())
         self._view.select_distortion(self._model.get_distortion())
         self._view.select_blur(self._model.get_blur())
+        self._view.select_transformation(self._model.get_transformation())
         self._view.set_brightness_slider(self._model.get_brightness())
         self._view.set_contrast_slider(self._model.get_contrast())
         self._view.set_saturation_slider(self._model.get_saturation())
@@ -159,6 +162,10 @@ class PhotosPresenter(object):
     def _do_blur_select(self, blur_type):
         self._model.set_blur(blur_type)
         self._view.update_async(lambda: self._view.select_blur(blur_type))
+
+    def _do_transformation_select(self, transformation_type):
+        self._model.set_transformation(transformation_type)
+        self._view.update_async(lambda: self._view.select_transformation(transformation_type))
 
     #UI callbacks...
     def on_close(self):
@@ -292,6 +299,13 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_blur_select, (blur_name,))
 
+    def on_transformation_select(self, transformation_name):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_transformation_select, (transformation_name,))
+
     def on_border_select(self, border_name):
         if self._locked:
             return
@@ -306,6 +320,16 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_distort, (distort_name,))
+
+    def cancel_crop(self):
+        if self._locked:
+            return
+        if not self._model.is_open():
+            return
+        self._run_locking_task(self._do_cancel_crop)
+
+    def _do_cancel_crop(self):
+        self._model.disable_crop()
 
     def _prune_active_threads(self):
         ''' Clears out old threads from the
