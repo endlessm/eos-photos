@@ -168,6 +168,23 @@ def blur_with_mask(image, mask, amount):
     base.paste(blurred, (0,0), mask)
     return base
 
+# Rotating in the clockwise direction, which seems more natural in code,
+# is the reverse of the polar increasing direction. So, flip the values here
+angle_constants = {
+    0: None,
+    90: Image.ROTATE_270,
+    180: Image.ROTATE_180,
+    270: Image.ROTATE_90
+}
+
+def rotate_by_angle(image, angle):
+    normalized_angle = angle % 360
+    pil_angle = angle_constants[normalized_angle]
+    if pil_angle is not None:
+        return image.copy().transpose(pil_angle)
+    else:
+        return image.copy()
+
 # These filters don't support an alpha channel, so we have to loose all transparencies.
 def boxelate(image):
     image = pixelate(image)

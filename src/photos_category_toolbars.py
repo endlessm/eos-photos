@@ -2,6 +2,7 @@ from gi.repository import Gtk
 
 from widgets.option_list import OptionList
 from widgets.slider import Slider
+from widgets.image_text_button import ImageTextButton
 
 
 class CategoryToolbar(Gtk.Alignment):
@@ -60,6 +61,28 @@ class OptionListToolbar(CategoryToolbar):
 
     def get_desired_scroll_position(self):
         return self._list.get_desired_scroll_position()
+
+class TransformToolbar(CategoryToolbar):
+    def __init__(self, **kw):
+        kw["name"] = "transform"
+        kw.setdefault("left-padding", 10)
+        kw.setdefault("right-padding", 15)
+        kw.setdefault("top-padding", 10)
+        kw.setdefault("bottom-padding", 10)
+        kw.setdefault("xscale", 1.0)
+        super(TransformToolbar, self).__init__(**kw)
+        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
+
+        self._rotate_button = ImageTextButton(label=_("Rotate Clockwise"))
+        self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
+        self._rotate_button.set_name("rotate-button")
+        self._vbox.pack_start(self._rotate_button, False, False, 0)
+
+        self.add(self._vbox)
+        self.show_all()
+
+    def get_label(self):
+        return _("TRANSFORMS")
 
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
