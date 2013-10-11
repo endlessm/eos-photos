@@ -6,7 +6,6 @@ import ImageFilter
 import image_processing.image_tools as ImageTools
 from photos_image_widget import PhotosImageWidget
 
-
 class PhotosModel(object):
     """
     The model for the photo being edited. Uses the Python Imaging Library to
@@ -24,6 +23,8 @@ class PhotosModel(object):
         self._blurred_image = None
         self._distorted_image = None
         self._adjusted_image = None
+        self._transformed_image = None
+        self._rotated_image = None
 
         self._displayable = displayable
         if displayable:
@@ -36,6 +37,27 @@ class PhotosModel(object):
         self._build_border_dict()
         self._build_blur_dict()
         self._build_distortions_dict()
+
+    def rotate_orientation_clockwise(self):
+        self._orientation = (self._orientation + 90) % 360
+
+    def rotate_orientation_counter_clockwise(self):
+        self._orientation = (self._orientation - 90) % 360
+
+    def rotate_image_by_orientation(self, img, orientation):
+        c_rot = lambda im: ImageTools.rotate_clockwise(im)
+        cc_rot = lambda im: ImageTools.rotate_counter_clockwise(im)
+
+        if orientation == 0:
+            f = lambda im: im
+        if orientation == 90 or orientation == -270:
+            f = c_rot
+        if orientation == 180 or orientation == -180:
+            f = lambda im: c_rot(c_rot(im))
+        if orientation == 270 or orientation == -90:
+            f = cc_rot
+
+        return f(img)
 
     def _build_blur_dict(self):
         self._blur_dict = collections.OrderedDict([
@@ -93,14 +115,20 @@ class PhotosModel(object):
         self._filter = self._get_default_filter()
         self._distort = self._get_default_distortion()
         self._blur_type = self._get_default_blur()
+        self._transformation_type = ""
+        self._orientation = 0
         self._brightness = 1.0
         self._contrast = 1.0
         self._saturation = 1.0
+        self._last_orientation = 0
         self._last_filter = ""
         self._last_blur_type = ""
         self._last_distort = ""
         self._last_brightness = self._last_contrast = self._last_saturation = -1
         self._border = self._get_default_border()
+
+    def revert_to_original(self):
+        self.clear_options()
         if self.is_open():
             self._update_base_image()
             self._update_border_image()
@@ -124,7 +152,7 @@ class PhotosModel(object):
     def open(self, filename):
         self._filename = filename
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
-        self.clear_options()
+        self.revert_to_original()
 
     # format, an image format string will be inferred from filename by default
     # quality, the quality of the image (100% is max) for lossy image formats
@@ -207,6 +235,15 @@ class PhotosModel(object):
     def get_brightness(self):
         return self._brightness
 
+    def do_rotate(self):
+        self.rotate_orientation_clockwise()
+        
+        self._update_base_image()
+        self._update_border_image()
+
+    def get_transformation(self):
+        return self._transformation_type
+
     def set_blur(self, value):
         self._blur_type = value
         self._update_base_image()
@@ -252,12 +289,21 @@ class PhotosModel(object):
         if (not self.is_open()):
             return
         modified = False
+
+        if self._orientation == 0:
+            self._rotated_image = self._source_image
+
+        if not self._last_orientation == self._orientation:
+            modified = True
+            self._rotated_image = ImageTools.rotate_by_angle(self._source_image, self._orientation)
+            self._last_orientation = self._orientation
+
         # filter
-        if not self._filter == self._last_filter:
+        if not self._filter == self._last_filter or modified:
             if self._filter in self._filter_dict:
                 modified = True
                 self._last_filter = self._filter
-                self._filtered_image = self._filter_dict[self._filter](self._source_image)
+                self._filtered_image = self._filter_dict[self._filter](self._rotated_image)
             else:
                 print "Filter not supported!"
 

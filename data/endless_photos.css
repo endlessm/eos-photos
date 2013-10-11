@@ -135,6 +135,15 @@ GtkLabel {
     color: #ffffff;
 }
 
+#transform-expander .image-frame {
+    background-image: url("../images/icon_transform_normal.png");
+}
+
+#transform-expander .image-frame:hover,
+#transform-expander .image-frame:active {
+    background-image: url("../images/icon_transform_hover.png");
+}
+
 #blur-expander .image-frame {
     background-image: url("../images/icon_blur_normal.png");
 }
@@ -207,6 +216,40 @@ GtkLabel {
 #wallpaper-button GtkLabel:active,
 #share-button GtkLabel:active {
     color: #555555;
+}
+
+#rotate-button GtkLabel {
+    padding: 0px 3px 0px 8px;
+    font-size: 12px;
+    text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
+    color: #999999;
+}
+
+#rotate-button GtkLabel:hover {
+    color: #ffffff;
+}
+
+#rotate-button {
+    background-color: transparent;
+    background-image: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px alpha(#000000, 0.5) inset;
+    border-width: 2px;
+    border-image: none;
+}
+
+#rotate-button:hover{
+    background-color: alpha(#000000, 0.2);
+}
+
+#rotate-button .image-frame {
+    background-image: url("../images/button_rotate_normal.png");
+}
+#rotate-button .image-frame:hover {
+    background-image: url("../images/button_rotate_hover.png");
+}
+#rotate-button .image-frame:active {
+    background-image: url("../images/button_rotate_active.png");
 }
 
 #wallpaper-button .image-frame {
