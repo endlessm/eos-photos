@@ -5,7 +5,7 @@
     -GtkExpander-focus-line-width: 0px;
     -GtkExpander-expander-spacing: 0px;
     -GtkExpander-focus-padding: 0px;
-    font-family: Source Sans Pro Semibold;
+    font-family: Lato Bold;
 }
 
 *:insensitive {
@@ -75,7 +75,7 @@ GtkLabel {
 
 /*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
-    font-family: BentonSans ExtraLight;
+    font-family: Lato Light;
     text-shadow: 0px 1px 1px rgba(0,0,0,0.25);
     font-size: 46px;
     color: rgba(255, 255, 255, 0.6);
@@ -301,7 +301,7 @@ GtkLabel {
 }
 
 #splash-open-photos-button GtkLabel {
-    font-family: Source Sans Pro Light;
+    font-family: Lato Light;
     font-size: 18px;
     padding-left: 3px;
     color: #FFFFFF;
