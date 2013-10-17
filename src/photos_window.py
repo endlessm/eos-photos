@@ -48,8 +48,8 @@ class PhotosWindow(Endless.Window):
         self._grid.attach(right_toolbar, 2, 0, 1, 1)
 
         self._open_button = ImageTextButton(label=_("OPEN IMAGE"),
-                                            image_size_x=21,
-                                            image_size_y=19,
+                                            image_size_x=20,
+                                            image_size_y=18,
                                             name="open-photos-button")
         self._open_button.connect('clicked', lambda w: self._presenter.on_open())
         self._open_button.show_all();
