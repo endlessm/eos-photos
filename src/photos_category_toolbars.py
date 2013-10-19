@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from gi.repository import Gtk
 
 from widgets.option_list import OptionList
@@ -73,7 +74,7 @@ class TransformToolbar(CategoryToolbar):
         super(TransformToolbar, self).__init__(**kw)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
 
-        self._rotate_button = ImageTextButton(label=_("Rotate Clockwise"))
+        self._rotate_button = ImageTextButton(label=_(u"Rotate Right 90\N{Degree Sign}"))
         self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
         self._rotate_button.set_name("rotate-button")
         self._vbox.pack_start(self._rotate_button, False, False, 0)
@@ -82,7 +83,7 @@ class TransformToolbar(CategoryToolbar):
         self.show_all()
 
     def get_label(self):
-        return _("TRANSFORMS")
+        return _("TRANSFORM")
 
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
@@ -147,7 +148,7 @@ class DistortToolbar(OptionListToolbar):
         super(DistortToolbar, self).__init__(**kw)
 
     def get_label(self):
-        return _("DISTORTIONS")
+        return _("DISTORT")
 
     def get_thumbnail_prefix(self):
         return "distortion_thumbnails/"
