@@ -16,6 +16,7 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, application=None, images_path=""):
+        self._images_path = images_path
         self._adjustments = AdjustmentToolbar(images_path=images_path)
         self._blurs = BlurToolbar(images_path=images_path)
         self._transformations = TransformToolbar(images_path=images_path)

@@ -1,3 +1,6 @@
+import os
+import inspect
+
 from gi.repository import Clutter, Gdk
 
 # Bitwise flags to indicate clickable locations
@@ -11,8 +14,11 @@ RIGHT = 1 << 4
 # margin represents the hitbox dimension of the corners/sides
 MARGIN = 10
 
+# thickness of cropbox border
+BORDER_THICKNESS = 2
+
 # How much of the image stage should the crop box take up by default
-DEFAULT_PROPORTION = 0.5
+DEFAULT_PROPORTION = 0.84
 
 # How small the box can be sized
 MIN_HEIGHT = 2 * MARGIN
@@ -41,8 +47,13 @@ CURSOR_DICT = {
 }
 
 # Color and opacity of the region surrounding the cropbox
-BACKGROUND_COLOR = Clutter.Color.from_string("#333333")[1]
-BACKGROUND_OPACITY = 200
+BACKGROUND_COLOR = Clutter.Color.from_string("#000000")[1]
+BACKGROUND_OPACITY_PCT = 0.6
+BACKGROUND_OPACITY = int(255 * BACKGROUND_OPACITY_PCT)
+
+CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
+CURRENT_DIR = os.path.dirname(CURRENT_FILE)
+BASE_IMAGE_PATH = os.path.join(CURRENT_DIR, os.pardir) + '/images/'
 
 class DraggableBox(Clutter.Actor):
     
@@ -54,9 +65,6 @@ class DraggableBox(Clutter.Actor):
         drag_action = Clutter.DragAction()
         self.add_action(drag_action)
 
-        self.drag_begin_dimensions = []
-        self.drag_begin_coords = []
-        self.clicked_region = 0
         self._last_region = 0
 
         self.stage = stage
@@ -66,19 +74,18 @@ class DraggableBox(Clutter.Actor):
 
         self.stage.add_child(self)
         for square in self.surrounding_squares:
+            square.connect("enter-event", self.mouse_leave_handler)
             self.stage.add_child(square)
-
-        for handle in self.draggable_handles:
-            self.stage.add_child(handle)
 
         for border in self.draggable_borders:
             self.stage.add_child(border)
 
-        drag_action.connect("drag-begin", self.drag_begin_handler)
+        for handle in self.draggable_handles:
+            self.stage.add_child(handle)
+
         drag_action.connect("drag-progress", self.drag_progress_handler)
-        self.connect("motion-event", self.mouse_motion_handler)
-        self.connect("enter-event", self.mouse_motion_handler)
-        self.connect("leave-event", self.mouse_leave_handler)
+        self.connect("enter-event", self.mouse_enter_handler)
+        self.get_parent().connect("leave-event", self.mouse_leave_handler)
 
     # Given the width/height of the total image stage, position
     # the cropbox in the middle of the screen and size its width/height
@@ -123,7 +130,9 @@ class DraggableBox(Clutter.Actor):
         coordinates = [TOP, BOT, LEFT, RIGHT]
 
         for coordinate in coordinates:
-            border = DraggableBorder()
+            border_wrapper = DraggableBorder(self, coordinate)
+            border = border_wrapper.line
+            border_hitbox = border_wrapper.hitbox
 
             # Each border has four constraints:
             #   cropbox_edge_constraint: binds the border's x/y position to the respective edge
@@ -132,44 +141,61 @@ class DraggableBox(Clutter.Actor):
             #       order to maintain a constant thickness
             #   length_constraint (1 & 2): these two bind the two loose ends of the border to the
             #       cropbox's corners
+            # Its hitbox is constrained in the same fashion as its length_constraints, but also has
+            # a positional constraint to the border
             cropbox_edge_constraint = Clutter.SnapConstraint()
             cropbox_edge_constraint.set_source(self)
             thickness_constraint = Clutter.SnapConstraint()
             thickness_constraint.set_source(self)
 
+            wrapper_constraint_1 = Clutter.SnapConstraint()
+            wrapper_constraint_1.set_source(self)
+            wrapper_constraint_2 = Clutter.SnapConstraint()
+            wrapper_constraint_2.set_source(self)
+            wrapper_pos_constraint = Clutter.BindConstraint()
+            wrapper_pos_constraint.set_source(border)
             length_constraint_1 = Clutter.SnapConstraint()
             length_constraint_1.set_source(self)
             length_constraint_2 = Clutter.SnapConstraint()
             length_constraint_2.set_source(self)
 
             if coordinate & TOP or coordinate & LEFT:
-                position_offset = border.get_offset()
-                thickness_offset = position_offset + border.get_thickness()
+                thickness_offset = border_wrapper.get_offset()
             else:
-                position_offset = -border.get_offset()
-                thickness_offset = position_offset - border.get_thickness()
+                thickness_offset = -border_wrapper.get_offset()
 
             cropbox_edge_constraint.set_edges(
                 CLUTTER_EDGES[coordinate], CLUTTER_EDGES[coordinate])
-            cropbox_edge_constraint.set_offset(position_offset)
 
             thickness_constraint.set_edges(
                 CLUTTER_EDGES[self.opposing_side(coordinate)], CLUTTER_EDGES[coordinate])
             thickness_constraint.set_offset(thickness_offset)
 
+            wrapper_pos_constraint.set_coordinate(Clutter.BindCoordinate.POSITION)
+            wrapper_pos_constraint.set_offset(-MARGIN / 2)
+
             if coordinate & TOP or coordinate & BOT:
                 length_constraint_1.set_edges(CLUTTER_EDGES[LEFT], CLUTTER_EDGES[LEFT])
                 length_constraint_2.set_edges(CLUTTER_EDGES[RIGHT], CLUTTER_EDGES[RIGHT])
+                wrapper_constraint_1.set_edges(CLUTTER_EDGES[LEFT], CLUTTER_EDGES[LEFT])
+                wrapper_constraint_2.set_edges(CLUTTER_EDGES[RIGHT], CLUTTER_EDGES[RIGHT])
+                border_hitbox.set_height(MARGIN)
             else:
                 length_constraint_1.set_edges(CLUTTER_EDGES[TOP], CLUTTER_EDGES[TOP])
                 length_constraint_2.set_edges(CLUTTER_EDGES[BOT], CLUTTER_EDGES[BOT])
+                wrapper_constraint_1.set_edges(CLUTTER_EDGES[TOP], CLUTTER_EDGES[TOP])
+                wrapper_constraint_2.set_edges(CLUTTER_EDGES[BOT], CLUTTER_EDGES[BOT])
+                border_hitbox.set_width(MARGIN)
 
             border.add_constraint(cropbox_edge_constraint)
             border.add_constraint(thickness_constraint)
             border.add_constraint(length_constraint_1)
             border.add_constraint(length_constraint_2)
+            border_hitbox.add_constraint(wrapper_constraint_1)
+            border_hitbox.add_constraint(wrapper_constraint_2)
+            border_hitbox.add_constraint(wrapper_pos_constraint)
 
-            borders.append(border)
+            borders.append(border_wrapper)
 
         return borders
 
@@ -182,7 +208,7 @@ class DraggableBox(Clutter.Actor):
         coordinates = [TOP|LEFT, TOP|RIGHT, BOT|LEFT, BOT|RIGHT]
 
         for coordinate in coordinates:
-            handle = DraggableHandle()
+            handle = DraggableHandle(self, coordinate)
 
             # Each handle has four constraints:
             #   horiz_constraint: binds the handle to the cropbox's top/bottom sides
@@ -192,7 +218,8 @@ class DraggableBox(Clutter.Actor):
             #
             # The height/width constraints are set by binding the opposite side of the handle
             # that horiz/vert constraints bind (respectively) to the same edge of the cropbox,
-            # and setting an offset equal to the desired height/width
+            # and setting an offset equal to the desired height/width. The handle's hitbox is
+            # constrainted by position to the handle image
 
             horiz_constraint = Clutter.SnapConstraint()
             horiz_constraint.set_source(self)
@@ -204,28 +231,39 @@ class DraggableBox(Clutter.Actor):
             width_constraint = Clutter.SnapConstraint()
             width_constraint.set_source(self)
 
+            hitbox_pos_constraint = Clutter.BindConstraint()
+            hitbox_pos_constraint.set_source(handle.current_knob)
+            hitbox_pos_constraint.set_offset(4)
+            hitbox_pos_constraint.set_coordinate(Clutter.BindCoordinate.POSITION)
+
+            offset = handle.get_offset()
             if coordinate & TOP:
                 horiz_constraint.set_edges(CLUTTER_EDGES[TOP], CLUTTER_EDGES[TOP])
                 height_constraint.set_edges(CLUTTER_EDGES[BOT], CLUTTER_EDGES[TOP])
-                height_constraint.set_offset(handle.get_offset())
+                horiz_constraint.set_offset(BORDER_THICKNESS/2 - offset)
+                height_constraint.set_offset(BORDER_THICKNESS/2 - offset)
             else:
                 horiz_constraint.set_edges(CLUTTER_EDGES[BOT], CLUTTER_EDGES[BOT])
                 height_constraint.set_edges(CLUTTER_EDGES[TOP], CLUTTER_EDGES[BOT])
-                height_constraint.set_offset(-handle.get_offset())
+                horiz_constraint.set_offset(-(BORDER_THICKNESS/2 + offset))
+                height_constraint.set_offset(-(BORDER_THICKNESS/2 + offset))
 
             if coordinate & LEFT:
                 vert_constraint.set_edges(CLUTTER_EDGES[LEFT], CLUTTER_EDGES[LEFT])
                 width_constraint.set_edges(CLUTTER_EDGES[RIGHT], CLUTTER_EDGES[LEFT])
-                width_constraint.set_offset(handle.get_offset())
+                vert_constraint.set_offset(BORDER_THICKNESS/2 - offset)
+                width_constraint.set_offset(BORDER_THICKNESS/2 - offset)
             else:
                 vert_constraint.set_edges(CLUTTER_EDGES[RIGHT], CLUTTER_EDGES[RIGHT])
                 width_constraint.set_edges(CLUTTER_EDGES[LEFT], CLUTTER_EDGES[RIGHT])
-                width_constraint.set_offset(-handle.get_offset())
+                vert_constraint.set_offset(-(BORDER_THICKNESS/2 + offset))
+                width_constraint.set_offset(-(BORDER_THICKNESS/2 + offset))
 
             handle.add_constraint(height_constraint)
             handle.add_constraint(width_constraint)
             handle.add_constraint(horiz_constraint)
             handle.add_constraint(vert_constraint)
+            handle.hitbox.add_constraint(hitbox_pos_constraint)
 
             handles.append(handle)
 
@@ -252,6 +290,7 @@ class DraggableBox(Clutter.Actor):
 
         for coordinate in coordinates:
             square = Clutter.Actor()
+            square.set_reactive(True)
             square.set_background_color(BACKGROUND_COLOR)
             square.set_opacity(BACKGROUND_OPACITY)
 
@@ -261,9 +300,11 @@ class DraggableBox(Clutter.Actor):
                 right_constraint = Clutter.SnapConstraint()
                 right_constraint.set_source(self.stage)
                 right_constraint.set_edges(CLUTTER_EDGES[RIGHT], CLUTTER_EDGES[RIGHT])
+
                 left_constraint = Clutter.SnapConstraint()
                 left_constraint.set_source(self.stage)
                 left_constraint.set_edges(CLUTTER_EDGES[LEFT], CLUTTER_EDGES[LEFT])
+
                 square.add_constraint(left_constraint)
                 square.add_constraint(right_constraint)
 
@@ -272,20 +313,15 @@ class DraggableBox(Clutter.Actor):
                 # bound to the top and bottom edges of the CROP box
                 top_constraint = Clutter.SnapConstraint()
                 top_constraint.set_source(self)
-                top_constraint.set_offset(MARGIN / 2)
                 top_constraint.set_edges(CLUTTER_EDGES[TOP], CLUTTER_EDGES[TOP])
+
                 bot_constraint = Clutter.SnapConstraint()
                 bot_constraint.set_source(self)
-                bot_constraint.set_offset(-MARGIN / 2)
                 bot_constraint.set_edges(CLUTTER_EDGES[BOT], CLUTTER_EDGES[BOT])
 
                 square.add_constraint(top_constraint)
                 square.add_constraint(bot_constraint)
 
-            if coordinate & TOP or coordinate & LEFT:
-                offset = MARGIN / 2
-            else:
-                offset = -MARGIN / 2
             # All the boxes have their namesake's edge bound to the same
             # named edge of the stage, and have the opposite side bound to their
             # namesake's edge of CROP. 
@@ -295,7 +331,6 @@ class DraggableBox(Clutter.Actor):
 
             cropbox_constraint = Clutter.SnapConstraint()
             cropbox_constraint.set_source(self)
-            cropbox_constraint.set_offset(offset)
             cropbox_constraint.set_edges(CLUTTER_EDGES[self.opposing_side(coordinate)], CLUTTER_EDGES[coordinate])
 
             stage_constraint = Clutter.SnapConstraint()
@@ -309,157 +344,209 @@ class DraggableBox(Clutter.Actor):
 
         return squares
 
-    def box_region_at_coord(self, x, y):
-        clicked_region = 0
-        mid_vertical = mid_horizontal = False
-
-        # Normalize the click coordinates to be the distance from
-        # the box's (x, y) coordinates
-        norm_x, norm_y = x - self.get_x(), y - self.get_y()
-
-        # If the click happened within the first MARGIN pixels
-        # of the box, it's on the left. If it was in the last
-        # MARGIN of pixels, it's on the right
-        if norm_x < MARGIN:
-            clicked_region |= LEFT
-        elif norm_x > self.get_width() - MARGIN:
-            clicked_region |= RIGHT
-        else:
-            mid_horizontal = True
-
-        # Likewise for top/bottom
-        if norm_y < MARGIN:
-            clicked_region |= TOP
-        elif norm_y > self.get_height() - MARGIN:
-            clicked_region |= BOT
-        else:
-            mid_vertical = True
-
-        # If the clicked region isn't in a corner (i.e. has both a
-        # top/bot and right/left quality), it's in the middle
-        if mid_horizontal and mid_vertical:
-            clicked_region = MIDDLE
-
-        return clicked_region
-
     def set_view(self, view):
         self._view = view
 
-    def mouse_motion_handler(self, actor, event):
-        mouse_x, mouse_y = event.x, event.y
-        region = self.box_region_at_coord(mouse_x, mouse_y)
+    # Called whenever an actor detects that the mouse has entered its region
+    def mouse_changed_region(self, region):
         if region is not self._last_region:
             self._last_region = region
-            if self._view is not None:
-                # set the cursor here based on the region
-                self._view.set_cursor(CURSOR_DICT[region])
+
+            # Set the cursor based on the pointer's location
+            self._view.set_cursor(CURSOR_DICT[region])
+
+            # Metrics for whether a handle or border should be highlighted. An ornament is
+            # highlighted if it or an adjacent ornament is moused over, or if the mouse is
+            # over the middle section of the cropbox
+            is_middle = (region == MIDDLE)
+            isnt_handle = not (region == NONE or region & (region - 1))
+            border_is_selected = \
+                lambda b: b.coordinate & region or is_middle
+            handle_is_selected = \
+                lambda h: (isnt_handle and h.coordinate & region) \
+                            or (h.coordinate == region) or is_middle
+
+            selected_borders = [b for b in self.draggable_borders if border_is_selected(b)]
+            unselected_borders = [b for b in self.draggable_borders if b not in selected_borders]
+            selected_handles = [h for h in self.draggable_handles if handle_is_selected(h)]
+            unselected_handles = [h for h in self.draggable_handles if h not in selected_handles]
+
+            # highlight the relevant handles and edges
+            map(lambda border: border.highlight(), selected_borders)
+            map(lambda border: border.darken(), unselected_borders)
+            map(lambda handle: handle.highlight(), selected_handles)
+            map(lambda handle: handle.normalize() if region == NONE else handle.darken(), unselected_handles)
+
+    def mouse_enter_handler(self, actor, event):
+        self.mouse_changed_region(MIDDLE)
 
     def mouse_leave_handler(self, actor, event):
-        self._last_region = NONE
-        # set the cursor back to normal
-        if self._view is not None:
-            # set the cursor here based on the region
-            self._view.set_cursor(CURSOR_DICT[NONE])
+        self.mouse_changed_region(NONE)
 
-    def drag_begin_handler(self, action, actor, x, y, mod):
-        self.clicked_region = self.box_region_at_coord(x, y)
-        self.drag_begin_dimensions = [actor.get_width(), actor.get_height()]
-        self.drag_begin_coords = [actor.get_x(), actor.get_y()]
+    def drag_progress_handler(self, action, actor, dx, dy):
+        self.update_box_geometry(MIDDLE, dx, dy)
 
     # Return a value of dx such that the crop box's width will never
     # be lower than the MIN_WIDTH, and so that the crop box's left/right
     # sides will never move outside the bounds of the image stage
-    def validate_dx(self, dx):
+    def validate_dx(self, dx, clicked_region):
         # If the user is dragging either the left/right side, check if
         # the width of the box would be reduced to less than MIN_WIDTH
         # given dx. If so, return a value for dx which would reduce the width
         # to exactly MIN_WIDTH
-        if self.clicked_region & LEFT:
+        if clicked_region & LEFT:
             if self.get_width() - dx < MIN_WIDTH:
                 return self.get_width() - MIN_WIDTH
-        if self.clicked_region & RIGHT:
-            if self.drag_begin_dimensions[0] + dx < MIN_WIDTH:
-                return MIN_WIDTH - self.drag_begin_dimensions[0]
+        if clicked_region & RIGHT:
+            if self.get_width() + dx < MIN_WIDTH:
+                return MIN_WIDTH - self.get_width()
 
         # If the user is moving the left/right sides (either by dragging the
         # respective side, or by dragging the whole box), trim dx if it'd cause
         # the current x coordinate to be less than 0 or greater than the width
         # of the image stage
-        if self.clicked_region & (LEFT | MIDDLE):
+        if clicked_region & (LEFT | MIDDLE):
             if self.get_x() + dx < 0:
                 return -self.get_x()
-        if self.clicked_region & (RIGHT | MIDDLE):
-            if self.get_x() + self.drag_begin_dimensions[0] + dx > self.get_parent().get_width():
-                return self.get_parent().get_width() - (self.get_x() + self.drag_begin_dimensions[0])
+        if clicked_region & (RIGHT | MIDDLE):
+            if self.get_x() + self.get_width() + dx > self.get_parent().get_width():
+                return self.get_parent().get_width() - (self.get_x() + self.get_width())
         return dx
 
     # Nearly exactly as in validate_dy, trim the value of dy if it'd result
     # in the height of the box being too small, or if dy would place either
     # the top or bottom edges outside the bounds of the image stage
-    def validate_dy(self, dy):
-        if self.clicked_region & TOP:
+    def validate_dy(self, dy, clicked_region):
+        if clicked_region & TOP:
             if self.get_height() - dy < MIN_HEIGHT:
                 return self.get_height() - MIN_HEIGHT
-        if self.clicked_region & BOT:
-            if self.drag_begin_dimensions[1] + dy < MIN_HEIGHT:
-                return MIN_HEIGHT - self.drag_begin_dimensions[1]
+        if clicked_region & BOT:
+            if self.get_height() + dy < MIN_HEIGHT:
+                return MIN_HEIGHT - self.get_height()
 
-        if self.clicked_region & (TOP | MIDDLE):
+        if clicked_region & (TOP | MIDDLE):
             if self.get_y() + dy < 0:
                 return -self.get_y()
-        if self.clicked_region & (BOT | MIDDLE):
-            if self.get_y() + self.drag_begin_dimensions[1] + dy > self.get_parent().get_height():
-                return self.get_parent().get_height() - (self.get_y() + self.drag_begin_dimensions[1])
+        if clicked_region & (BOT | MIDDLE):
+            if self.get_y() + self.get_height() + dy > self.get_parent().get_height():
+                return self.get_parent().get_height() - (self.get_y() + self.get_height())
         return dy
 
-    def drag_progress_handler(self, action, actor, dx, dy):
+    def update_box_geometry(self, clicked_region, dx, dy):
         # Ensure dx and dy would adjust the crop box's geometry within
         # the minimum size and bounded region constraints
-        dx = self.validate_dx(dx)
-        dy = self.validate_dy(dy)
+        dx = self.validate_dx(dx, clicked_region)
+        dy = self.validate_dy(dy, clicked_region)
 
-        if not self.clicked_region & MIDDLE:
+        if not clicked_region & MIDDLE:
             # If the click was on the left side, we need to both
             # add the inverse of the dragged distance and simultaneously
             # move the position of the box (to simulate the manipulation
             # of the left side). If it was on the right, just add the
             # dragged distance to the size of the pre-dragged dimensions
-            if self.clicked_region & LEFT:
-                actor.set_width(actor.get_width() - dx)
-                actor.set_x(actor.get_x() + dx)
-            elif self.clicked_region & RIGHT:
-                actor.set_width(self.drag_begin_dimensions[0] + dx)
+            if clicked_region & LEFT:
+                self.set_width(self.get_width() - dx)
+                self.set_x(self.get_x() + dx)
+            elif clicked_region & RIGHT:
+                self.set_width(self.get_width() + dx)
 
-            if self.clicked_region & TOP:
-                actor.set_height(actor.get_height() - dy)
-                actor.set_y(actor.get_y() + dy)
-            elif self.clicked_region & BOT:
-                actor.set_height(self.drag_begin_dimensions[1] + dy)
+            if clicked_region & TOP:
+                self.set_height(self.get_height() - dy)
+                self.set_y(self.get_y() + dy)
+            elif clicked_region & BOT:
+                self.set_height(self.get_height() + dy)
         else:
             # If the click happened away from either horizontal or 
             # vertical edges, just drag the box around
-            actor.set_x(actor.get_x() + dx)
-            actor.set_y(actor.get_y() + dy)
+            self.set_x(self.get_x() + dx)
+            self.set_y(self.get_y() + dy)
 
-class DraggableHandle(Clutter.Actor):
-    def __init__(self, **kw):
-        super(DraggableHandle, self).__init__(**kw)
+class DraggableOrnament(Clutter.Group):
+    """
+    Base class for an object which forwards mouse events to the crop box. The hitbox actor is kept
+    separate from any other visual actors so that the ornament can receieve events over a wider
+    region than what is actually visible to the user 
+    """
+    def __init__(self, box, coordinate, **kw):
+        kw["reactive"] = True
+        super(DraggableOrnament, self).__init__(**kw)
+
+        self.draggable_box = box
+        self.coordinate = coordinate
+
+        self.hitbox = Clutter.Actor()
+        self.hitbox.set_reactive(True)
+
+        drag_action = Clutter.DragAction()
+        drag_action.connect("drag-progress", self.drag_progress_handler)
+
+        self.hitbox.add_action(drag_action)
+        self.hitbox.connect("enter-event", self.mouse_enter_handler)
+
+    def drag_progress_handler(self, actor, action, dx, dy):
+        self.draggable_box.update_box_geometry(self.coordinate, dx, dy)
+
+    def mouse_enter_handler(self, x, y):
+        self.draggable_box.mouse_changed_region(self.coordinate)
+
+
+class DraggableHandle(DraggableOrnament):
+    def __init__(self, *args):
+        super(DraggableHandle, self).__init__(*args)
         self.dimension = MARGIN
-        self.set_height(self.dimension)
-        self.set_width(self.dimension)
-        self.set_background_color(Clutter.Color.from_string("#000000")[1])
+        self.current_knob = None
+
+        self.hitbox.set_height(MARGIN)
+        self.hitbox.set_width(MARGIN)
+
+        NORMAL_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_normal.png"
+        LIGHT_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_hover.png"
+        DARK_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_dark.png"
+
+        self.NORMAL_KNOB = Clutter.Texture.new_from_file(NORMAL_KNOB_FILE_PATH)
+        self.LIGHT_KNOB = Clutter.Texture.new_from_file(LIGHT_KNOB_FILE_PATH)
+        self.DARK_KNOB = Clutter.Texture.new_from_file(DARK_KNOB_FILE_PATH)
+
+        self.current_knob = self.NORMAL_KNOB
+        self.add_child(self.current_knob)
+        self.add_child(self.hitbox)
+
+    def set_knob(self, knob):
+        if knob is not self.current_knob:
+            self.remove_child(self.current_knob)
+            self.add_child(knob)
+            self.current_knob = knob
+
+    def highlight(self):
+        self.set_knob(self.LIGHT_KNOB)
+
+    def darken(self):
+        self.set_knob(self.DARK_KNOB)
+
+    def normalize(self):
+        self.set_knob(self.NORMAL_KNOB)
 
     def get_offset(self):
-        return self.dimension
+        return (self.get_width() / 2)
 
-class DraggableBorder(Clutter.Actor):
-    def __init__(self, **kw):
-        super(DraggableBorder, self).__init__(**kw)
-        self.thickness = MARGIN / 4
-        self.set_background_color(Clutter.Color.from_string("#000000")[1])
+class DraggableBorder(DraggableOrnament):
+    def __init__(self, *args):
+        super(DraggableBorder, self).__init__(*args)
+
+        self.line = Clutter.Actor()
+        self.add_child(self.line)
+        self.add_child(self.hitbox)
+
+        self.thickness = BORDER_THICKNESS
+        self.NORMAL_COLOR = Clutter.Color.from_string("#000000")[1]
+        self.HIGHLIGHT_COLOR = Clutter.Color.from_string("#FFFFFF")[1]
+        self.darken()
+
+    def highlight(self):
+        self.line.set_background_color(self.HIGHLIGHT_COLOR)
+
+    def darken(self):
+        self.line.set_background_color(self.NORMAL_COLOR)
 
     def get_offset(self):
-        return MARGIN / 2
-
-    def get_thickness(self):
         return self.thickness

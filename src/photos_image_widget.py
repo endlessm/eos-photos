@@ -24,7 +24,6 @@ class PhotosImageWidget(Clutter.Actor):
         self.add_child(self._crop_overlay)
         self._crop_overlay.hide_crop_overlay()
         self.crop_overlay_visible = False
-        self._resize_cropbox = False
 
         bind_overlay_size = Clutter.BindConstraint(coordinate = Clutter.BindCoordinate.SIZE, source = self._base_image)
         self._crop_overlay.add_constraint(bind_overlay_size)
@@ -35,11 +34,10 @@ class PhotosImageWidget(Clutter.Actor):
         return self._ratio
 
     def alloc_changed(self, actor, box, flags):
-        if self._resize_cropbox:
-            alloc = self.get_allocation_geometry()
-            img_width = alloc.width
-            img_height = alloc.height
-            self._crop_overlay.resize_crop_box(img_width, img_height)
+        alloc = self.get_allocation_geometry()
+        img_width = alloc.width
+        img_height = alloc.height
+        self._crop_overlay.resize_crop_box(img_width, img_height)
 
     def do_get_property(self, property):
         if property.name == "ratio":
@@ -72,8 +70,7 @@ class PhotosImageWidget(Clutter.Actor):
         else:
             return Clutter.Actor.do_set_property(self, property, value)
 
-    def replace_base_image(self, data, width, height, resize_cropbox):
-        self._resize_cropbox = resize_cropbox
+    def replace_base_image(self, data, width, height):
         Gdk.threads_add_idle(
             GLib.PRIORITY_DEFAULT_IDLE,
             lambda dummy: self._replace_base_image_callback(data, width, height),

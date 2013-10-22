@@ -228,17 +228,7 @@ GtkLabel {
     border-image: none;
 }
 
-#crop-button:hover {
-    background-color: alpha(#000000, 0.1);
-}
-
-#crop-button:hover {
-    background-color: alpha(#000000, 0.3);
-}
-
 #crop-options {
-    border-radius: 5px;
-    box-shadow: 0px 0px 1px alpha(#000000, 0.5) inset;
     border-width: 0px;
     border-image: none;
 }
@@ -255,53 +245,76 @@ GtkLabel {
 }
 
 #crop-options.active {
-    background-color: alpha(#000000, 0.1);
+    border-radius: 5px;
+    border-image: none;
+    box-shadow: 0px -1px rgba(255, 255, 255, 0.15) inset;    
+    background-image: linear-gradient(to top,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.2) 100%);
+}
+
+#crop-button.active {
     background-image: none;
+    border-radius: 0px;
+    border-width: 2px;
+    border-image: url("../images/confirm_menu_separator_middle.png") 0 0 10 0;
 }
 
 #crop-label {
-    color: green;
     padding: 0px 0px 0px 15px;
 }
 
+#rotate-button GtkLabel,
 #crop-button GtkLabel {
-    font-size: 12px;
-}
-
-#rotate-button GtkLabel {
     margin: 10px 3px 8px 0px;
     font-size: 11px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #c4c4c4;
 }
 
-#rotate-button GtkLabel:hover {
+#rotate-button GtkLabel:hover,
+#crop-button GtkLabel:hover{
+    text-shadow: 0px 1px rgba(255,255,255,0.15);
     color: #ffffff;
 }
 
-#rotate-button {
+#rotate-button GtkLabel:active,
+#crop-button GtkLabel:active {
+    color: #ffffff;
+}
+
+#rotate-button,
+#crop-button.inactive {
     border-radius: 5px;
+    border-image: none;
+    border-width: 1px;
     background-color: transparent;
     background-image: none;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35) inset;
-    border-width: 1px;
-    border-image: none;
 }
 
 #rotate-button:hover,
-#rotate-button:active{
+#crop-button.inactive:hover,
+#rotate-button:active,
+#crop-button.inactive:active {
     background-image: linear-gradient(to bottom,
         rgba(25, 25, 25, 0) 0%,
         rgba(25, 25, 25, 0.5) 99%,
-        rgba(25, 25, 25, 0.5) 100%);
+        rgba(25, 25, 25, 0.5) 100%)
+}
+
+#crop-button .image-frame {
+    background-image: url("../images/icon_crop_normal.png");
+}
+#crop-button .image-frame:hover,
+#crop-button .image-frame:active {
+    background-image: url("../images/icon_crop_hover.png");
 }
 
 #rotate-button .image-frame {
     background-image: url("../images/icon_rotate_normal.png");
 }
-#rotate-button .image-frame:hover {
-    background-image: url("../images/icon_rotate_hover.png");
-}
+#rotate-button .image-frame:hover,
 #rotate-button .image-frame:active {
     background-image: url("../images/icon_rotate_hover.png");
 }

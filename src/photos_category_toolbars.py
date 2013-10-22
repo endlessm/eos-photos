@@ -73,7 +73,7 @@ class TransformToolbar(CategoryToolbar):
         kw.setdefault("bottom-padding", 10)
         kw.setdefault("xscale", 1.0)
         super(TransformToolbar, self).__init__(**kw)
-        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
+        self._vbox = Gtk.VBox(homogeneous=False, spacing=8)
 
         self._rotate_button = ImageTextButton(label=_(u"Rotate Right 90\N{Degree Sign}"))
         self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
@@ -121,17 +121,17 @@ class CropOptions(Gtk.Frame):
         self._crop_options_box.pack_start(self._crop_label, False, False, 0)
 
         self._apply_button = ImageButton(
-            normal_path = self._images_path + 'apply-normal.png',
-            hover_path = self._images_path + 'apply-hover.png',
-            down_path = self._images_path + 'apply-active.png'
+            normal_path = self._images_path + 'confirm_ok-btn_normal.png',
+            hover_path = self._images_path + 'confirm_ok-btn_hover.png',
+            down_path = self._images_path + 'confirm_ok-btn_pressed.png'
         )
         self._apply_button.connect("clicked", self.apply_crop)
         self._apply_button.set_name("apply-button")
 
         self._cancel_button = ImageButton(
-            normal_path = self._images_path + 'cancel-normal.png',
-            hover_path = self._images_path + 'cancel-hover.png',
-            down_path = self._images_path + 'cancel-active.png'
+            normal_path = self._images_path + 'confirm_cancel-btn_normal.png',
+            hover_path = self._images_path + 'confirm_cancel-btn_hover.png',
+            down_path = self._images_path + 'confirm_cancel-btn_pressed.png'
         )
         self._cancel_button.connect("clicked", self.cancel_crop)
         self._cancel_button.set_name("cancel-button")
@@ -141,23 +141,29 @@ class CropOptions(Gtk.Frame):
 
         self._vbox.pack_start(self._crop_button, False, False, 0)
         self._vbox.pack_start(self._crop_options_box, False, False, 0)
-        
+
         self._style_context = self.get_style_context()
+        self._button_context = self._crop_button.get_style_context()
         self._options_state = 'inactive'
         self._style_context.add_class(self._options_state)
+        self._button_context.add_class(self._options_state)
 
         self.add(self._vbox)
 
     def hide_crop_options(self):
         self._crop_options_box.hide()
+        self._button_context.remove_class(self._options_state)
         self._style_context.remove_class(self._options_state)
         self._options_state = 'inactive'
+        self._button_context.add_class(self._options_state)
         self._style_context.add_class(self._options_state)
 
     def show_crop_options(self):
         self._crop_options_box.show()
+        self._button_context.remove_class(self._options_state)
         self._style_context.remove_class(self._options_state)
         self._options_state = 'active'
+        self._button_context.add_class(self._options_state)
         self._style_context.add_class(self._options_state)
 
     def apply_crop(self, event):

@@ -1,10 +1,11 @@
-from gi.repository import Clutter, GLib, Gdk, GObject
+from gi.repository import Clutter
 from draggable_box import DraggableBox
 
 class CropOverlay(Clutter.Actor):
     def __init__(self, **kw):
         kw.setdefault('x-expand', True)
         kw.setdefault('y-expand', True)
+        kw["reactive"] = True
         super(CropOverlay, self).__init__(**kw)
 
         self._crop_box = DraggableBox(self)

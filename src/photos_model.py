@@ -26,7 +26,6 @@ class PhotosModel(object):
         self._adjusted_image = None
         self._rotated_image = None
         self._options_stored = False
-        self._resize_crop_box = True
 
         self._displayable = displayable
         if displayable:
@@ -189,7 +188,6 @@ class PhotosModel(object):
 
     def open(self, filename):
         self._filename = filename
-        self.queue_crop_box_resize()
         self._source_image = ImageTools.limit_size(Image.open(filename), (2056, 2056)).convert('RGB')
         self.revert_to_original()
 
@@ -276,7 +274,6 @@ class PhotosModel(object):
 
     def do_rotate(self):
         self.rotate_orientation_clockwise()
-        self.queue_crop_box_resize()
 
         self._update_base_image()
         self._update_border_image()
@@ -288,11 +285,6 @@ class PhotosModel(object):
             self.pop_options()
             self._image_widget.hide_crop_overlay()
             self._update_base_image()
-
-    # Signals that, upon the next image replace operation, the crop box will
-    # reset its geometry to be a default size on the new image
-    def queue_crop_box_resize(self):
-        self._resize_crop_box = True
 
     def do_crop_activate(self):
         # Reset the crop coordinates, dropping any previous croppings
@@ -309,19 +301,17 @@ class PhotosModel(object):
         self._update_border_image()
 
     def do_crop_apply(self):
-        # Only perform actions if the user has a current crop selection
-        if self._image_widget.crop_overlay_visible:
-
-            # Get the coordinates of the crop overlay square. If the orientation
-            # is such that the image is on its side, transpose the height/width
-            # to reflect this
-            width, height = self._source_image.size
-            if self._orientation in (90, 270):
-                width, height = height, width
-            self._crop_coordinates = self._image_widget.get_crop_selection(width, height)
-            self._crop_orientation = self._orientation
-            self.pop_options()
-            self._image_widget.hide_crop_overlay()
+        # Get the coordinates of the crop overlay square. If the orientation
+        # is such that the image is on its side, transpose the height/width
+        # to reflect this
+        width, height = self._source_image.size
+        if self._orientation in (90, 270):
+            width, height = height, width
+        self.pop_options()
+        self._last_crop_coordinates = None
+        self._crop_coordinates = self._image_widget.get_crop_selection(width, height)
+        self._crop_orientation = self._orientation
+        self._image_widget.hide_crop_overlay()
         
         self._update_base_image()
         self._update_border_image()
@@ -451,8 +441,7 @@ class PhotosModel(object):
             width, height = self._adjusted_image.size
             if self._displayable:
                 self._image_widget.replace_base_image(
-                    self._adjusted_image.tostring(), width, height, self._resize_crop_box)
-                self._resize_crop_box = False
+                    self._adjusted_image.tostring(), width, height)
             self._is_saved = False
 
     def _update_border_image(self):
