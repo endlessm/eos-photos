@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 13:46-0700\n"
+"POT-Creation-Date: 2013-09-26 14:52-0700\n"
 "PO-Revision-Date: 2013-09-26 21:21+0000\n"
 "Last-Translator: joelmx <joel@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/teams/language/es/)\n"
@@ -150,7 +150,7 @@ msgstr "Problema de red detectado. Por favor, verifique su conexión a Internet 
 msgid "None"
 msgstr "Ninguno"
 
-#: src/photos_window.py:52
+#: src/photos_window.py:50
 msgid "OPEN IMAGE"
 msgstr "ABRIR IMAGEN"
 
