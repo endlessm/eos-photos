@@ -36,6 +36,13 @@ class PhotosLeftToolbar(Gtk.VBox):
         self._presenter = presenter
 
     def change_category(self, category_label):
+        # If the user selected a category that isn't Transformations,
+        # cancel any in-progress crop that's going on (but retain the
+        # current crop dimensions, if any)
+        if category_label != "transform" and hasattr(self, '_presenter'):
+            # do something to cancel crop
+            self._presenter.cancel_crop()
+
         for name, category in self._categories.items():
             if not name == category_label:
                 category.deselect()
