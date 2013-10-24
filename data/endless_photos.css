@@ -255,15 +255,15 @@ GtkLabel {
 }
 
 #wallpaper-button .image-frame {
-    background-image: url("../images/expand-image_normal.png");
+    background-image: url("../images/btn_background_normal.png");
 }
 
 #wallpaper-button .image-frame:hover {
-    background-image: url("../images/expand-image_hover.png");
+    background-image: url("../images/btn_background_hover.png");
 }
 
 #wallpaper-button .image-frame:active {
-    background-image: url("../images/expand-image_down.png");
+    background-image: url("../images/btn_background_pressed.png");
 }
 
 #save-button .image-frame {
