@@ -14,8 +14,6 @@
 
 override_dh_install:
 	python generate_filter_thumbnails.py
-	./build_mo_from_po_files.sh
-	python -m compileall -f -d /usr/share/endless-os-photos/src src/
-	dh_install
-	find debian/endlessos-base-photos -name '*.py' -delete
 	find src -name '*.pyc' -delete
+	./build_mo_from_po_files.sh
+	dh_install
