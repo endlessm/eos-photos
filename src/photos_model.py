@@ -4,7 +4,6 @@ import Image
 import ImageFilter
 
 import image_processing.image_tools as ImageTools
-from photos_image_widget import PhotosImageWidget
 
 class PhotosModel(object):
     """
@@ -29,6 +28,9 @@ class PhotosModel(object):
 
         self._displayable = displayable
         if displayable:
+            # Only import this if displayable; we don't want to do any graphical
+            # operations in generate_filter_thumbnails.py
+            from photos_image_widget import PhotosImageWidget
             self._image_widget = PhotosImageWidget()
         else:
             self._image_widget = None
@@ -164,7 +166,8 @@ class PhotosModel(object):
         self._border = self._get_default_border()
 
     def revert_to_original(self):
-        self._image_widget.hide_crop_overlay()
+        if self._displayable:
+            self._image_widget.hide_crop_overlay()
         self.clear_options()
         if self.is_open():
             self._update_base_image()
