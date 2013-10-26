@@ -16,6 +16,7 @@ class PhotosView(object):
     actual toplevel layout of the toolbars and central view.
     """
     def __init__(self, application=None, images_path=""):
+        self._images_path = images_path
         self._adjustments = AdjustmentToolbar(images_path=images_path)
         self._blurs = BlurToolbar(images_path=images_path)
         self._transformations = TransformToolbar(images_path=images_path)
@@ -67,6 +68,11 @@ class PhotosView(object):
 
     def set_image_widget(self, widget):
         self._image_container.set_image_widget(widget)
+        widget._crop_overlay._crop_box.set_view(self)
+
+    def set_cursor(self, cursor):
+        if cursor is not None:
+            self.get_window().get_window().set_cursor(cursor)
 
     def set_photo_editor_active(self):
         self._window.set_photo_editor_active()
@@ -94,6 +100,9 @@ class PhotosView(object):
 
     def select_blur(self, blur_name):
         self._blurs.select(blur_name)
+
+    def select_transformation(self, transformation_name):
+        self._transformations.select(transformation_name)
 
     def select_border(self, border_name):
         self._borders.select(border_name)

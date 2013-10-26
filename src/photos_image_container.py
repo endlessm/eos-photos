@@ -10,6 +10,7 @@ class ImageContainer(GtkClutter.Embed):
         super(ImageContainer, self).__init__(**kw)
         self._stage = self.get_stage()
         self._stage.set_layout_manager(Clutter.BinLayout())
+        self._images_path = images_path
         self._image_widget = None
 
     # We need to make sure this allocation is the right aspect ratio for our

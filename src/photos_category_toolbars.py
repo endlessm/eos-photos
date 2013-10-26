@@ -4,6 +4,7 @@ from gi.repository import Gtk
 from widgets.option_list import OptionList
 from widgets.slider import Slider
 from widgets.image_text_button import ImageTextButton
+from widgets.image_button import ImageButton
 
 
 class CategoryToolbar(Gtk.Alignment):
@@ -72,18 +73,110 @@ class TransformToolbar(CategoryToolbar):
         kw.setdefault("bottom-padding", 10)
         kw.setdefault("xscale", 1.0)
         super(TransformToolbar, self).__init__(**kw)
-        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
+        self._vbox = Gtk.VBox(homogeneous=False, spacing=8)
 
         self._rotate_button = ImageTextButton(label=_(u"Rotate Right 90\N{Degree Sign}"))
         self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
         self._rotate_button.set_name("rotate-button")
+
+        self._crop_button = CropOptions(images_path=self._images_path)
+
         self._vbox.pack_start(self._rotate_button, False, False, 0)
+        self._vbox.pack_start(self._crop_button, False, False, 0)
 
         self.add(self._vbox)
-        self.show_all()
+
+    def do_show_all(self):
+        # Show everything, but make sure the crop options (accept/cancel buttons)
+        # visibility is invariant on this
+        crop_options_visible = self._crop_button._crop_options_box.get_visible()
+        CategoryToolbar.do_show_all(self)
+        self._crop_button._crop_options_box.set_visible(crop_options_visible)
+
+    def close_crop_options(self):
+        self._crop_button.hide_crop_options()
+
+    def set_presenter(self, presenter):
+        self._crop_button._presenter = presenter
+        super(TransformToolbar, self).set_presenter(presenter)
 
     def get_label(self):
         return _("TRANSFORM")
+
+class CropOptions(Gtk.Frame):
+    def __init__(self, images_path, **kw):
+        kw["name"] = "crop-options"
+        super(CropOptions, self).__init__(**kw)
+        self._images_path = images_path
+        self._crop_options_box = Gtk.HBox()
+        self._vbox = Gtk.VBox()
+
+        self._crop_button = ImageTextButton(label=_("Crop"))
+        self._crop_button.connect("clicked", self.activate_crop)
+        self._crop_button.set_name("crop-button")
+
+        self._crop_label = Gtk.Label()
+        self._crop_label.set_label(_("Apply Crop?"))
+        self._crop_label.set_name("crop-label")
+        self._crop_options_box.pack_start(self._crop_label, False, False, 0)
+
+        self._apply_button = ImageButton(
+            normal_path = self._images_path + 'confirm_ok-btn_normal.png',
+            hover_path = self._images_path + 'confirm_ok-btn_hover.png',
+            down_path = self._images_path + 'confirm_ok-btn_pressed.png'
+        )
+        self._apply_button.connect("clicked", self.apply_crop)
+        self._apply_button.set_name("apply-button")
+
+        self._cancel_button = ImageButton(
+            normal_path = self._images_path + 'confirm_cancel-btn_normal.png',
+            hover_path = self._images_path + 'confirm_cancel-btn_hover.png',
+            down_path = self._images_path + 'confirm_cancel-btn_pressed.png'
+        )
+        self._cancel_button.connect("clicked", self.cancel_crop)
+        self._cancel_button.set_name("cancel-button")
+
+        self._crop_options_box.pack_start(self._cancel_button, False, False, 0)
+        self._crop_options_box.pack_start(self._apply_button, False, False, 0)
+
+        self._vbox.pack_start(self._crop_button, False, False, 0)
+        self._vbox.pack_start(self._crop_options_box, False, False, 0)
+
+        self._style_context = self.get_style_context()
+        self._button_context = self._crop_button.get_style_context()
+        self._options_state = 'inactive'
+        self._style_context.add_class(self._options_state)
+        self._button_context.add_class(self._options_state)
+
+        self.add(self._vbox)
+
+    def hide_crop_options(self):
+        self._crop_options_box.hide()
+        self._button_context.remove_class(self._options_state)
+        self._style_context.remove_class(self._options_state)
+        self._options_state = 'inactive'
+        self._button_context.add_class(self._options_state)
+        self._style_context.add_class(self._options_state)
+
+    def show_crop_options(self):
+        self._crop_options_box.show()
+        self._button_context.remove_class(self._options_state)
+        self._style_context.remove_class(self._options_state)
+        self._options_state = 'active'
+        self._button_context.add_class(self._options_state)
+        self._style_context.add_class(self._options_state)
+
+    def apply_crop(self, event):
+        self._presenter.on_crop_apply()
+        self.hide_crop_options()
+
+    def activate_crop(self, event):
+        self._presenter.on_crop_activate()
+        self.show_crop_options()
+
+    def cancel_crop(self, event):
+        self._presenter.on_crop_cancel()
+        self.hide_crop_options()
 
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
