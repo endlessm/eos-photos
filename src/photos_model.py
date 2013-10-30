@@ -451,7 +451,7 @@ class PhotosModel(object):
         filename = self._border_dict[self._border]
         if filename is not None:
             self._border_image = Image.open(self._borders_path + filename).resize(
-                self._source_image.size, Image.BILINEAR)
+                self._adjusted_image.size, Image.BILINEAR)
             width, height = self._border_image.size
             if self._displayable:
                 self._image_widget.replace_border_image(
