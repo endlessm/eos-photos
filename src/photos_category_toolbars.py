@@ -86,13 +86,6 @@ class TransformToolbar(CategoryToolbar):
 
         self.add(self._vbox)
 
-    def do_show_all(self):
-        # Show everything, but make sure the crop options (accept/cancel buttons)
-        # visibility is invariant on this
-        crop_options_visible = self._crop_button._crop_options_box.get_visible()
-        CategoryToolbar.do_show_all(self)
-        self._crop_button._crop_options_box.set_visible(crop_options_visible)
-
     def close_crop_options(self):
         self._crop_button.hide_crop_options()
 
@@ -108,7 +101,7 @@ class CropOptions(Gtk.Frame):
         kw["name"] = "crop-options"
         super(CropOptions, self).__init__(**kw)
         self._images_path = images_path
-        self._crop_options_box = Gtk.HBox()
+        self._crop_options_box = Gtk.HBox(no_show_all=True)
         self._vbox = Gtk.VBox()
 
         self._crop_button = ImageTextButton(label=_("Crop"))
@@ -118,6 +111,7 @@ class CropOptions(Gtk.Frame):
         self._crop_label = Gtk.Label()
         self._crop_label.set_label(_("Apply Crop?"))
         self._crop_label.set_name("crop-label")
+        self._crop_label.show()
         self._crop_options_box.pack_start(self._crop_label, False, False, 0)
 
         self._apply_button = ImageButton(
@@ -127,6 +121,7 @@ class CropOptions(Gtk.Frame):
         )
         self._apply_button.connect("clicked", self.apply_crop)
         self._apply_button.set_name("apply-button")
+        self._apply_button.show_all()
 
         self._cancel_button = ImageButton(
             normal_path = self._images_path + 'confirm_cancel-btn_normal.png',
@@ -135,6 +130,7 @@ class CropOptions(Gtk.Frame):
         )
         self._cancel_button.connect("clicked", self.cancel_crop)
         self._cancel_button.set_name("cancel-button")
+        self._cancel_button.show_all()
 
         self._crop_options_box.pack_start(self._cancel_button, False, False, 0)
         self._crop_options_box.pack_start(self._apply_button, False, False, 0)
