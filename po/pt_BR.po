@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# joelmx <joel@endlessm.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-26 14:52-0700\n"
-"PO-Revision-Date: 2013-09-26 20:48+0000\n"
+"POT-Creation-Date: 2013-11-01 21:36-0700\n"
+"PO-Revision-Date: 2013-11-02 04:36+0000\n"
 "Last-Translator: ptomato <philip.chimento@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/teams/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -17,27 +18,31 @@ msgstr ""
 "Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/photos_category_toolbars.py:192
+#: src/photos_category_toolbars.py:306
 msgid "ADJUST"
 msgstr "AJUSTES"
 
+#: src/photos_category_toolbars.py:112
+msgid "Apply Crop?"
+msgstr "Aplicar Corte?"
+
 #: src/photos_right_toolbar.py:32
 msgid "BACKGROUND"
-msgstr ""
+msgstr "FUNDO"
 
-#: src/photos_category_toolbars.py:72
+#: src/photos_category_toolbars.py:186
 msgid "BLURS"
 msgstr "BLURS"
 
-#: src/photos_category_toolbars.py:90
+#: src/photos_category_toolbars.py:204
 msgid "BORDERS"
 msgstr "MOLDURA"
 
-#: src/photos_category_toolbars.py:149
+#: src/photos_category_toolbars.py:263
 msgid "Brightness"
 msgstr "Brilho"
 
-#: src/photos_model.py:79
+#: src/photos_model.py:104
 msgid "Brush"
 msgstr "Pincel"
 
@@ -45,47 +50,51 @@ msgstr "Pincel"
 msgid "Choose one of your photos to begin!"
 msgstr "Escolha uma de suas fotos para começar!"
 
-#: src/photos_model.py:54
+#: src/photos_model.py:79
 msgid "Colorful"
 msgstr "Colorido"
 
-#: src/photos_category_toolbars.py:159
+#: src/photos_category_toolbars.py:273
 msgid "Contrast"
 msgstr "Realçar"
 
-#: src/photos_model.py:51
+#: src/photos_model.py:76
 msgid "Country"
 msgstr "Sertanejo"
 
-#: src/photos_model.py:76
+#: src/photos_model.py:101
 msgid "Crayon"
 msgstr "Lápis de Cera"
 
-#: src/photos_category_toolbars.py:126
-msgid "DISTORTIONS"
-msgstr "DEFORMAR"
+#: src/photos_category_toolbars.py:107
+msgid "Crop"
+msgstr "Cortar"
 
-#: src/photos_model.py:44
+#: src/photos_category_toolbars.py:240
+msgid "DISTORT"
+msgstr "DISTORCER"
+
+#: src/photos_model.py:69
 msgid "Depth of Field"
 msgstr "Profundidade de Campo"
 
-#: src/photos_model.py:62
+#: src/photos_model.py:87
 msgid "Desert"
 msgstr "Deserto"
 
-#: src/photos_model.py:66
+#: src/photos_model.py:91
 msgid "Edges"
 msgstr "Contornos"
 
-#: src/photos_presenter.py:124
+#: src/photos_presenter.py:125
 msgid "Email failed."
 msgstr "Falha na conexão."
 
-#: src/photos_presenter.py:265
+#: src/photos_presenter.py:280
 msgid "Enter a message to add to the e-mail"
 msgstr "Digite uma mensagem para adicionar ao e-mail"
 
-#: src/photos_presenter.py:249
+#: src/photos_presenter.py:264
 msgid "Enter a message to add to your photo!"
 msgstr "Escreva uma mensagem para enviar com usa foto!"
 
@@ -93,48 +102,52 @@ msgstr "Escreva uma mensagem para enviar com usa foto!"
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_category_toolbars.py:108
+#: src/photos_category_toolbars.py:222
 msgid "FILTERS"
 msgstr "FILTROS"
 
-#: src/photos_presenter.py:247
+#: src/photos_presenter.py:262
 msgid "Facebook is not available offline."
 msgstr "Opa! Não conseguimos acessar o facebook. Verifique sua conexão de internet."
 
-#: src/photos_model.py:86
+#: src/photos_model.py:111
 msgid "Fish Eye Heavy"
 msgstr "Olho de Peixe Gordo"
 
-#: src/photos_model.py:85
+#: src/photos_model.py:110
 msgid "Fish Eye Light"
 msgstr "Olho de Peixe Magro"
 
-#: src/photos_model.py:59
+#: src/photos_model.py:84
 msgid "Foggy Blue"
 msgstr "Névoa Azul"
 
-#: src/photos_model.py:50
+#: src/photos_model.py:75
 msgid "Grayscale"
 msgstr "Preto e branco"
 
-#: src/photos_model.py:77
+#: src/photos_model.py:102
 msgid "Grunge"
 msgstr "Grunge"
 
-#: src/photos_model.py:52
+#: src/photos_model.py:77
 msgid "Grungify"
 msgstr "Grunge"
+
+#: src/photos_view.py:207
+msgid "Image successfully applied to background!"
+msgstr ""
 
 #: src/share/facebook_post.py:36 src/share/facebook_post.py:41
 #: src/share/facebook_post.py:69
 msgid "Login failed."
 msgstr "Falha na conexão."
 
-#: src/photos_model.py:56
+#: src/photos_model.py:81
 msgid "Lomo"
 msgstr "Lomo"
 
-#: src/photos_presenter.py:249 src/photos_presenter.py:265
+#: src/photos_presenter.py:264 src/photos_presenter.py:280
 msgid "Message:"
 msgstr "Mensagem:"
 
@@ -144,8 +157,8 @@ msgid ""
 "again."
 msgstr "Problema de rede detectado. Por favor, verifique sua conexão à Internet e tente novamente."
 
-#: src/photos_model.py:42 src/photos_model.py:49 src/photos_model.py:73
-#: src/photos_model.py:84
+#: src/photos_model.py:67 src/photos_model.py:74 src/photos_model.py:98
+#: src/photos_model.py:109
 msgid "None"
 msgstr "Normal"
 
@@ -153,27 +166,27 @@ msgstr "Normal"
 msgid "OPEN IMAGE"
 msgstr "ABRIR FOTO"
 
-#: src/photos_model.py:53
+#: src/photos_model.py:78
 msgid "Old Photo"
 msgstr "Foto Antiga"
 
-#: src/splash_screen.py:27 src/photos_view.py:110
+#: src/splash_screen.py:27 src/photos_view.py:125
 msgid "Open Image"
 msgstr "Abrir Imagem"
 
-#: src/photos_view.py:162
+#: src/photos_view.py:178
 msgid "Open new photo without save?"
 msgstr "Deseja abrir uma foto sem salvar a atual?"
 
-#: src/photos_model.py:60
+#: src/photos_model.py:85
 msgid "Paper"
 msgstr "Papel"
 
-#: src/photos_model.py:88
+#: src/photos_model.py:113
 msgid "Pinch Heavy"
 msgstr "Beliscão Gordo"
 
-#: src/photos_model.py:87
+#: src/photos_model.py:112
 msgid "Pinch Light"
 msgstr "Beliscão Magro"
 
@@ -186,11 +199,11 @@ msgstr "Por favor, não responda a este e-mail. As respostas são enviadas para 
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr "Sua publicação falhou. Não temos certeza do que aconteceu, desculpe!"
 
-#: src/photos_model.py:63
+#: src/photos_model.py:88
 msgid "Posterize"
 msgstr "Posterizar"
 
-#: src/photos_view.py:176
+#: src/photos_view.py:192
 msgid "Quit Without Save?"
 msgstr "Sair Sem Salvar?"
 
@@ -198,7 +211,7 @@ msgstr "Sair Sem Salvar?"
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLTAR AO ORIGINAL"
 
-#: src/photos_presenter.py:265
+#: src/photos_presenter.py:280
 msgid "Recipient email:"
 msgstr "Email do destinatário"
 
@@ -207,15 +220,19 @@ msgid ""
 "Requested action is not possible at the moment. Please try again later."
 msgstr "Não for possível realisar a ação solicitada  no momento. Por favor, tente novamente mais tarde."
 
+#: src/photos_category_toolbars.py:78
+msgid "Rotate Right 90°"
+msgstr "Girar para a direita 90°"
+
 #: src/photos_right_toolbar.py:16
 msgid "SAVE"
 msgstr "SALVAR"
 
-#: src/photos_category_toolbars.py:169
+#: src/photos_category_toolbars.py:283
 msgid "Saturation"
 msgstr "Saturação"
 
-#: src/photos_view.py:139
+#: src/photos_view.py:155
 msgid "Save Image"
 msgstr "Salvar Imagem"
 
@@ -223,37 +240,41 @@ msgstr "Salvar Imagem"
 msgid "Someone"
 msgstr "Alguém"
 
-#: src/photos_model.py:78
+#: src/photos_model.py:103
 msgid "Spray"
 msgstr "Spray"
 
-#: src/photos_model.py:89
+#: src/photos_model.py:114
 msgid "Swirl"
 msgstr "Redemoinho"
 
-#: src/photos_model.py:43
+#: src/photos_category_toolbars.py:97
+msgid "TRANSFORM"
+msgstr "TRANSFORMAR"
+
+#: src/photos_model.py:68
 msgid "Tilt Shift"
 msgstr "Tilt Shift"
 
-#: src/photos_model.py:61
+#: src/photos_model.py:86
 msgid "Trains"
 msgstr "Caravana"
 
-#: src/photos_category_toolbars.py:24
+#: src/photos_category_toolbars.py:28
 msgid "Untitled"
 msgstr "Sem Título"
 
-#: src/photos_presenter.py:265
+#: src/photos_presenter.py:280
 msgid "Your Name:"
 msgstr "Seu Nome"
 
-#: src/photos_view.py:163
+#: src/photos_view.py:179
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr "A foto que você está trabalhando ainda não foi salva. Abrir nova imagem sem salvá-la?"
 
-#: src/photos_view.py:177
+#: src/photos_view.py:193
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
 
