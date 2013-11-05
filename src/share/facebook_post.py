@@ -1,7 +1,12 @@
-from facebook import GraphAPIError, GraphAPI
-from urllib2 import URLError
+import os
+import inspect
 import subprocess
 
+from facebook import GraphAPIError, GraphAPI
+from urllib2 import URLError
+
+CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
+CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 
 class FacebookPost:
     # -- DEV --
@@ -18,9 +23,7 @@ class FacebookPost:
         self._graph_api = None
 
     def fb_login(self):
-        # keep as dependency on social bar??
-        # proc = subprocess.Popen(['python', './src/share/fb_auth_window.py'], stdout=subprocess.PIPE)
-        proc = subprocess.Popen(['python', '/usr/share/endless-os-photos/src/share/fb_auth_window.pyc'], stdout=subprocess.PIPE)
+        proc = subprocess.Popen(['python', os.path.join(CURRENT_DIR, 'fb_auth_window.py')], stdout=subprocess.PIPE)
         success = False
         for line in proc.stdout:
             if line.startswith('ACCESS_TOKEN:'):
