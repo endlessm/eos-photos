@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-01 21:36-0700\n"
+"POT-Creation-Date: 2013-11-09 22:30-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -137,8 +137,8 @@ msgstr ""
 msgid "Image successfully applied to background!"
 msgstr ""
 
-#: src/share/facebook_post.py:36 src/share/facebook_post.py:41
-#: src/share/facebook_post.py:69
+#: src/share/facebook_post.py:39 src/share/facebook_post.py:44
+#: src/share/facebook_post.py:72
 msgid "Login failed."
 msgstr ""
 
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Message:"
 msgstr ""
 
-#: src/share/facebook_post.py:74
+#: src/share/facebook_post.py:77
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
@@ -194,7 +194,7 @@ msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr ""
 
-#: src/share/facebook_post.py:51
+#: src/share/facebook_post.py:54
 msgid "Post failed. We're not really sure what happened sorry!"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr ""
 msgid "Recipient email:"
 msgstr ""
 
-#: src/share/facebook_post.py:66
+#: src/share/facebook_post.py:69
 msgid "Requested action is not possible at the moment. Please try again later."
 msgstr ""
 
