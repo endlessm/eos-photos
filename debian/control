@@ -26,6 +26,7 @@ Depends: gir1.2-gtkclutter-1.0,
          gir1.2-gdkpixbuf-2.0,
          python-gi,
          python-imaging,
+         python-webkit,
          python (>= 2.7),
          python-scipy,
          python-skimage (>=0.6.1)
