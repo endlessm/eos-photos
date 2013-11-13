@@ -162,18 +162,21 @@ class PhotosPresenter(object):
         self._view.update_async(lambda: self._view.select_blur(blur_type))
 
     def _do_rotate(self):
-        self._model.do_crop_cancel()
-        self._view._transformations.close_crop_options()
+        self._do_crop_cancel()
         self._model.do_rotate()
 
     def _do_crop_activate(self):
         self._model.do_crop_activate()
+        self._view._transformations.open_crop_options()
 
     def _do_crop_apply(self):
         self._model.do_crop_apply()
+        self._view._transformations.close_crop_options()
 
     def _do_crop_cancel(self):
-        self._model.do_crop_cancel()
+        if self._model.is_crop_active():
+            self._model.do_crop_cancel()
+            self._view._transformations.close_crop_options()
 
     #UI callbacks...
     def on_close(self):
@@ -192,6 +195,10 @@ class PhotosPresenter(object):
     def on_open(self):
         if self._locked:
             return
+
+        # Cancel any ongoing crops
+        self._do_crop_cancel()
+
         if not self._model.is_saved():
             confirm = self._view.show_confirm_open_new()
             if not confirm:
@@ -235,6 +242,9 @@ class PhotosPresenter(object):
         if not self._model.is_open():
             return
 
+        # Cancel any ongoing crops
+        self._do_crop_cancel()
+
         [filename, ext] = self.generate_filename()
 
         if filename is not None:
@@ -258,6 +268,10 @@ class PhotosPresenter(object):
             return
         if not self._model.is_open():
             return
+
+        # Cancel any ongoing crops
+        self._do_crop_cancel()
+
         if not self.has_internet():
             self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
             return
@@ -270,6 +284,10 @@ class PhotosPresenter(object):
             return
         if not self._model.is_open():
             return
+
+        # Cancel any ongoing crops
+        self._do_crop_cancel()
+        
         self._run_locking_task(self._do_set_image_as_background)
 
     def on_email(self):
@@ -350,17 +368,6 @@ class PhotosPresenter(object):
             return
         self._run_locking_task(self._do_distort, (distort_name,))
 
-    def cancel_crop(self):
-        if self._locked:
-            return
-        if not self._model.is_open():
-            return
-        self._run_locking_task(self._do_cancel_crop)
-
-    def _do_cancel_crop(self):
-        self._model.do_crop_cancel()
-        self._view._transformations.close_crop_options()
-
     def _prune_active_threads(self):
         ''' Clears out old threads from the
         active thread list. ''' 
@@ -427,5 +434,6 @@ class PhotosPresenter(object):
     def on_revert(self):
         if self._locked:
             return
+        self._do_crop_cancel()
         self._model.revert_to_original()
         self._sync_photo_options()

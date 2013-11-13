@@ -86,6 +86,9 @@ class TransformToolbar(CategoryToolbar):
 
         self.add(self._vbox)
 
+    def open_crop_options(self):
+        self._crop_button.show_crop_options()
+
     def close_crop_options(self):
         self._crop_button.hide_crop_options()
 
@@ -164,15 +167,12 @@ class CropOptions(Gtk.Frame):
 
     def apply_crop(self, event):
         self._presenter.on_crop_apply()
-        self.hide_crop_options()
 
     def activate_crop(self, event):
         self._presenter.on_crop_activate()
-        self.show_crop_options()
 
     def cancel_crop(self, event):
         self._presenter.on_crop_cancel()
-        self.hide_crop_options()
 
 class BlurToolbar(OptionListToolbar):
     def __init__(self, **kw):
