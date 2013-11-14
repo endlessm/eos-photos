@@ -496,8 +496,8 @@ class DraggableHandle(DraggableOrnament):
         self.dimension = MARGIN
         self.current_knob = None
 
-        self.hitbox.set_height(MARGIN)
-        self.hitbox.set_width(MARGIN)
+        self.hitbox.set_height(self.dimension)
+        self.hitbox.set_width(self.dimension)
 
         NORMAL_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_normal.png"
         LIGHT_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_hover.png"
