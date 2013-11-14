@@ -168,6 +168,7 @@ class PhotosModel(object):
     def revert_to_original(self):
         if self._displayable:
             self._image_widget.hide_crop_overlay()
+            self._image_widget.reset_crop_overlay()
         self.clear_options()
         if self.is_open():
             self._update_base_image()
@@ -277,6 +278,7 @@ class PhotosModel(object):
 
     def do_rotate(self):
         self.rotate_orientation_clockwise()
+        self._image_widget.rotate_crop_overlay()
 
         self._update_base_image()
         self._update_border_image()

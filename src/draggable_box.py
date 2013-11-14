@@ -71,6 +71,7 @@ class DraggableBox(Clutter.Actor):
         self.surrounding_squares = self.init_surrounding_squares()
         self.draggable_handles = self.init_draggable_handles()
         self.draggable_borders = self.init_draggable_borders()
+        self.reset_dimensions()
 
         self.stage.add_child(self)
         for square in self.surrounding_squares:
@@ -84,6 +85,7 @@ class DraggableBox(Clutter.Actor):
             self.stage.add_child(handle)
 
         drag_action.connect("drag-progress", self.drag_progress_handler)
+        drag_action.connect("drag-end", self.drag_end_handler)
         self.connect("enter-event", self.mouse_enter_handler)
         self.get_parent().connect("leave-event", self.mouse_leave_handler)
 
@@ -91,15 +93,32 @@ class DraggableBox(Clutter.Actor):
     # the cropbox in the middle of the screen and size its width/height
     # to be a DEFAULT_PROPORTION of the total
     def resize(self, stage_width, stage_height):
-        new_width = DEFAULT_PROPORTION * stage_width
-        new_height = DEFAULT_PROPORTION * stage_height
-        new_x = (stage_width - new_width) / 2
-        new_y = (stage_height - new_height) / 2
+        new_width = self.width_as_pct * stage_width
+        new_height = self.height_as_pct * stage_height
+        new_x = self.x_pos_as_pct * stage_width
+        new_y = self.y_pos_as_pct * stage_height
 
         self.set_x(new_x)
         self.set_y(new_y)
         self.set_width(new_width)
         self.set_height(new_height)
+
+    def reset_dimensions(self):
+        # The box will store its position/dimensions as percentages of the total stage, 
+        # (values between 0 and 1) so that upon stage resizing/rotation, its dimensions
+        # can be reconstructed faithfully
+        self.x_pos_as_pct = (1 - DEFAULT_PROPORTION) / 2
+        self.y_pos_as_pct = (1 - DEFAULT_PROPORTION) / 2
+        self.width_as_pct = DEFAULT_PROPORTION
+        self.height_as_pct = DEFAULT_PROPORTION
+
+    def rotate_dimensions(self):
+        # rotates the box's dimensions 90 degrees clockwise
+        new_x_pct = 1 - self.y_pos_as_pct - self.height_as_pct
+        new_y_pct = self.x_pos_as_pct
+
+        self.x_pos_as_pct, self.y_pos_as_pct = new_x_pct, new_y_pct
+        self.width_as_pct, self.height_as_pct = self.height_as_pct, self.width_as_pct
 
     def get_crop_selection_coordinates(self, real_width, real_height):
         # Dimensions of the crop box need to be scaled to the actual height
@@ -386,6 +405,17 @@ class DraggableBox(Clutter.Actor):
     def drag_progress_handler(self, action, actor, dx, dy):
         self.update_box_geometry(MIDDLE, dx, dy)
 
+    def drag_end_handler(self, action, actor, x, y, mod):
+        # Resizing is over, so update the position/dimension percentages
+        x, y = self.get_x(), self.get_y()
+        box_width, box_height = self.get_width(), self.get_height()
+        stage_width, stage_height = self.get_parent().get_width(), self.get_parent().get_height()
+
+        self.x_pos_as_pct = x / stage_width
+        self.y_pos_as_pct = y / stage_height
+        self.width_as_pct = box_width / stage_width
+        self.height_as_pct = box_height / stage_height
+
     # Return a value of dx such that the crop box's width will never
     # be lower than the MIN_WIDTH, and so that the crop box's left/right
     # sides will never move outside the bounds of the image stage
@@ -479,6 +509,7 @@ class DraggableOrnament(Clutter.Group):
 
         drag_action = Clutter.DragAction()
         drag_action.connect("drag-progress", self.drag_progress_handler)
+        drag_action.connect("drag-end", self.draggable_box.drag_end_handler)
 
         self.hitbox.add_action(drag_action)
         self.hitbox.connect("enter-event", self.mouse_enter_handler)
