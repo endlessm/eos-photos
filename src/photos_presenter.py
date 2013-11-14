@@ -92,16 +92,12 @@ class PhotosPresenter(object):
         return tempfile.mkstemp('.jpg')[1].lower()
 
     def _do_post_to_facebook(self, photo_message):
-        success = True
-        if not self._facebook_post.is_user_loged_in():
-            success, err_message = self._facebook_post.fb_login()
-        if success:
-            filename = self._get_image_tempfile()
-            self._model.save(filename)
-            success, message = self._facebook_post.post_image(filename, photo_message)
-            os.remove(filename)
-        if not success:
-            self._view.update_async(lambda: self._view.show_message(text=_(err_message), warning=True))
+        filename = self._get_image_tempfile()
+        self._model.save(filename)
+        success, message = self._facebook_post.post_image(filename, photo_message)
+        os.remove(filename)
+        if message:
+            self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
 
     def _do_set_image_as_background(self):
         filename = self.generate_filename(suffix='background', show_save_dialog=False, overwrite=True)[0]
@@ -262,7 +258,18 @@ class PhotosPresenter(object):
             self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
             return
         info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
-        if info:
+        if info is None:
+            return
+        logged_in = self._facebook_post.is_logged_in()
+        # If not logged in try once to log in
+        if not logged_in:
+            token, message = self._view.show_facebook_login_dialog()
+            if token:
+                logged_in = True
+                self._facebook_post.login(token)
+            if message:
+                self._view.show_message(text=message, warning=True)
+        if logged_in:
             self._run_locking_task(self._do_post_to_facebook, (info[0],))
 
     def on_set_background(self):

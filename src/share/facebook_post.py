@@ -22,39 +22,24 @@ class FacebookPost:
         self._fb_access_token = None
         self._graph_api = None
 
-    def fb_login(self):
-        proc = subprocess.Popen(['python', os.path.join(CURRENT_DIR, 'fb_auth_window.py')], stdout=subprocess.PIPE)
-        success = False
-        for line in proc.stdout:
-            if line.startswith('ACCESS_TOKEN:'):
-                token = line.split(':')[1]
-                if self.is_token_valid(token):
-                    self.set_fb_access_token(token)
-                    self._graph_api = GraphAPI(access_token=self._fb_access_token)
-                    success = True
-                else:
-                    break
-            elif line.startswith('FAILURE'):
-                break
-        message = "" if success else _("Login failed.")
-        return success, message
-
     def post_image(self, file_name, message=""):
-        if not self._graph_api:
-            return False, _("Login failed.")
         try:
             self._graph_api.put_photo(open(file_name), message=message)
-            return True, ""
-        except GraphAPIError as error:
-            return False, self.oauth_exception_message(error.result)
-        except URLError as e:
-            return False, self.url_exception_handler()
+            return True, _("Image successfully posted to facebook!")
+        # I think a simpler collection of error messages for the user would be
+        # better so I'm commenting out our fancier exception differentiating.
+        # Still useful for debugging though
+        # except GraphAPIError as error:
+        #     return False, self.oauth_exception_message(error.result)
+        # except URLError as e:
+        #     return False, self.url_exception_handler()
         except Exception as e:
             print e
-            return False, _("Post failed. We're not really sure what happened sorry!")
+            return False, _("Could not reach facebook.")
 
-    def set_fb_access_token(self, token):
+    def login(self, token):
         self._fb_access_token = token
+        self._graph_api = GraphAPI(access_token=self._fb_access_token)
 
     def oauth_exception_message(self, result):
         server_error_codes = [1, 2, 4, 17]
@@ -77,7 +62,7 @@ class FacebookPost:
         message = _('Network problem detected. Please check your internet connection and try again.')
         return message
 
-    def is_user_loged_in(self):
+    def is_logged_in(self):
         if self._fb_access_token is None or not self.is_token_valid():
             return False
         else:

@@ -7,6 +7,7 @@ from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToo
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 from widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
+from share.facebook_auth_dialog import FacebookAuthDialog
 
 
 class PhotosView(object):
@@ -118,6 +119,14 @@ class PhotosView(object):
 
     def set_saturation_slider(self, value):
         self._adjustments.set_saturation_slider(value)
+
+    def show_facebook_login_dialog(self):
+        dialog = FacebookAuthDialog(transient_for=self.get_window())
+        dialog.run()
+        token = dialog.get_access_token()
+        message = dialog.get_message()
+        dialog.destroy()
+        return token, message
 
     def show_open_dialog(self, starting_dir=None):
         # Opens a dialog window where the user can choose an image file
