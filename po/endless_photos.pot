@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-09 22:30-0800\n"
+"POT-Creation-Date: 2013-11-15 15:48-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "ADJUST"
 msgstr ""
 
-#: src/photos_category_toolbars.py:112
+#: src/photos_category_toolbars.py:115
 msgid "Apply Crop?"
 msgstr ""
 
@@ -57,6 +57,11 @@ msgstr ""
 msgid "Contrast"
 msgstr ""
 
+#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:79
+#: src/share/facebook_post.py:38
+msgid "Could not reach facebook."
+msgstr ""
+
 #: src/photos_model.py:76
 msgid "Country"
 msgstr ""
@@ -65,7 +70,7 @@ msgstr ""
 msgid "Crayon"
 msgstr ""
 
-#: src/photos_category_toolbars.py:107
+#: src/photos_category_toolbars.py:110
 msgid "Crop"
 msgstr ""
 
@@ -85,15 +90,15 @@ msgstr ""
 msgid "Edges"
 msgstr ""
 
-#: src/photos_presenter.py:125
+#: src/photos_presenter.py:121
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:280
+#: src/photos_presenter.py:305
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:264
+#: src/photos_presenter.py:274
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
@@ -105,7 +110,7 @@ msgstr ""
 msgid "FILTERS"
 msgstr ""
 
-#: src/photos_presenter.py:262
+#: src/photos_presenter.py:272
 msgid "Facebook is not available offline."
 msgstr ""
 
@@ -133,12 +138,19 @@ msgstr ""
 msgid "Grungify"
 msgstr ""
 
-#: src/photos_view.py:207
+#: src/photos_view.py:216
 msgid "Image successfully applied to background!"
 msgstr ""
 
-#: src/share/facebook_post.py:39 src/share/facebook_post.py:44
-#: src/share/facebook_post.py:72
+#: src/share/facebook_post.py:28
+msgid "Image successfully posted to facebook!"
+msgstr ""
+
+#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:63
+msgid "Login canceled."
+msgstr ""
+
+#: src/share/facebook_post.py:57
 msgid "Login failed."
 msgstr ""
 
@@ -146,11 +158,11 @@ msgstr ""
 msgid "Lomo"
 msgstr ""
 
-#: src/photos_presenter.py:264 src/photos_presenter.py:280
+#: src/photos_presenter.py:274 src/photos_presenter.py:305
 msgid "Message:"
 msgstr ""
 
-#: src/share/facebook_post.py:77
+#: src/share/facebook_post.py:62
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
@@ -169,11 +181,11 @@ msgstr ""
 msgid "Old Photo"
 msgstr ""
 
-#: src/splash_screen.py:27 src/photos_view.py:125
+#: src/photos_view.py:134 src/splash_screen.py:27
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:178
+#: src/photos_view.py:187
 msgid "Open new photo without save?"
 msgstr ""
 
@@ -194,15 +206,11 @@ msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr ""
 
-#: src/share/facebook_post.py:54
-msgid "Post failed. We're not really sure what happened sorry!"
-msgstr ""
-
 #: src/photos_model.py:88
 msgid "Posterize"
 msgstr ""
 
-#: src/photos_view.py:192
+#: src/photos_view.py:201
 msgid "Quit Without Save?"
 msgstr ""
 
@@ -210,11 +218,11 @@ msgstr ""
 msgid "REVERT TO ORIGINAL"
 msgstr ""
 
-#: src/photos_presenter.py:280
+#: src/photos_presenter.py:305
 msgid "Recipient email:"
 msgstr ""
 
-#: src/share/facebook_post.py:69
+#: src/share/facebook_post.py:54
 msgid "Requested action is not possible at the moment. Please try again later."
 msgstr ""
 
@@ -230,7 +238,7 @@ msgstr ""
 msgid "Saturation"
 msgstr ""
 
-#: src/photos_view.py:155
+#: src/photos_view.py:164
 msgid "Save Image"
 msgstr ""
 
@@ -246,7 +254,7 @@ msgstr ""
 msgid "Swirl"
 msgstr ""
 
-#: src/photos_category_toolbars.py:97
+#: src/photos_category_toolbars.py:100
 msgid "TRANSFORM"
 msgstr ""
 
@@ -262,17 +270,17 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/photos_presenter.py:280
+#: src/photos_presenter.py:305
 msgid "Your Name:"
 msgstr ""
 
-#: src/photos_view.py:179
+#: src/photos_view.py:188
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:193
+#: src/photos_view.py:202
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr ""
 
