@@ -41,7 +41,7 @@ class PhotosLeftToolbar(Gtk.VBox):
         # current crop dimensions, if any)
         if category_label != "transform" and hasattr(self, '_presenter'):
             # do something to cancel crop
-            self._presenter.cancel_crop()
+            self._presenter.on_crop_cancel()
 
         for name, category in self._categories.items():
             if not name == category_label:

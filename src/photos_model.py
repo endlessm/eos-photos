@@ -281,13 +281,8 @@ class PhotosModel(object):
         self._update_base_image()
         self._update_border_image()
         
-    def disable_crop(self):
-        # Whenever the crop overlay is to be hidden, reapply all hidden effects,
-        # hide the UI for the overlay, and show the resulting image
-        if self._image_widget.crop_overlay_visible:
-            self.pop_options()
-            self._image_widget.hide_crop_overlay()
-            self._update_base_image()
+    def is_crop_active(self):
+        return self._image_widget.crop_overlay_visible
 
     def do_crop_activate(self):
         # Reset the crop coordinates, dropping any previous croppings
