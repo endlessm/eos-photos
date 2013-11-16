@@ -9,6 +9,7 @@ class CropOverlay(Clutter.Actor):
         self._crop_box = DraggableBox(self)
 
     def show_crop_overlay(self):
+        self._crop_box.resize(self.get_width(), self.get_height())
         self.show()
 
     def hide_crop_overlay(self):
@@ -27,3 +28,6 @@ class CropOverlay(Clutter.Actor):
 
     def get_crop_selection(self, width, height):
         return self._crop_box.get_crop_selection_coordinates(width, height)
+
+    def set_crop_selection(self, coordinates, width, height):
+        return self._crop_box.set_crop_selection_coordinates(coordinates, width, height)

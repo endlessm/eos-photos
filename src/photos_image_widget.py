@@ -69,6 +69,9 @@ class PhotosImageWidget(Clutter.Actor):
         # reset the crop overlay to its default dimensions
         self._crop_overlay.reset_crop_box()
 
+    def set_crop_selection(self, coordinates, width, height):
+        self._crop_overlay.set_crop_selection(coordinates, width, height)
+
     def get_crop_selection(self, width, height):
         return self._crop_overlay.get_crop_selection(width, height)
 
