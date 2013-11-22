@@ -71,6 +71,7 @@ class DraggableBox(Clutter.Actor):
         self.surrounding_squares = self.init_surrounding_squares()
         self.draggable_handles = self.init_draggable_handles()
         self.draggable_borders = self.init_draggable_borders()
+        self.reset_dimensions()
 
         self.stage.add_child(self)
         for square in self.surrounding_squares:
@@ -91,15 +92,47 @@ class DraggableBox(Clutter.Actor):
     # the cropbox in the middle of the screen and size its width/height
     # to be a DEFAULT_PROPORTION of the total
     def resize(self, stage_width, stage_height):
-        new_width = DEFAULT_PROPORTION * stage_width
-        new_height = DEFAULT_PROPORTION * stage_height
-        new_x = (stage_width - new_width) / 2
-        new_y = (stage_height - new_height) / 2
+        new_width = self.width_as_pct * stage_width
+        new_height = self.height_as_pct * stage_height
+        new_x = self.x_pos_as_pct * stage_width
+        new_y = self.y_pos_as_pct * stage_height
 
         self.set_x(new_x)
         self.set_y(new_y)
         self.set_width(new_width)
         self.set_height(new_height)
+
+    def set_crop_selection_coordinates(self, coordinates, real_width, real_height):
+        # Coordinates are in the same format output by get_crop_selection_coordinates
+        # i.e. left_coord is the dist from the stage's left side to the box's left side,
+        # right_coord is the dist from the stage's left side to the box's right side, etc.
+        if coordinates is None:
+            self.reset_dimensions()
+        else:
+            left_coord, top_coord, right_coord, bot_coord = map(float, coordinates)
+            stage_width, stage_height = self.stage.get_width(), self.stage.get_height()
+
+            self.x_pos_as_pct = left_coord / real_width
+            self.y_pos_as_pct = top_coord / real_height
+            self.width_as_pct = right_coord / real_width - self.x_pos_as_pct
+            self.height_as_pct = bot_coord / real_height - self.y_pos_as_pct
+
+    def reset_dimensions(self):
+        # The box will store its position/dimensions as percentages of the total stage, 
+        # (values between 0 and 1) so that upon stage resizing/rotation, its dimensions
+        # can be reconstructed faithfully
+        self.x_pos_as_pct = (1 - DEFAULT_PROPORTION) / 2
+        self.y_pos_as_pct = (1 - DEFAULT_PROPORTION) / 2
+        self.width_as_pct = DEFAULT_PROPORTION
+        self.height_as_pct = DEFAULT_PROPORTION
+
+    def rotate_dimensions(self):
+        # rotates the box's dimensions 90 degrees clockwise
+        new_x_pct = 1 - self.y_pos_as_pct - self.height_as_pct
+        new_y_pct = self.x_pos_as_pct
+
+        self.x_pos_as_pct, self.y_pos_as_pct = new_x_pct, new_y_pct
+        self.width_as_pct, self.height_as_pct = self.height_as_pct, self.width_as_pct
 
     def get_crop_selection_coordinates(self, real_width, real_height):
         # Dimensions of the crop box need to be scaled to the actual height
@@ -109,12 +142,12 @@ class DraggableBox(Clutter.Actor):
         width, height = self.get_width(), self.get_height()
         stage_width, stage_height = self.stage.get_width(), self.stage.get_height()
 
-        left_coord = int((x / stage_width) * real_width)
-        top_coord = int((y / stage_height) * real_height)
-        right_coord = int(((x + width) / stage_width) * real_width)
-        bot_coord = int(((y + height) / stage_height) * real_height)
+        left_coord = (x / stage_width) * real_width
+        top_coord = (y / stage_height) * real_height
+        right_coord = ((x + width) / stage_width) * real_width
+        bot_coord = ((y + height) / stage_height) * real_height
 
-        return (left_coord, top_coord, right_coord, bot_coord)
+        return map(int, (left_coord, top_coord, right_coord, bot_coord))
 
     def opposing_side(self, side):
         if side & TOP or side & BOT:

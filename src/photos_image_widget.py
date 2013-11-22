@@ -61,6 +61,17 @@ class PhotosImageWidget(Clutter.Actor):
             self._crop_overlay.hide_crop_overlay()
             self.crop_overlay_visible = False
 
+    def rotate_crop_overlay(self):
+        # rotates the dimensions of the cropbox by 90 degrees
+        self._crop_overlay.rotate_crop_box()
+
+    def reset_crop_overlay(self):
+        # reset the crop overlay to its default dimensions
+        self._crop_overlay.reset_crop_box()
+
+    def set_crop_selection(self, coordinates, width, height):
+        self._crop_overlay.set_crop_selection(coordinates, width, height)
+
     def get_crop_selection(self, width, height):
         return self._crop_overlay.get_crop_selection(width, height)
 

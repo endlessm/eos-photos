@@ -168,6 +168,7 @@ class PhotosModel(object):
     def revert_to_original(self):
         if self._displayable:
             self._image_widget.hide_crop_overlay()
+            self._image_widget.reset_crop_overlay()
         self.clear_options()
         if self.is_open():
             self._update_base_image()
@@ -277,6 +278,7 @@ class PhotosModel(object):
 
     def do_rotate(self):
         self.rotate_orientation_clockwise()
+        self._image_widget.rotate_crop_overlay()
 
         self._update_base_image()
         self._update_border_image()
@@ -285,6 +287,27 @@ class PhotosModel(object):
         return self._image_widget.crop_overlay_visible
 
     def do_crop_activate(self):
+        # Crop overlay about to become visible, so resize it to the last crop selection.
+        # General strategy here is to set the cropbox's dimensions to the (potentially rotated)
+        # _last_crop_coordinates, and then perform the crop overlay's "rotate" operation as
+        # many times as is necessary to orient those dimensions to the current orientation.
+
+        width, height = self._source_image.size
+
+        # if the crop was made when the image was on its side, swap height and width
+        if self._crop_orientation in (90, 270):
+            width, height = height, width
+        self._image_widget.set_crop_selection(self._last_crop_coordinates, width, height)
+
+        # target_orientation = (degrees needed to rotate _crop_orientation to 0deg) + (current orientation)
+        un_orient_crop = 360 - self._crop_orientation
+        target_orientation = (un_orient_crop + self._orientation) % 360
+
+        # crop overlay's rotation operation works at 90 degree intervals (clockwise)
+        num_rotations = target_orientation / 90
+        for times in range(0, num_rotations):
+            self._image_widget.rotate_crop_overlay()
+
         # Reset the crop coordinates, dropping any previous croppings
         self._crop_coordinates = None
 
