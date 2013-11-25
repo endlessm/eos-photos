@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import tempfile
 import urllib2
@@ -100,7 +101,7 @@ class PhotosPresenter(object):
             self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
 
     def _do_set_image_as_background(self):
-        filename = self.generate_filename(suffix='background', show_save_dialog=False, overwrite=True)[0]
+        filename = self.generate_hashed_filename()
         self._model.save(filename)
         file_uri = "file://" + filename
 
@@ -200,6 +201,21 @@ class PhotosPresenter(object):
             if not confirm:
                 return
         self._do_open()
+
+    def generate_hashed_filename(self):
+        cache_path = GLib.get_user_cache_dir()
+        background_images_dir = os.path.join(cache_path, "com.endlessm.photos", "background_images")
+        # Check to see if directory for background images exists
+        # If doesn't exist yet, recursively create it
+        if not os.path.isdir(background_images_dir):
+            os.makedirs(background_images_dir)
+
+        # Hash the filename + current timestamp to get unique filename for this background image
+        ext = self._model.get_current_filename().split(".")[-1]
+        digest_filename = str(hash(self._model.get_current_filename() + datetime.now().__repr__())) + "." + ext
+        path = os.path.join(background_images_dir, digest_filename)
+        return path
+
 
     def generate_filename(self, suffix=None, show_save_dialog=True, overwrite=False):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
