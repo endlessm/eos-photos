@@ -229,7 +229,6 @@ class PhotosPresenter(object):
         else:
             name = base_name_arr[0] + '_' + suffix
         ext = base_name_arr[1]
-        str_slash = "/"
         i = 1
         curr_name = name
 
