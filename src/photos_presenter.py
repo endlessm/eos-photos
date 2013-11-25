@@ -1,3 +1,4 @@
+from datetime import datetime
 import os
 import tempfile
 import urllib2
@@ -32,6 +33,9 @@ class PhotosPresenter(object):
 
         #Track threads in use
         self._active_threads = []
+
+        #Clean out background_images directory
+        self._run_locking_task(self._clean_background_dir)
 
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
@@ -86,6 +90,23 @@ class PhotosPresenter(object):
         worker.start()
         self._active_threads.append(worker)
 
+    def _clean_background_dir(self):
+        cache_path = GLib.get_user_cache_dir()
+        background_images_dir = os.path.join(cache_path, "com.endlessm.photos", "background_images")
+
+        # If directory doesn't exist yet, just return. It will get created
+        # when user first sets a background image
+        if not os.path.isdir(background_images_dir):
+            return
+        files = os.listdir(background_images_dir)
+
+        # Sort all background image filenames by last modified timestamp
+        decorated = [(filename, os.path.getmtime(os.path.join(background_images_dir, filename))) for filename in files]
+        sorted_files = sorted(decorated, key=lambda file_tuple: file_tuple[1], reverse=True)
+
+        # Delete all background images except the most recent 5
+        [os.remove(os.path.join(background_images_dir, filename[0])) for filename in sorted_files[5:]]
+
     def _get_image_tempfile(self):
         # PNG would give no loss from current image, but a lot bigger.
         # Would take longer to upload to facebook/gmail.
@@ -100,7 +121,7 @@ class PhotosPresenter(object):
             self._view.update_async(lambda: self._view.show_message(text=message, warning=True))
 
     def _do_set_image_as_background(self):
-        filename = self.generate_filename(suffix='background', show_save_dialog=False, overwrite=True)[0]
+        filename = self.generate_hashed_filename()
         self._model.save(filename)
         file_uri = "file://" + filename
 
@@ -201,6 +222,21 @@ class PhotosPresenter(object):
                 return
         self._do_open()
 
+    def generate_hashed_filename(self):
+        cache_path = GLib.get_user_cache_dir()
+        background_images_dir = os.path.join(cache_path, "com.endlessm.photos", "background_images")
+        # Check to see if directory for background images exists
+        # If doesn't exist yet, recursively create it
+        if not os.path.isdir(background_images_dir):
+            os.makedirs(background_images_dir)
+
+        # Hash the filename + current timestamp to get unique filename for this background image
+        ext = self._model.get_current_filename().split(".")[-1]
+        digest_filename = str(hash(self._model.get_current_filename() + datetime.now().__repr__())) + "." + ext
+        path = os.path.join(background_images_dir, digest_filename)
+        return path
+
+
     def generate_filename(self, suffix=None, show_save_dialog=True, overwrite=False):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
 
@@ -213,7 +249,6 @@ class PhotosPresenter(object):
         else:
             name = base_name_arr[0] + '_' + suffix
         ext = base_name_arr[1]
-        str_slash = "/"
         i = 1
         curr_name = name
 
