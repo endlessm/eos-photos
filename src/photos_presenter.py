@@ -34,6 +34,9 @@ class PhotosPresenter(object):
         #Track threads in use
         self._active_threads = []
 
+        #Clean out background_images directory
+        self._run_locking_task(self._clean_background_dir)
+
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
         self._locked = False
@@ -86,6 +89,23 @@ class PhotosPresenter(object):
         worker.add_task(method, args)
         worker.start()
         self._active_threads.append(worker)
+
+    def _clean_background_dir(self):
+        cache_path = GLib.get_user_cache_dir()
+        background_images_dir = os.path.join(cache_path, "com.endlessm.photos", "background_images")
+
+        # If directory doesn't exist yet, just return. It will get created
+        # when user first sets a background image
+        if not os.path.isdir(background_images_dir):
+            return
+        files = os.listdir(background_images_dir)
+
+        # Sort all background image filenames by last modified timestamp
+        decorated = [(filename, os.path.getmtime(os.path.join(background_images_dir, filename))) for filename in files]
+        sorted_files = sorted(decorated, key=lambda file_tuple: file_tuple[1], reverse=True)
+
+        # Delete all background images except the most recent 5
+        [os.remove(os.path.join(background_images_dir, filename[0])) for filename in sorted_files[5:]]
 
     def _get_image_tempfile(self):
         # PNG would give no loss from current image, but a lot bigger.
