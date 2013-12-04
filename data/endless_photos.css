@@ -9,56 +9,6 @@
     font-weight: bold;
 }
 
-*:insensitive {
-    background-color: transparent;
-    text-shadow: none;
-}
-
-/* TODO: hack fix until we move from adwaita to our proper SDK theme*/
-.top-bar * {
-  -GtkWidget-focus-padding: 0;
-}
-
-.top-bar {
-    background-image: -gtk-gradient(linear, center top, center bottom,
-        from(#464646), to(#1e1e1e));
-}
-
-.top-bar:backdrop {
-    background-image: -gtk-gradient(linear, center top, center bottom,
-        from(#282828), to(#1e1e1e));
-}
-
-.top-bar .button {
-    border-radius: 2px;
-    color: #8c8c8c;
-    icon-shadow: 0px -1px alpha(black, 0.25);
-    transition:background-image 0s;
-}
-
-.top-bar .button:backdrop {
-    color: #646464;
-}
-
-.top-bar .button:hover {
-    color: #dcdcdc;
-    icon-shadow: 0px -1px alpha(black, 0.35);
-    background-image: -gtk-gradient(linear, left bottom, left top,
-        color-stop(0.98, rgb(131, 131, 131)),
-        color-stop(0.95, rgb(108, 108, 108)),
-        color-stop(0, rgb(68, 68, 68)));
-}
-
-.top-bar .button:active {
-    color: #787878;
-    icon-shadow: none;
-    background-image: -gtk-gradient(linear, left bottom, left top,
-        color-stop(0.98, rgb(79, 79, 79)),
-        color-stop(0.95, rgb(71, 71, 71)),
-        color-stop(0, rgb(67, 67, 67)));
-}
-/* End hackery!! */
-
 GtkButton {
     transition:background-image 200ms ease-in-out;
 }
@@ -69,7 +19,6 @@ GtkLabel {
 
 .arrow-frame,
 .image-frame {
-    border-width: 0px;
     background-size: 100% 100%;
     transition:background-image 200ms ease-in-out;
 }
@@ -90,11 +39,8 @@ GtkLabel {
 
 .option-button {
     transition:background-color 200ms ease-in-out;
-    background-color: transparent;
-    background-image: none;
-    border-width: 0px;
-    border-image: none;
     border-radius: 2px;
+    padding: 2px 3px 2px 3px;
 }
 
 .option-button:hover {
@@ -107,15 +53,9 @@ GtkLabel {
 
 .slider-label,
 .option-label {
-    text-shadow: none;
     font-size: 11px;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
-}
-
-.slider-label,
-.option-label:selected {
-    background-color: transparent;
 }
 
 .category-expander .arrow-frame:hover {
@@ -128,7 +68,6 @@ GtkLabel {
 
 .category-label {
     font-size: 12px;
-    text-shadow: none;
     color: #999999;
 }
 
@@ -191,15 +130,6 @@ GtkLabel {
     background-image: url("../images/icon_adjustments_hover.png");
 }
 
-#save-button,
-#wallpaper-button,
-#share-button {
-    background-color: transparent;
-    background-image: none;
-    border-width: 0px;
-    border-image: none;
-}
-
 #save-button GtkLabel,
 #wallpaper-button GtkLabel,
 #share-button GtkLabel {
@@ -220,33 +150,14 @@ GtkLabel {
     color: #555555;
 }
 
-#crop-button,
-#apply-button,
-#cancel-button {
-    background-color: transparent;
-    background-image: none;
-    border-image: none;
-}
-
-#crop-options {
-    border-width: 0px;
-    border-image: none;
-}
-
 #crop-options GtkLabel {
     font-size: 10px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #999999;
 }
 
-#crop-options.inactive {
-    background-color: transparent;
-    background-image: none;
-}
-
 #crop-options.active {
     border-radius: 5px;
-    border-image: none;
     box-shadow: 0px -1px rgba(255, 255, 255, 0.15) inset;    
     background-image: linear-gradient(to top,
         rgba(0, 0, 0, 0.1) 0%,
@@ -254,8 +165,6 @@ GtkLabel {
 }
 
 #crop-button.active {
-    background-image: none;
-    border-radius: 0px;
     border-width: 2px;
     border-image: url("../images/confirm_menu_separator_middle.png") 0 0 10 0;
 }
@@ -284,12 +193,14 @@ GtkLabel {
 }
 
 #rotate-button,
+#crop-button {
+    padding: 3px;
+}
+
+#rotate-button,
 #crop-button.inactive {
     border-radius: 5px;
-    border-image: none;
     border-width: 1px;
-    background-color: transparent;
-    background-image: none;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35) inset;
 }
 
@@ -357,14 +268,11 @@ GtkLabel {
 
 #splash-open-photos-button {
     transition:background-image 200ms ease-in-out;
-    -GtkWidget-focus-line-width: 0px;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      color-stop(0.0, #A6AC00),
                                      color-stop(1.0, #A6AC00));
     padding: 0px 9px 0px 9px;
-    border-width: 0px;
-    border-image: none;
-    box-shadow: none;
+    border-radius: 3px;
 }
 
 #splash-open-photos-button GtkLabel {
@@ -374,14 +282,6 @@ GtkLabel {
     padding-left: 3px;
     color: #FFFFFF;
     padding: 4px 4px 4px 4px;
-}
-
-#splash-open-photos-button GtkLabel:hover {
-    color: #FFFFFF;
-}
-
-#splash-open-photos-button GtkLabel:active {
-    text-shadow: none;
 }
 
 #splash-open-photos-button:hover {
@@ -403,12 +303,6 @@ GtkLabel {
 #revert-button {
     transition:background-image 200ms ease-in-out;
     padding: 8px 0px 8px 0px;
-    background-color: transparent;
-    background-image: none;
-    border-radius: 0px;
-    border-width: 0px;
-    border-image: none;
-    box-shadow: none;
     background-size: 100% 100%;
 }
 
@@ -488,29 +382,17 @@ GtkLabel {
 
 .filters-scroll-area > .scrollbar {
     -GtkRange-slider-width: 8;
-    -GtkRange-trough-border: 0;
-}
-
-.filters-scroll-area > .scrollbar.trough {
-    border-width: 0px;
-    background-color: transparent;
-    background-image: none;
 }
 
 .filters-scroll-area > .scrollbar.slider {
     /* this transition doesn't seem to work */
     transition:background-color 200ms ease-in-out;
-    border-width: 0px;
-    background-image: none;
     background-color: #3f3f3f;
+    border-radius: 4px;
 }
 
 .filters-scroll-area > .scrollbar.slider:hover {
     background-color: #5c5c5c;
-}
-
-#image-container{
-    border-width: 0px;
 }
 
 /* Scale themeing */
@@ -530,15 +412,9 @@ GtkScale {
     background-image: url("../images/slider_knob_hover.png");
 }
 
-.scale.highlight.left{
-    background-image: none;
-    background-color: black;
-    border-width: 0px;
-}
-
 .scale.trough{
-    background-image: none;
+    border-radius: 3px;
+    margin: 8px 0;
     background-color: black;
-    border-width: 0px;
     box-shadow: inset 0 -1px alpha(#ffffff, 0.25);
 }
