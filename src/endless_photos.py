@@ -31,7 +31,7 @@ class EndlessPhotos(Endless.Application):
         GLib.threads_init()
         Gdk.threads_init()
         GtkClutter.init([])
-        Gtk.Application.__init__(self,
+        Endless.Application.__init__(self,
                                  application_id='com.endlessm.endless-photos',
                                  flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
@@ -43,7 +43,7 @@ class EndlessPhotos(Endless.Application):
         main window here.
         """
         # Chaining up is required
-        Gtk.Application.do_startup(self)
+        Endless.Application.do_startup(self)
 
         # Style CSS
         provider = Gtk.CssProvider()
