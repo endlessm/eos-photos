@@ -2,6 +2,7 @@ import collections
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
+from widgets.composite_button import CompositeButton
 from widgets.toolbar_separator import ToolbarSeparator
 from widgets.image_text_button import ImageTextButton
 
@@ -106,7 +107,7 @@ class ScrollWindowDropShadow(Gtk.Widget):
         return True
 
 
-class CategoryExpander(Gtk.Expander):
+class CategoryExpander(Gtk.Expander, CompositeButton):
     def __init__(self, images_path, widget, **kw):
         kw["name"] = widget.get_name() + "-expander"
         super(CategoryExpander, self).__init__(**kw)
@@ -157,6 +158,8 @@ class CategoryExpander(Gtk.Expander):
         self.connect('notify::expanded', self._on_expanded)
         self.connect('enter-notify-event', self._on_mouse_enter)
         self.connect('leave-notify-event', self._on_mouse_leave)
+
+        self.set_sensitive_children([self._category_label, self._icon_frame])
 
     def _on_expanded(self, widget, event):
         if self.get_expanded():
