@@ -32,7 +32,7 @@ class EndlessPhotos(Endless.Application):
         Gdk.threads_init()
         GtkClutter.init([])
         Endless.Application.__init__(self,
-                                 application_id='com.endlessm.endless-photos',
+                                 application_id='com.endlessm.photos',
                                  flags=Gio.ApplicationFlags.HANDLES_OPEN)
 
     def do_startup(self):
