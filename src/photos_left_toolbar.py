@@ -156,10 +156,8 @@ class CategoryExpander(Gtk.Expander, CompositeButton):
         self.add(self._overlay)
 
         self.connect('notify::expanded', self._on_expanded)
-        self.connect('enter-notify-event', self._on_mouse_enter)
-        self.connect('leave-notify-event', self._on_mouse_leave)
 
-        self.set_sensitive_children([self._category_label, self._icon_frame])
+        self.set_sensitive_children([self._category_label, self._icon_frame, self._arrow_frame])
 
     def _on_expanded(self, widget, event):
         if self.get_expanded():
@@ -172,31 +170,15 @@ class CategoryExpander(Gtk.Expander, CompositeButton):
 
             self._vbox.remove(self._separator)
             self.get_parent().change_category(self._widget.get_name())
-            flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.ACTIVE
-            self._icon_frame.set_state_flags(flags, True)
-            self._category_label.set_state_flags(flags, True)
-            # Don't set arrow active unless mouse is currently over category.
-            if self._arrow_frame.get_state_flags() & Gtk.StateFlags.PRELIGHT:
-                self._arrow_frame.set_state_flags(flags, True)
+            self._icon_frame.get_style_context().add_class("expanded")
+            self._category_label.get_style_context().add_class("expanded")
+            self._arrow_frame.get_style_context().add_class("expanded")
         else:
             self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
-            flags = Gtk.StateFlags(self._arrow_frame.get_state_flags() & ~Gtk.StateFlags.ACTIVE)
-            self._arrow_frame.set_state_flags(flags, True)
-            self._category_label.set_state_flags(flags, True)
-            self._icon_frame.set_state_flags(flags, True)
+            self._arrow_frame.get_style_context().remove_class("expanded")
+            self._category_label.get_style_context().remove_class("expanded")
+            self._icon_frame.get_style_context().remove_class("expanded")
         self.show_all()
-
-    def _on_mouse_enter(self, widget, event):
-        flags = self._arrow_frame.get_state_flags() | Gtk.StateFlags.PRELIGHT
-        if self.get_expanded():
-            flags = flags | Gtk.StateFlags.ACTIVE
-        self._arrow_frame.set_state_flags(flags, True)
-
-    def _on_mouse_leave(self, widget, event):
-        flags = Gtk.StateFlags(self._arrow_frame.get_state_flags() & ~Gtk.StateFlags.PRELIGHT)
-        if self.get_expanded():
-            flags = Gtk.StateFlags(flags & ~Gtk.StateFlags.ACTIVE)
-        self._arrow_frame.set_state_flags(flags, True)
 
     def get_widget(self):
         return self._widget

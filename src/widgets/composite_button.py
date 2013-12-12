@@ -35,8 +35,8 @@ class CompositeButton(object):
             for child in self.sensitive_children:
                 if set_value:
                     flags = child.get_state_flags() | event_flag
-                    child.set_state_flags(event_flag, True)
+                    child.set_state_flags(event_flag, False)
                 else:
-                    child.unset_state_flags(Gtk.StateFlags.PRELIGHT)
+                    child.unset_state_flags(event_flag)
 
         return event_handler
