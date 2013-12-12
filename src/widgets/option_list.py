@@ -1,5 +1,6 @@
 from gi.repository import Gtk
 
+from composite_button import CompositeButton
 
 class OptionLabel(Gtk.Label):
     """
@@ -22,7 +23,7 @@ class OptionLabel(Gtk.Label):
 
 
 
-class Option(Gtk.Button):
+class Option(Gtk.Button, CompositeButton):
     """
     Options for the OptionList, these widgets display a thumbnail and a label
     fit underneath.
@@ -44,6 +45,8 @@ class Option(Gtk.Button):
 
         self.add(self._vbox)
         self.connect('clicked', self._on_click)
+
+        self.set_sensitive_children([self._label, self._image])
 
     def select(self):
         flags = self.get_state_flags() | Gtk.StateFlags.SELECTED

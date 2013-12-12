@@ -62,7 +62,7 @@ GtkLabel {
     background-image: url("../images/icon_arrow-down.png");
 }
 
-.category-expander .arrow-frame:active {
+.category-expander .arrow-frame.expanded:hover {
     background-image: url("../images/icon_arrow-up.png");
 }
 
@@ -72,7 +72,7 @@ GtkLabel {
 }
 
 .category-label:hover,
-.category-label:active {
+.category-label.expanded {
     color: #ffffff;
 }
 
@@ -81,7 +81,7 @@ GtkLabel {
 }
 
 #transform-expander .image-frame:hover,
-#transform-expander .image-frame:active {
+#transform-expander .image-frame.expanded {
     background-image: url("../images/icon_transformation_hover.png");
 }
 
@@ -90,7 +90,7 @@ GtkLabel {
 }
 
 #blur-expander .image-frame:hover,
-#blur-expander .image-frame:active {
+#blur-expander .image-frame.expanded {
     background-image: url("../images/icon_blur_hover.png");
 }
 
@@ -99,7 +99,7 @@ GtkLabel {
 }
 
 #border-expander .image-frame:hover,
-#border-expander .image-frame:active {
+#border-expander .image-frame.expanded {
     background-image: url("../images/icon_border_hover.png");
 }
 
@@ -108,7 +108,7 @@ GtkLabel {
 }
 
 #filter-expander .image-frame:hover,
-#filter-expander .image-frame:active {
+#filter-expander .image-frame.expanded {
     background-image: url("../images/icon_effects_hover.png");
 }
 
@@ -117,7 +117,7 @@ GtkLabel {
 }
 
 #distort-expander .image-frame:hover,
-#distort-expander .image-frame:active {
+#distort-expander .image-frame.expanded {
     background-image: url("../images/icon_deform_hover.png");
 }
 
@@ -126,7 +126,7 @@ GtkLabel {
 }
 
 #adjustment-expander .image-frame:hover,
-#adjustment-expander .image-frame:active {
+#adjustment-expander .image-frame.expanded {
     background-image: url("../images/icon_adjustments_hover.png");
 }
 

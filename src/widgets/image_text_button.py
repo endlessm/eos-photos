@@ -1,7 +1,7 @@
 from gi.repository import Gtk, GdkPixbuf, Gdk
+from composite_button import CompositeButton
 
-
-class ImageTextButton(Gtk.Button):
+class ImageTextButton(Gtk.Button, CompositeButton):
     """
     This button contains an image and text, packed vertically or horizontally.
     State flags are set on label for css highlighting.
@@ -37,3 +37,5 @@ class ImageTextButton(Gtk.Button):
         self._box.pack_start(align, expand=False, fill=False, padding=0)
         self._box.pack_start(self._label, expand=False, fill=False, padding=2)
         self.add(self._box)
+
+        self.set_sensitive_children([self._frame, self._label])
