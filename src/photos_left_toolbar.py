@@ -156,8 +156,16 @@ class CategoryExpander(Gtk.Expander, CompositeButton):
         self.add(self._overlay)
 
         self.connect('notify::expanded', self._on_expanded)
+        self.connect('enter-notify-event', self._on_mouse_enter)
+        self.connect('leave-notify-event', self._on_mouse_leave)
 
         self.set_sensitive_children([self._category_label, self._icon_frame, self._arrow_frame])
+
+    def _on_mouse_enter(self, *args):
+        self.set_state_flags(Gtk.StateFlags.PRELIGHT, False)
+
+    def _on_mouse_leave(self, *args):
+        self.unset_state_flags(Gtk.StateFlags.PRELIGHT)
 
     def _on_expanded(self, widget, event):
         if self.get_expanded():

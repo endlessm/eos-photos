@@ -1,12 +1,19 @@
 from gi.repository import Gtk
 
 
-prelight = Gtk.StateFlags.PRELIGHT
-active = Gtk.StateFlags.ACTIVE
+PRELIGHT = Gtk.StateFlags.PRELIGHT
+ACTIVE = Gtk.StateFlags.ACTIVE
 
 
 class CompositeButton(object):
+    # Class mixin for widgets whose :hover and :active CSS pseudoclass states should be
+    # inherited by other widgets, since as of GTK 3.10 these flags no longer propagate
+    # from a widget to its children. Widgets in sensitive_children will listen to this widget's
+    # state-flags-changed event and inherit all flag values listed in inherited_flags
+
+
     _handler_set = False
+    inherited_flags = [PRELIGHT, ACTIVE]
 
 
     def set_sensitive_children(self, children):
@@ -16,27 +23,24 @@ class CompositeButton(object):
 
         # If the handlers for mouse events aren't already set, conenct them
         if not self._handler_set:
-            self._connect_meta_handler()
+            self._connect_state_changed_handler()
 
 
-    def _connect_meta_handler(self):
-        self.connect('enter-notify-event', self._meta_handler(prelight, True))
-        self.connect('leave-notify-event', self._meta_handler(prelight, False))
-        self.connect('button-press-event', self._meta_handler(active, True))
-        self.connect('button-release-event', self._meta_handler(active, False))
+    def _connect_state_changed_handler(self):
+        self.connect('state-flags-changed', self._state_changed_handler)
 
         self._handler_set = True
 
 
-    def _meta_handler(self, event_flag, set_value): 
-        # Return an event handler which does nothing but set the value of
-        # the event_flag to set_value on all sensitive children
-        def event_handler(*args):
-            for child in self.sensitive_children:
+    def _state_changed_handler(self, widget, prev_flags): 
+        my_flags = self.get_state_flags()
+        for child in self.sensitive_children:
+            for flag in self.inherited_flags:
+                # for each flag we want the children to inherit, grab this widget's flag
+                # value, and set the child's matching flag accordingly
+                my_flag = int(my_flags & flag)
+                set_value = (my_flag is not 0)
                 if set_value:
-                    flags = child.get_state_flags() | event_flag
-                    child.set_state_flags(event_flag, False)
+                    child.set_state_flags(flag, True)
                 else:
-                    child.unset_state_flags(event_flag)
-
-        return event_handler
+                    child.unset_state_flags(flag)
