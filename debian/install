@@ -1,5 +1,5 @@
-data usr/share/endless-os-photos
-images usr/share/endless-os-photos
-src usr/share/endless-os-photos
+data usr/share/eos-photos
+images usr/share/eos-photos
+src usr/share/eos-photos
 mo/* usr/share/locale
-endless-os-photos /usr/bin
+eos-photos /usr/bin

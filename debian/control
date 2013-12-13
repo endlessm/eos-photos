@@ -1,4 +1,4 @@
-Source: endlessos-base-photos
+Source: eos-photos
 Section: non-free/misc
 Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
@@ -16,7 +16,7 @@ Build-Depends: debhelper (>= 9),
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 
-Package: endlessos-base-photos
+Package: eos-photos
 Architecture: all
 Depends: gir1.2-gtkclutter-1.0,
          gir1.2-clutter-1.0,
