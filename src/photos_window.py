@@ -17,10 +17,7 @@ class PhotosWindow(Endless.Window):
     allocated space.
     """
     def __init__(self, images_path="", splash_screen=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
-        kw.setdefault('decorated', False)
-        kw.setdefault('window-position', Gtk.WindowPosition.CENTER)
-        kw.setdefault('has-resize-grip', False)
-        Gtk.Window.__init__(self, **kw)
+        Endless.Window.__init__(self, **kw)
         self._image_container = image_container
         self._splash_screen = splash_screen
         self._left_toolbar = left_toolbar
