@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Endless Photos 0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-15 15:48-0800\n"
+"POT-Creation-Date: 2013-12-20 16:40-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -90,15 +90,15 @@ msgstr ""
 msgid "Edges"
 msgstr ""
 
-#: src/photos_presenter.py:121
+#: src/photos_presenter.py:142
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:274
+#: src/photos_presenter.py:309
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
@@ -110,7 +110,7 @@ msgstr ""
 msgid "FILTERS"
 msgstr ""
 
-#: src/photos_presenter.py:272
+#: src/photos_presenter.py:307
 msgid "Facebook is not available offline."
 msgstr ""
 
@@ -158,7 +158,7 @@ msgstr ""
 msgid "Lomo"
 msgstr ""
 
-#: src/photos_presenter.py:274 src/photos_presenter.py:305
+#: src/photos_presenter.py:309 src/photos_presenter.py:340
 msgid "Message:"
 msgstr ""
 
@@ -173,7 +173,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: src/photos_window.py:50
+#: src/photos_window.py:47
 msgid "OPEN IMAGE"
 msgstr ""
 
@@ -214,11 +214,11 @@ msgstr ""
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_left_toolbar.py:23
+#: src/photos_left_toolbar.py:24
 msgid "REVERT TO ORIGINAL"
 msgstr ""
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Recipient email:"
 msgstr ""
 
@@ -270,7 +270,7 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Your Name:"
 msgstr ""
 

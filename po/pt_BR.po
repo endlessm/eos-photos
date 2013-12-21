@@ -5,14 +5,15 @@
 # Translators:
 # joelmx <joel@endlessm.com>, 2013
 # nsanchez <ns@endlessm.com>, 2013
+# RenatoP <renato@endlessm.com>, 2013
 # Michele.silva <michele@endlessm.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-15 13:41-0800\n"
-"PO-Revision-Date: 2013-11-15 23:17+0000\n"
-"Last-Translator: nsanchez <ns@endlessm.com>\n"
+"POT-Creation-Date: 2013-12-20 16:40-0800\n"
+"PO-Revision-Date: 2013-11-20 10:45+0000\n"
+"Last-Translator: RenatoP <renato@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/teams/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -63,7 +64,7 @@ msgstr "Contraste"
 #: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:79
 #: src/share/facebook_post.py:38
 msgid "Could not reach facebook."
-msgstr "Não foi possível chegar facebook."
+msgstr "Não foi possível acessar o facebook."
 
 #: src/photos_model.py:76
 msgid "Country"
@@ -93,15 +94,15 @@ msgstr "Deserto"
 msgid "Edges"
 msgstr "Contornos"
 
-#: src/photos_presenter.py:121
+#: src/photos_presenter.py:142
 msgid "Email failed."
 msgstr "Falha na conexão."
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Enter a message to add to the e-mail"
 msgstr "Digite uma mensagem para adicionar ao e-mail"
 
-#: src/photos_presenter.py:274
+#: src/photos_presenter.py:309
 msgid "Enter a message to add to your photo!"
 msgstr "Escreva uma legenda para sua foto!"
 
@@ -113,7 +114,7 @@ msgstr "FACEBOOK"
 msgid "FILTERS"
 msgstr "FILTROS"
 
-#: src/photos_presenter.py:272
+#: src/photos_presenter.py:307
 msgid "Facebook is not available offline."
 msgstr "Opa! Não conseguimos acessar o Facebook. Verifique sua conexão de internet."
 
@@ -151,7 +152,7 @@ msgstr "Imagem postada com sucesso no Facebook!"
 
 #: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:63
 msgid "Login canceled."
-msgstr " Início cancelada."
+msgstr " Início de sessão cancelado."
 
 #: src/share/facebook_post.py:57
 msgid "Login failed."
@@ -161,7 +162,7 @@ msgstr "Falha na conexão."
 msgid "Lomo"
 msgstr "Lomo"
 
-#: src/photos_presenter.py:274 src/photos_presenter.py:305
+#: src/photos_presenter.py:309 src/photos_presenter.py:340
 msgid "Message:"
 msgstr "Mensagem:"
 
@@ -176,7 +177,7 @@ msgstr "Problema de rede detectado. Por favor, verifique sua conexão com a Inte
 msgid "None"
 msgstr "Nenhum"
 
-#: src/photos_window.py:50
+#: src/photos_window.py:47
 msgid "OPEN IMAGE"
 msgstr "ABRIR FOTO"
 
@@ -217,11 +218,11 @@ msgstr "Posterizar"
 msgid "Quit Without Save?"
 msgstr "Sair sem salvar?"
 
-#: src/photos_left_toolbar.py:23
+#: src/photos_left_toolbar.py:24
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLTAR AO ORIGINAL"
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Recipient email:"
 msgstr "Email do destinatário:"
 
@@ -274,7 +275,7 @@ msgstr "Caravana"
 msgid "Untitled"
 msgstr "Sem Título"
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Your Name:"
 msgstr "Seu Nome:"
 

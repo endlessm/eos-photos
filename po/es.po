@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-15 13:41-0800\n"
-"PO-Revision-Date: 2013-11-16 00:55+0000\n"
+"POT-Creation-Date: 2013-12-20 16:40-0800\n"
+"PO-Revision-Date: 2013-11-20 10:45+0000\n"
 "Last-Translator: nsanchez <ns@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/teams/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -93,15 +93,15 @@ msgstr "Desierto"
 msgid "Edges"
 msgstr "Bordes"
 
-#: src/photos_presenter.py:121
+#: src/photos_presenter.py:142
 msgid "Email failed."
 msgstr "Email falló."
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Enter a message to add to the e-mail"
 msgstr "Escribe un mensaje para agregar al e-mail"
 
-#: src/photos_presenter.py:274
+#: src/photos_presenter.py:309
 msgid "Enter a message to add to your photo!"
 msgstr "Escribe un mensaje para agregar a tu foto!"
 
@@ -113,7 +113,7 @@ msgstr "FACEBOOK"
 msgid "FILTERS"
 msgstr "FILTROS"
 
-#: src/photos_presenter.py:272
+#: src/photos_presenter.py:307
 msgid "Facebook is not available offline."
 msgstr "Facebook no está disponible sin conexión."
 
@@ -161,7 +161,7 @@ msgstr "Falla en el login."
 msgid "Lomo"
 msgstr "Lomo"
 
-#: src/photos_presenter.py:274 src/photos_presenter.py:305
+#: src/photos_presenter.py:309 src/photos_presenter.py:340
 msgid "Message:"
 msgstr "Mensaje:"
 
@@ -176,7 +176,7 @@ msgstr "Problema de red detectado. Por favor, verifique su conexión a Internet 
 msgid "None"
 msgstr "Ninguno"
 
-#: src/photos_window.py:50
+#: src/photos_window.py:47
 msgid "OPEN IMAGE"
 msgstr "ABRIR IMAGEN"
 
@@ -217,11 +217,11 @@ msgstr "Posterizar"
 msgid "Quit Without Save?"
 msgstr "¿Salir Sin Guardar?"
 
-#: src/photos_left_toolbar.py:23
+#: src/photos_left_toolbar.py:24
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLVER AL ORIGINAL"
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Recipient email:"
 msgstr "Email del destinatário"
 
@@ -274,7 +274,7 @@ msgstr "Trenes"
 msgid "Untitled"
 msgstr "Sin Título"
 
-#: src/photos_presenter.py:305
+#: src/photos_presenter.py:340
 msgid "Your Name:"
 msgstr "Tu Nombre"
 
