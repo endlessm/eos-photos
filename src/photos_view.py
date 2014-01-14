@@ -36,7 +36,9 @@ class PhotosView(object):
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
                                     image_container=self._image_container,
-                                    application=application)
+                                    application=application,
+                                    font_scaling_active=True,
+                                    font_scaling_default_window_size=720)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

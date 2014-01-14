@@ -23,12 +23,11 @@ GtkLabel {
     transition:background-image 200ms ease-in-out;
 }
 
-/*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
 #splash-label {
     font-family: Lato Light;
     font-weight: normal;
     text-shadow: 0px 1px 1px rgba(0,0,0,0.25);
-    font-size: 48px;
+    font-size: 4em;
     color: rgba(255, 255, 255, 0.6);
     padding: 10px 0px 20px 0px;
 }
@@ -53,7 +52,7 @@ GtkLabel {
 
 .slider-label,
 .option-label {
-    font-size: 11px;
+    font-size: 0.917em;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
 }
@@ -67,7 +66,7 @@ GtkLabel {
 }
 
 .category-label {
-    font-size: 12px;
+    font-size: 1em;
     color: #999999;
 }
 
@@ -133,7 +132,7 @@ GtkLabel {
 #save-button GtkLabel,
 #wallpaper-button GtkLabel,
 #share-button GtkLabel {
-    font-size: 11px;
+    font-size: 0.917em;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #555555;
 }
@@ -151,7 +150,7 @@ GtkLabel {
 }
 
 #crop-options GtkLabel {
-    font-size: 10px;
+    font-size: 0.83em;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #999999;
 }
@@ -176,7 +175,7 @@ GtkLabel {
 #rotate-button GtkLabel,
 #crop-button GtkLabel {
     margin: 10px 3px 8px 0px;
-    font-size: 11px;
+    font-size: 0.917em;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #c4c4c4;
 }
@@ -278,7 +277,7 @@ GtkLabel {
 #splash-open-photos-button GtkLabel {
     font-family: Lato Light;
     font-weight: normal;
-    font-size: 17px;
+    font-size: 1.42em;
     padding-left: 3px;
     color: #FFFFFF;
     padding: 4px 4px 4px 4px;
@@ -311,14 +310,14 @@ GtkLabel {
 }
 
 #open-photos-button GtkLabel {
-    font-size: 10px;
+    font-size: 0.83em;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #999999;
     padding: 0px 3px 0px 8px;
 }
 
 #revert-button GtkLabel {
-    font-size: 11px;
+    font-size: 0.917em;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
     color: #999999;
 }
