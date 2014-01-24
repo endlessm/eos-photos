@@ -398,7 +398,7 @@ class PhotosModel(object):
         if self._crop_coordinates == None:
             self._cropped_image = self._source_image
         if self._orientation == 0:
-            self._rotated_image = self._source_image
+            self._rotated_image = self._cropped_image
 
         # If we need to crop, first rotate the image, then apply the crop, and then
         # rotate the cropped image back to 0 degrees. The image must first be rotated
