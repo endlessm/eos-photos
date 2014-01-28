@@ -158,6 +158,10 @@ class CropOptions(Gtk.Frame):
         self._style_context.add_class(self._options_state)
 
     def show_crop_options(self):
+        # Crop overlay is now visible, so a keypress to 'enter'
+        # should apply the crop
+        self._apply_button.grab_focus()
+
         self._crop_options_box.show()
         self._button_context.remove_class(self._options_state)
         self._style_context.remove_class(self._options_state)
