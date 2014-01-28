@@ -253,6 +253,7 @@ class PhotosView(object):
         for msg in args:
             entry = Gtk.Entry()
             entry.set_size_request(-1, 30)
+            entry.set_activates_default(True)
             entries.append(entry)
             align = Gtk.Alignment(xalign=0, yalign=0, xscale=0, yscale=0)
             align.add(Gtk.Label(msg))
