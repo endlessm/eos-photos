@@ -90,6 +90,11 @@ class PhotosImageWidget(Clutter.Actor):
     def _replace_base_image_callback(self, data, width, height):
         self._base_image.set_from_rgb_data(data, False, width, height, 0, 3, 0)
         self._ratio = float(width) / height
+        # This fix is just for MALI drivers, which will sometimes drop a refresh on the
+        # clutter content. set_from_rgb_data will queue a redraw itself, but a manual
+        # call later is needed to hide the MALI bug. As soon as we have a fix in MALI or
+        # clutter-gtk, or we don't care about supporting MALI, we should revert this.
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, lambda a: self.queue_redraw(), None)
 
     def replace_border_image(self, data, width, height):
         Gdk.threads_add_idle(
@@ -100,6 +105,11 @@ class PhotosImageWidget(Clutter.Actor):
     def _replace_border_image_callback(self, data, width, height):
         self._border_image.set_from_rgb_data(data, True, width, height, 0, 4, 0)
         self._border_image.show()
+        # This fix is just for MALI drivers, which will sometimes drop a refresh on the
+        # clutter content. set_from_rgb_data will queue a redraw itself, but a manual
+        # call later is needed to hide the MALI bug. As soon as we have a fix in MALI or
+        # clutter-gtk, or we don't care about supporting MALI, we should revert this.
+        Gdk.threads_add_idle(GLib.PRIORITY_DEFAULT_IDLE, lambda a: self.queue_redraw(), None)
 
     def hide_border_image(self):
         self._border_image.hide()
