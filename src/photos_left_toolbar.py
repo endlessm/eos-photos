@@ -21,6 +21,9 @@ class PhotosLeftToolbar(Gtk.VBox):
             self._categories[name] = CategoryExpander(images_path, category)
             self.pack_start(self._categories[name], expand=False, fill=True, padding=0)
 
+        bottom_category_name = categories[-1].get_name()
+        self._bottommost_category = self._categories[bottom_category_name]
+
         self._revert_button = ImageTextButton(label=_("REVERT TO ORIGINAL"),
                                               name="revert-button")
         self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
@@ -52,12 +55,10 @@ class PhotosLeftToolbar(Gtk.VBox):
         if alloc.height <= self.get_preferred_height()[1]:
             if not self._removed_separator:
                 self._removed_separator = True
-                self._separator.hide()
-                # self.remove(self._separator)
+                self._bottommost_category.hide_separators()
         elif self._removed_separator:
             self._removed_separator = False
-            self._separator.show()
-            # self.pack_end(self._separator, expand=False, fill=False, padding=0)
+            self._bottommost_category.show_separators()
 
 
 class CategoryScrollWindow(Gtk.ScrolledWindow):
@@ -82,8 +83,12 @@ class ScrollWindowDropShadow(Gtk.Widget):
         self._bottom_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_white.png")
         self.set_has_window(False)
         self.set_app_paintable(True)
+        self._bottom_separator_is_visible = True
         self.connect('draw', self._draw)
         self.connect_after('realize', self._realize)
+
+    def set_bottom_separator_visible(self, is_visible):
+        self._bottom_separator_is_visible = is_visible
 
     def _realize(self, w):
         # Big old hack to keep from getting input in this widget. Sets the Gdk
@@ -102,8 +107,9 @@ class ScrollWindowDropShadow(Gtk.Widget):
         cr.paint()
         Gdk.cairo_set_source_pixbuf(cr, self._bottom_shadow, 0, alloc.height - self._bottom_shadow.get_height())
         cr.paint()
-        Gdk.cairo_set_source_pixbuf(cr, self._bottom_separator, 0, alloc.height - self._bottom_separator.get_height())
-        cr.paint()
+        if self._bottom_separator_is_visible:
+            Gdk.cairo_set_source_pixbuf(cr, self._bottom_separator, 0, alloc.height - self._bottom_separator.get_height())
+            cr.paint()
         return True
 
 
@@ -187,6 +193,14 @@ class CategoryExpander(Gtk.Expander, CompositeButton):
             self._category_label.get_style_context().remove_class("expanded")
             self._icon_frame.get_style_context().remove_class("expanded")
         self.show_all()
+
+    def show_separators(self):
+        self._separator.set_visible(True)
+        self._drop_shadow.set_bottom_separator_visible(True)
+
+    def hide_separators(self):
+        self._separator.set_visible(False)
+        self._drop_shadow.set_bottom_separator_visible(False)
 
     def get_widget(self):
         return self._widget
