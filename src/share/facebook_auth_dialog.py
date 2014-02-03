@@ -54,6 +54,24 @@ class FacebookAuthDialog(Gtk.Dialog):
     def _on_load_changed(self, view, load_event):
         uri = view.get_uri()
         parsed = urlparse.urlparse(uri)
+
+        # When the login flow eventually moves to a page other than the one specified in
+        # the original webkit load_uri call, all calls to window.close() will fail
+        # (https://developer.mozilla.org/en-US/docs/Web/API/Window.close)
+        # So instead override the close function to reload the current URI with an error
+        # parameter to abort the login flow
+        script = """
+            window.close = function(){
+                loc = window.location.toString()
+                if(loc.indexOf('?') === -1)
+                    loc += '?';
+                else
+                    loc += '&';
+                window.location = loc + 'error=WINDOW_CLOSED'
+            }
+            """
+        view.run_javascript(script, None, None, None)
+
         parsed_query = urlparse.parse_qs(parsed.query)
         if parsed_query.has_key('code') and self._access_token is None:
             code = parsed_query['code'][0]
