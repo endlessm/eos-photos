@@ -1,0 +1,11 @@
+src/share/facebook_auth_dialog.py
+src/share/facebook_post.py
+src/share/emailer.py
+src/photos_category_toolbars.py
+src/photos_left_toolbar.py
+src/photos_model.py
+src/photos_presenter.py
+src/photos_right_toolbar.py
+src/photos_view.py
+src/photos_window.py
+src/splash_screen.py

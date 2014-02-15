@@ -6,6 +6,7 @@ from widgets.slider import Slider
 from widgets.image_text_button import ImageTextButton
 from widgets.image_button import ImageButton
 
+THUMBNAIL_RESOURCE_PREFIX = "/com/endlessm/photos/thumbnails/"
 
 class CategoryToolbar(Gtk.Alignment):
     """
@@ -48,15 +49,12 @@ class OptionListToolbar(CategoryToolbar):
 
     def _set_option(self, name_and_thumb):
         option_name = name_and_thumb[0]
-        thumbnail_path = self._images_path + self.get_thumbnail_prefix() + name_and_thumb[1]
-        self._list.add_option(thumbnail_path, option_name, lambda: self.clicked_callback(option_name))
+        thumbnail_resource = THUMBNAIL_RESOURCE_PREFIX + name_and_thumb[1]
+        self._list.add_option(thumbnail_resource, option_name, lambda: self.clicked_callback(option_name))
         self.show_all()
 
     def select(self, option):
         self._list.select_option(option)
-
-    def get_thumbnail_prefix(self):
-        return ""
 
     def clicked_callback(self, option_name):
         pass
@@ -189,9 +187,6 @@ class BlurToolbar(OptionListToolbar):
     def get_label(self):
         return _("BLURS")
 
-    def get_thumbnail_prefix(self):
-        return "blur_thumbnails/"
-
     def clicked_callback(self, blur_name):
         self._presenter.on_blur_select(blur_name)
 
@@ -206,9 +201,6 @@ class BorderToolbar(OptionListToolbar):
 
     def get_label(self):
         return _("BORDERS")
-
-    def get_thumbnail_prefix(self):
-        return "border_thumbnails/"
 
     def clicked_callback(self, option_name):
         self._presenter.on_border_select(option_name)
@@ -225,9 +217,6 @@ class FilterToolbar(OptionListToolbar):
     def get_label(self):
         return _("FILTERS")
 
-    def get_thumbnail_prefix(self):
-        return "filter_thumbnails/"
-
     def clicked_callback(self, option_name):
         self._presenter.on_filter_select(option_name)
 
@@ -242,9 +231,6 @@ class DistortToolbar(OptionListToolbar):
 
     def get_label(self):
         return _("DISTORT")
-
-    def get_thumbnail_prefix(self):
-        return "distortion_thumbnails/"
 
     def clicked_callback(self, option_name):
         self._presenter.on_distortion_select(option_name)

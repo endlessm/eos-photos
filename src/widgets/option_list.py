@@ -28,12 +28,12 @@ class Option(Gtk.Button, CompositeButton):
     Options for the OptionList, these widgets display a thumbnail and a label
     fit underneath.
     """
-    def __init__(self, image_path="", label="", clicked_callback=None):
+    def __init__(self, image_resource="", label="", clicked_callback=None):
         super(Option, self).__init__()
         self.get_style_context().add_class("option-button")
 
         self._clicked_callback = clicked_callback
-        self._image = Gtk.Image(file=image_path)
+        self._image = Gtk.Image(resource=image_resource)
         self._image.get_style_context().add_class("option-image")
         self._label = OptionLabel(image=self._image, label=label)
         self._label.get_style_context().add_class("option-label")
@@ -76,9 +76,9 @@ class OptionList(Gtk.VBox):
         super(OptionList, self).__init__(homogeneous=False, spacing=0)
         self._selected_icon_scroll_height = 0
 
-    def add_option(self, thumbnail_path, label, clicked_callback):
+    def add_option(self, thumbnail_resource, label, clicked_callback):
         option = Option(
-            image_path=thumbnail_path, label=label,
+            image_resource=thumbnail_resource, label=label,
             clicked_callback=clicked_callback)
         self.pack_start(option, expand=False, fill=False, padding=self.PADDING)
 

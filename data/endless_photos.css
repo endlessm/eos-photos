@@ -59,11 +59,11 @@ GtkLabel {
 }
 
 .category-expander .arrow-frame:hover {
-    background-image: url("../images/icon_arrow-down.png");
+    background-image: url("images/icon_arrow-down.png");
 }
 
 .category-expander .arrow-frame.expanded:hover {
-    background-image: url("../images/icon_arrow-up.png");
+    background-image: url("images/icon_arrow-up.png");
 }
 
 .category-label {
@@ -77,57 +77,57 @@ GtkLabel {
 }
 
 #transform-expander .image-frame {
-    background-image: url("../images/icon_transformation_normal.png");
+    background-image: url("images/icon_transformation_normal.png");
 }
 
 #transform-expander .image-frame:hover,
 #transform-expander .image-frame.expanded {
-    background-image: url("../images/icon_transformation_hover.png");
+    background-image: url("images/icon_transformation_hover.png");
 }
 
 #blur-expander .image-frame {
-    background-image: url("../images/icon_blur_normal.png");
+    background-image: url("images/icon_blur_normal.png");
 }
 
 #blur-expander .image-frame:hover,
 #blur-expander .image-frame.expanded {
-    background-image: url("../images/icon_blur_hover.png");
+    background-image: url("images/icon_blur_hover.png");
 }
 
 #border-expander .image-frame {
-    background-image: url("../images/icon_border_normal.png");
+    background-image: url("images/icon_border_normal.png");
 }
 
 #border-expander .image-frame:hover,
 #border-expander .image-frame.expanded {
-    background-image: url("../images/icon_border_hover.png");
+    background-image: url("images/icon_border_hover.png");
 }
 
 #filter-expander .image-frame {
-    background-image: url("../images/icon_effects_normal.png");
+    background-image: url("images/icon_effects_normal.png");
 }
 
 #filter-expander .image-frame:hover,
 #filter-expander .image-frame.expanded {
-    background-image: url("../images/icon_effects_hover.png");
+    background-image: url("images/icon_effects_hover.png");
 }
 
 #distort-expander .image-frame {
-    background-image: url("../images/icon_deform_normal.png");
+    background-image: url("images/icon_deform_normal.png");
 }
 
 #distort-expander .image-frame:hover,
 #distort-expander .image-frame.expanded {
-    background-image: url("../images/icon_deform_hover.png");
+    background-image: url("images/icon_deform_hover.png");
 }
 
 #adjustment-expander .image-frame {
-    background-image: url("../images/icon_adjustments_normal.png");
+    background-image: url("images/icon_adjustments_normal.png");
 }
 
 #adjustment-expander .image-frame:hover,
 #adjustment-expander .image-frame.expanded {
-    background-image: url("../images/icon_adjustments_hover.png");
+    background-image: url("images/icon_adjustments_hover.png");
 }
 
 #save-button GtkLabel,
@@ -166,7 +166,7 @@ GtkLabel {
 
 #crop-button.active {
     border-width: 2px;
-    border-image: url("../images/confirm_menu_separator_middle.png") 0 0 10 0;
+    border-image: url("images/confirm_menu_separator_middle.png") 0 0 10 0;
 }
 
 #crop-label {
@@ -215,55 +215,55 @@ GtkLabel {
 }
 
 #crop-button .image-frame {
-    background-image: url("../images/icon_crop_normal.png");
+    background-image: url("images/icon_crop_normal.png");
 }
 #crop-button .image-frame:hover,
 #crop-button .image-frame:active {
-    background-image: url("../images/icon_crop_hover.png");
+    background-image: url("images/icon_crop_hover.png");
 }
 
 #rotate-button .image-frame {
-    background-image: url("../images/icon_rotate_normal.png");
+    background-image: url("images/icon_rotate_normal.png");
 }
 #rotate-button .image-frame:hover,
 #rotate-button .image-frame:active {
-    background-image: url("../images/icon_rotate_hover.png");
+    background-image: url("images/icon_rotate_hover.png");
 }
 
 #wallpaper-button .image-frame {
-    background-image: url("../images/btn_background_normal.png");
+    background-image: url("images/btn_background_normal.png");
 }
 
 #wallpaper-button .image-frame:hover {
-    background-image: url("../images/btn_background_hover.png");
+    background-image: url("images/btn_background_hover.png");
 }
 
 #wallpaper-button .image-frame:active {
-    background-image: url("../images/btn_background_pressed.png");
+    background-image: url("images/btn_background_pressed.png");
 }
 
 #save-button .image-frame {
-    background-image: url("../images/save_normal.png");
+    background-image: url("images/save_normal.png");
 }
 
 #save-button .image-frame:hover {
-    background-image: url("../images/save_hover.png");
+    background-image: url("images/save_hover.png");
 }
 
 #save-button .image-frame:active {
-    background-image: url("../images/save_down.png");
+    background-image: url("images/save_down.png");
 }
 
 #share-button .image-frame {
-    background-image: url("../images/facebook_normal.png");
+    background-image: url("images/facebook_normal.png");
 }
 
 #share-button .image-frame:hover {
-    background-image: url("../images/facebook_hover.png");
+    background-image: url("images/facebook_hover.png");
 }
 
 #share-button .image-frame:active {
-    background-image: url("../images/facebook_down.png");
+    background-image: url("images/facebook_down.png");
 }
 
 #splash-open-photos-button {
@@ -297,7 +297,7 @@ GtkLabel {
 }
 
 #splash-open-photos-button .image-frame {
-    background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
+    background-image: url("images/icon_topbar_OpenPhoto_hover.png");
 }
 
 #revert-button {
@@ -334,11 +334,11 @@ GtkLabel {
 }
 
 #revert-button:hover {
-    background-image: url("../images/restore-photo_bg_hover.png");
+    background-image: url("images/restore-photo_bg_hover.png");
 }
 
 #revert-button:active {
-    background-image: url("../images/restore-photo_bg_down.png");
+    background-image: url("images/restore-photo_bg_down.png");
 }
 
 #revert-button GtkLabel {
@@ -346,27 +346,27 @@ GtkLabel {
 }
 
 #revert-button .image-frame {
-    background-image: url("../images/icon_restore-photo_normal.png");
+    background-image: url("images/icon_restore-photo_normal.png");
 }
 
 #revert-button .image-frame:hover {
-    background-image: url("../images/icon_restore-photo_hover.png");
+    background-image: url("images/icon_restore-photo_hover.png");
 }
 
 #revert-button .image-frame:active {
-    background-image: url("../images/icon_restore-photo_normal.png");
+    background-image: url("images/icon_restore-photo_normal.png");
 }
 
 #open-photos-button .image-frame {
-    background-image: url("../images/icon_topbar_OpenPhoto_normal.png");
+    background-image: url("images/icon_topbar_OpenPhoto_normal.png");
 }
 
 #open-photos-button .image-frame:hover {
-    background-image: url("../images/icon_topbar_OpenPhoto_hover.png");
+    background-image: url("images/icon_topbar_OpenPhoto_hover.png");
 }
 
 #open-photos-button .image-frame:active {
-    background-image: url("../images/icon_topbar_OpenPhoto_normal.png");
+    background-image: url("images/icon_topbar_OpenPhoto_normal.png");
 }
 
 /*.filters-scroll-area {
@@ -405,11 +405,11 @@ GtkScale {
 .scale.slider {
     /* this transition doesn't seem to work */
     transition:background-image 200ms ease-in-out;
-    background-image: url("../images/slider_knob_normal.png");
+    background-image: url("images/slider_knob_normal.png");
 }
 
 .scale.slider:hover {
-    background-image: url("../images/slider_knob_hover.png");
+    background-image: url("images/slider_knob_hover.png");
 }
 
 .scale.trough{

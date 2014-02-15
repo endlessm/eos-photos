@@ -12,6 +12,8 @@ from photos_presenter import PhotosPresenter
 
 CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
+ASSET_RESOURCE_PATH = CURRENT_DIR + '/../data/endless_photos.gresource';
+THUMBNAIL_RESOURCE_PATH = CURRENT_DIR + '/../data/images/thumbnails/thumbnails.gresource';
 
 class EndlessPhotos(Endless.Application):
     # The parent dir of the current directory (src) is the base of photo app
@@ -45,9 +47,16 @@ class EndlessPhotos(Endless.Application):
         # Chaining up is required
         Endless.Application.do_startup(self)
 
+        # Load GResource bundles
+        asset_resource = Gio.Resource.load(ASSET_RESOURCE_PATH);
+        asset_resource._register();
+        thumbnail_resource = Gio.Resource.load(THUMBNAIL_RESOURCE_PATH);
+        thumbnail_resource._register();
+
         # Style CSS
         provider = Gtk.CssProvider()
-        provider.load_from_path(self.get_data_path() + 'endless_photos.css')
+        css_file = Gio.File.new_for_uri('resource:///com/endlessm/photos/endless_photos.css')
+        provider.load_from_file(css_file);
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(), provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
@@ -93,7 +102,7 @@ class EndlessPhotos(Endless.Application):
         Returns path in the file system where application-specific image files
         are stored.
         """
-        return self.ABS_PHOTOS_PATH + '/images/'
+        return self.ABS_PHOTOS_PATH + '/data/images/'
 
     def get_data_path(self):
         """
