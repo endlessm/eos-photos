@@ -1,4 +1,5 @@
 eos-photos
+eos-photos-local
 data/images/thumbnails/*
 
 *.deb

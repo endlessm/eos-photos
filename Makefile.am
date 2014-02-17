@@ -43,11 +43,15 @@ data/endless_photos.gresource: data/endless_photos.gresource.xml $(asset_resourc
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/data  $<
 CLEANFILES += data/endless_photos.gresource
 
-do_subst = sed -e 's|@pkgdatadir[@]|$(pkgdatadir)|g'
+subst_install = sed -e 's|@pkgdatadir[@]|$(pkgdatadir)|g'
+subst_local = sed -e 's|@pkgdatadir[@]|$(realpath $(dir $(lastword $(MAKEFILE_LIST))))|g'
 eos-photos: eos-photos.in Makefile
-	$(AM_V_GEN) $(do_subst) $< > $@
+	$(AM_V_GEN) $(subst_install) $< > $@
 	chmod +x $@
-CLEANFILES += eos-photos
+	$(AM_V_at) $(subst_local) $< > eos-photos-local
+	chmod +x eos-photos-local
+CLEANFILES += eos-photos \
+	eos-photos-local
 
 # # # INSTALL RULES # # #
 
