@@ -11,9 +11,3 @@
 
 %:
 	dh $@
-
-override_dh_install:
-	python generate_filter_thumbnails.py
-	find src -name '*.pyc' -delete
-	./build_mo_from_po_files.sh
-	dh_install
