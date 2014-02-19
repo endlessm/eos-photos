@@ -1,5 +1,0 @@
-data usr/share/eos-photos
-images usr/share/eos-photos
-src usr/share/eos-photos
-mo/* usr/share/locale
-eos-photos /usr/bin
