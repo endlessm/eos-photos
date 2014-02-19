@@ -251,7 +251,7 @@ class PhotosModel(object):
         names_and_thumbs = []
         border_no = 0
         for name in self._border_dict.keys():
-            names_and_thumbs.append((name, "border_" + str(border_no) + ".png"))
+            names_and_thumbs.append((name, "border_" + str(border_no) + ".jpg"))
             border_no += 1
         return names_and_thumbs
 

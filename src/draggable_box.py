@@ -53,7 +53,7 @@ BACKGROUND_OPACITY = int(255 * BACKGROUND_OPACITY_PCT)
 
 CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
-BASE_IMAGE_PATH = os.path.join(CURRENT_DIR, os.pardir) + '/images/'
+BASE_IMAGE_PATH = os.path.join(CURRENT_DIR, os.pardir) + '/data/images/'
 
 class DraggableBox(Clutter.Actor):
     

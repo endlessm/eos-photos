@@ -1,0 +1,80 @@
+#!/usr/bin/env python
+import os
+import inspect
+import gettext
+gettext.install('endless_photos')
+
+CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
+CURRENT_DIR = os.path.dirname(CURRENT_FILE)
+
+GRESOURCE_HEAD="""
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+    <gresource prefix="/com/endlessm/photos/thumbnails">"""
+GRESOURCE_BODY="""
+        <file>{file}</file>"""
+GRESOURCE_TAIL="""
+    </gresource>
+</gresources>"""
+
+from src.photos_model import PhotosModel
+
+def create_dir_if_necessary(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+if __name__ == '__main__':
+    model = PhotosModel(textures_path=CURRENT_DIR + "/data/images/textures/",
+                        curves_path=CURRENT_DIR + "/data/curves/",
+                        borders_path=CURRENT_DIR + "/data/images/borders/",
+                        displayable=False)
+
+    thumbnail_files = []
+    output_dir = "data/images/thumbnails"
+    create_dir_if_necessary(output_dir)
+    model.open(CURRENT_DIR + "/data/images/thumbnail_original.jpg")
+    filter_no = 0
+    for f in model.get_filter_names():
+        model.set_filter(f)
+        filename = "filter_" + str(filter_no) + ".jpg"
+        model.save(os.path.join(output_dir, filename))
+        print filename
+        thumbnail_files.append(filename)
+        filter_no += 1
+
+    model.revert_to_original()
+    border_no = 0
+    for b in model.get_border_names():
+        model.set_border(b)
+        filename = "border_" + str(border_no) + ".jpg"
+        model.save(os.path.join(output_dir, filename))
+        print filename
+        thumbnail_files.append(filename)
+        border_no += 1
+
+    model.revert_to_original()
+    distort_no = 0
+    for d in model.get_distortion_names():
+        model.set_distortion(d)
+        filename = "distort_" + str(distort_no) + ".jpg"
+        model.save(os.path.join(output_dir, filename))
+        print filename
+        thumbnail_files.append(filename)
+        distort_no += 1
+
+    model.revert_to_original()
+    distort_no = 0
+    for d in model.get_blur_names():
+        model.set_blur(d)
+        filename = "blur_" + str(distort_no) + ".jpg"
+        model.save(os.path.join(output_dir, filename))
+        print filename
+        thumbnail_files.append(filename)
+        distort_no += 1
+
+    gresource_file = open("data/images/thumbnails/thumbnails.gresource.xml", "w")
+    gresource_file.write(GRESOURCE_HEAD)
+    for thumbnail_file in thumbnail_files:
+        gresource_file.write(GRESOURCE_BODY.format(file=thumbnail_file))
+    gresource_file.write(GRESOURCE_TAIL)
+    gresource_file.close()
