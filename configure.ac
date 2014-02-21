@@ -24,10 +24,6 @@ AM_SILENT_RULES([yes])
 # Keep Autotools macros local to this source tree
 AC_CONFIG_MACRO_DIR([m4])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
-GOBJECT_INTROSPECTION_REQUIRE([0.9.6])
-
-PKG_CHECK_MODULES(EOS_PHOTOS,
-                  gtk+-3.0)
 AC_CACHE_SAVE
 
 # Gettext package name
