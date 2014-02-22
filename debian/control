@@ -3,16 +3,17 @@ Section: non-free/misc
 Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
 Build-Depends: debhelper (>= 9),
-               python,
-               gettext,
                devscripts,
+               gettext,
                gir1.2-clutter-1.0,
-               gir1.2-gtk-3.0,
                gir1.2-glib-2.0,
+               gir1.2-gtk-3.0,
+               libglib2.0-dev,
+               python,
                python-gi,
-               python-skimage (>=0.6.1),
+               python-imaging,
                python-scipy,
-               python-imaging
+               python-skimage (>=0.6.1)
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 
