@@ -40,6 +40,7 @@ CLEANFILES += data/images/thumbnails/thumbnails.gresource $(thumbnail_resource_f
 # static assets GResource file
 asset_resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/data --generate-dependencies $(srcdir)/data/endless_photos.gresource.xml)
 data/endless_photos.gresource: data/endless_photos.gresource.xml $(asset_resource_files)
+	mkdir -p data
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/data  $<
 CLEANFILES += data/endless_photos.gresource
 
