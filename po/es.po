@@ -1,5 +1,5 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Endless Mobile
+# Copyright (C) YEAR Endless Mobile, Inc.
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-20 16:40-0800\n"
+"Report-Msgid-Bugs-To: philip@endlessm.com\n"
+"POT-Creation-Date: 2014-03-05 06:18+0000\n"
 "PO-Revision-Date: 2013-11-20 10:45+0000\n"
 "Last-Translator: nsanchez <ns@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/teams/language/es/)\n"
@@ -20,150 +20,27 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/photos_category_toolbars.py:306
-msgid "ADJUST"
-msgstr "AJUSTAR"
+#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
+msgid "Login canceled."
+msgstr "Início cancelado."
 
-#: src/photos_category_toolbars.py:115
-msgid "Apply Crop?"
-msgstr "Aplicar Corte?"
-
-#: src/photos_right_toolbar.py:32
-msgid "BACKGROUND"
-msgstr "FONDO"
-
-#: src/photos_category_toolbars.py:186
-msgid "BLURS"
-msgstr "DIFUMINAR"
-
-#: src/photos_category_toolbars.py:204
-msgid "BORDERS"
-msgstr "MARCOS"
-
-#: src/photos_category_toolbars.py:263
-msgid "Brightness"
-msgstr "Brillo"
-
-#: src/photos_model.py:104
-msgid "Brush"
-msgstr "Cepillo"
-
-#: src/splash_screen.py:31
-msgid "Choose one of your photos to begin!"
-msgstr "Escoge una de tus fotos para empezar!"
-
-#: src/photos_model.py:79
-msgid "Colorful"
-msgstr "Colorido"
-
-#: src/photos_category_toolbars.py:273
-msgid "Contrast"
-msgstr "Contraste"
-
-#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:79
+#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
 #: src/share/facebook_post.py:38
 msgid "Could not reach facebook."
 msgstr "Não foi possível chegar facebook."
-
-#: src/photos_model.py:76
-msgid "Country"
-msgstr "Campo"
-
-#: src/photos_model.py:101
-msgid "Crayon"
-msgstr "Crayola"
-
-#: src/photos_category_toolbars.py:110
-msgid "Crop"
-msgstr "Cortar"
-
-#: src/photos_category_toolbars.py:240
-msgid "DISTORT"
-msgstr "DISTORSIONAR"
-
-#: src/photos_model.py:69
-msgid "Depth of Field"
-msgstr "Profund. de Campo"
-
-#: src/photos_model.py:87
-msgid "Desert"
-msgstr "Desierto"
-
-#: src/photos_model.py:91
-msgid "Edges"
-msgstr "Bordes"
-
-#: src/photos_presenter.py:142
-msgid "Email failed."
-msgstr "Email falló."
-
-#: src/photos_presenter.py:340
-msgid "Enter a message to add to the e-mail"
-msgstr "Escribe un mensaje para agregar al e-mail"
-
-#: src/photos_presenter.py:309
-msgid "Enter a message to add to your photo!"
-msgstr "Escribe un mensaje para agregar a tu foto!"
-
-#: src/photos_right_toolbar.py:24
-msgid "FACEBOOK"
-msgstr "FACEBOOK"
-
-#: src/photos_category_toolbars.py:222
-msgid "FILTERS"
-msgstr "FILTROS"
-
-#: src/photos_presenter.py:307
-msgid "Facebook is not available offline."
-msgstr "Facebook no está disponible sin conexión."
-
-#: src/photos_model.py:111
-msgid "Fish Eye Heavy"
-msgstr "Fish-Eye Pesado"
-
-#: src/photos_model.py:110
-msgid "Fish Eye Light"
-msgstr "Fish-Eye Ligero"
-
-#: src/photos_model.py:84
-msgid "Foggy Blue"
-msgstr "Azul Brumoso"
-
-#: src/photos_model.py:75
-msgid "Grayscale"
-msgstr "Escala de Grises"
-
-#: src/photos_model.py:102
-msgid "Grunge"
-msgstr "Grunge"
-
-#: src/photos_model.py:77
-msgid "Grungify"
-msgstr "Grungificar"
-
-#: src/photos_view.py:216
-msgid "Image successfully applied to background!"
-msgstr "¡Imagen exitosamente aplicada al fondo!"
 
 #: src/share/facebook_post.py:28
 msgid "Image successfully posted to facebook!"
 msgstr "Imagem postada com sucesso no Facebook!"
 
-#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:63
-msgid "Login canceled."
-msgstr "Início cancelado."
+#: src/share/facebook_post.py:54
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr "No fue posíble realizar la acción solicitada en este momento. Por favor, intente de nuevo mas tarde."
 
 #: src/share/facebook_post.py:57
 msgid "Login failed."
 msgstr "Falla en el login."
-
-#: src/photos_model.py:81
-msgid "Lomo"
-msgstr "Lomo"
-
-#: src/photos_presenter.py:309 src/photos_presenter.py:340
-msgid "Message:"
-msgstr "Mensaje:"
 
 #: src/share/facebook_post.py:62
 msgid ""
@@ -171,112 +48,223 @@ msgid ""
 "again."
 msgstr "Problema de red detectado. Por favor, verifique su conexión a Internet e intente nuevamente."
 
-#: src/photos_model.py:67 src/photos_model.py:74 src/photos_model.py:98
-#: src/photos_model.py:109
-msgid "None"
-msgstr "Ninguno"
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr "Alguien"
 
-#: src/photos_window.py:47
-msgid "OPEN IMAGE"
-msgstr "ABRIR IMAGEN"
-
-#: src/photos_model.py:78
-msgid "Old Photo"
-msgstr "Foto Antigua"
-
-#: src/photos_view.py:134 src/splash_screen.py:27
-msgid "Open Image"
-msgstr "Abrir Imagen"
-
-#: src/photos_view.py:187
-msgid "Open new photo without save?"
-msgstr "¿Desea abrir una nueva foto sin guardar?"
-
-#: src/photos_model.py:85
-msgid "Paper"
-msgstr "Papel"
-
-#: src/photos_model.py:113
-msgid "Pinch Heavy"
-msgstr "Pellizcar Pesado"
-
-#: src/photos_model.py:112
-msgid "Pinch Light"
-msgstr "Pellizcar Ligero"
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr "Te envié una foto a través de Endless Photos!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr "Por favor, no responda a este e-mail. Las respuestas son enviadas a unabandeja de entrada no monitoreada."
 
-#: src/photos_model.py:88
-msgid "Posterize"
-msgstr "Posterizar"
+#: src/photos_category_toolbars.py:29
+msgid "Untitled"
+msgstr "Sin Título"
 
-#: src/photos_view.py:201
-msgid "Quit Without Save?"
-msgstr "¿Salir Sin Guardar?"
-
-#: src/photos_left_toolbar.py:24
-msgid "REVERT TO ORIGINAL"
-msgstr "VOLVER AL ORIGINAL"
-
-#: src/photos_presenter.py:340
-msgid "Recipient email:"
-msgstr "Email del destinatário"
-
-#: src/share/facebook_post.py:54
-msgid ""
-"Requested action is not possible at the moment. Please try again later."
-msgstr "No fue posíble realizar la acción solicitada en este momento. Por favor, intente de nuevo mas tarde."
-
-#: src/photos_category_toolbars.py:78
+#: src/photos_category_toolbars.py:76
 msgid "Rotate Right 90°"
 msgstr "Girar 90° a la Derecha"
 
-#: src/photos_right_toolbar.py:16
-msgid "SAVE"
-msgstr "GUARDAR"
+#: src/photos_category_toolbars.py:98
+msgid "TRANSFORM"
+msgstr "TRANSFORMAR"
 
-#: src/photos_category_toolbars.py:283
+#: src/photos_category_toolbars.py:108
+msgid "Crop"
+msgstr "Cortar"
+
+#: src/photos_category_toolbars.py:113
+msgid "Apply Crop?"
+msgstr "Aplicar Corte?"
+
+#: src/photos_category_toolbars.py:188
+msgid "BLURS"
+msgstr "DIFUMINAR"
+
+#: src/photos_category_toolbars.py:203
+msgid "BORDERS"
+msgstr "MARCOS"
+
+#: src/photos_category_toolbars.py:218
+msgid "FILTERS"
+msgstr "FILTROS"
+
+#: src/photos_category_toolbars.py:233
+msgid "DISTORT"
+msgstr "DISTORSIONAR"
+
+#: src/photos_category_toolbars.py:253
+msgid "Brightness"
+msgstr "Brillo"
+
+#: src/photos_category_toolbars.py:263
+msgid "Contrast"
+msgstr "Contraste"
+
+#: src/photos_category_toolbars.py:273
 msgid "Saturation"
 msgstr "Saturación"
 
-#: src/photos_view.py:164
-msgid "Save Image"
-msgstr "Guardar Imagen"
+#: src/photos_category_toolbars.py:296
+msgid "ADJUST"
+msgstr "AJUSTAR"
 
-#: src/share/emailer.py:17
-msgid "Someone"
-msgstr "Alguien"
+#: src/photos_left_toolbar.py:27
+msgid "REVERT TO ORIGINAL"
+msgstr "VOLVER AL ORIGINAL"
 
-#: src/photos_model.py:103
-msgid "Spray"
-msgstr "Spray"
-
-#: src/photos_model.py:114
-msgid "Swirl"
-msgstr "Remolino"
-
-#: src/photos_category_toolbars.py:100
-msgid "TRANSFORM"
-msgstr "TRANSFORMAR"
+#: src/photos_model.py:67 src/photos_model.py:74 src/photos_model.py:98
+#: src/photos_model.py:109
+msgid "None"
+msgstr "Ninguno"
 
 #: src/photos_model.py:68
 msgid "Tilt Shift"
 msgstr "Tilt Shift"
 
+#: src/photos_model.py:69
+msgid "Depth of Field"
+msgstr "Profund. de Campo"
+
+#: src/photos_model.py:75
+msgid "Grayscale"
+msgstr "Escala de Grises"
+
+#: src/photos_model.py:76
+msgid "Country"
+msgstr "Campo"
+
+#: src/photos_model.py:77
+msgid "Grungify"
+msgstr "Grungificar"
+
+#: src/photos_model.py:78
+msgid "Old Photo"
+msgstr "Foto Antigua"
+
+#: src/photos_model.py:79
+msgid "Colorful"
+msgstr "Colorido"
+
+#: src/photos_model.py:81
+msgid "Lomo"
+msgstr "Lomo"
+
+#: src/photos_model.py:84
+msgid "Foggy Blue"
+msgstr "Azul Brumoso"
+
+#: src/photos_model.py:85
+msgid "Paper"
+msgstr "Papel"
+
 #: src/photos_model.py:86
 msgid "Trains"
 msgstr "Trenes"
 
-#: src/photos_category_toolbars.py:28
-msgid "Untitled"
-msgstr "Sin Título"
+#: src/photos_model.py:87
+msgid "Desert"
+msgstr "Desierto"
+
+#: src/photos_model.py:88
+msgid "Posterize"
+msgstr "Posterizar"
+
+#: src/photos_model.py:91
+msgid "Edges"
+msgstr "Bordes"
+
+#: src/photos_model.py:101
+msgid "Crayon"
+msgstr "Crayola"
+
+#: src/photos_model.py:102
+msgid "Grunge"
+msgstr "Grunge"
+
+#: src/photos_model.py:103
+msgid "Spray"
+msgstr "Spray"
+
+#: src/photos_model.py:104
+msgid "Brush"
+msgstr "Cepillo"
+
+#: src/photos_model.py:110
+msgid "Fish Eye Light"
+msgstr "Fish-Eye Ligero"
+
+#: src/photos_model.py:111
+msgid "Fish Eye Heavy"
+msgstr "Fish-Eye Pesado"
+
+#: src/photos_model.py:112
+msgid "Pinch Light"
+msgstr "Pellizcar Ligero"
+
+#: src/photos_model.py:113
+msgid "Pinch Heavy"
+msgstr "Pellizcar Pesado"
+
+#: src/photos_model.py:114
+msgid "Swirl"
+msgstr "Remolino"
+
+#: src/photos_presenter.py:142
+msgid "Email failed."
+msgstr "Email falló."
+
+#: src/photos_presenter.py:307
+msgid "Facebook is not available offline."
+msgstr "Facebook no está disponible sin conexión."
+
+#: src/photos_presenter.py:309
+msgid "Enter a message to add to your photo!"
+msgstr "Escribe un mensaje para agregar a tu foto!"
+
+#: src/photos_presenter.py:309 src/photos_presenter.py:340
+msgid "Message:"
+msgstr "Mensaje:"
+
+#: src/photos_presenter.py:340
+msgid "Enter a message to add to the e-mail"
+msgstr "Escribe un mensaje para agregar al e-mail"
 
 #: src/photos_presenter.py:340
 msgid "Your Name:"
 msgstr "Tu Nombre"
+
+#: src/photos_presenter.py:340
+msgid "Recipient email:"
+msgstr "Email del destinatário"
+
+#: src/photos_right_toolbar.py:16
+msgid "SAVE"
+msgstr "GUARDAR"
+
+#: src/photos_right_toolbar.py:24
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+#: src/photos_right_toolbar.py:32
+msgid "BACKGROUND"
+msgstr "FONDO"
+
+#: src/photos_view.py:134 src/splash_screen.py:27
+msgid "Open Image"
+msgstr "Abrir Imagen"
+
+#: src/photos_view.py:164
+msgid "Save Image"
+msgstr "Guardar Imagen"
+
+#: src/photos_view.py:187
+msgid "Open new photo without save?"
+msgstr "¿Desea abrir una nueva foto sin guardar?"
 
 #: src/photos_view.py:188
 msgid ""
@@ -284,10 +272,22 @@ msgid ""
 "without saving?"
 msgstr "Tus cambios no fueron guardados. ¿Estás seguro que deseas abrir una nuevafoto sin guardar?"
 
+#: src/photos_view.py:201
+msgid "Quit Without Save?"
+msgstr "¿Salir Sin Guardar?"
+
 #: src/photos_view.py:202
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr "Tus cambios no han sido guardados. ¿Estás seguro que deseas salir?"
 
-#: src/share/emailer.py:18
-msgid "sent you a photo from Endless Photos!"
-msgstr "Te envié una foto a través de Endless Photos!"
+#: src/photos_view.py:216
+msgid "Image successfully applied to background!"
+msgstr "¡Imagen exitosamente aplicada al fondo!"
+
+#: src/photos_window.py:47
+msgid "OPEN IMAGE"
+msgstr "ABRIR IMAGEN"
+
+#: src/splash_screen.py:31
+msgid "Choose one of your photos to begin!"
+msgstr "Escoge una de tus fotos para empezar!"
