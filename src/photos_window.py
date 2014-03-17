@@ -55,6 +55,8 @@ class PhotosWindow(Endless.Window):
         # Splash page
         pm.add(self._splash_screen)
         pm.set_page_background_uri(self._splash_screen, images_path + "background_splash.jpg")
+        pm.set_page_background_size(self._splash_screen, "cover")
+        pm.set_page_background_position(self._splash_screen, "center center")
         # Main page
         pm.add(self._grid)
         pm.set_page_left_topbar_widget(self._grid, self._open_button)
