@@ -74,7 +74,6 @@ py_sources = \
 	src/widgets/option_list.py \
 	src/widgets/preview_file_chooser_dialog.py \
 	src/widgets/slider.py \
-	src/widgets/toolbar_separator.py \
 	src/__init__.py \
 	src/asyncworker.py \
 	src/crop_overlay.py \
@@ -125,10 +124,6 @@ images = \
 	data/images/crop_knob_dark.png \
 	data/images/crop_knob_hover.png \
 	data/images/crop_knob_normal.png \
-	data/images/separator-opened_bottom-shadow.png \
-	data/images/separator-opened_top-shadow.png \
-	data/images/separator_black.png \
-	data/images/separator_white.png \
 	$(NULL)
 
 nobase_pkgdata_DATA = \

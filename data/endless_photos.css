@@ -60,75 +60,84 @@ EosPageManager .image-frame {
     padding: 3px 0px 0px 0px;
 }
 
+.category-expander .arrow-frame:active,
 .category-expander .arrow-frame:hover {
     background-image: url("images/icon_arrow-down.png");
 }
 
-.category-expander .arrow-frame.expanded:hover {
+.category-expander.expanded .arrow-frame:active,
+.category-expander.expanded .arrow-frame:hover {
     background-image: url("images/icon_arrow-up.png");
 }
 
-.category-label {
+.category-expander .label {
     font-size: 12px;
     color: #999999;
 }
 
-.category-label:hover,
-.category-label.expanded {
+.category-expander .label:active,
+.category-expander .label:hover,
+.category-expander.expanded .label {
     color: #ffffff;
 }
 
-#transform-expander .image-frame {
+#transform-expander .category-image-frame {
     background-image: url("images/icon_transformation_normal.png");
 }
 
-#transform-expander .image-frame:hover,
-#transform-expander .image-frame.expanded {
+#transform-expander .category-image-frame:active,
+#transform-expander .category-image-frame:hover,
+#transform-expander.expanded .category-image-frame {
     background-image: url("images/icon_transformation_hover.png");
 }
 
-#blur-expander .image-frame {
+#blur-expander .category-image-frame {
     background-image: url("images/icon_blur_normal.png");
 }
 
-#blur-expander .image-frame:hover,
-#blur-expander .image-frame.expanded {
+#blur-expander .category-image-frame:active,
+#blur-expander .category-image-frame:hover,
+#blur-expander.expanded .category-image-frame {
     background-image: url("images/icon_blur_hover.png");
 }
 
-#border-expander .image-frame {
+#border-expander .category-image-frame {
     background-image: url("images/icon_border_normal.png");
 }
 
-#border-expander .image-frame:hover,
-#border-expander .image-frame.expanded {
+#border-expander .category-image-frame:active,
+#border-expander .category-image-frame:hover,
+#border-expander.expanded .category-image-frame {
     background-image: url("images/icon_border_hover.png");
 }
 
-#filter-expander .image-frame {
+#filter-expander .category-image-frame {
     background-image: url("images/icon_effects_normal.png");
 }
 
-#filter-expander .image-frame:hover,
-#filter-expander .image-frame.expanded {
+#filter-expander .category-image-frame:active,
+#filter-expander .category-image-frame:hover,
+#filter-expander.expanded .category-image-frame {
     background-image: url("images/icon_effects_hover.png");
 }
 
-#distort-expander .image-frame {
+#distort-expander .category-image-frame {
     background-image: url("images/icon_deform_normal.png");
 }
 
-#distort-expander .image-frame:hover,
-#distort-expander .image-frame.expanded {
+#distort-expander .category-image-frame:active,
+#distort-expander .category-image-frame:hover,
+#distort-expander.expanded .category-image-frame {
     background-image: url("images/icon_deform_hover.png");
 }
 
-#adjustment-expander .image-frame {
+#adjustment-expander .category-image-frame {
     background-image: url("images/icon_adjustments_normal.png");
 }
 
-#adjustment-expander .image-frame:hover,
-#adjustment-expander .image-frame.expanded {
+#adjustment-expander .category-image-frame:active,
+#adjustment-expander .category-image-frame:hover,
+#adjustment-expander.expanded .category-image-frame {
     background-image: url("images/icon_adjustments_hover.png");
 }
 
