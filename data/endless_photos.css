@@ -9,16 +9,18 @@
     font-weight: bold;
 }
 
-GtkButton {
+/* We don't want to theme the topbar here, so just select children of the page
+ manager */
+EosPageManager GtkButton {
     transition:background-image 200ms ease-in-out;
 }
 
-GtkLabel {
+EosPageManager GtkLabel {
     transition:color 200ms ease-in-out;
 }
 
-.arrow-frame,
-.image-frame {
+EosPageManager .arrow-frame,
+EosPageManager .image-frame {
     background-size: 100% 100%;
     transition:background-image 200ms ease-in-out;
 }
