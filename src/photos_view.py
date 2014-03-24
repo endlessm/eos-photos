@@ -139,18 +139,18 @@ class PhotosView(object):
             dialog.set_current_folder(starting_dir)
 
         # Adds 'Cancel' and 'OK' buttons
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_OK, 1)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
 
         # Sets default to 'OK'
-        dialog.set_default_response(1)
+        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
         # Filters and displays files which can be opened by Gtk.Image
         filefilter = Gtk.FileFilter()
         filefilter.add_pixbuf_formats()
         dialog.set_filter(filefilter)
 
-        if dialog.run() == 1:
+        if dialog.run() == Gtk.ResponseType.ACCEPT:
             # Loads the image
             filename = dialog.get_filename()
             dialog.destroy()
@@ -162,17 +162,18 @@ class PhotosView(object):
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog(_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE)
+        dialog.set_do_overwrite_confirmation(True);
 
         # Adds 'Cancel' and 'OK' buttons
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_OK, 1)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
 
         dialog.set_current_folder(dir_path)
         dialog.set_current_name(curr_name)
         # Sets default to 'OK'
-        dialog.set_default_response(1)
+        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
-        if dialog.run() == 1:
+        if dialog.run() == Gtk.ResponseType.ACCEPT:
             # Loads the image
             filename = dialog.get_filename()
             dialog.destroy()
