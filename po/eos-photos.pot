@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-03-05 06:18+0000\n"
+"POT-Creation-Date: 2014-03-25 04:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -258,25 +258,25 @@ msgstr ""
 msgid "Save Image"
 msgstr ""
 
-#: src/photos_view.py:187
+#: src/photos_view.py:188
 msgid "Open new photo without save?"
 msgstr ""
 
-#: src/photos_view.py:188
+#: src/photos_view.py:189
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:201
+#: src/photos_view.py:202
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_view.py:202
+#: src/photos_view.py:203
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr ""
 
-#: src/photos_view.py:216
+#: src/photos_view.py:217
 msgid "Image successfully applied to background!"
 msgstr ""
 
