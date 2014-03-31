@@ -1,10 +1,6 @@
 from gi.repository import Gtk
 
 
-PRELIGHT = Gtk.StateFlags.PRELIGHT
-ACTIVE = Gtk.StateFlags.ACTIVE
-
-
 class CompositeButton(object):
     # Class mixin for widgets whose :hover and :active CSS pseudoclass states should be
     # inherited by other widgets, since as of GTK 3.10 these flags no longer propagate
@@ -13,7 +9,7 @@ class CompositeButton(object):
 
 
     _handler_set = False
-    inherited_flags = [PRELIGHT, ACTIVE]
+    inherited_flags = [Gtk.StateFlags.PRELIGHT, Gtk.StateFlags.ACTIVE]
 
 
     def set_sensitive_children(self, children):

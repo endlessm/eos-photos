@@ -36,6 +36,10 @@
         <file>images/save_down.png</file>
         <file>images/save_hover.png</file>
         <file>images/save_normal.png</file>
+        <file>images/separator_black.png</file>
+        <file>images/separator_white.png</file>
+        <file>images/separator-opened_top-shadow.png</file>
+        <file>images/separator-opened_bottom-shadow.png</file>
         <file>images/slider_knob_hover.png</file>
         <file>images/slider_knob_normal.png</file>
     </gresource>

@@ -3,7 +3,6 @@ import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
 from widgets.composite_button import CompositeButton
-from widgets.toolbar_separator import ToolbarSeparator
 from widgets.image_text_button import ImageTextButton
 
 
@@ -13,28 +12,36 @@ class PhotosLeftToolbar(Gtk.VBox):
     """
     def __init__(self, images_path="", categories=[], **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
-        self._images_path = images_path
+        self._separator_images = {
+            "top": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator_black.png"),
+            "bottom": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator_white.png"),
+            "top-shadow": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator-opened_top-shadow.png"),
+            "bottom-shadow": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator-opened_bottom-shadow.png")
+        }
 
         self._categories = {}
         for category in categories:
             name = category.get_name()
-            self._categories[name] = CategoryExpander(images_path, category)
+            self._categories[name] = CategoryExpander(self._separator_images, category)
             self.pack_start(self._categories[name], expand=False, fill=True, padding=0)
-
-        bottom_category_name = categories[-1].get_name()
-        self._bottommost_category = self._categories[bottom_category_name]
 
         self._revert_button = ImageTextButton(label=_("REVERT TO ORIGINAL"),
                                               name="revert-button")
         self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
         self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
-        self._separator = ToolbarSeparator(images_path=images_path)
-        self.pack_end(self._separator, expand=False, fill=False, padding=0)
-        self._removed_separator = False
 
         self.set_vexpand(True)
         self.show_all()
-        self.connect('size-allocate', self._check_full)
+
+    def do_draw(self, cr):
+        Gtk.VBox.do_draw(self, cr)
+        alloc = self.get_allocation()
+        if alloc.height > self.get_preferred_height()[1]:
+            revert_alloc = self._revert_button.get_allocation()
+            Gdk.cairo_set_source_pixbuf(cr, self._separator_images["top"], 0, alloc.height - revert_alloc.height - 2)
+            cr.paint()
+            Gdk.cairo_set_source_pixbuf(cr, self._separator_images["bottom"], 0, alloc.height - revert_alloc.height - 1)
+            cr.paint()
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -49,46 +56,30 @@ class PhotosLeftToolbar(Gtk.VBox):
 
         for name, category in self._categories.items():
             if not name == category_label:
-                category.deselect()
-
-    def _check_full(self, w, alloc):
-        if alloc.height <= self.get_preferred_height()[1]:
-            if not self._removed_separator:
-                self._removed_separator = True
-                self._bottommost_category.hide_separators()
-        elif self._removed_separator:
-            self._removed_separator = False
-            self._bottommost_category.show_separators()
+                category.unexpand()
 
 
 class CategoryScrollWindow(Gtk.ScrolledWindow):
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
         super(CategoryScrollWindow, self).__init__(**kw)
 
     def do_get_preferred_height(self):
         children = self.get_children()
-        min_height = Gtk.ScrolledWindow.do_get_preferred_height(self)[0]
-        natural_height = min_height
+         # Always request at least 2 pixels so we can draw the top and bottom separators
+        natural_height = min_height = 2
         if children:
             natural_height = max(children[0].get_preferred_height()[1], natural_height)
         return min_height, natural_height
 
 
 class ScrollWindowDropShadow(Gtk.Widget):
-    def __init__(self, images_path="", **kw):
+    def __init__(self, separator_images, **kw):
         super(ScrollWindowDropShadow, self).__init__(**kw)
-        self._top_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_top-shadow.png")
-        self._top_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_black.png")
-        self._bottom_shadow = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator-opened_bottom-shadow.png")
-        self._bottom_separator = GdkPixbuf.Pixbuf.new_from_file(images_path + "separator_white.png")
+        self._separator_images = separator_images
         self.set_has_window(False)
         self.set_app_paintable(True)
-        self._bottom_separator_is_visible = True
         self.connect('draw', self._draw)
         self.connect_after('realize', self._realize)
-
-    def set_bottom_separator_visible(self, is_visible):
-        self._bottom_separator_is_visible = is_visible
 
     def _realize(self, w):
         # Big old hack to keep from getting input in this widget. Sets the Gdk
@@ -101,115 +92,97 @@ class ScrollWindowDropShadow(Gtk.Widget):
 
     def _draw(self, w, cr):
         alloc = self.get_allocation()
-        Gdk.cairo_set_source_pixbuf(cr, self._top_shadow, 0, 0)
+        Gdk.cairo_set_source_pixbuf(cr, self._separator_images["top-shadow"], 0, 0)
         cr.paint()
-        Gdk.cairo_set_source_pixbuf(cr, self._top_separator, 0, 0)
+        Gdk.cairo_set_source_pixbuf(cr, self._separator_images["top"], 0, 0)
         cr.paint()
-        Gdk.cairo_set_source_pixbuf(cr, self._bottom_shadow, 0, alloc.height - self._bottom_shadow.get_height())
+        Gdk.cairo_set_source_pixbuf(cr, self._separator_images["bottom-shadow"], 0,
+                                    alloc.height - self._separator_images["bottom-shadow"].get_height())
         cr.paint()
-        if self._bottom_separator_is_visible:
-            Gdk.cairo_set_source_pixbuf(cr, self._bottom_separator, 0, alloc.height - self._bottom_separator.get_height())
-            cr.paint()
-        return True
+        Gdk.cairo_set_source_pixbuf(cr, self._separator_images["bottom"], 0,
+                                    alloc.height - self._separator_images["bottom"].get_height())
+        cr.paint()
 
-
-class CategoryExpander(Gtk.Expander, CompositeButton):
-    def __init__(self, images_path, widget, **kw):
-        kw["name"] = widget.get_name() + "-expander"
-        super(CategoryExpander, self).__init__(**kw)
-        self.get_style_context().add_class("category-expander")
-
+class CategoryButton(Gtk.Button, CompositeButton):
+    def __init__(self, category_label, **kw):
+        super(CategoryButton, self).__init__(**kw)
         self._icon_frame = Gtk.Frame()
-        self._icon_frame.get_style_context().add_class("image-frame")
+        self._icon_frame.get_style_context().add_class("category-image-frame")
         self._icon_frame.set_size_request(21, 21)
 
         self._icon_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
         self._icon_align.add(self._icon_frame)
 
-        self._category_label = Gtk.Label(label=widget.get_label(), name="category-label")
-        self._category_label.get_style_context().add_class("category-label")
+        self._category_label = Gtk.Label(label=category_label, name="category-label")
+        self._category_label.get_style_context().add_class("label")
 
-        self._hbox = Gtk.HBox(homogeneous=False, spacing=0)
-        self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=9)
-        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
-
-        self._arrow_frame = Gtk.Frame()
+        self._arrow_frame = Gtk.Frame(halign=Gtk.Align.END)
         self._arrow_frame.get_style_context().add_class("arrow-frame")
         self._arrow_frame.set_size_request(21, 21)
         self._arrow_align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
         self._arrow_align.add(self._arrow_frame)
-        self._hbox.pack_end(self._arrow_align, expand=False, fill=False, padding=8)
 
-        self._separator = ToolbarSeparator(images_path=images_path, margin_left=0, halign=0)
-        self._vbox = Gtk.VBox(homogeneous=False, spacing=0)
-        self._vbox.pack_start(self._hbox, expand=False, fill=False, padding=8)
-        self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
+        self._hbox = Gtk.HBox(homogeneous=False, spacing=0, margin_top=8, margin_bottom=8)
+        self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=9)
+        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
+        self._hbox.pack_end(self._arrow_align, expand=False, fill=False, padding=8)
         # This hackish line keeps the expander widget from downsizing
         # horizontally after the separator is removed. 183 is the width of the
         # separator image
         self._hbox.set_size_request(183, -1)
-        self.set_label_widget(self._vbox)
+
+        self.add(self._hbox)
+        self.set_sensitive_children([self._category_label, self._icon_frame, self._arrow_frame])
+
+class CategoryExpander(Gtk.Grid):
+    def __init__(self, separator_images, widget, **kw):
+        kw["name"] = widget.get_name() + "-expander"
+        kw["orientation"] = Gtk.Orientation.VERTICAL
+        super(CategoryExpander, self).__init__(**kw)
+        self.get_style_context().add_class("category-expander")
+
+        self._button = CategoryButton(widget.get_label())
 
         self._widget = widget
+        self._revealer = Gtk.Revealer()
+        self._revealer.add(self._widget)
         self._scroll_area = CategoryScrollWindow()
         self._scroll_area.get_style_context().add_class("filters-scroll-area")
         self._scroll_area.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
-        self._scroll_area.add_with_viewport(self._widget)
-        self._drop_shadow = ScrollWindowDropShadow(images_path=images_path)
+        self._scroll_area.add_with_viewport(self._revealer)
+        self._scroll_area.connect("size-allocate", self._update_scroll)
+        self._drop_shadow = ScrollWindowDropShadow(separator_images)
         self._overlay = Gtk.Overlay()
         self._overlay.add(self._scroll_area)
         self._overlay.add_overlay(self._drop_shadow)
+
+        self.add(self._button)
         self.add(self._overlay)
+        self._expanded = False
+        self._button.connect("clicked", lambda (w): self._toggle_expanded())
+        self._scroll_target = 0
 
-        self.connect('notify::expanded', self._on_expanded)
-        self.connect('enter-notify-event', self._on_mouse_enter)
-        self.connect('leave-notify-event', self._on_mouse_leave)
+    def _update_scroll(self, w, a):
+        if not self._revealer.get_child_revealed():
+            self._scroll_area.get_vadjustment().set_value(self._scroll_target)
 
-        self.set_sensitive_children([self._category_label, self._icon_frame, self._arrow_frame])
-
-    def _on_mouse_enter(self, *args):
-        self.set_state_flags(Gtk.StateFlags.PRELIGHT, False)
-
-    def _on_mouse_leave(self, *args):
-        self.unset_state_flags(Gtk.StateFlags.PRELIGHT)
-
-    def _on_expanded(self, widget, event):
-        if self.get_expanded():
-            # Scroll to the selected widget
-            try:
-                scroll_to_height = self._widget.get_desired_scroll_position()
-                self._scroll_area.get_vadjustment().set_value(scroll_to_height)
-            except NotImplementedError:
-                pass
-
-            self._vbox.remove(self._separator)
-            self.get_parent().change_category(self._widget.get_name())
-            self._icon_frame.get_style_context().add_class("expanded")
-            self._category_label.get_style_context().add_class("expanded")
-            self._arrow_frame.get_style_context().add_class("expanded")
+    def _toggle_expanded(self):
+        if self._expanded:
+            self.unexpand()
         else:
-            self._vbox.pack_start(self._separator, expand=False, fill=False, padding=0)
-            self._arrow_frame.get_style_context().remove_class("expanded")
-            self._category_label.get_style_context().remove_class("expanded")
-            self._icon_frame.get_style_context().remove_class("expanded")
-        self.show_all()
+            self.expand()
 
-    def show_separators(self):
-        self._separator.set_visible(True)
-        self._drop_shadow.set_bottom_separator_visible(True)
+    def expand(self):
+        try:
+            self._scroll_target = self._widget.get_desired_scroll_position()
+        except NotImplementedError:
+            self._scroll_target = 0
+        self.get_parent().change_category(self._widget.get_name())
+        self.get_style_context().add_class("expanded")
+        self._revealer.set_reveal_child(True)
+        self._expanded = True
 
-    def hide_separators(self):
-        self._separator.set_visible(False)
-        self._drop_shadow.set_bottom_separator_visible(False)
-
-    def get_widget(self):
-        return self._widget
-
-    def select(self):
-        self.set_expanded(True)
-
-    def deselect(self):
-        self.set_expanded(False)
-
-    def is_selected(self):
-        return self.get_expanded()
+    def unexpand(self):
+        self.get_style_context().remove_class("expanded")
+        self._revealer.set_reveal_child(False)
+        self._expanded = False
