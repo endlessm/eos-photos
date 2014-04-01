@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-03-05 06:18+0000\n"
+"POT-Creation-Date: 2014-03-25 04:37+0000\n"
 "PO-Revision-Date: 2013-11-20 10:45+0000\n"
 "Last-Translator: RenatoP <renato@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/teams/language/pt/)\n"
@@ -263,25 +263,25 @@ msgstr "Abrir Imagem"
 msgid "Save Image"
 msgstr "Salvar Imagem"
 
-#: src/photos_view.py:187
+#: src/photos_view.py:188
 msgid "Open new photo without save?"
 msgstr "Deseja abrir uma foto sem salvar a atual?"
 
-#: src/photos_view.py:188
+#: src/photos_view.py:189
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr "A foto que você está trabalhando ainda não foi salva. Tem certeza de que deseja abrir uma nova imagem sem salvá-la?"
 
-#: src/photos_view.py:201
+#: src/photos_view.py:202
 msgid "Quit Without Save?"
 msgstr "Sair sem salvar?"
 
-#: src/photos_view.py:202
+#: src/photos_view.py:203
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
 
-#: src/photos_view.py:216
+#: src/photos_view.py:217
 msgid "Image successfully applied to background!"
 msgstr "Imagem de fundo aplicada com  sucesso!"
 
