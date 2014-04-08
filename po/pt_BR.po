@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-03-25 04:37+0000\n"
+"POT-Creation-Date: 2014-04-01 04:38+0000\n"
 "PO-Revision-Date: 2013-11-20 10:45+0000\n"
 "Last-Translator: RenatoP <renato@endlessm.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/teams/language/pt/)\n"
@@ -114,7 +114,7 @@ msgstr "Saturação"
 msgid "ADJUST"
 msgstr "AJUSTES"
 
-#: src/photos_left_toolbar.py:27
+#: src/photos_left_toolbar.py:28
 msgid "REVERT TO ORIGINAL"
 msgstr "VOLTAR AO ORIGINAL"
 
