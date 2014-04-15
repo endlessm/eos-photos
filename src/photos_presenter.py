@@ -1,4 +1,5 @@
 from datetime import datetime
+import errno
 import os
 import tempfile
 import urllib2
@@ -237,7 +238,7 @@ class PhotosPresenter(object):
         return path
 
 
-    def generate_filename(self, suffix=None, show_save_dialog=True, overwrite=False):
+    def generate_filename(self, suffix=None, overwrite=False):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
 
         # Check to see if a file exists with current name
@@ -257,15 +258,25 @@ class PhotosPresenter(object):
                 break
             curr_name = name + " (" + str(i) + ")"
             i += 1
+        return [curr_name, ext]
 
-        if show_save_dialog:
-            # Set this name as placeholder in save dialog
-            filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
+    def save_handler(self, filename):
+        ext = self._model.get_current_filename().split('.')[-1]
+        filename = self._check_extension(filename, ext)
+        try:
+            self._model.save(filename, save_point=True)
+            return True
+        except IOError as ex:
+            if ex.errno == errno.EACCES or ex.errno == errno.EROFS:
+                error_message = _("You do not have permissions to save the photo here")
+            else:
+                error_message = _("An error occurred while saving your photo")
+
+                self._view.show_message(text=error_message, warning=True)
+
+                return False
         else:
-            filename = pictures_path + '/' + curr_name + "." + ext
-
-        return [filename, ext]
-        
+            self._view.hide_dialog(dialog)
 
     def on_save(self):
         if self._locked:
@@ -276,12 +287,11 @@ class PhotosPresenter(object):
         # Cancel any ongoing crops
         self._do_crop_cancel()
 
-        [filename, ext] = self.generate_filename()
+        pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
 
-        if filename is not None:
-            # Check returned value from save dialog to make sure it has a valid extension
-            filename = self._check_extension(filename, ext)
-            self._model.save(filename, save_point=True)
+        [curr_name, ext] = self.generate_filename()
+
+        filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
 
     def has_internet(self):
         '''

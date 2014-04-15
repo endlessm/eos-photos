@@ -159,6 +159,9 @@ class PhotosView(object):
             dialog.destroy()
             return None
 
+    def hide_dialog(self, dialog):
+        dialog.hide()
+
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
         dialog = Gtk.FileChooserDialog(_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE)
@@ -173,14 +176,10 @@ class PhotosView(object):
         # Sets default to 'OK'
         dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
-        if dialog.run() == Gtk.ResponseType.ACCEPT:
-            # Loads the image
-            filename = dialog.get_filename()
-            dialog.destroy()
-            return filename
-        else:
-            dialog.destroy()
-            return None
+        dialog.connect('response',lambda dialog, response: self._presenter.save_handler(dialog,
+                dialog.get_filename(),
+                response == Gtk.ResponseType.ACCEPT))
+        dialog.show()
 
     def show_confirm_open_new(self):
         dialog = Gtk.MessageDialog(
