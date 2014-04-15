@@ -131,7 +131,7 @@ class PhotosPresenter(object):
 
         try:
             result = call(bg_set_img_cmd)
-            self._view.update_async(lambda: self._view.prompt_view_background())
+            self._view.update_async(lambda: self._view.show_message(text=_("Image successfully applied to background!")))
         except:
             print "There was an error setting the background!"
             return
