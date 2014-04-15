@@ -151,14 +151,15 @@ class PhotosPresenter(object):
         self._model.set_distortion(distort_name)
         self._view.update_async(lambda: self._view.select_distortion(distort_name))
 
+    def open_handler(self, filename):
+        self.open_image(filename)
+
     def _do_open(self):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
         if os.path.isdir(pictures_path):
-            filename = self._view.show_open_dialog(pictures_path)
+            self._view.show_open_dialog(pictures_path)
         else:
-            filename = self._view.show_open_dialog()
-        if filename is not None:
-            self.open_image(filename)
+            self._view.show_open_dialog()
 
     def _do_adjustment_slide(self, value_get, value_set):
         in_timeout = False
@@ -197,18 +198,15 @@ class PhotosPresenter(object):
             self._view._transformations.close_crop_options()
 
     #UI callbacks...
+
     def on_close(self):
         if self._locked:
             return
         # Prompt for save before quitting
         if not self._model.is_saved():
-            confirm = self._view.show_confirm_close()
-            if not confirm:
-                return
-            elif confirm == 1:
-                self.on_save()
-
-        self._view.close_window()
+            self._view.show_confirm_close()
+        else:
+            self._view.close_window()
 
     def on_open(self):
         if self._locked:
@@ -218,10 +216,9 @@ class PhotosPresenter(object):
         self._do_crop_cancel()
 
         if not self._model.is_saved():
-            confirm = self._view.show_confirm_open_new()
-            if not confirm:
-                return
-        self._do_open()
+            self._view.show_confirm_open_new_dialog()
+        else:
+            self._do_open()
 
     def generate_hashed_filename(self):
         cache_path = GLib.get_user_cache_dir()
@@ -272,11 +269,9 @@ class PhotosPresenter(object):
             else:
                 error_message = _("An error occurred while saving your photo")
 
-                self._view.show_message(text=error_message, warning=True)
+            self._view.show_message(text=error_message, warning=True)
 
-                return False
-        else:
-            self._view.hide_dialog(dialog)
+            return False
 
     def on_save(self):
         if self._locked:
@@ -304,6 +299,23 @@ class PhotosPresenter(object):
         except:
             return False
 
+    def facebook_login_handler(self, message_to_post, token, dialog_message):
+        if token:
+            self._facebook_post.login(token)
+            if dialog_message:
+                self._view.show_message(text=dialog_message, warning=True)
+            self._run_locking_task(self._do_post_to_facebook, (message_to_post,))
+
+    def facebook_message_callback(self, confirm, info):
+        if confirm == 0 or info is None:
+            return
+        logged_in = self._facebook_post.is_logged_in()
+        # If not logged in try once to log in
+        if not logged_in:
+            self._view.show_facebook_login_dialog(info[0])
+        else:
+            self._run_locking_task(self._do_post_to_facebook, (info[0],))
+
     def on_share(self):
         if self._locked:
             return
@@ -316,20 +328,7 @@ class PhotosPresenter(object):
         if not self.has_internet():
             self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
             return
-        info = self._view.get_message(_("Enter a message to add to your photo!"), _("Message:"))
-        if info is None:
-            return
-        logged_in = self._facebook_post.is_logged_in()
-        # If not logged in try once to log in
-        if not logged_in:
-            token, message = self._view.show_facebook_login_dialog()
-            if token:
-                logged_in = True
-                self._facebook_post.login(token)
-            if message:
-                self._view.show_message(text=message, warning=True)
-        if logged_in:
-            self._run_locking_task(self._do_post_to_facebook, (info[0],))
+        self._view.get_message(_("Enter a message to add to your photo!"), self.facebook_message_callback, _("Message:"))
 
     def on_set_background(self):
         if self._locked:
@@ -342,14 +341,20 @@ class PhotosPresenter(object):
         
         self._run_locking_task(self._do_set_image_as_background)
 
+    def email_message_callback(self, confirm, info):
+        if info:
+            self._run_locking_task(self._do_send_email, (info[0], info[1], info[2]))
+
     def on_email(self):
         if self._locked:
             return
         if not self._model.is_open():
             return
-        info = self._view.get_message(_("Enter a message to add to the e-mail"), _("Your Name:"), _("Recipient email:"), _("Message:"))
-        if info:
-            self._run_locking_task(self._do_send_email, (info[0], info[1], info[2]))
+
+        # Cancel any ongoing crops
+        self._do_crop_cancel()
+
+        self._view.get_message(_("Enter a message to add to the e-mail"), self.email_message_callback, _("Your Name:"), _("Recipient email:"), _("Message:"))
 
     def on_fullscreen(self):
         if self._locked:
