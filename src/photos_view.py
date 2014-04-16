@@ -140,7 +140,8 @@ class PhotosView(object):
         dialog = PreviewFileChooserDialog(
             title=_("Open Image"),
             parent=self.get_window(),
-            action=Gtk.FileChooserAction.OPEN)
+            action=Gtk.FileChooserAction.OPEN,
+            modal=True)
 
         if starting_dir != None:
             dialog.set_current_folder(starting_dir)
@@ -172,7 +173,11 @@ class PhotosView(object):
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog(_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE)
+        dialog = Gtk.FileChooserDialog(
+            _("Save Image"),
+            self.get_window(),
+            Gtk.FileChooserAction.SAVE,
+            modal=True)
         dialog.set_do_overwrite_confirmation(True);
 
         # Adds 'Cancel' and 'OK' buttons
@@ -197,7 +202,8 @@ class PhotosView(object):
             parent=self.get_window(),
             text=_("Open new photo without save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to open a new photo without saving?"),
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_OK, 1)
         # set default to cancel
@@ -217,7 +223,8 @@ class PhotosView(object):
             parent=self.get_window(),
             text=_("Quit Without Save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to quit?"),
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_SAVE, 1)
         dialog.add_button(Gtk.STOCK_QUIT, 2)
@@ -232,7 +239,8 @@ class PhotosView(object):
             parent=self.get_window(),
             text=text,
             secondary_text=secondary_text,
-            message_type=dialog_type)
+            message_type=dialog_type,
+            modal=True)
         dialog.add_button(Gtk.STOCK_OK, 0)
         # set default to cancel
         dialog.set_default_response(0)
@@ -254,7 +262,8 @@ class PhotosView(object):
             image=None,
             parent=self.get_window(),
             use_markup=True,
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.set_markup("<big><b>" + prompt + "</b></big>")
         dialog.add_button(Gtk.STOCK_OK, 1)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
