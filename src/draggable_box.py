@@ -3,6 +3,9 @@ import inspect
 
 from gi.repository import Clutter, Gdk
 
+import util
+
+
 # Bitwise flags to indicate clickable locations
 NONE = 0
 MIDDLE = 1 << 0
@@ -532,32 +535,23 @@ class DraggableHandle(DraggableOrnament):
         self.hitbox.set_height(self.dimension)
         self.hitbox.set_width(self.dimension)
 
-        NORMAL_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_normal.png"
-        LIGHT_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_hover.png"
-        DARK_KNOB_FILE_PATH = BASE_IMAGE_PATH + "crop_knob_dark.png"
+        self.NORMAL_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_normal.png")
+        self.LIGHT_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_hover.png")
+        self.DARK_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_dark.png")
 
-        self.NORMAL_KNOB = Clutter.Texture.new_from_file(NORMAL_KNOB_FILE_PATH)
-        self.LIGHT_KNOB = Clutter.Texture.new_from_file(LIGHT_KNOB_FILE_PATH)
-        self.DARK_KNOB = Clutter.Texture.new_from_file(DARK_KNOB_FILE_PATH)
-
-        self.current_knob = self.NORMAL_KNOB
+        dummy, knob_width, knob_height = self.NORMAL_KNOB.get_preferred_size()
+        self.current_knob = Clutter.Actor(width=knob_width, height=knob_height, content=self.NORMAL_KNOB)
         self.add_child(self.current_knob)
         self.add_child(self.hitbox)
 
-    def set_knob(self, knob):
-        if knob is not self.current_knob:
-            self.remove_child(self.current_knob)
-            self.add_child(knob)
-            self.current_knob = knob
-
     def highlight(self):
-        self.set_knob(self.LIGHT_KNOB)
+        self.current_knob.set_content(self.LIGHT_KNOB)
 
     def darken(self):
-        self.set_knob(self.DARK_KNOB)
+        self.current_knob.set_content(self.DARK_KNOB)
 
     def normalize(self):
-        self.set_knob(self.NORMAL_KNOB)
+        self.current_knob.set_content(self.NORMAL_KNOB)
 
     def get_offset(self):
         return (self.get_width() / 2)

@@ -67,7 +67,6 @@ py_sources = \
 	src/share/facebook_post.py \
 	src/share/facebook.py \
 	src/widgets/__init__.py \
-	src/widgets/clutter_image_button.py \
 	src/widgets/composite_button.py \
 	src/widgets/image_text_button.py \
 	src/widgets/option_list.py \
@@ -89,6 +88,7 @@ py_sources = \
 	src/photos_view.py \
 	src/photos_window.py \
 	src/splash_screen.py \
+	src/util.py \
 	$(NULL)
 
 curves = \
@@ -114,9 +114,6 @@ images = \
 	data/images/textures/weird_vignette.png \
 	data/images/background-tile.jpg \
 	data/images/background_splash.jpg \
-	data/images/crop_knob_dark.png \
-	data/images/crop_knob_hover.png \
-	data/images/crop_knob_normal.png \
 	$(NULL)
 
 nobase_pkgdata_DATA = \
