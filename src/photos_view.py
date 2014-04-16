@@ -16,23 +16,20 @@ class PhotosView(object):
     presenter calls to the appropriate UI elements. PhotosWindow does the
     actual toplevel layout of the toolbars and central view.
     """
-    def __init__(self, application=None, images_path=""):
-        self._images_path = images_path
-        self._adjustments = AdjustmentToolbar(images_path=images_path)
-        self._blurs = BlurToolbar(images_path=images_path)
-        self._transformations = TransformToolbar(images_path=images_path)
-        self._filters = FilterToolbar(images_path=images_path)
-        self._borders = BorderToolbar(images_path=images_path)
-        self._distorts = DistortToolbar(images_path=images_path)
+    def __init__(self, application=None):
+        self._adjustments = AdjustmentToolbar()
+        self._blurs = BlurToolbar()
+        self._transformations = TransformToolbar()
+        self._filters = FilterToolbar()
+        self._borders = BorderToolbar()
+        self._distorts = DistortToolbar()
         categories = [self._transformations, self._adjustments, self._filters, self._distorts, self._blurs, self._borders]
-        self._left_toolbar = PhotosLeftToolbar(images_path=images_path,
-                                               categories=categories)
+        self._left_toolbar = PhotosLeftToolbar(categories=categories)
         self._splash_screen = SplashScreen(name="splash-eventbox")
 
         self._right_toolbar = PhotosRightToolbar()
-        self._image_container = ImageContainer(images_path=images_path, name="image-container")
-        self._window = PhotosWindow(images_path=images_path,
-                                    splash_screen=self._splash_screen,
+        self._image_container = ImageContainer(name="image-container")
+        self._window = PhotosWindow(splash_screen=self._splash_screen,
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
                                     image_container=self._image_container,

@@ -9,6 +9,7 @@ import ImageEnhance
 import colorsys
 
 from .. import util
+from ..resource_prefixes import *
 from curve import Curve
 from curve import CurveManager
 from distortions import Distortion
@@ -17,18 +18,6 @@ from distortions import Distortion
 Pretty much all the image processing functionality we coded right now. Maybe
 someday split into filters, basic tools, etc.
 """
-
-_CURVES_PATH = ""
-_TEXTURES_PATH = ""
-_TEXTURES_RESOURCE_PATH = "/com/endlessm/photos/images/textures/"
-
-def set_curves_path(curves_path):
-    global _CURVES_PATH
-    _CURVES_PATH = curves_path
-
-def set_textures_path(textures_path):
-    global _TEXTURES_PATH
-    _TEXTURES_PATH = textures_path
 
 def limit_size(image, size_limits):
     width, height = image.size
@@ -80,15 +69,14 @@ def pixelate(image, pixel_size=10):
     return downsized.resize((width, height))
 
 def texture_overlay(image, texture_file, alpha=0.5):
-    texture = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + texture_file)
-    texture = Image.open(_TEXTURES_PATH + texture_file)
+    texture = util.load_pil_image_from_resource(TEXTURES_RESOURCE_PREFIX + texture_file)
     texture = texture.resize(image.size)
     return Image.blend(image, texture, alpha)
 
 def vignette(image, texture_file):
-    black = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + "black.png")
+    black = util.load_pil_image_from_resource(TEXTURES_RESOURCE_PREFIX + "black.png")
     black = black.resize(image.size)
-    texture = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + texture_file)
+    texture = util.load_pil_image_from_resource(TEXTURES_RESOURCE_PREFIX + texture_file)
     texture = texture.resize(image.size)
     return Image.composite(black, image, texture)
 

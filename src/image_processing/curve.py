@@ -8,13 +8,13 @@ from scipy import interpolate
 import numpy
 
 from .. import util
-
+from ..resource_prefixes import *
 
 class Curve:
     def __init__(self, acv_file_name, name):
         self.name = name
 
-        acv_file = util.load_byte_stream_from_resource("/com/endlessm/photos/curves/" + acv_file_name)
+        acv_file = util.load_byte_stream_from_resource(CURVES_RESOURCE_PREFIX + acv_file_name)
         self.curves = self._read_curves(acv_file)
         self.polynomials = self._find_coefficients()
 

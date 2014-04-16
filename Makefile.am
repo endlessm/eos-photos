@@ -87,6 +87,7 @@ py_sources = \
 	src/photos_right_toolbar.py \
 	src/photos_view.py \
 	src/photos_window.py \
+	src/resource_prefixes.py \
 	src/splash_screen.py \
 	src/util.py \
 	$(NULL)

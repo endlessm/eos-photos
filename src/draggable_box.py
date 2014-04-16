@@ -4,6 +4,7 @@ import inspect
 from gi.repository import Clutter, Gdk
 
 import util
+from resource_prefixes import *
 
 
 # Bitwise flags to indicate clickable locations
@@ -535,9 +536,9 @@ class DraggableHandle(DraggableOrnament):
         self.hitbox.set_height(self.dimension)
         self.hitbox.set_width(self.dimension)
 
-        self.NORMAL_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_normal.png")
-        self.LIGHT_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_hover.png")
-        self.DARK_KNOB = util.load_clutter_image_from_resource("/com/endlessm/photos/images/crop_knob_dark.png")
+        self.NORMAL_KNOB = util.load_clutter_image_from_resource(IMAGES_RESOURCE_PREFIX + "crop_knob_normal.png")
+        self.LIGHT_KNOB = util.load_clutter_image_from_resource(IMAGES_RESOURCE_PREFIX + "crop_knob_hover.png")
+        self.DARK_KNOB = util.load_clutter_image_from_resource(IMAGES_RESOURCE_PREFIX + "crop_knob_dark.png")
 
         dummy, knob_width, knob_height = self.NORMAL_KNOB.get_preferred_size()
         self.current_knob = Clutter.Actor(width=knob_width, height=knob_height, content=self.NORMAL_KNOB)

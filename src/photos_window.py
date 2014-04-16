@@ -2,6 +2,7 @@ from gi.repository import Gtk, Gdk, GdkPixbuf, Endless
 
 from drop_shadow_alignment import DropShadowAlignment
 from widgets.image_text_button import ImageTextButton
+from resource_prefixes import *
 
 
 class PhotosWindow(Endless.Window):
@@ -16,7 +17,7 @@ class PhotosWindow(Endless.Window):
     resizing and packs all the toolbars along with with image viewer into its
     allocated space.
     """
-    def __init__(self, images_path="", splash_screen=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
+    def __init__(self, splash_screen=None, left_toolbar=None, right_toolbar=None, image_container=None, **kw):
         Endless.Window.__init__(self, **kw)
         self._image_container = image_container
         self._splash_screen = splash_screen
@@ -54,13 +55,13 @@ class PhotosWindow(Endless.Window):
         pm = self.get_page_manager()
         # Splash page
         pm.add(self._splash_screen)
-        pm.set_page_background_uri(self._splash_screen, "resource:///com/endlessm/photos/images/background_splash.jpg")
+        pm.set_page_background_uri(self._splash_screen, "resource://" + IMAGES_RESOURCE_PREFIX + "background_splash.jpg")
         pm.set_page_background_size(self._splash_screen, "cover")
         pm.set_page_background_position(self._splash_screen, "center center")
         # Main page
         pm.add(self._grid)
         pm.set_page_left_topbar_widget(self._grid, self._open_button)
-        pm.set_page_background_uri(self._grid, "resource:///com/endlessm/photos/images/background-tile.jpg")
+        pm.set_page_background_uri(self._grid, "resource://" + IMAGES_RESOURCE_PREFIX + "background-tile.jpg")
         pm.set_page_background_repeats(self._grid, True)
         pm.set_page_background_size(self._grid, "auto")
         # Fullscreen page

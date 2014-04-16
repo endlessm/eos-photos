@@ -4,19 +4,20 @@ from gi.repository import Gtk, Gdk, GdkPixbuf
 
 from widgets.composite_button import CompositeButton
 from widgets.image_text_button import ImageTextButton
+from resource_prefixes import *
 
 
 class PhotosLeftToolbar(Gtk.VBox):
     """
     The left filter selection toolbar for the photo app.
     """
-    def __init__(self, images_path="", categories=[], **kw):
+    def __init__(self, categories=[], **kw):
         super(PhotosLeftToolbar, self).__init__(homogeneous=False, spacing=0, **kw)
         self._separator_images = {
-            "top": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator_black.png"),
-            "bottom": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator_white.png"),
-            "top-shadow": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator-opened_top-shadow.png"),
-            "bottom-shadow": GdkPixbuf.Pixbuf.new_from_resource("/com/endlessm/photos/images/separator-opened_bottom-shadow.png")
+            "top": GdkPixbuf.Pixbuf.new_from_resource(IMAGES_RESOURCE_PREFIX + "separator_black.png"),
+            "bottom": GdkPixbuf.Pixbuf.new_from_resource(IMAGES_RESOURCE_PREFIX + "separator_white.png"),
+            "top-shadow": GdkPixbuf.Pixbuf.new_from_resource(IMAGES_RESOURCE_PREFIX + "separator-opened_top-shadow.png"),
+            "bottom-shadow": GdkPixbuf.Pixbuf.new_from_resource(IMAGES_RESOURCE_PREFIX + "separator-opened_bottom-shadow.png")
         }
 
         self._categories = {}
