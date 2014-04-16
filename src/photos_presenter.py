@@ -40,7 +40,6 @@ class PhotosPresenter(object):
 
         #set up social bar so we can connect to facebook
         self._facebook_post = FacebookPost()
-        self._locked = False
 
     def open_image(self, filename):
         self._model.open(filename)
@@ -71,11 +70,9 @@ class PhotosPresenter(object):
         return filename
 
     def _lock_ui(self):
-        self._locked = True
         self._view.lock_ui()
 
     def _unlock_ui(self):
-        self._locked = False
         self._view.unlock_ui()
 
     def _run_locking_task(self, method, args=()):
@@ -200,8 +197,6 @@ class PhotosPresenter(object):
     #UI callbacks...
 
     def on_close(self):
-        if self._locked:
-            return
         # Prompt for save before quitting
         if not self._model.is_saved():
             self._view.show_confirm_close()
@@ -209,8 +204,6 @@ class PhotosPresenter(object):
             self._view.close_window()
 
     def on_open(self):
-        if self._locked:
-            return
 
         # Cancel any ongoing crops
         self._do_crop_cancel()
@@ -274,8 +267,6 @@ class PhotosPresenter(object):
             return False
 
     def on_save(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
 
@@ -317,8 +308,6 @@ class PhotosPresenter(object):
             self._run_locking_task(self._do_post_to_facebook, (info[0],))
 
     def on_share(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
 
@@ -331,8 +320,6 @@ class PhotosPresenter(object):
         self._view.get_message(_("Enter a message to add to your photo!"), self.facebook_message_callback, _("Message:"))
 
     def on_set_background(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
 
@@ -346,8 +333,6 @@ class PhotosPresenter(object):
             self._run_locking_task(self._do_send_email, (info[0], info[1], info[2]))
 
     def on_email(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
 
@@ -357,70 +342,50 @@ class PhotosPresenter(object):
         self._view.get_message(_("Enter a message to add to the e-mail"), self.email_message_callback, _("Your Name:"), _("Recipient email:"), _("Message:"))
 
     def on_fullscreen(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._view.set_image_fullscreen(True)
 
     def on_unfullscreen(self):
-        if self._locked:
-            return
         self._view.set_image_fullscreen(False)
 
     def on_filter_select(self, filter_name):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_filter_select, (filter_name,))
 
     def on_blur_select(self, blur_name):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_blur_select, (blur_name,))
 
     def on_rotate(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_rotate)
 
     def on_crop_activate(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_crop_activate)
 
     def on_crop_apply(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_crop_apply)
 
     def on_crop_cancel(self):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_crop_cancel)
 
     def on_border_select(self, border_name):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._model.set_border(border_name)
         self._view.select_border(border_name)
 
     def on_distortion_select(self, distort_name):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         self._run_locking_task(self._do_distort, (distort_name,))
@@ -447,50 +412,36 @@ class PhotosPresenter(object):
                 thread_name)
 
     def on_contrast_change(self, value):
-        if self._locked:
-            return
         self._make_adjustment_change(
             value, self._model.get_contrast, self._model.set_contrast, "Contrast Slider Thread")
 
     def on_brightness_change(self, value):
-        if self._locked:
-            return
         self._make_adjustment_change(
             value, self._model.get_brightness, self._model.set_brightness, "Brightness Slider Thread")
 
     def on_saturation_change(self, value):
-        if self._locked:
-            return
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation, "Saturation Slider Thread")
 
     def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("TILT-SHIFT",))
 
     def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("DEPTH-OF-FIELD",))
 
     def on_noblur_toggle(self, toggleAction):
-        if self._locked:
-            return
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("NONE",))
 
     def on_revert(self):
-        if self._locked:
-            return
         self._do_crop_cancel()
         self._model.revert_to_original()
         self._sync_photo_options()
