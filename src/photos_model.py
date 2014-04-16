@@ -197,7 +197,7 @@ class PhotosModel(object):
 
     # format, an image format string will be inferred from filename by default
     # quality, the quality of the image (100% is max) for lossy image formats
-    # save_point, weather to consider this a save point (i.e. the user triggered this save)
+    # save_point, whether to consider this a save point (i.e. the user triggered this save)
     def save(self, filename, format=None, quality=95, save_point=False):
         if self.is_open():
             im = self._composite_final_image()

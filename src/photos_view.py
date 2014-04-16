@@ -120,20 +120,28 @@ class PhotosView(object):
     def set_saturation_slider(self, value):
         self._adjustments.set_saturation_slider(value)
 
-    def show_facebook_login_dialog(self):
+    def facebook_login_callback(self, dialog, response, message_to_post):
+        self._presenter.facebook_login_handler(message_to_post, dialog.get_access_token(), dialog.get_message())
+        dialog.hide()
+
+    def show_facebook_login_dialog(self, message_to_post):
         dialog = FacebookAuthDialog(transient_for=self.get_window())
-        dialog.run()
-        token = dialog.get_access_token()
-        message = dialog.get_message()
-        dialog.destroy()
-        return token, message
+        dialog.connect('response', self.facebook_login_callback, message_to_post)
+        dialog.show()
+
+    def open_callback(self, dialog, response):
+        if response == Gtk.ResponseType.ACCEPT:
+            self._presenter.open_handler(
+                dialog.get_filename())
+        dialog.hide()
 
     def show_open_dialog(self, starting_dir=None):
         # Opens a dialog window where the user can choose an image file
         dialog = PreviewFileChooserDialog(
             title=_("Open Image"),
             parent=self.get_window(),
-            action=Gtk.FileChooserAction.OPEN)
+            action=Gtk.FileChooserAction.OPEN,
+            modal=True)
 
         if starting_dir != None:
             dialog.set_current_folder(starting_dir)
@@ -150,18 +158,26 @@ class PhotosView(object):
         filefilter.add_pixbuf_formats()
         dialog.set_filter(filefilter)
 
-        if dialog.run() == Gtk.ResponseType.ACCEPT:
-            # Loads the image
-            filename = dialog.get_filename()
-            dialog.destroy()
-            return filename
+        dialog.connect('response', self.open_callback)
+
+        dialog.show()
+
+    def save_callback(self, dialog, response):
+        if response == Gtk.ResponseType.ACCEPT:
+            should_close = self._presenter.save_handler(
+                dialog.get_filename())
+            if should_close:
+                dialog.hide()
         else:
-            dialog.destroy()
-            return None
+            dialog.hide()
 
     def show_save_dialog(self, curr_name, dir_path):
         # Opens a dialog window where the user can choose an image file
-        dialog = Gtk.FileChooserDialog(_("Save Image"), self.get_window(), Gtk.FileChooserAction.SAVE)
+        dialog = Gtk.FileChooserDialog(
+            _("Save Image"),
+            self.get_window(),
+            Gtk.FileChooserAction.SAVE,
+            modal=True)
         dialog.set_do_overwrite_confirmation(True);
 
         # Adds 'Cancel' and 'OK' buttons
@@ -173,54 +189,49 @@ class PhotosView(object):
         # Sets default to 'OK'
         dialog.set_default_response(Gtk.ResponseType.ACCEPT)
 
-        if dialog.run() == Gtk.ResponseType.ACCEPT:
-            # Loads the image
-            filename = dialog.get_filename()
-            dialog.destroy()
-            return filename
-        else:
-            dialog.destroy()
-            return None
+        dialog.connect('response', self.save_callback)
+        dialog.show()
 
-    def show_confirm_open_new(self):
+    def confirm_open_new_callback(self, dialog, response):
+        dialog.hide()
+        if response == 1:
+            self._presenter._do_open()
+
+    def show_confirm_open_new_dialog(self):
         dialog = Gtk.MessageDialog(
             parent=self.get_window(),
             text=_("Open new photo without save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to open a new photo without saving?"),
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_OK, 1)
         # set default to cancel
         dialog.set_default_response(0)
-        confirm = dialog.run()
-        dialog.destroy()
-        return confirm
+        dialog.connect('response', self.confirm_open_new_callback)
+        dialog.show()
+
+    def confirm_close_callback(self, dialog, response):
+        dialog.hide()
+        if response == 1:
+            self._presenter.on_save()
+        elif response == 2:
+            self.close_window()
 
     def show_confirm_close(self):
         dialog = Gtk.MessageDialog(
             parent=self.get_window(),
             text=_("Quit Without Save?"),
             secondary_text=_("Your changes have not been saved. Are you sure you want to quit?"),
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
         dialog.add_button(Gtk.STOCK_SAVE, 1)
         dialog.add_button(Gtk.STOCK_QUIT, 2)
         # set default to cancel
         dialog.set_default_response(0)
-        confirm = dialog.run()
-        dialog.destroy()
-        return confirm
-
-    def prompt_view_background(self):
-        dialog = Gtk.MessageDialog(
-            parent=self.get_window(),
-            text=_("Image successfully applied to background!"),
-            message_type=Gtk.MessageType.INFO)
-        dialog.add_button(Gtk.STOCK_OK, 0)
-        # set default to cancel
-        dialog.set_default_response(0)
-        confirm = dialog.run()
-        dialog.destroy()
+        dialog.connect('response', self.confirm_close_callback)
+        dialog.show()
 
     def show_message(self, text="", secondary_text="", warning=False):
         dialog_type = Gtk.MessageType.WARNING if warning else Gtk.MessageType.INFO
@@ -228,21 +239,31 @@ class PhotosView(object):
             parent=self.get_window(),
             text=text,
             secondary_text=secondary_text,
-            message_type=dialog_type)
+            message_type=dialog_type,
+            modal=True)
         dialog.add_button(Gtk.STOCK_OK, 0)
         # set default to cancel
         dialog.set_default_response(0)
-        dialog.run()
-        dialog.destroy()
+        dialog.connect('response', lambda dialog, response: dialog.hide())
+        dialog.show()
+
+    def message_callback(self, dialog, confirm, entries, callback):
+        responses = []
+        map(lambda x: responses.append(x.get_text()), entries)
+        dialog.hide()
+        if confirm <= 0:
+            confirm = 0
+        callback(confirm, responses)
 
     # Gets responses from a user. Args is a list of requested responses
     # from the user.
-    def get_message(self, prompt, *args):
+    def get_message(self, prompt, callback, *args):
         dialog = Gtk.MessageDialog(
             image=None,
             parent=self.get_window(),
             use_markup=True,
-            message_type=Gtk.MessageType.WARNING)
+            message_type=Gtk.MessageType.WARNING,
+            modal=True)
         dialog.set_markup("<big><b>" + prompt + "</b></big>")
         dialog.add_button(Gtk.STOCK_OK, 1)
         dialog.add_button(Gtk.STOCK_CANCEL, 0)
@@ -263,18 +284,8 @@ class PhotosView(object):
             vbox.pack_end(entry, True, True, 0)
             dialog.get_message_area().pack_start(vbox, True, True, 0)
 
+        dialog.connect('response', self.message_callback, entries, callback)
         dialog.show_all()
-        confirm = dialog.run()
-        # If user clicks cancel, return having done nothing
-        if confirm == 1:
-            # Store the responses from user in this list
-            responses = []
-            map(lambda x: responses.append(x.get_text()), entries)
-            dialog.destroy()
-            return responses
-        else:
-            dialog.destroy()
-            return None
 
     def lock_ui(self):
         # TODO: bring set_sensitive back someday!!! When we know why it breaks
