@@ -241,6 +241,30 @@ EosPageManager .image-frame {
     background-image: url("images/icon_rotate_hover.png");
 }
 
+#apply-button .image-frame {
+    background-image: url("images/confirm_ok-btn_normal.png");
+}
+
+#apply-button .image-frame:hover {
+    background-image: url("images/confirm_ok-btn_hover.png");
+}
+
+#apply-button .image-frame:active {
+    background-image: url("images/confirm_ok-btn_pressed.png");
+}
+
+#cancel-button .image-frame {
+    background-image: url("images/confirm_cancel-btn_normal.png");
+}
+
+#cancel-button .image-frame:hover {
+    background-image: url("images/confirm_cancel-btn_hover.png");
+}
+
+#cancel-button .image-frame:active {
+    background-image: url("images/confirm_cancel-btn_pressed.png");
+}
+
 #wallpaper-button .image-frame {
     background-image: url("images/btn_background_normal.png");
 }

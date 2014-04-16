@@ -4,7 +4,6 @@ from gi.repository import Gtk
 from widgets.option_list import OptionList
 from widgets.slider import Slider
 from widgets.image_text_button import ImageTextButton
-from widgets.image_button import ImageButton
 
 THUMBNAIL_RESOURCE_PREFIX = "/com/endlessm/photos/thumbnails/"
 
@@ -98,6 +97,8 @@ class TransformToolbar(CategoryToolbar):
         return _("TRANSFORM")
 
 class CropOptions(Gtk.Frame):
+    APPLY_CANCEL_SIZE=32
+
     def __init__(self, images_path, **kw):
         kw["name"] = "crop-options"
         super(CropOptions, self).__init__(**kw)
@@ -115,20 +116,14 @@ class CropOptions(Gtk.Frame):
         self._crop_label.show()
         self._crop_options_box.pack_start(self._crop_label, False, False, 0)
 
-        self._apply_button = ImageButton(
-            normal_path = self._images_path + 'confirm_ok-btn_normal.png',
-            hover_path = self._images_path + 'confirm_ok-btn_hover.png',
-            down_path = self._images_path + 'confirm_ok-btn_pressed.png'
-        )
+        self._apply_button = ImageTextButton(image_size_x=CropOptions.APPLY_CANCEL_SIZE,
+                                             image_size_y=CropOptions.APPLY_CANCEL_SIZE)
         self._apply_button.connect("clicked", self.apply_crop)
         self._apply_button.set_name("apply-button")
         self._apply_button.show_all()
 
-        self._cancel_button = ImageButton(
-            normal_path = self._images_path + 'confirm_cancel-btn_normal.png',
-            hover_path = self._images_path + 'confirm_cancel-btn_hover.png',
-            down_path = self._images_path + 'confirm_cancel-btn_pressed.png'
-        )
+        self._cancel_button = ImageTextButton(image_size_x=CropOptions.APPLY_CANCEL_SIZE,
+                                              image_size_y=CropOptions.APPLY_CANCEL_SIZE)
         self._cancel_button.connect("clicked", self.cancel_crop)
         self._cancel_button.set_name("cancel-button")
         self._cancel_button.show_all()
