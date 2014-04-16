@@ -112,8 +112,6 @@ images = \
 	data/images/textures/old_film.jpg \
 	data/images/textures/paper.jpg \
 	data/images/textures/weird_vignette.png \
-	data/images/background-tile.jpg \
-	data/images/background_splash.jpg \
 	$(NULL)
 
 nobase_pkgdata_DATA = \

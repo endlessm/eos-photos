@@ -54,13 +54,13 @@ class PhotosWindow(Endless.Window):
         pm = self.get_page_manager()
         # Splash page
         pm.add(self._splash_screen)
-        pm.set_page_background_uri(self._splash_screen, images_path + "background_splash.jpg")
+        pm.set_page_background_uri(self._splash_screen, "resource:///com/endlessm/photos/images/background_splash.jpg")
         pm.set_page_background_size(self._splash_screen, "cover")
         pm.set_page_background_position(self._splash_screen, "center center")
         # Main page
         pm.add(self._grid)
         pm.set_page_left_topbar_widget(self._grid, self._open_button)
-        pm.set_page_background_uri(self._grid, images_path + "background-tile.jpg")
+        pm.set_page_background_uri(self._grid, "resource:///com/endlessm/photos/images/background-tile.jpg")
         pm.set_page_background_repeats(self._grid, True)
         pm.set_page_background_size(self._grid, "auto")
         # Fullscreen page

@@ -2,6 +2,8 @@
 <gresources>
     <gresource prefix="/com/endlessm/photos">
         <file>endless_photos.css</file>
+        <file>images/background-tile.jpg</file>
+        <file>images/background_splash.jpg</file>
         <file>images/btn_background_hover.png</file>
         <file>images/btn_background_normal.png</file>
         <file>images/btn_background_pressed.png</file>
