@@ -8,9 +8,9 @@ import ImageFilter
 import ImageEnhance
 import colorsys
 
+from .. import util
 from curve import Curve
 from curve import CurveManager
-
 from distortions import Distortion
 
 """
@@ -20,7 +20,7 @@ someday split into filters, basic tools, etc.
 
 _CURVES_PATH = ""
 _TEXTURES_PATH = ""
-
+_TEXTURES_RESOURCE_PATH = "/com/endlessm/photos/images/textures/"
 
 def set_curves_path(curves_path):
     global _CURVES_PATH
@@ -53,7 +53,7 @@ def apply_saturation(image, value):
     return enh.enhance(value)
 
 def apply_curve(image, curve_file):
-    img_curve = Curve(_CURVES_PATH + curve_file, 'crgb')
+    img_curve = Curve(curve_file, 'crgb')
     image_array = numpy.array(image)
     curve_manager = CurveManager()
     curve_manager.add_curve(img_curve)
@@ -80,14 +80,15 @@ def pixelate(image, pixel_size=10):
     return downsized.resize((width, height))
 
 def texture_overlay(image, texture_file, alpha=0.5):
+    texture = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + texture_file)
     texture = Image.open(_TEXTURES_PATH + texture_file)
     texture = texture.resize(image.size)
     return Image.blend(image, texture, alpha)
 
 def vignette(image, texture_file):
-    black = Image.open(_TEXTURES_PATH + "black.png")
+    black = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + "black.png")
     black = black.resize(image.size)
-    texture = Image.open(_TEXTURES_PATH + texture_file)
+    texture = util.load_pil_image_from_resource(_TEXTURES_RESOURCE_PATH + texture_file)
     texture = texture.resize(image.size)
     return Image.composite(black, image, texture)
 

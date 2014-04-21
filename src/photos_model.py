@@ -3,6 +3,7 @@ import collections
 import Image
 import ImageFilter
 
+import util
 import image_processing.image_tools as ImageTools
 
 class PhotosModel(object):
@@ -468,8 +469,8 @@ class PhotosModel(object):
     def _update_border_image(self):
         filename = self._border_dict[self._border]
         if filename is not None:
-            self._border_image = Image.open(self._borders_path + filename).resize(
-                self._adjusted_image.size, Image.BILINEAR)
+            border = util.load_pil_image_from_resource("/com/endlessm/photos/images/borders/" + filename)
+            self._border_image = border.resize(self._adjusted_image.size, Image.BILINEAR)
             width, height = self._border_image.size
             if self._displayable:
                 self._image_widget.replace_border_image(
