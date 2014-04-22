@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-04-01 04:38+0000\n"
+"POT-Creation-Date: 2014-04-22 04:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,31 +210,43 @@ msgstr ""
 msgid "Swirl"
 msgstr ""
 
-#: src/photos_presenter.py:142
+#: src/photos_presenter.py:131
+msgid "Image successfully applied to background!"
+msgstr ""
+
+#: src/photos_presenter.py:140
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:307
+#: src/photos_presenter.py:261
+msgid "You do not have permissions to save the photo here"
+msgstr ""
+
+#: src/photos_presenter.py:263
+msgid "An error occurred while saving your photo"
+msgstr ""
+
+#: src/photos_presenter.py:318
 msgid "Facebook is not available offline."
 msgstr ""
 
-#: src/photos_presenter.py:309
+#: src/photos_presenter.py:320
 msgid "Enter a message to add to your photo!"
 msgstr ""
 
-#: src/photos_presenter.py:309 src/photos_presenter.py:340
+#: src/photos_presenter.py:320 src/photos_presenter.py:342
 msgid "Message:"
 msgstr ""
 
-#: src/photos_presenter.py:340
+#: src/photos_presenter.py:342
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:340
+#: src/photos_presenter.py:342
 msgid "Your Name:"
 msgstr ""
 
-#: src/photos_presenter.py:340
+#: src/photos_presenter.py:342
 msgid "Recipient email:"
 msgstr ""
 
@@ -250,34 +262,30 @@ msgstr ""
 msgid "BACKGROUND"
 msgstr ""
 
-#: src/photos_view.py:134 src/splash_screen.py:27
+#: src/photos_view.py:141 src/splash_screen.py:27
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:164
+#: src/photos_view.py:177
 msgid "Save Image"
 msgstr ""
 
-#: src/photos_view.py:188
+#: src/photos_view.py:203
 msgid "Open new photo without save?"
 msgstr ""
 
-#: src/photos_view.py:189
+#: src/photos_view.py:204
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:202
+#: src/photos_view.py:224
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_view.py:203
+#: src/photos_view.py:225
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
-
-#: src/photos_view.py:217
-msgid "Image successfully applied to background!"
 msgstr ""
 
 #: src/photos_window.py:47
