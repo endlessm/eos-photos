@@ -1,38 +1,44 @@
 #!/usr/bin/env python
 import os
+import sys
 import inspect
+from gi.repository import Gio
+
 import gettext
 gettext.install('endless_photos')
 
-CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
-CURRENT_DIR = os.path.dirname(CURRENT_FILE)
+BUILDDIR = "@abs_top_builddir@"
+SRCDIR = "@abs_top_srcdir@"
+ASSET_RESOURCE_PATH = BUILDDIR + '/data/endless_photos.gresource';
+THUMBNAIL_IMAGE_PATH = SRCDIR + '/data/images/thumbnail_original.jpg';
+
+sys.path.append(SRCDIR)
+from src.photos_model import PhotosModel
+from src.resource_prefixes import *
 
 GRESOURCE_HEAD="""
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-    <gresource prefix="/com/endlessm/photos/thumbnails">"""
+    <gresource prefix='""" + THUMBNAILS_RESOURCE_PREFIX + "'>"
 GRESOURCE_BODY="""
         <file>{file}</file>"""
 GRESOURCE_TAIL="""
     </gresource>
 </gresources>"""
 
-from src.photos_model import PhotosModel
-
 def create_dir_if_necessary(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
 if __name__ == '__main__':
-    model = PhotosModel(textures_path=CURRENT_DIR + "/data/images/textures/",
-                        curves_path=CURRENT_DIR + "/data/curves/",
-                        borders_path=CURRENT_DIR + "/data/images/borders/",
-                        displayable=False)
+    asset_resource = Gio.Resource.load(ASSET_RESOURCE_PATH);
+    asset_resource._register();
+    model = PhotosModel(displayable=False)
 
     thumbnail_files = []
     output_dir = "data/images/thumbnails"
     create_dir_if_necessary(output_dir)
-    model.open(CURRENT_DIR + "/data/images/thumbnail_original.jpg")
+    model.open(THUMBNAIL_IMAGE_PATH)
     filter_no = 0
     for f in model.get_filter_names():
         model.set_filter(f)

@@ -5,15 +5,17 @@ The extraction of the curves from the acv files are from here:
 
 from struct import unpack
 from scipy import interpolate
-
 import numpy
 
+from .. import util
+from ..resource_prefixes import *
 
 class Curve:
-    def __init__(self, acv_file_path, name):
+    def __init__(self, acv_file_name, name):
         self.name = name
-        with open(acv_file_path, 'rb') as acv_file:
-            self.curves = self._read_curves(acv_file)
+
+        acv_file = util.load_byte_stream_from_resource(CURVES_RESOURCE_PREFIX + acv_file_name)
+        self.curves = self._read_curves(acv_file)
         self.polynomials = self._find_coefficients()
 
     def _read_curves(self, acv_file):

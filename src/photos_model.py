@@ -3,6 +3,8 @@ import collections
 import Image
 import ImageFilter
 
+import util
+from resource_prefixes import *
 import image_processing.image_tools as ImageTools
 
 class PhotosModel(object):
@@ -10,13 +12,8 @@ class PhotosModel(object):
     The model for the photo being edited. Uses the Python Imaging Library to
     modify the current open photo.
     """
-    def __init__(self, textures_path="", curves_path="", borders_path="", displayable=True):
+    def __init__(self, displayable=True):
         super(PhotosModel, self).__init__()
-        ImageTools.set_textures_path(textures_path)
-        self._textures_path = textures_path
-        ImageTools.set_curves_path(curves_path)
-        self._curves_path = curves_path
-        self._borders_path = borders_path
         self._source_image = None
         self._cropped_image = None
         self._filtered_image = None
@@ -468,8 +465,8 @@ class PhotosModel(object):
     def _update_border_image(self):
         filename = self._border_dict[self._border]
         if filename is not None:
-            self._border_image = Image.open(self._borders_path + filename).resize(
-                self._adjusted_image.size, Image.BILINEAR)
+            border = util.load_pil_image_from_resource(BORDERS_RESOURCE_PREFIX + filename)
+            self._border_image = border.resize(self._adjusted_image.size, Image.BILINEAR)
             width, height = self._border_image.size
             if self._displayable:
                 self._image_widget.replace_border_image(

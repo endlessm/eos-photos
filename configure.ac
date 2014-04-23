@@ -53,8 +53,9 @@ AC_CACHE_SAVE
 # ------
 # List files here that the configure script should output
 AC_CONFIG_FILES([
+    generate-filter-thumbnails
     Makefile
     po/Makefile.in
-])
+], [chmod +x generate-filter-thumbnails])
 # Do the output
 AC_OUTPUT

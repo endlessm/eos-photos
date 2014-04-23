@@ -2,10 +2,38 @@
 <gresources>
     <gresource prefix="/com/endlessm/photos">
         <file>endless_photos.css</file>
+        <file>curves/desert.acv</file>
+        <file>curves/country.acv</file>
+        <file>curves/trains.acv</file>
+        <file>curves/fogy_blue.acv</file>
+        <file>curves/lumo.acv</file>
+        <file>images/borders/frame_3x2_brush.png</file>
+        <file>images/borders/frame_3x2_crayon.png</file>
+        <file>images/borders/frame_3x2_grunge.png</file>
+        <file>images/borders/frame_3x2_spray.png</file>
+        <file>images/textures/black.png</file>
+        <file>images/textures/bumpy.jpg</file>
+        <file>images/textures/grunge.jpg</file>
+        <file>images/textures/heavy_vignette.png</file>
+        <file>images/textures/light_vignette.png</file>
+        <file>images/textures/old_film.jpg</file>
+        <file>images/textures/paper.jpg</file>
+        <file>images/textures/weird_vignette.png</file>
+        <file>images/background-tile.jpg</file>
+        <file>images/background_splash.jpg</file>
         <file>images/btn_background_hover.png</file>
         <file>images/btn_background_normal.png</file>
         <file>images/btn_background_pressed.png</file>
+        <file>images/confirm_cancel-btn_hover.png</file>
+        <file>images/confirm_cancel-btn_normal.png</file>
+        <file>images/confirm_cancel-btn_pressed.png</file>
         <file>images/confirm_menu_separator_middle.png</file>
+        <file>images/confirm_ok-btn_hover.png</file>
+        <file>images/confirm_ok-btn_normal.png</file>
+        <file>images/confirm_ok-btn_pressed.png</file>
+        <file>images/crop_knob_normal.png</file>
+        <file>images/crop_knob_hover.png</file>
+        <file>images/crop_knob_dark.png</file>
         <file>images/facebook_down.png</file>
         <file>images/facebook_hover.png</file>
         <file>images/facebook_normal.png</file>

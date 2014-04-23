@@ -1,5 +1,6 @@
 eos-photos
 eos-photos-local
+generate-filter-thumbnails
 data/images/thumbnails/*
 
 *.deb

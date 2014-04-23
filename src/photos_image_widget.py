@@ -10,7 +10,7 @@ class PhotosImageWidget(Clutter.Actor):
     this cuts down on a lot of function passing overhead through the
     presenter.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
         kw.setdefault("layout-manager", Clutter.BinLayout())
         super(PhotosImageWidget, self).__init__(**kw)
         self._ratio = 1.0

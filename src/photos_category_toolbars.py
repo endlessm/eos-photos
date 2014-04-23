@@ -4,9 +4,7 @@ from gi.repository import Gtk
 from widgets.option_list import OptionList
 from widgets.slider import Slider
 from widgets.image_text_button import ImageTextButton
-from widgets.image_button import ImageButton
-
-THUMBNAIL_RESOURCE_PREFIX = "/com/endlessm/photos/thumbnails/"
+from resource_prefixes import *
 
 class CategoryToolbar(Gtk.Alignment):
     """
@@ -14,13 +12,12 @@ class CategoryToolbar(Gtk.Alignment):
     content, but must display provide a label and icon in normal and hover
     states.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
         kw.setdefault("xalign", 0.0)
         kw.setdefault("yalign", 0.0)
         kw.setdefault("xscale", 0.0)
         kw.setdefault("yscale", 0.0)
         super(CategoryToolbar, self).__init__(**kw)
-        self._images_path = images_path
 
     def set_presenter(self, presenter):
         self._presenter = presenter
@@ -49,7 +46,7 @@ class OptionListToolbar(CategoryToolbar):
 
     def _set_option(self, name_and_thumb):
         option_name = name_and_thumb[0]
-        thumbnail_resource = THUMBNAIL_RESOURCE_PREFIX + name_and_thumb[1]
+        thumbnail_resource = THUMBNAILS_RESOURCE_PREFIX + name_and_thumb[1]
         self._list.add_option(thumbnail_resource, option_name, lambda: self.clicked_callback(option_name))
         self.show_all()
 
@@ -77,7 +74,7 @@ class TransformToolbar(CategoryToolbar):
         self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
         self._rotate_button.set_name("rotate-button")
 
-        self._crop_button = CropOptions(images_path=self._images_path)
+        self._crop_button = CropOptions()
 
         self._vbox.pack_start(self._rotate_button, False, False, 0)
         self._vbox.pack_start(self._crop_button, False, False, 0)
@@ -98,10 +95,11 @@ class TransformToolbar(CategoryToolbar):
         return _("TRANSFORM")
 
 class CropOptions(Gtk.Frame):
-    def __init__(self, images_path, **kw):
+    APPLY_CANCEL_SIZE=32
+
+    def __init__(self, **kw):
         kw["name"] = "crop-options"
         super(CropOptions, self).__init__(**kw)
-        self._images_path = images_path
         self._crop_options_box = Gtk.HBox(no_show_all=True)
         self._vbox = Gtk.VBox()
 
@@ -115,20 +113,14 @@ class CropOptions(Gtk.Frame):
         self._crop_label.show()
         self._crop_options_box.pack_start(self._crop_label, False, False, 0)
 
-        self._apply_button = ImageButton(
-            normal_path = self._images_path + 'confirm_ok-btn_normal.png',
-            hover_path = self._images_path + 'confirm_ok-btn_hover.png',
-            down_path = self._images_path + 'confirm_ok-btn_pressed.png'
-        )
+        self._apply_button = ImageTextButton(image_size_x=CropOptions.APPLY_CANCEL_SIZE,
+                                             image_size_y=CropOptions.APPLY_CANCEL_SIZE)
         self._apply_button.connect("clicked", self.apply_crop)
         self._apply_button.set_name("apply-button")
         self._apply_button.show_all()
 
-        self._cancel_button = ImageButton(
-            normal_path = self._images_path + 'confirm_cancel-btn_normal.png',
-            hover_path = self._images_path + 'confirm_cancel-btn_hover.png',
-            down_path = self._images_path + 'confirm_cancel-btn_pressed.png'
-        )
+        self._cancel_button = ImageTextButton(image_size_x=CropOptions.APPLY_CANCEL_SIZE,
+                                              image_size_y=CropOptions.APPLY_CANCEL_SIZE)
         self._cancel_button.connect("clicked", self.cancel_crop)
         self._cancel_button.set_name("cancel-button")
         self._cancel_button.show_all()
@@ -240,7 +232,7 @@ class AdjustmentToolbar(CategoryToolbar):
     """
     Widget presenting sliders for image adjustments. Part of the left toolbar.
     """
-    def __init__(self, images_path="", **kw):
+    def __init__(self, **kw):
         kw["name"] = "adjustment"
         kw.setdefault("left-padding", 10)
         kw.setdefault("right-padding", 15)

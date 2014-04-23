@@ -1,5 +1,3 @@
-import subprocess
-from datetime import datetime, timedelta
 from gi.repository import Gtk, Gdk
 
 class Slider(Gtk.HScale):

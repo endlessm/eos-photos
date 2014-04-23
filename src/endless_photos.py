@@ -9,6 +9,7 @@ gettext.install('eos-photos')
 from photos_model import PhotosModel
 from photos_view import PhotosView
 from photos_presenter import PhotosPresenter
+from resource_prefixes import *
 
 CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
@@ -16,9 +17,6 @@ ASSET_RESOURCE_PATH = CURRENT_DIR + '/../data/endless_photos.gresource';
 THUMBNAIL_RESOURCE_PATH = CURRENT_DIR + '/../data/images/thumbnails/thumbnails.gresource';
 
 class EndlessPhotos(Endless.Application):
-    # The parent dir of the current directory (src) is the base of photo app
-    # directory structure
-    ABS_PHOTOS_PATH = os.path.join(CURRENT_DIR, os.pardir)
     """
     The photo application.
 
@@ -55,7 +53,7 @@ class EndlessPhotos(Endless.Application):
 
         # Style CSS
         provider = Gtk.CssProvider()
-        css_file = Gio.File.new_for_uri('resource:///com/endlessm/photos/endless_photos.css')
+        css_file = Gio.File.new_for_uri('resource://' + BASE_RESOURCE_PREFIX + 'endless_photos.css')
         provider.load_from_file(css_file);
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(), provider,
@@ -63,11 +61,8 @@ class EndlessPhotos(Endless.Application):
 
         # Create the mvp for the Photo app and attach the window to the
         # application.
-        self._model = PhotosModel(
-            textures_path=self.get_images_path() + "textures/",
-            curves_path=self.get_data_path() + "curves/",
-            borders_path=self.get_images_path() + "borders/")
-        self._view = PhotosView(application=self, images_path=self.get_images_path())
+        self._model = PhotosModel()
+        self._view = PhotosView(application=self)
         self._presenter = PhotosPresenter(model=self._model, view=self._view)
         self._view.set_presenter(self._presenter)
 
@@ -96,17 +91,3 @@ class EndlessPhotos(Endless.Application):
         does not do anything right now.
         """
         self._window.deiconify()
-
-    def get_images_path(self):
-        """
-        Returns path in the file system where application-specific image files
-        are stored.
-        """
-        return self.ABS_PHOTOS_PATH + '/data/images/'
-
-    def get_data_path(self):
-        """
-        Returns path in the file system where application-specific data files
-        are stored.
-        """
-        return self.ABS_PHOTOS_PATH + '/data/'

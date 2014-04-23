@@ -26,7 +26,7 @@ class ImageTextButton(Gtk.Button, CompositeButton):
         self._frame = Gtk.Frame()
         self._frame.get_style_context().add_class("image-frame")
         self._frame.set_size_request(image_size_x, image_size_y)
-        self._label = Gtk.Label(label)
+        sensitive_children = [self._frame]
 
         if vertical:
             self._box = Gtk.VBox(homogeneous=False, spacing=0)
@@ -35,7 +35,10 @@ class ImageTextButton(Gtk.Button, CompositeButton):
         align = Gtk.Alignment(xalign=0.5, yalign=0.5, xscale=0.0, yscale=0.0)
         align.add(self._frame)
         self._box.pack_start(align, expand=False, fill=False, padding=0)
-        self._box.pack_start(self._label, expand=False, fill=False, padding=2)
+        if label:
+            self._label = Gtk.Label(label)
+            self._box.pack_start(self._label, expand=False, fill=False, padding=2)
+            sensitive_children.append(self._label)
         self.add(self._box)
 
-        self.set_sensitive_children([self._frame, self._label])
+        self.set_sensitive_children(sensitive_children)
