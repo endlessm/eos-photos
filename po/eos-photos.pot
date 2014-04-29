@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-04-22 04:37+0000\n"
+"POT-Creation-Date: 2014-04-29 04:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,156 +57,156 @@ msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr ""
 
-#: src/photos_category_toolbars.py:29
+#: src/photos_category_toolbars.py:26
 msgid "Untitled"
 msgstr ""
 
-#: src/photos_category_toolbars.py:76
+#: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
 msgstr ""
 
-#: src/photos_category_toolbars.py:98
+#: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
 msgstr ""
 
-#: src/photos_category_toolbars.py:108
+#: src/photos_category_toolbars.py:106
 msgid "Crop"
 msgstr ""
 
-#: src/photos_category_toolbars.py:113
+#: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
 msgstr ""
 
-#: src/photos_category_toolbars.py:188
+#: src/photos_category_toolbars.py:180
 msgid "BLURS"
 msgstr ""
 
-#: src/photos_category_toolbars.py:203
+#: src/photos_category_toolbars.py:195
 msgid "BORDERS"
 msgstr ""
 
-#: src/photos_category_toolbars.py:218
+#: src/photos_category_toolbars.py:210
 msgid "FILTERS"
 msgstr ""
 
-#: src/photos_category_toolbars.py:233
+#: src/photos_category_toolbars.py:225
 msgid "DISTORT"
 msgstr ""
 
-#: src/photos_category_toolbars.py:253
+#: src/photos_category_toolbars.py:245
 msgid "Brightness"
 msgstr ""
 
-#: src/photos_category_toolbars.py:263
+#: src/photos_category_toolbars.py:255
 msgid "Contrast"
 msgstr ""
 
-#: src/photos_category_toolbars.py:273
+#: src/photos_category_toolbars.py:265
 msgid "Saturation"
 msgstr ""
 
-#: src/photos_category_toolbars.py:296
+#: src/photos_category_toolbars.py:288
 msgid "ADJUST"
 msgstr ""
 
-#: src/photos_left_toolbar.py:28
+#: src/photos_left_toolbar.py:29
 msgid "REVERT TO ORIGINAL"
 msgstr ""
 
-#: src/photos_model.py:67 src/photos_model.py:74 src/photos_model.py:98
-#: src/photos_model.py:109
+#: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
+#: src/photos_model.py:106
 msgid "None"
 msgstr ""
 
-#: src/photos_model.py:68
+#: src/photos_model.py:65
 msgid "Tilt Shift"
 msgstr ""
 
-#: src/photos_model.py:69
+#: src/photos_model.py:66
 msgid "Depth of Field"
 msgstr ""
 
-#: src/photos_model.py:75
+#: src/photos_model.py:72
 msgid "Grayscale"
 msgstr ""
 
-#: src/photos_model.py:76
+#: src/photos_model.py:73
 msgid "Country"
 msgstr ""
 
-#: src/photos_model.py:77
+#: src/photos_model.py:74
 msgid "Grungify"
 msgstr ""
 
-#: src/photos_model.py:78
+#: src/photos_model.py:75
 msgid "Old Photo"
 msgstr ""
 
-#: src/photos_model.py:79
+#: src/photos_model.py:76
 msgid "Colorful"
 msgstr ""
 
-#: src/photos_model.py:81
+#: src/photos_model.py:78
 msgid "Lomo"
 msgstr ""
 
-#: src/photos_model.py:84
+#: src/photos_model.py:81
 msgid "Foggy Blue"
 msgstr ""
 
-#: src/photos_model.py:85
+#: src/photos_model.py:82
 msgid "Paper"
 msgstr ""
 
-#: src/photos_model.py:86
+#: src/photos_model.py:83
 msgid "Trains"
 msgstr ""
 
-#: src/photos_model.py:87
+#: src/photos_model.py:84
 msgid "Desert"
 msgstr ""
 
-#: src/photos_model.py:88
+#: src/photos_model.py:85
 msgid "Posterize"
 msgstr ""
 
-#: src/photos_model.py:91
+#: src/photos_model.py:88
 msgid "Edges"
 msgstr ""
 
-#: src/photos_model.py:101
+#: src/photos_model.py:98
 msgid "Crayon"
 msgstr ""
 
-#: src/photos_model.py:102
+#: src/photos_model.py:99
 msgid "Grunge"
 msgstr ""
 
-#: src/photos_model.py:103
+#: src/photos_model.py:100
 msgid "Spray"
 msgstr ""
 
-#: src/photos_model.py:104
+#: src/photos_model.py:101
 msgid "Brush"
 msgstr ""
 
-#: src/photos_model.py:110
+#: src/photos_model.py:107
 msgid "Fish Eye Light"
 msgstr ""
 
-#: src/photos_model.py:111
+#: src/photos_model.py:108
 msgid "Fish Eye Heavy"
 msgstr ""
 
-#: src/photos_model.py:112
+#: src/photos_model.py:109
 msgid "Pinch Light"
 msgstr ""
 
-#: src/photos_model.py:113
+#: src/photos_model.py:110
 msgid "Pinch Heavy"
 msgstr ""
 
-#: src/photos_model.py:114
+#: src/photos_model.py:111
 msgid "Swirl"
 msgstr ""
 
@@ -262,33 +262,33 @@ msgstr ""
 msgid "BACKGROUND"
 msgstr ""
 
-#: src/photos_view.py:141 src/splash_screen.py:27
+#: src/photos_view.py:138 src/splash_screen.py:27
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:177
+#: src/photos_view.py:174
 msgid "Save Image"
 msgstr ""
 
-#: src/photos_view.py:203
+#: src/photos_view.py:200
 msgid "Open new photo without save?"
 msgstr ""
 
-#: src/photos_view.py:204
+#: src/photos_view.py:201
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:224
+#: src/photos_view.py:221
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_view.py:225
+#: src/photos_view.py:222
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr ""
 
-#: src/photos_window.py:47
+#: src/photos_window.py:48
 msgid "OPEN IMAGE"
 msgstr ""
 
