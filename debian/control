@@ -19,6 +19,9 @@ Homepage: http://www.endlessm.com
 
 Package: eos-photos
 Architecture: all
+XCBS-EOS-MinOsVersion: 1.4.7
+XCBS-EOS-AppId: com.endlessm.photos
+XCBS-EOS-AppName: Photos
 Replaces: endlessos-base-photos
 Breaks: endlessos-base-photos
 Depends: gir1.2-gtkclutter-1.0,
