@@ -76,19 +76,19 @@ class PhotosWindow(Endless.Window):
 
     def _on_keypress(self, widget, event):
         # We only call set_fullscreen to false if we are on the fullscreen page
-        if event.keyval == Gdk.KEY_Escape and self.get_page_manager().get_visible_page() == self._fullscreen_attach:
+        if event.keyval == Gdk.KEY_Escape and self.get_page_manager().get_visible_child() == self._fullscreen_attach:
             self.set_image_fullscreen(False)
 
     def set_photo_editor_active(self):
-        self.get_page_manager().set_visible_page(self._grid)
+        self.get_page_manager().set_visible_child(self._grid)
 
     def set_image_fullscreen(self, fullscreen):
         if fullscreen:
-            self.get_page_manager().set_visible_page(self._fullscreen_attach)
+            self.get_page_manager().set_visible_child(self._fullscreen_attach)
             self._image_container.reparent(self._fullscreen_attach)
             self._image_container.set_fullscreen_mode(True)
         else:
-            self.get_page_manager().set_visible_page(self._grid)
+            self.get_page_manager().set_visible_child(self._grid)
             self._image_container.reparent(self._normal_attach)
             self._image_container.set_fullscreen_mode(False)
 
