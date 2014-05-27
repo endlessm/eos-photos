@@ -3,16 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# joelmx <joel@endlessm.com>, 2013
-# nsanchez <ns@endlessm.com>, 2013
+# joelmx <joel@endlessm.com>, 2013-2014
+# nsanchez <ns@endlessm.com>, 2013-2014
 # ptomato <philip.chimento@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2014-04-29 04:39+0000\n"
-"PO-Revision-Date: 2014-04-22 04:37+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
+"PO-Revision-Date: 2014-05-23 17:20+0000\n"
+"Last-Translator: joelmx <joel@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/eos-photos/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,11 +224,11 @@ msgstr "Email falló."
 
 #: src/photos_presenter.py:261
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "No tienes los permisos requeridos para guardar tu foto aquí"
 
 #: src/photos_presenter.py:263
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "Sucedió un error y no se ha podido guardar tu foto."
 
 #: src/photos_presenter.py:318
 msgid "Facebook is not available offline."
