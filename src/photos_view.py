@@ -127,7 +127,7 @@ class PhotosView(object):
         dialog.show()
 
     def open_callback(self, dialog, response):
-        if response == Gtk.ResponseType.ACCEPT:
+        if response == Gtk.ResponseType.OK:
             self._presenter.open_handler(
                 dialog.get_filename())
         dialog.hide()
@@ -144,11 +144,11 @@ class PhotosView(object):
             dialog.set_current_folder(starting_dir)
 
         # Adds 'Cancel' and 'OK' buttons
-        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT)
-        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
 
         # Sets default to 'OK'
-        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
+        dialog.set_default_response(Gtk.ResponseType.OK)
 
         # Filters and displays files which can be opened by Gtk.Image
         filefilter = Gtk.FileFilter()
@@ -160,7 +160,7 @@ class PhotosView(object):
         dialog.show()
 
     def save_callback(self, dialog, response):
-        if response == Gtk.ResponseType.ACCEPT:
+        if response == Gtk.ResponseType.OK:
             should_close = self._presenter.save_handler(
                 dialog.get_filename())
             if should_close:
@@ -178,20 +178,22 @@ class PhotosView(object):
         dialog.set_do_overwrite_confirmation(True);
 
         # Adds 'Cancel' and 'OK' buttons
-        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.REJECT)
-        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.ACCEPT)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
 
         dialog.set_current_folder(dir_path)
         dialog.set_current_name(curr_name)
         # Sets default to 'OK'
-        dialog.set_default_response(Gtk.ResponseType.ACCEPT)
+        dialog.set_default_response(Gtk.ResponseType.OK)
 
         dialog.connect('response', self.save_callback)
         dialog.show()
 
     def confirm_open_new_callback(self, dialog, response):
         dialog.hide()
-        if response == 1:
+        if response == Gtk.ResponseType.ACCEPT:
+            self._presenter.on_save()
+        elif response == Gtk.ResponseType.OK:
             self._presenter._do_open()
 
     def show_confirm_open_new_dialog(self):
@@ -201,18 +203,19 @@ class PhotosView(object):
             secondary_text=_("Your changes have not been saved. Are you sure you want to open a new photo without saving?"),
             message_type=Gtk.MessageType.WARNING,
             modal=True)
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_OK, 1)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        dialog.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT)
+        dialog.add_button(Gtk.STOCK_OK, Gtk.ResponseType.OK)
         # set default to cancel
-        dialog.set_default_response(0)
+        dialog.set_default_response(Gtk.ResponseType.CANCEL)
         dialog.connect('response', self.confirm_open_new_callback)
         dialog.show()
 
     def confirm_close_callback(self, dialog, response):
         dialog.hide()
-        if response == 1:
+        if response == Gtk.ResponseType.ACCEPT:
             self._presenter.on_save()
-        elif response == 2:
+        elif response == Gtk.ResponseType.OK:
             self.close_window()
 
     def show_confirm_close(self):
@@ -222,11 +225,11 @@ class PhotosView(object):
             secondary_text=_("Your changes have not been saved. Are you sure you want to quit?"),
             message_type=Gtk.MessageType.WARNING,
             modal=True)
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.add_button(Gtk.STOCK_SAVE, 1)
-        dialog.add_button(Gtk.STOCK_QUIT, 2)
+        dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
+        dialog.add_button(Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT)
+        dialog.add_button(Gtk.STOCK_QUIT, Gtk.ResponseType.OK)
         # set default to cancel
-        dialog.set_default_response(0)
+        dialog.set_default_response(Gtk.ResponseType.CANCEL)
         dialog.connect('response', self.confirm_close_callback)
         dialog.show()
 
