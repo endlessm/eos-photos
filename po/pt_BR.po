@@ -3,10 +3,10 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# joelmx <joel@endlessm.com>, 2013
-# nsanchez <ns@endlessm.com>, 2013
-# RenatoP <renato@endlessm.com>, 2013
-# Michele.silva <michele@endlessm.com>, 2013
+# Joel Gil Leon <joel@endlessm.com>, 2013
+# Nuritzi Sanchez <ns@endlessm.com>, 2013
+# Renato Peixoto Pinto <renato@endlessm.com>, 2013
+# Silva <michele@endlessm.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
