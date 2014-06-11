@@ -72,6 +72,7 @@ py_sources = \
 	src/widgets/option_list.py \
 	src/widgets/preview_file_chooser_dialog.py \
 	src/widgets/slider.py \
+	src/widgets/text_entry.py \
 	src/__init__.py \
 	src/asyncworker.py \
 	src/crop_overlay.py \
