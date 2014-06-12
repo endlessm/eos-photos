@@ -70,5 +70,6 @@
         <file>images/separator-opened_bottom-shadow.png</file>
         <file>images/slider_knob_hover.png</file>
         <file>images/slider_knob_normal.png</file>
+        <file>images/open_photos_icon.png</file>
     </gresource>
 </gresources>
