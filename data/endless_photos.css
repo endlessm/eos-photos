@@ -301,15 +301,28 @@ EosPageManager .image-frame {
     background-image: url("images/facebook_down.png");
 }
 
+
 #splash-open-photos-button {
     transition:background-image 200ms ease-in-out;
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      from(#FFFFFF),
-                                     to(#B2B2B2));
+                                     to(#BBBBBB));
     padding: 0px 9px 0px 9px;
     border: 1px solid #B3B3B3;
     border-radius: 5px;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.35), inset 0px 1px 1px 0px #FFFFFF;
+}
+
+#splash-open-photos-button:hover {
+    background-image: -gtk-gradient (linear, left top, left bottom,
+                                     from(#FFFFFF),
+                                     to(#CBCBCB));
+}
+
+#splash-open-photos-button:active {
+    background-image: -gtk-gradient (linear, left bottom, left top,
+                                     from(#D1D1D1),
+                                     to(#B0B0B0));
 }
 
 #splash-open-photos-button GtkLabel {
@@ -319,18 +332,6 @@ EosPageManager .image-frame {
     padding-left: 3px;
     color: #333333;
     padding: 4px 4px 4px 4px;
-}
-
-#splash-open-photos-button:hover {
-    background-image: -gtk-gradient (linear, left top, left bottom,
-                                     from(#FFFFFF),
-                                     to(#C5C5C5));
-}
-
-#splash-open-photos-button:active {
-    background-image: -gtk-gradient (linear, left bottom, left top,
-                                     from(#D4D4D4),
-                                     to(#B2B2B2));
 }
 
 #splash-open-photos-button .image-frame {
