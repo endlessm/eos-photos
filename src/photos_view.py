@@ -7,6 +7,7 @@ from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToo
 from photos_window import PhotosWindow
 from photos_image_container import ImageContainer
 from widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
+from widgets.text_entry import TextEntry
 from share.facebook_auth_dialog import FacebookAuthDialog
 
 
@@ -240,6 +241,7 @@ class PhotosView(object):
             text=text,
             secondary_text=secondary_text,
             message_type=dialog_type,
+            name='message-dialog',
             modal=True)
         dialog.add_button(Gtk.STOCK_OK, 0)
         # set default to cancel
@@ -251,38 +253,46 @@ class PhotosView(object):
         responses = []
         map(lambda x: responses.append(x.get_text()), entries)
         dialog.hide()
-        if confirm <= 0:
-            confirm = 0
         callback(confirm, responses)
 
     # Gets responses from a user. Args is a list of requested responses
     # from the user.
     def get_message(self, prompt, callback, *args):
-        dialog = Gtk.MessageDialog(
-            image=None,
+        dialog = Gtk.Dialog(
             parent=self.get_window(),
-            use_markup=True,
-            message_type=Gtk.MessageType.WARNING,
-            modal=True)
-        dialog.set_markup("<big><b>" + prompt + "</b></big>")
-        dialog.add_button(Gtk.STOCK_OK, 1)
-        dialog.add_button(Gtk.STOCK_CANCEL, 0)
-        dialog.set_default_response(1)
-        dialog.set_size_request(400, -1)
+            modal=True,
+            name='message-box',
+            title=prompt)
+
+        grid = Gtk.Grid()
+        continue_button = Gtk.Button(label=_("Continue"), name='continue-button')
+        cancel_button = Gtk.Button(_("Cancel"))
+        dialog.add_action_widget(cancel_button, Gtk.ResponseType.CANCEL)
+        dialog.add_action_widget(continue_button, Gtk.ResponseType.OK)
+        dialog.get_action_area().set_layout(Gtk.ButtonBoxStyle.EDGE)
+        cancel_button.grab_focus()
+        dialog.set_size_request(500, -1)
 
         entries = []
-        # Create an entry for each of the requested responses
-        for msg in args:
+        # Create an entry for all but the last of the requested responses
+        # used solely for email popup, a currently disabled feature, so hasn't been tested
+        for index in range(0, len(args) - 1):
             entry = Gtk.Entry()
             entry.set_size_request(-1, 30)
             entry.set_activates_default(True)
             entries.append(entry)
             align = Gtk.Alignment(xalign=0, yalign=0, xscale=0, yscale=0)
-            align.add(Gtk.Label(msg))
+            align.add(Gtk.Label(args[index]))
             vbox = Gtk.VBox()
             vbox.pack_start(align, False, 5, 5)
             vbox.pack_end(entry, True, True, 0)
-            dialog.get_message_area().pack_start(vbox, True, True, 0)
+            grid.attach(vbox, 0, index, 1, 1)
+
+        text_view = TextEntry(args[len(args) - 1])
+        entries.append(text_view)
+        grid.attach(text_view, 0, len(args) - 1, 1, 1)
+
+        dialog.get_content_area().pack_start(grid, True, True, 10)
 
         dialog.connect('response', self.message_callback, entries, callback)
         dialog.show_all()

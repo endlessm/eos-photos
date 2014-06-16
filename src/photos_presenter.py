@@ -5,7 +5,7 @@ import tempfile
 import urllib2
 import time
 from subprocess import call
-from gi.repository import GLib
+from gi.repository import GLib, Gtk
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
@@ -298,7 +298,7 @@ class PhotosPresenter(object):
             self._run_locking_task(self._do_post_to_facebook, (message_to_post,))
 
     def facebook_message_callback(self, confirm, info):
-        if confirm == 0 or info is None:
+        if confirm != Gtk.ResponseType.OK or info is None:
             return
         logged_in = self._facebook_post.is_logged_in()
         # If not logged in try once to log in
@@ -317,7 +317,7 @@ class PhotosPresenter(object):
         if not self.has_internet():
             self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
             return
-        self._view.get_message(_("Enter a message to add to your photo!"), self.facebook_message_callback, _("Message:"))
+        self._view.get_message(_("Post to Facebook"), self.facebook_message_callback, _("Write a description for the photo"))
 
     def on_set_background(self):
         if not self._model.is_open():

@@ -5,7 +5,7 @@ from gi.repository import Gtk, WebKit2
 
 
 class FacebookAuthDialog(Gtk.Dialog):
-
+    __gtype_name__ = 'FacebookAuthDialog'
     # -- DEV --
     #FB_APP_ID = '393860344022808'
     #FB_APP_SECRET = 'eb0dcb05f7512be39f7a3826ce99dfcd'
