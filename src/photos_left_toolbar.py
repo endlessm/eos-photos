@@ -124,9 +124,9 @@ class CategoryButton(Gtk.Button, CompositeButton):
         self._arrow_align.add(self._arrow_frame)
 
         self._hbox = Gtk.HBox(homogeneous=False, spacing=0, margin_top=8, margin_bottom=8)
-        self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=9)
-        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=0)
-        self._hbox.pack_end(self._arrow_align, expand=False, fill=False, padding=8)
+        self._hbox.pack_start(self._arrow_align, expand=False, fill=False, padding=0)
+        self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=2)
+        self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=10)
         # This hackish line keeps the expander widget from downsizing
         # horizontally after the separator is removed. 183 is the width of the
         # separator image
