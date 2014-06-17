@@ -353,12 +353,11 @@ EosPageManager .image-frame {
     background-image: url("images/open_photos_icon.png");
 }
 
-/*.filters-scroll-area {
+.filters-scroll-area {
     background-image: -gtk-gradient (linear, left top, right top,
-                                     color-stop(0.0, alpha(#ffffff, 0.04)),
-                                     color-stop(0.8, alpha(#ffffff, 0.02)),
-                                     color-stop(1.0, alpha(#ffffff, 0.0)));
-}*/
+                                     color-stop(0.0, alpha(black, 0.2)),
+                                     color-stop(0.8, alpha(black, 0.0)));
+}
 
 .filters-scroll-area > GtkViewport {
     background-color: transparent;
