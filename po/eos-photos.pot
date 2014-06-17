@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-06-10 04:40+0000\n"
+"POT-Creation-Date: 2014-06-17 04:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -231,11 +231,11 @@ msgid "Facebook is not available offline."
 msgstr ""
 
 #: src/photos_presenter.py:320
-msgid "Enter a message to add to your photo!"
+msgid "Post to Facebook"
 msgstr ""
 
-#: src/photos_presenter.py:320 src/photos_presenter.py:342
-msgid "Message:"
+#: src/photos_presenter.py:320
+msgid "Write a description for the photo"
 msgstr ""
 
 #: src/photos_presenter.py:342
@@ -250,6 +250,10 @@ msgstr ""
 msgid "Recipient email:"
 msgstr ""
 
+#: src/photos_presenter.py:342
+msgid "Message:"
+msgstr ""
+
 #: src/photos_right_toolbar.py:16
 msgid "SAVE"
 msgstr ""
@@ -262,30 +266,38 @@ msgstr ""
 msgid "BACKGROUND"
 msgstr ""
 
-#: src/photos_view.py:138 src/splash_screen.py:27
+#: src/photos_view.py:139 src/splash_screen.py:27
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:174
+#: src/photos_view.py:175
 msgid "Save Image"
 msgstr ""
 
-#: src/photos_view.py:202
+#: src/photos_view.py:203
 msgid "Open new photo without save?"
 msgstr ""
 
-#: src/photos_view.py:203
+#: src/photos_view.py:204
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:224
+#: src/photos_view.py:225
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_view.py:225
+#: src/photos_view.py:226
 msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr ""
+
+#: src/photos_view.py:268
+msgid "Continue"
+msgstr ""
+
+#: src/photos_view.py:269
+msgid "Cancel"
 msgstr ""
 
 #: src/photos_window.py:48
