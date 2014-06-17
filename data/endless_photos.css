@@ -160,7 +160,7 @@ EosPageManager .image-frame {
 
 #crop-options.active {
     border-radius: 5px;
-    box-shadow: 0px -1px rgba(255, 255, 255, 0.15) inset;    
+    box-shadow: 0px -1px rgba(255, 255, 255, 0.15) inset;
     background-image: linear-gradient(to top,
         rgba(0, 0, 0, 0.1) 0%,
         rgba(0, 0, 0, 0.2) 100%);
@@ -191,7 +191,7 @@ EosPageManager .image-frame {
 
 #rotate-button GtkLabel:active,
 #crop-button GtkLabel:active {
-    color: #ffffff;
+    color: #c4c4c4;
 }
 
 #rotate-button,
@@ -203,32 +203,44 @@ EosPageManager .image-frame {
 #crop-button.inactive {
     border-radius: 5px;
     border-width: 1px;
-    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.35) inset;
+    background-image: linear-gradient(to bottom,
+        rgba(93, 93, 93, 0.25) 0%,
+        rgba(71, 71, 71, 0.0) 100%);
+    box-shadow: 0px 1px 1px 0px rgba(162, 162, 162, 0.1) inset,
+        0px -1px 1px 0px rgba(0, 0, 0, 0.5) inset;
 }
 
 #rotate-button:hover,
-#crop-button.inactive:hover,
+#crop-button.inactive:hover {
+    background-image: linear-gradient(to bottom,
+        rgba(101, 101, 101, 0.5) 0%,
+        rgba(34, 34, 34, 0.89) 100%);
+    box-shadow: 0px 1px 1px 0px rgba(162, 162, 162, 0.25) inset,
+        0px -1px 1px 0px rgba(0, 0, 0, 0.75) inset;
+}
+
 #rotate-button:active,
 #crop-button.inactive:active {
     background-image: linear-gradient(to bottom,
-        rgba(25, 25, 25, 0) 0%,
-        rgba(25, 25, 25, 0.5) 99%,
-        rgba(25, 25, 25, 0.5) 100%)
+        rgba(34, 34, 34, 0.44) 0%,
+        rgba(101, 101, 101, 0.25) 100%);
+    box-shadow: 0px 1px 1px 0px rgba(108, 108, 108, 0.15) inset,
+        0px -1px 1px 0px rgba(0, 0, 0, 0.75) inset;
 }
 
-#crop-button .image-frame {
+#crop-button .image-frame,
+#crop-button .image-frame:active {
     background-image: url("images/icon_crop_normal.png");
 }
-#crop-button .image-frame:hover,
-#crop-button .image-frame:active {
+#crop-button .image-frame:hover {
     background-image: url("images/icon_crop_hover.png");
 }
 
-#rotate-button .image-frame {
+#rotate-button .image-frame,
+#rotate-button .image-frame:active {
     background-image: url("images/icon_rotate_normal.png");
 }
-#rotate-button .image-frame:hover,
-#rotate-button .image-frame:active {
+#rotate-button .image-frame:hover {
     background-image: url("images/icon_rotate_hover.png");
 }
 
