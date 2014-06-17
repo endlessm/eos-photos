@@ -141,24 +141,15 @@ EosPageManager .image-frame {
     background-image: url("images/icon_adjustments_hover.png");
 }
 
+#open-photo-button GtkLabel,
 #save-button GtkLabel,
 #wallpaper-button GtkLabel,
-#share-button GtkLabel {
-    font-size: 11px;
-    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
-    color: #555555;
-}
-
-#save-button GtkLabel:hover,
-#wallpaper-button GtkLabel:hover,
-#share-button GtkLabel:hover {
-    color: #a1a1a1;
-}
-
-#save-button GtkLabel:active,
-#wallpaper-button GtkLabel:active,
-#share-button GtkLabel:active {
-    color: #555555;
+#share-button GtkLabel,
+#revert-image-button GtkLabel {
+    font-family: Lato-Regular;
+    font-size: 8px;
+    text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
+    color: #A7A9AC;
 }
 
 #crop-options GtkLabel {
@@ -266,39 +257,63 @@ EosPageManager .image-frame {
 }
 
 #wallpaper-button .image-frame {
-    background-image: url("images/btn_background_normal.png");
+    background-image: url("images/background_button_regular.png");
 }
 
 #wallpaper-button .image-frame:hover {
-    background-image: url("images/btn_background_hover.png");
+    background-image: url("images/background_button_hover.png");
 }
 
 #wallpaper-button .image-frame:active {
-    background-image: url("images/btn_background_pressed.png");
+    background-image: url("images/background_button_pressed.png");
+}
+
+#open-photo-button .image-frame {
+    background-image: url("images/open_photo_button_regular.png");
+}
+
+#open-photo-button .image-frame:hover {
+    background-image: url("images/open_photo_button_hover.png");
+}
+
+#open-photo-button .image-frame:active {
+    background-image: url("images/open_photo_button_pressed.png");
+}
+
+#revert-image-button .image-frame {
+    background-image: url("images/revert_button_regular.png");
+}
+
+#revert-image-button .image-frame:hover {
+    background-image: url("images/revert_button_hover.png");
+}
+
+#revert-image-button .image-frame:active {
+    background-image: url("images/revert_button_pressed.png");
 }
 
 #save-button .image-frame {
-    background-image: url("images/save_normal.png");
+    background-image: url("images/save_button_regular.png");
 }
 
 #save-button .image-frame:hover {
-    background-image: url("images/save_hover.png");
+    background-image: url("images/save_button_hover.png");
 }
 
 #save-button .image-frame:active {
-    background-image: url("images/save_down.png");
+    background-image: url("images/save_button_pressed.png");
 }
 
 #share-button .image-frame {
-    background-image: url("images/facebook_normal.png");
+    background-image: url("images/facebook_button_regular.png");
 }
 
 #share-button .image-frame:hover {
-    background-image: url("images/facebook_hover.png");
+    background-image: url("images/facebook_button_hover.png");
 }
 
 #share-button .image-frame:active {
-    background-image: url("images/facebook_down.png");
+    background-image: url("images/facebook_button_pressed.png");
 }
 
 #splash-open-photos-button {
@@ -309,7 +324,7 @@ EosPageManager .image-frame {
     padding: 0px 9px 0px 9px;
     border: 1px solid #B3B3B3;
     border-radius: 5px;
-    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.35), inset 0px 1px 1px 0px #FFFFFF;
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.35), inset 0px 1px 1px 0px #FFFFFF;
 }
 
 #splash-open-photos-button GtkLabel {
@@ -335,75 +350,6 @@ EosPageManager .image-frame {
 
 #splash-open-photos-button .image-frame {
     background-image: url("images/open_photos_icon.png");
-}
-
-#revert-button {
-    transition:background-image 200ms ease-in-out;
-    padding: 8px 0px 8px 0px;
-    background-size: 100% 100%;
-}
-
-#open-photos-button {
-    padding: 3px 0px 3px 3px;
-}
-
-#open-photos-button GtkLabel {
-    font-size: 10px;
-    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
-    color: #999999;
-    padding: 0px 3px 0px 8px;
-}
-
-#revert-button GtkLabel {
-    font-size: 11px;
-    text-shadow: 0px -1px 1px rgba(0,0,0,0.5);
-    color: #999999;
-}
-
-#revert-button GtkLabel:hover,
-#open-photos-button GtkLabel:hover {
-    color: #ffffff;
-}
-
-#revert-button GtkLabel:active,
-#open-photos-button GtkLabel:active {
-    color: #999999;
-}
-
-#revert-button:hover {
-    background-image: url("images/restore-photo_bg_hover.png");
-}
-
-#revert-button:active {
-    background-image: url("images/restore-photo_bg_down.png");
-}
-
-#revert-button GtkLabel {
-    padding: 0px 3px 0px 3px;
-}
-
-#revert-button .image-frame {
-    background-image: url("images/icon_restore-photo_normal.png");
-}
-
-#revert-button .image-frame:hover {
-    background-image: url("images/icon_restore-photo_hover.png");
-}
-
-#revert-button .image-frame:active {
-    background-image: url("images/icon_restore-photo_normal.png");
-}
-
-#open-photos-button .image-frame {
-    background-image: url("images/icon_topbar_OpenPhoto_normal.png");
-}
-
-#open-photos-button .image-frame:hover {
-    background-image: url("images/icon_topbar_OpenPhoto_hover.png");
-}
-
-#open-photos-button .image-frame:active {
-    background-image: url("images/icon_topbar_OpenPhoto_normal.png");
 }
 
 /*.filters-scroll-area {
