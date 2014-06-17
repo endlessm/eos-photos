@@ -45,13 +45,6 @@ class PhotosWindow(Endless.Window):
         self._grid.attach(self._normal_attach, 1, 0, 1, 1)
         self._grid.attach(right_toolbar, 2, 0, 1, 1)
 
-        self._open_button = ImageTextButton(label=_("OPEN IMAGE"),
-                                            image_size_x=20,
-                                            image_size_y=18,
-                                            name="open-photos-button")
-        self._open_button.connect('clicked', lambda w: self._presenter.on_open())
-        self._open_button.show_all();
-
         pm = self.get_page_manager()
         # Splash page
         pm.add(self._splash_screen)
@@ -60,7 +53,6 @@ class PhotosWindow(Endless.Window):
         pm.set_page_background_position(self._splash_screen, "center center")
         # Main page
         pm.add(self._grid)
-        pm.set_page_left_topbar_widget(self._grid, self._open_button)
         pm.set_page_background_uri(self._grid, "resource://" + IMAGES_RESOURCE_PREFIX + "background-tile.jpg")
         pm.set_page_background_repeats(self._grid, True)
         pm.set_page_background_size(self._grid, "auto")

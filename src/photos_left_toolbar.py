@@ -26,23 +26,8 @@ class PhotosLeftToolbar(Gtk.VBox):
             self._categories[name] = CategoryExpander(self._separator_images, category)
             self.pack_start(self._categories[name], expand=False, fill=True, padding=0)
 
-        self._revert_button = ImageTextButton(label=_("REVERT TO ORIGINAL"),
-                                              name="revert-button")
-        self._revert_button.connect("clicked", lambda e: self._presenter.on_revert())
-        self.pack_end(self._revert_button, expand=False, fill=False, padding=0)
-
         self.set_vexpand(True)
         self.show_all()
-
-    def do_draw(self, cr):
-        Gtk.VBox.do_draw(self, cr)
-        alloc = self.get_allocation()
-        if alloc.height > self.get_preferred_height()[1]:
-            revert_alloc = self._revert_button.get_allocation()
-            Gdk.cairo_set_source_pixbuf(cr, self._separator_images["top"], 0, alloc.height - revert_alloc.height - 2)
-            cr.paint()
-            Gdk.cairo_set_source_pixbuf(cr, self._separator_images["bottom"], 0, alloc.height - revert_alloc.height - 1)
-            cr.paint()
 
     def set_presenter(self, presenter):
         self._presenter = presenter

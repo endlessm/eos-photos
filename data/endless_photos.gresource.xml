@@ -21,9 +21,6 @@
         <file>images/textures/weird_vignette.png</file>
         <file>images/background-tile.jpg</file>
         <file>images/background_splash.jpg</file>
-        <file>images/btn_background_hover.png</file>
-        <file>images/btn_background_normal.png</file>
-        <file>images/btn_background_pressed.png</file>
         <file>images/confirm_cancel-btn_hover.png</file>
         <file>images/confirm_cancel-btn_normal.png</file>
         <file>images/confirm_cancel-btn_pressed.png</file>
@@ -34,9 +31,9 @@
         <file>images/crop_knob_normal.png</file>
         <file>images/crop_knob_hover.png</file>
         <file>images/crop_knob_dark.png</file>
-        <file>images/facebook_down.png</file>
-        <file>images/facebook_hover.png</file>
-        <file>images/facebook_normal.png</file>
+        <file>images/facebook_button_regular.png</file>
+        <file>images/facebook_button_hover.png</file>
+        <file>images/facebook_button_pressed.png</file>
         <file>images/icon_adjustments_hover.png</file>
         <file>images/icon_adjustments_normal.png</file>
         <file>images/icon_arrow-down.png</file>
@@ -51,19 +48,13 @@
         <file>images/icon_deform_normal.png</file>
         <file>images/icon_effects_hover.png</file>
         <file>images/icon_effects_normal.png</file>
-        <file>images/icon_restore-photo_hover.png</file>
-        <file>images/icon_restore-photo_normal.png</file>
         <file>images/icon_rotate_hover.png</file>
         <file>images/icon_rotate_normal.png</file>
-        <file>images/icon_topbar_OpenPhoto_hover.png</file>
-        <file>images/icon_topbar_OpenPhoto_normal.png</file>
         <file>images/icon_transformation_hover.png</file>
         <file>images/icon_transformation_normal.png</file>
-        <file>images/restore-photo_bg_down.png</file>
-        <file>images/restore-photo_bg_hover.png</file>
-        <file>images/save_down.png</file>
-        <file>images/save_hover.png</file>
-        <file>images/save_normal.png</file>
+        <file>images/save_button_regular.png</file>
+        <file>images/save_button_hover.png</file>
+        <file>images/save_button_pressed.png</file>
         <file>images/separator_black.png</file>
         <file>images/separator_white.png</file>
         <file>images/separator-opened_top-shadow.png</file>
@@ -71,5 +62,14 @@
         <file>images/slider_knob_hover.png</file>
         <file>images/slider_knob_normal.png</file>
         <file>images/open_photos_icon.png</file>
+        <file>images/revert_button_regular.png</file>
+        <file>images/revert_button_hover.png</file>
+        <file>images/revert_button_pressed.png</file>
+        <file>images/background_button_regular.png</file>
+        <file>images/background_button_hover.png</file>
+        <file>images/background_button_pressed.png</file>
+        <file>images/open_photo_button_regular.png</file>
+        <file>images/open_photo_button_hover.png</file>
+        <file>images/open_photo_button_pressed.png</file>
     </gresource>
 </gresources>
