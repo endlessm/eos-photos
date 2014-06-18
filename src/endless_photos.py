@@ -69,25 +69,17 @@ class EndlessPhotos(Endless.Application):
         self._window = self._view.get_window()
         self.add_window(self._window)
         self._window.show_all()
-        # hacky way of handling file open args as the proper way has python
-        # binding issues.
-        for arg in sys.argv[1:]:
-            if (not arg[0] == '-') and os.path.exists(arg):
-                self._presenter.open_image(arg)
-                break
 
-    # This is the proper way to handle opening files, but it doesn't work with
-    # the python bindings. The file list is always empty. This is a known bug
-    # that may be fixed in newer versions of GTK
     def do_open(self, files, nfiles, hint):
-        # print files # always empty
-        pass
+        self._presenter.on_open(files[0].get_path());
+        self.activate();
 
     def do_activate(self):
         """
         Overrides the default Gio.Application.activate handler.
 
-        It is required to override this in a subclass of Gio.Application, but it
-        does not do anything right now.
+        It is required to override this in a subclass of Gio.Application. We
+        will just ask the window to present itself whenever this happens, i.e.
+        a new image is opened from the file manager.
         """
-        self._window.deiconify()
+        self._window.present()

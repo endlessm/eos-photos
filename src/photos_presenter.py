@@ -203,15 +203,20 @@ class PhotosPresenter(object):
         else:
             self._view.close_window()
 
-    def on_open(self):
+    def on_open(self, filename=None):
 
         # Cancel any ongoing crops
         self._do_crop_cancel()
 
-        if not self._model.is_saved():
-            self._view.show_confirm_open_new_dialog(self.on_save, self._do_open)
+        if filename is None:
+            callback = self._do_open
         else:
-            self._do_open()
+            callback = lambda: self.open_image(filename)
+
+        if not self._model.is_saved():
+            self._view.show_confirm_open_new_dialog(self.on_save, callback)
+        else:
+            callback()
 
     def generate_hashed_filename(self):
         cache_path = GLib.get_user_cache_dir()
