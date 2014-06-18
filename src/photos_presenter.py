@@ -313,11 +313,20 @@ class PhotosPresenter(object):
 
         # Cancel any ongoing crops
         self._do_crop_cancel()
+        self._run_locking_task(self._check_internet_for_facebook_post)
 
+    def _check_internet_for_facebook_post(self):
         if not self.has_internet():
-            self._view.update_async(lambda: self._view.show_message(text=_("Facebook is not available offline."), warning=True))
-            return
-        self._view.get_message(_("Post to Facebook"), self.facebook_message_callback, _("Write a description for the photo"))
+            self._view.update_async(lambda:
+                self._view.show_message(text=_("Facebook is not available offline."),
+                                        warning=True)
+            )
+        else:
+            self._view.update_async(lambda:
+                self._view.get_message(_("Post to Facebook"),
+                                       self.facebook_message_callback,
+                                       _("Write a description for the photo"))
+            )
 
     def on_set_background(self):
         if not self._model.is_open():
