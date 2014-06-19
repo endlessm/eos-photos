@@ -148,15 +148,15 @@ class PhotosPresenter(object):
         self._model.set_distortion(distort_name)
         self._view.update_async(lambda: self._view.select_distortion(distort_name))
 
-    def open_handler(self, filename):
+    def _open_handler(self, filename):
         self.open_image(filename)
 
     def _do_open(self):
         pictures_path = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES)
         if os.path.isdir(pictures_path):
-            self._view.show_open_dialog(pictures_path)
+            self._view.show_open_dialog(pictures_path, self._open_handler)
         else:
-            self._view.show_open_dialog()
+            self._view.show_open_dialog(None, self._open_handler)
 
     def _do_adjustment_slide(self, value_get, value_set):
         in_timeout = False
@@ -199,7 +199,7 @@ class PhotosPresenter(object):
     def on_close(self):
         # Prompt for save before quitting
         if not self._model.is_saved():
-            self._view.show_confirm_close()
+            self._view.show_confirm_close(self.on_save, self._view.close_window)
         else:
             self._view.close_window()
 
@@ -209,7 +209,7 @@ class PhotosPresenter(object):
         self._do_crop_cancel()
 
         if not self._model.is_saved():
-            self._view.show_confirm_open_new_dialog()
+            self._view.show_confirm_open_new_dialog(self.on_save, self._do_open)
         else:
             self._do_open()
 
@@ -250,7 +250,7 @@ class PhotosPresenter(object):
             i += 1
         return [curr_name, ext]
 
-    def save_handler(self, filename):
+    def _save_handler(self, filename):
         ext = self._model.get_current_filename().split('.')[-1]
         filename = self._check_extension(filename, ext)
         try:
@@ -277,7 +277,9 @@ class PhotosPresenter(object):
 
         [curr_name, ext] = self.generate_filename()
 
-        filename = self._view.show_save_dialog(curr_name + "." + ext, pictures_path)
+        filename = self._view.show_save_dialog(curr_name + "." + ext,
+                                               pictures_path,
+                                               self._save_handler)
 
     def has_internet(self):
         '''
