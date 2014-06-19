@@ -69,6 +69,10 @@ EosPageManager .image-frame {
     padding: 3px 0px 0px 0px;
 }
 
+.category-expander .arrow-frame {
+    background-image: url("images/icon_arrow_none.png");
+}
+
 .category-expander .arrow-frame:active,
 .category-expander .arrow-frame:hover {
     background-image: url("images/icon_arrow_right.png");
@@ -76,7 +80,6 @@ EosPageManager .image-frame {
 
 .category-expander.expanded .arrow-frame {
     background-image: url("images/icon_arrow_down.png");
-    background-size: auto;
 }
 
 .category-expander .label {
