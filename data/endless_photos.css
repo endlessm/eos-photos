@@ -20,9 +20,19 @@ EosPageManager GtkLabel {
 }
 
 EosPageManager .arrow-frame,
+EosPageManager .image-frame,
+EosPageManager .category-image-frame {
+    transition:background-image 200ms ease-in-out;
+}
+
+EosPageManager .arrow-frame {
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 EosPageManager .image-frame {
     background-size: 100% 100%;
-    transition:background-image 200ms ease-in-out;
 }
 
 /*TODO: font sized are in pixels! Do this a better way when we have our fonts nailed down.*/
@@ -60,14 +70,17 @@ EosPageManager .image-frame {
     padding: 3px 0px 0px 0px;
 }
 
-.category-expander .arrow-frame:active,
-.category-expander .arrow-frame:hover {
-    background-image: url("images/icon_arrow-down.png");
+.category-expander .arrow-frame {
+    background-image: url("images/icon_arrow_none.png");
 }
 
-.category-expander.expanded .arrow-frame:active,
-.category-expander.expanded .arrow-frame:hover {
-    background-image: url("images/icon_arrow-up.png");
+.category-expander .arrow-frame:active,
+.category-expander .arrow-frame:hover {
+    background-image: url("images/icon_arrow_right.png");
+}
+
+.category-expander.expanded .arrow-frame {
+    background-image: url("images/icon_arrow_down.png");
 }
 
 .category-expander .label {
