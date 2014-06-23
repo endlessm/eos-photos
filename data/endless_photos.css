@@ -20,7 +20,8 @@ EosPageManager GtkLabel {
 }
 
 EosPageManager .arrow-frame,
-EosPageManager .image-frame {
+EosPageManager .image-frame,
+EosPageManager .category-image-frame {
     transition:background-image 200ms ease-in-out;
 }
 
