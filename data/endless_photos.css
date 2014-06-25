@@ -1,5 +1,4 @@
-* {
-    /*defaults*/
+EosWindow {
     -GtkWidget-focus-line-width: 0px;
     -GtkExpander-expander-size: 0px;
     -GtkExpander-focus-line-width: 0px;
