@@ -3,225 +3,221 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Joel Gil Leon <joel@endlessm.com>, 2013
-# Nuritzi Sanchez <ns@endlessm.com>, 2013
-# Renato Peixoto Pinto <renato@endlessm.com>, 2013
-# Silva <michele@endlessm.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-06-10 04:40+0000\n"
-"PO-Revision-Date: 2014-04-22 04:37+0000\n"
-"Last-Translator: endlessmobile_build <philip@endlessm.com>\n"
-"Language-Team: Portuguese (http://www.transifex.com/projects/p/eos-photos/language/pt/)\n"
+"POT-Creation-Date: 2014-06-17 04:39+0000\n"
+"PO-Revision-Date: 2013-09-09 19:41+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/eos-photos/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
 msgid "Login canceled."
-msgstr " Início de sessão cancelado."
+msgstr ""
 
 #: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
 #: src/share/facebook_post.py:38
 msgid "Could not reach facebook."
-msgstr "Não foi possível acessar o facebook."
+msgstr ""
 
 #: src/share/facebook_post.py:28
 msgid "Image successfully posted to facebook!"
-msgstr "Imagem postada com sucesso no Facebook!"
+msgstr ""
 
 #: src/share/facebook_post.py:54
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
-msgstr "Não for possível realizar a ação solicitada no momento. Por favor, tente novamente mais tarde."
+msgstr ""
 
 #: src/share/facebook_post.py:57
 msgid "Login failed."
-msgstr "Falha na conexão."
+msgstr ""
 
 #: src/share/facebook_post.py:62
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr "Problema de rede detectado. Por favor, verifique sua conexão com a Internet e tente novamente."
+msgstr ""
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr "Alguém"
+msgstr ""
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr "Enviei-lhe uma foto de Endless Photos!"
+msgstr ""
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr "Por favor, não responda a este e-mail. As respostas serão enviadas para uma caixa de entrada não monitorada."
+msgstr ""
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr "Sem Título"
+msgstr ""
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr "Girar 90° para a direita "
+msgstr ""
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr "TRANSFORMAR"
+msgstr ""
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr "Cortar"
+msgstr ""
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr "Aplicar Corte?"
+msgstr ""
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr "BORRAR"
+msgstr ""
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr "FRONTEIRAS"
+msgstr ""
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr "FILTROS"
+msgstr ""
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr "DISTORCER"
+msgstr ""
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr "Brilho"
+msgstr ""
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr "Contraste"
+msgstr ""
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr "Saturação"
+msgstr ""
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr "AJUSTES"
+msgstr ""
 
 #: src/photos_left_toolbar.py:29
 msgid "REVERT TO ORIGINAL"
-msgstr "VOLTAR AO ORIGINAL"
+msgstr ""
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr "Nenhum"
+msgstr ""
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr "Tilt Shift"
+msgstr ""
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr "Profundidade de Campo"
+msgstr ""
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr "Preto e branco"
+msgstr ""
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr "Sertanejo"
+msgstr ""
 
 #: src/photos_model.py:74
 msgid "Grungify"
-msgstr "Grungificar"
+msgstr ""
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr "Foto Antiga"
+msgstr ""
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr "Colorido"
+msgstr ""
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr "Lomo"
+msgstr ""
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr "Névoa Azul"
+msgstr ""
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr "Papel"
+msgstr ""
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr "Caravana"
+msgstr ""
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr "Deserto"
+msgstr ""
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr "Posterizar"
+msgstr ""
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr "Contornos"
+msgstr ""
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr "Lápis de Cera"
+msgstr ""
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr "Grunge"
+msgstr ""
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr "Spray"
+msgstr ""
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr "Pincel"
+msgstr ""
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr "Olho de Peixe Magro"
+msgstr ""
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr "Olho de Peixe Gordo"
+msgstr ""
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr "Beliscão Magro"
+msgstr ""
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr "Beliscão Gordo"
+msgstr ""
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr "Redemoinho"
+msgstr ""
 
 #: src/photos_presenter.py:131
 msgid "Image successfully applied to background!"
-msgstr "Imagem de fundo aplicada com  sucesso!"
+msgstr ""
 
 #: src/photos_presenter.py:140
 msgid "Email failed."
-msgstr "Falha na conexão."
+msgstr ""
 
 #: src/photos_presenter.py:261
 msgid "You do not have permissions to save the photo here"
@@ -233,70 +229,82 @@ msgstr ""
 
 #: src/photos_presenter.py:318
 msgid "Facebook is not available offline."
-msgstr "Opa! Não conseguimos acessar o Facebook. Verifique sua conexão de internet."
+msgstr ""
 
 #: src/photos_presenter.py:320
-msgid "Enter a message to add to your photo!"
-msgstr "Escreva uma legenda para sua foto!"
+msgid "Post to Facebook"
+msgstr ""
 
-#: src/photos_presenter.py:320 src/photos_presenter.py:342
-msgid "Message:"
-msgstr "Mensagem:"
+#: src/photos_presenter.py:320
+msgid "Write a description for the photo"
+msgstr ""
 
 #: src/photos_presenter.py:342
 msgid "Enter a message to add to the e-mail"
-msgstr "Digite uma mensagem para adicionar ao e-mail"
+msgstr ""
 
 #: src/photos_presenter.py:342
 msgid "Your Name:"
-msgstr "Seu Nome:"
+msgstr ""
 
 #: src/photos_presenter.py:342
 msgid "Recipient email:"
-msgstr "Email do destinatário:"
+msgstr ""
+
+#: src/photos_presenter.py:342
+msgid "Message:"
+msgstr ""
 
 #: src/photos_right_toolbar.py:16
 msgid "SAVE"
-msgstr "SALVAR"
+msgstr ""
 
 #: src/photos_right_toolbar.py:24
 msgid "FACEBOOK"
-msgstr "FACEBOOK"
+msgstr ""
 
 #: src/photos_right_toolbar.py:32
 msgid "BACKGROUND"
-msgstr "FUNDO"
+msgstr ""
 
-#: src/photos_view.py:138 src/splash_screen.py:27
+#: src/photos_view.py:139 src/splash_screen.py:27
 msgid "Open Image"
-msgstr "Abrir Imagem"
+msgstr ""
 
-#: src/photos_view.py:174
+#: src/photos_view.py:175
 msgid "Save Image"
-msgstr "Salvar Imagem"
-
-#: src/photos_view.py:202
-msgid "Open new photo without save?"
-msgstr "Deseja abrir uma foto sem salvar a atual?"
+msgstr ""
 
 #: src/photos_view.py:203
+msgid "Open new photo without save?"
+msgstr ""
+
+#: src/photos_view.py:204
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr "A foto que você está trabalhando ainda não foi salva. Tem certeza de que deseja abrir uma nova imagem sem salvá-la?"
-
-#: src/photos_view.py:224
-msgid "Quit Without Save?"
-msgstr "Sair sem salvar?"
+msgstr ""
 
 #: src/photos_view.py:225
+msgid "Quit Without Save?"
+msgstr ""
+
+#: src/photos_view.py:226
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr "Suas alterações não foram salvas. Tem certeza de que deseja sair?"
+msgstr ""
+
+#: src/photos_view.py:268
+msgid "Continue"
+msgstr ""
+
+#: src/photos_view.py:269
+msgid "Cancel"
+msgstr ""
 
 #: src/photos_window.py:48
 msgid "OPEN IMAGE"
-msgstr "ABRIR FOTO"
+msgstr ""
 
 #: src/splash_screen.py:31
 msgid "Choose one of your photos to begin!"
-msgstr "Escolha uma de suas fotos para começar!"
+msgstr ""
