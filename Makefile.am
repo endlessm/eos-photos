@@ -44,8 +44,10 @@ data/images/thumbnails/thumbnails.gresource: data/images/thumbnails/thumbnails.g
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=data/images/thumbnails  $<
 CLEANFILES += data/images/thumbnails/thumbnails.gresource $(thumbnail_resource_files)
 
-subst_install = sed -e 's|@pkgdatadir[@]|$(pkgdatadir)|g'
-subst_local = sed -e 's|@pkgdatadir[@]|$(realpath $(dir $(lastword $(MAKEFILE_LIST))))|g'
+subst_install = sed -e 's|@pkgdatadir[@]|$(pkgdatadir)|g' \
+	-e 's|@datadir[@]|$(datadir)|g'
+subst_local = sed -e 's|@pkgdatadir[@]|$(realpath $(dir $(lastword $(MAKEFILE_LIST))))|g' \
+	-e 's|@datadir[@]|$(datadir)|g'
 eos-photos: eos-photos.in Makefile
 	$(AM_V_GEN) $(subst_install) $< > $@
 	chmod +x $@
