@@ -3,9 +3,6 @@ import os
 import inspect
 from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio, Endless
 
-import gettext
-gettext.install('eos-photos')
-
 from photos_model import PhotosModel
 from photos_view import PhotosView
 from photos_presenter import PhotosPresenter

@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 
+import gettext
 import sys
-sys.path.append('@pkgdatadir@')
+pkg_dir = '@pkgdatadir@'
+data_dir = '@datadir@'
+locale_dir = data_dir + '/locale'
+
+sys.path.append(pkg_dir)
+gettext.install('eos-photos', locale_dir)
+
 from src.endless_photos import EndlessPhotos
 from gi.repository import GtkClutter, GLib, Gdk
 
