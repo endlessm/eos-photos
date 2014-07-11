@@ -11,9 +11,9 @@ Build-Depends: debhelper (>= 9),
                libglib2.0-dev,
                python,
                python-gi,
-               python-imaging,
-               python-scipy,
-               python-skimage (>=0.6.1)
+               python-imaging-eos-photos,
+               python-scipy-eos-photos,
+               python-skimage-eos-photos (>=0.6.1)
 Standards-Version: 3.9.2
 Homepage: http://www.endlessm.com
 
@@ -31,9 +31,9 @@ Depends: gir1.2-gtkclutter-1.0,
          gir1.2-gtk-3.0,
          gir1.2-gdkpixbuf-2.0,
          python-gi,
-         python-imaging,
+         python-imaging-eos-photos,
          python (>= 2.7),
-         python-scipy,
-         python-skimage (>=0.6.1)
+         python-scipy-eos-photos,
+         python-skimage-eos-photos (>=0.6.1)
 Description: Endless OS Photos
  This is a photos application for Endless OS
