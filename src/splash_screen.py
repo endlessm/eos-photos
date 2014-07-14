@@ -24,7 +24,9 @@ class SplashScreen(Gtk.VBox):
     def __init__(self, **kw):
         super(SplashScreen, self).__init__(**kw)
 
-        self._splash_open_button = ImageTextButton(label=_("Open Image"),
+        self._splash_open_button = ImageTextButton(label=(_("Open Image")).upper(),
+                                                   image_size_x=21, # Icon x-dimension
+                                                   image_size_y=17, # Icon y-dimension
                                                    name="splash-open-photos-button")
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
 
