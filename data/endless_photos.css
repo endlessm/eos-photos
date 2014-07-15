@@ -346,10 +346,11 @@ EosPageManager .image-frame {
     background-image: -gtk-gradient (linear, left top, left bottom,
                                      from(#FFFFFF),
                                      to(#BBBBBB));
-    padding: 0px 9px 0px 9px;
-    border: 1px solid #B3B3B3;
-    border-radius: 5px;
+    padding: 3px 1px 0px 12px;
+    border: 2px solid #B3B3B3;
+    border-radius: 4px;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.35), inset 0px 1px 1px 0px #FFFFFF;
+    text-shadow: 0px 1px 0px white;
 }
 
 #splash-open-photos-button:hover {
@@ -362,19 +363,24 @@ EosPageManager .image-frame {
     background-image: -gtk-gradient (linear, left bottom, left top,
                                      from(#D1D1D1),
                                      to(#B0B0B0));
+    text-shadow: none;
 }
 
 #splash-open-photos-button GtkLabel {
     font-family: Lato;
     font-weight: bold;
     font-size: 12px;
-    padding-left: 3px;
     color: #333333;
-    padding: 4px 4px 4px 4px;
+    padding: 6px 20px 8px 12px;
 }
 
 #splash-open-photos-button .image-frame {
+    padding-top: 12px;
     background-image: url("images/open_photos_icon.png");
+}
+
+#splash-open-photos-button .image-frame:active {
+    background-image: url("images/open_photos_icon_pressed.png");
 }
 
 .filters-scroll-area {
