@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-07-01 04:43+0000\n"
+"POT-Creation-Date: 2014-07-18 03:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -304,6 +304,6 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/splash_screen.py:31
+#: src/splash_screen.py:33
 msgid "Choose one of your photos to begin!"
 msgstr ""
