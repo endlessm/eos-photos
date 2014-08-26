@@ -1,11 +1,12 @@
 import numpy
 import math
 from scipy import ndimage, stats
-import Image
-import ImageOps
-import ImageDraw
-import ImageFilter
-import ImageEnhance
+
+from PIL import Image
+from PIL import ImageOps
+from PIL import ImageDraw
+from PIL import ImageFilter
+from PIL import ImageEnhance
 import colorsys
 
 from .. import util
