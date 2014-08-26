@@ -1,7 +1,7 @@
-from skimage.transform import *
-from skimage.morphology import *
+
+from skimage.transform import swirl, warp
 from skimage import img_as_ubyte, img_as_float
-import numpy
+import numpy as np
 from scipy import ndimage
 import scipy
 
@@ -32,7 +32,7 @@ class Distortion:
         radius_u = radius_func(radius_d)
 
         # hack to prevent divide by zero warnings
-        radius_d[numpy.where(radius_d == 0)] = 1
+        radius_d[np.where(radius_d == 0)] = 1
 
         unit_x = (x - x0) / radius_d
         unit_y = (y - y0) / radius_d
