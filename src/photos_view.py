@@ -34,6 +34,7 @@ class PhotosView(object):
                                     left_toolbar=self._left_toolbar,
                                     right_toolbar=self._right_toolbar,
                                     image_container=self._image_container,
+                                    title=_("Photos"),
                                     application=application)
 
     def set_presenter(self, presenter):
