@@ -15,7 +15,7 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
             margin_top=40,
-            margin_bottom=25, # preserves spacing in small windows
+            margin_bottom=15,
             label=_("OPEN PHOTO"),
             name="open-photo-button",
             vertical=True)
@@ -54,7 +54,7 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_top=25, # preserves spacing in small windows
+            margin_top=15,
             margin_bottom=40,
             label=_("REVERT IMAGE"),
             name="revert-image-button",
