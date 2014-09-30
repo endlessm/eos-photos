@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-07-18 03:19+0000\n"
+"POT-Creation-Date: 2014-09-30 01:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -270,37 +270,41 @@ msgstr ""
 msgid "REVERT IMAGE"
 msgstr ""
 
-#: src/photos_view.py:133 src/splash_screen.py:27
+#: src/photos_view.py:37
+msgid "Photos"
+msgstr ""
+
+#: src/photos_view.py:134 src/splash_screen.py:27
 msgid "Open Image"
 msgstr ""
 
-#: src/photos_view.py:164
+#: src/photos_view.py:165
 msgid "Save Image"
 msgstr ""
 
-#: src/photos_view.py:193
+#: src/photos_view.py:194
 msgid "Open new photo without save?"
 msgstr ""
 
-#: src/photos_view.py:194
+#: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
 msgstr ""
 
-#: src/photos_view.py:216
+#: src/photos_view.py:217
 msgid "Quit Without Save?"
 msgstr ""
 
-#: src/photos_view.py:217
+#: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr ""
 
-#: src/photos_view.py:261
+#: src/photos_view.py:262
 msgid "Continue"
 msgstr ""
 
-#: src/photos_view.py:262
+#: src/photos_view.py:263
 msgid "Cancel"
 msgstr ""
 
