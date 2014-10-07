@@ -4,6 +4,8 @@
 # 
 # Translators:
 # c.sanchez <cassandra@endlessm.com>, 2014
+# Devin J Ekins <devinj.ekins@gmail.com>, 2014
+# Eddy Alegria <eddy@endlessm.com>, 2014
 # Fernando Farfan <fernando@endlessm.com>, 2014
 # Joel Gil Leon <joel@endlessm.com>, 2013-2014
 # Maiclear <maidaclaro@gmail.com>, 2014
@@ -14,8 +16,8 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2014-09-30 01:55+0000\n"
-"PO-Revision-Date: 2014-10-01 21:38+0000\n"
-"Last-Translator: Maiclear <maidaclaro@gmail.com>\n"
+"PO-Revision-Date: 2014-10-06 22:57+0000\n"
+"Last-Translator: Nuritzi Sanchez <ns@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/eos-photos/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,7 +27,7 @@ msgstr ""
 
 #: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
 msgid "Login canceled."
-msgstr "Inicio cancelado."
+msgstr "Inicio de sesión cancelado."
 
 #: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
 #: src/share/facebook_post.py:38
@@ -34,7 +36,7 @@ msgstr "No fue posible conectar con Facebook."
 
 #: src/share/facebook_post.py:28
 msgid "Image successfully posted to facebook!"
-msgstr "¡Imagen publicada a Facebook!"
+msgstr "¡Imagen publicada en Facebook!"
 
 #: src/share/facebook_post.py:54
 msgid ""
@@ -43,7 +45,7 @@ msgstr "No fue posible realizar la acción solicitada en este momento. Por favor
 
 #: src/share/facebook_post.py:57
 msgid "Login failed."
-msgstr "Falla en el login."
+msgstr "Falla en el inicio de sesión."
 
 #: src/share/facebook_post.py:62
 msgid ""
@@ -57,7 +59,7 @@ msgstr "Alguien"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr "enviada a través de Endless Photos"
+msgstr "te envió una foto a través de Endless Photos"
 
 #: src/share/emailer.py:21
 msgid ""
@@ -179,11 +181,11 @@ msgstr "Bordes"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr "Crayola"
+msgstr "Crayones"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr "Grunge"
+msgstr "Mancha"
 
 #: src/photos_model.py:100
 msgid "Spray"
@@ -235,7 +237,7 @@ msgstr "Facebook no está disponible sin conexión."
 
 #: src/photos_presenter.py:333
 msgid "Post to Facebook"
-msgstr "Publica en Facebook"
+msgstr "Publicar en Facebook"
 
 #: src/photos_presenter.py:335
 msgid "Write a description for the photo"
@@ -271,7 +273,7 @@ msgstr "FACEBOOK"
 
 #: src/photos_right_toolbar.py:48
 msgid "BACKGROUND"
-msgstr "FONDO"
+msgstr "FONDO DE PANTALLA"
 
 #: src/photos_right_toolbar.py:59
 msgid "REVERT IMAGE"
@@ -291,7 +293,7 @@ msgstr "Guardar imagen"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr "¿Desea abrir una nueva foto sin guardar?"
+msgstr "¿Deseas abrir una nueva foto sin guardar?"
 
 #: src/photos_view.py:195
 msgid ""
