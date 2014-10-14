@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2014-09-30 01:55+0000\n"
-"PO-Revision-Date: 2014-10-06 22:57+0000\n"
+"PO-Revision-Date: 2014-10-09 01:12+0000\n"
 "Last-Translator: Nuritzi Sanchez <ns@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/eos-photos/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -185,7 +185,7 @@ msgstr "Crayones"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr "Mancha"
+msgstr "Antiguo"
 
 #: src/photos_model.py:100
 msgid "Spray"
