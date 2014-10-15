@@ -71,7 +71,7 @@ class PhotosModel(object):
             (_("None"), lambda im: im),
             (_("Grayscale"), lambda im: ImageTools.grayscale(im)),
             (_("Country"), lambda im: ImageTools.country(im)),
-            (_("Grungify"), lambda im: ImageTools.grunge(im)),
+            (_("Retro"), lambda im: ImageTools.grunge(im)),
             (_("Old Photo"), lambda im: ImageTools.old_photo(im)),
             (_("Colorful"), lambda im: ImageTools.colorful(im)),
             # (_("BUMPY"), lambda im: ImageTools.bumpy(im)),
