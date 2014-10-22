@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Endless Mobile, Inc.
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: eos-photos\n"
+"Report-Msgid-Bugs-To: philip@endlessm.com\n"
+"POT-Creation-Date: 2014-10-15 12:32-0700\n"
+"PO-Revision-Date: 2014-10-15 19:32+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/eos-photos/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
+msgid "Login canceled."
+msgstr "Connexion annulée."
+
+#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
+#: src/share/facebook_post.py:38
+msgid "Could not reach facebook."
+msgstr "Impossible de rejoindre Facebook."
+
+#: src/share/facebook_post.py:28
+msgid "Image successfully posted to facebook!"
+msgstr "Image postée avec succès sur Facebook !"
+
+#: src/share/facebook_post.py:54
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr "L'action demandée n'est pas possible pour le moment. Veuillez réessayer plus tard."
+
+#: src/share/facebook_post.py:57
+msgid "Login failed."
+msgstr "Échec de la connexion."
+
+#: src/share/facebook_post.py:62
+msgid ""
+"Network problem detected. Please check your internet connection and try "
+"again."
+msgstr "Problème de réseau détecté. Veuillez vérifier votre connexion Internet et essayez à nouveau."
+
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr "Quelqu'un"
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr "vous a envoyé une photo d'Endless Photos !"
+
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr "Veuillez ne pas répondre à cet email. Les réponses sont envoyées à une boîte de réception sans surveillance."
+
+#: src/photos_category_toolbars.py:26
+msgid "Untitled"
+msgstr "Innommé "
+
+#: src/photos_category_toolbars.py:73
+msgid "Rotate Right 90°"
+msgstr "Tourner à droite de 90°"
+
+#: src/photos_category_toolbars.py:95
+msgid "TRANSFORM"
+msgstr "TRANSFORMER"
+
+#: src/photos_category_toolbars.py:106
+msgid "Crop"
+msgstr "Couper"
+
+#: src/photos_category_toolbars.py:111
+msgid "Apply Crop?"
+msgstr "Appliquer la découpe ?"
+
+#: src/photos_category_toolbars.py:180
+msgid "BLURS"
+msgstr "BROUILLE"
+
+#: src/photos_category_toolbars.py:195
+msgid "BORDERS"
+msgstr "FRONTIÈRES"
+
+#: src/photos_category_toolbars.py:210
+msgid "FILTERS"
+msgstr "FILTRES"
+
+#: src/photos_category_toolbars.py:225
+msgid "DISTORT"
+msgstr "DÉFORMER"
+
+#: src/photos_category_toolbars.py:245
+msgid "Brightness"
+msgstr "Luminosité"
+
+#: src/photos_category_toolbars.py:255
+msgid "Contrast"
+msgstr "Contraste"
+
+#: src/photos_category_toolbars.py:265
+msgid "Saturation"
+msgstr "Saturation"
+
+#: src/photos_category_toolbars.py:288
+msgid "ADJUST"
+msgstr "AJUSTER"
+
+#: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
+#: src/photos_model.py:106
+msgid "None"
+msgstr "Aucun"
+
+#: src/photos_model.py:65
+msgid "Tilt Shift"
+msgstr "Tilt Shift"
+
+#: src/photos_model.py:66
+msgid "Depth of Field"
+msgstr "Profondeur de champ"
+
+#: src/photos_model.py:72
+msgid "Grayscale"
+msgstr "Niveaux de gris"
+
+#: src/photos_model.py:73
+msgid "Country"
+msgstr "Pays"
+
+#: src/photos_model.py:74
+msgid "Retro"
+msgstr ""
+
+#: src/photos_model.py:75
+msgid "Old Photo"
+msgstr "Vieille photo"
+
+#: src/photos_model.py:76
+msgid "Colorful"
+msgstr "Coloré"
+
+#: src/photos_model.py:78
+msgid "Lomo"
+msgstr "Lomo"
+
+#: src/photos_model.py:81
+msgid "Foggy Blue"
+msgstr "Bleu trouble"
+
+#: src/photos_model.py:82
+msgid "Paper"
+msgstr "Papier"
+
+#: src/photos_model.py:83
+msgid "Trains"
+msgstr "Série"
+
+#: src/photos_model.py:84
+msgid "Desert"
+msgstr "Abandonner"
+
+#: src/photos_model.py:85
+msgid "Posterize"
+msgstr "Postériser"
+
+#: src/photos_model.py:88
+msgid "Edges"
+msgstr "Bords"
+
+#: src/photos_model.py:98
+msgid "Crayon"
+msgstr "Crayon"
+
+#: src/photos_model.py:99
+msgid "Grunge"
+msgstr "Grunge"
+
+#: src/photos_model.py:100
+msgid "Spray"
+msgstr "Vaporiser"
+
+#: src/photos_model.py:101
+msgid "Brush"
+msgstr "Brosse"
+
+#: src/photos_model.py:107
+msgid "Fish Eye Light"
+msgstr "Lumière fisheye"
+
+#: src/photos_model.py:108
+msgid "Fish Eye Heavy"
+msgstr "Fisheye puissant"
+
+#: src/photos_model.py:109
+msgid "Pinch Light"
+msgstr "Pincer la lumière"
+
+#: src/photos_model.py:110
+msgid "Pinch Heavy"
+msgstr "Pincez lourd"
+
+#: src/photos_model.py:111
+msgid "Swirl"
+msgstr "Tourbillon"
+
+#: src/photos_presenter.py:131
+msgid "Image successfully applied to background!"
+msgstr "Image appliquée avec succès sur le fond !"
+
+#: src/photos_presenter.py:140
+msgid "Email failed."
+msgstr "Échec d'envoi de l'email"
+
+#: src/photos_presenter.py:266
+msgid "You do not have permissions to save the photo here"
+msgstr "Vous n'avez pas les permissions nécessaires pour enregistrer la photo ici"
+
+#: src/photos_presenter.py:268
+msgid "An error occurred while saving your photo"
+msgstr "Une erreur s'est produite lors de l'enregistrement de votre photo"
+
+#: src/photos_presenter.py:328
+msgid "Facebook is not available offline."
+msgstr "Facebook n'est pas disponible en ligne."
+
+#: src/photos_presenter.py:333
+msgid "Post to Facebook"
+msgstr "Publier sur Facebook"
+
+#: src/photos_presenter.py:335
+msgid "Write a description for the photo"
+msgstr "Ecrire une description de la photo"
+
+#: src/photos_presenter.py:358
+msgid "Enter a message to add to the e-mail"
+msgstr "Ecrire un message pour l'ajouter à l'adresse e-mail"
+
+#: src/photos_presenter.py:358
+msgid "Your Name:"
+msgstr "Votre nom :"
+
+#: src/photos_presenter.py:358
+msgid "Recipient email:"
+msgstr "E-mail du destinataire :"
+
+#: src/photos_presenter.py:358
+msgid "Message:"
+msgstr "Message :"
+
+#: src/photos_right_toolbar.py:19
+msgid "OPEN PHOTO"
+msgstr "OUVERIR LA PHOTO"
+
+#: src/photos_right_toolbar.py:29
+msgid "SAVE"
+msgstr "SAUVEGARDER"
+
+#: src/photos_right_toolbar.py:39
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+#: src/photos_right_toolbar.py:48
+msgid "BACKGROUND"
+msgstr "FOND"
+
+#: src/photos_right_toolbar.py:59
+msgid "REVERT IMAGE"
+msgstr "RETOURNER L'IMAGE"
+
+#: src/photos_view.py:37
+msgid "Photos"
+msgstr ""
+
+#: src/photos_view.py:134 src/splash_screen.py:27
+msgid "Open Image"
+msgstr "Ouvrir une image"
+
+#: src/photos_view.py:165
+msgid "Save Image"
+msgstr "Enregistrer l'image"
+
+#: src/photos_view.py:194
+msgid "Open new photo without save?"
+msgstr "Ouvrir une nouvelle photo sans sauvegarder ?"
+
+#: src/photos_view.py:195
+msgid ""
+"Your changes have not been saved. Are you sure you want to open a new photo "
+"without saving?"
+msgstr "Vos modifications n'ont pas été enregistrées. Etes-vous sûr de vouloir ouvrir une nouvelle photo sans enregistrer ?"
+
+#: src/photos_view.py:217
+msgid "Quit Without Save?"
+msgstr "Quitter sans sauvegarder ?"
+
+#: src/photos_view.py:218
+msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr "Vos modifications n'ont pas été enregistrées. Etes-vous sûr de vouloir quitter ?"
+
+#: src/photos_view.py:262
+msgid "Continue"
+msgstr "Continuer"
+
+#: src/photos_view.py:263
+msgid "Cancel"
+msgstr "Annuler"
+
+#: src/splash_screen.py:33
+msgid "Choose one of your photos to begin!"
+msgstr "Choisissez l'une de vos photos pour commencer !"
