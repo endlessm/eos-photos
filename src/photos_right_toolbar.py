@@ -20,6 +20,7 @@ class PhotosRightToolbar(Gtk.VBox):
             name="open-photo-button",
             vertical=True)
         self._open_photo_button.connect('clicked', lambda w: self._presenter.on_open())
+        self._open_photo_button.get_accessible().set_name("open-photo-button")
 
         self._save_button = ImageTextButton(
             image_size_x=ImageTextButton.SIZE_MEDIUM,
