@@ -27,7 +27,9 @@ class SplashScreen(Gtk.VBox):
         self._splash_open_button = ImageTextButton(label=(_("Open Image")).upper(),
                                                    image_size_x=21, # Icon x-dimension
                                                    image_size_y=17, # Icon y-dimension
-                                                   name="splash-open-photos-button")
+                                                   #name="splash-open-photos-button")
+        )
+        self._splash_open_button.get_accessible().set_name("splash_open_button")
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
 
         splash_label = WrappingLabel(width=600, label=_("Choose one of your photos to begin!"), name="splash-label", expand=False)

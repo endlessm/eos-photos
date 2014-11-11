@@ -29,6 +29,7 @@ class PhotosView(object):
         self._splash_screen = SplashScreen(name="splash-eventbox")
 
         self._right_toolbar = PhotosRightToolbar()
+        self._right_toolbar.get_accessible().set_name("right_toolbar")
         self._image_container = ImageContainer(name="image-container")
         self._window = PhotosWindow(splash_screen=self._splash_screen,
                                     left_toolbar=self._left_toolbar,
