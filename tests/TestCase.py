@@ -13,14 +13,14 @@ class TestOpenImageButton(BaseTestCase):
     def setUp(self):
         super(TestOpenImageButton, self).setUp()
         #grid = self.app.child('Thumbs Grid')
-        open_button = self.app.child('splash_open_button')
+        self.open_button = self.app.child('splash_open_button')
         #right_toolbar = self.app.child("right_toolbar")
         #self.thumbs = [x for x in grid.children if 'thumb_' in x.name]
 
     def test_openImage_button(self):
     	if self.open_button.showing:
     		print "open button is available"
-    		seld.assertTrue(self.open_button.showing)
+    		self.assertTrue(self.open_button.showing)
     	else:
     		print "there aint no toolbar showing"
         # self.assertTrue(len(self.thumbs) > 0)
