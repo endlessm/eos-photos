@@ -13,27 +13,28 @@ class TestOpenImage(BaseTestCase):
     def setUp(self):
         super(TestOpenImage, self).setUp()
         #grid = self.app.child('Thumbs Grid')
-        self.open_button = self.app.child('splash-open-photos-button')
+        self.open_button = self.app.child('splash_open_button')
+        self.main_image = self.app.child('image_container')
+
+    def test_openImage(self):
+        self.open_button.grab_focus()
+        self.open_button.click()
+        
+        doDelay(2)
+
         self.open_file_button = self.app.child('OK')
         self.picture_label = self.app.child('Pictures') # actionable / toggle button
         self.test_image_cell = self.app.child('test.jpg') # table cell
-        seld.main_image = self.app.child('image_container')
-        #right_toolbar = self.app.child("right_toolbar")
-        #self.thumbs = [x for x in grid.children if 'thumb_' in x.name]
-
-    def test_openImage(self):
-        print "Clicking on Pictures label"
+        
+        # Click on Pictures label
         self.picture_label.click()
-        print "Click on test image"
-        self.test_image_cell.click()
-        print "Click OK to open image"
+        # put focus on the desired image (this in case it's not the first on on the list)
+        self.test_image_cell.grab_focus()
+        #self.test_image_cell.click()
+        
+        # Click OK from the file chooser
         self.open_file_button.click()
-        if self.main_image.showing:
-            print "image loaded"
-            self.assertTrue(self.main_image.showing)
-        else:
-            print "Test image failed to load"
-
+        self.assertTrue(self.main_image.showing)
 
 
 if __name__ == '__main__':
