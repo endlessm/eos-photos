@@ -48,6 +48,10 @@ class EndlessPhotos(Endless.Application):
         thumbnail_resource = Gio.Resource.load(THUMBNAIL_RESOURCE_PATH);
         thumbnail_resource._register();
 
+        credits = Gio.File.new_for_uri('resource://' + BASE_RESOURCE_PREFIX +
+            'credits.json')
+        self.props.image_attribution_file = credits
+
         # Style CSS
         provider = Gtk.CssProvider()
         css_file = Gio.File.new_for_uri('resource://' + BASE_RESOURCE_PREFIX + 'endless_photos.css')

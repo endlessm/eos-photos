@@ -73,5 +73,7 @@
         <file>images/open_photo_button_regular.png</file>
         <file>images/open_photo_button_hover.png</file>
         <file>images/open_photo_button_pressed.png</file>
+        <file>images/thumbnail_original.jpg</file>
+        <file compressed="true">credits.json</file>
     </gresource>
 </gresources>
