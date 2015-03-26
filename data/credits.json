@@ -1,0 +1,16 @@
+[
+  {
+    "resource_path": "/com/endlessm/photos/images/background_splash.jpg",
+    "license": "CC BY 2.0",
+    "uri": "https://www.flickr.com/photos/mikefink/4451105742/",
+    "credit": "Mike Finkelstein",
+    "credit_uri": "https://www.flickr.com/photos/mikefink/"
+  },
+  {
+    "resource_path": "/com/endlessm/photos/images/thumbnail_original.jpg",
+    "license": "CC BY-SA 2.0",
+    "uri": "https://www.flickr.com/photos/anieto2k/9435123826/",
+    "credit": "Andrés Nieto Porras",
+    "credit_uri": "https://www.flickr.com/photos/anieto2k/"
+  }
+]
