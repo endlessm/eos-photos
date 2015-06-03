@@ -1,7 +1,7 @@
 import collections
 
-import Image
-import ImageFilter
+from PIL import Image
+from PIL import ImageFilter
 
 import util
 from resource_prefixes import *

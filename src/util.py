@@ -1,4 +1,5 @@
-import Image
+
+from PIL import Image
 import io
 from gi.repository import Clutter, Cogl, GdkPixbuf, Gio
 
