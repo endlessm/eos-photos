@@ -65,16 +65,6 @@ class ScrollWindowDropShadow(Gtk.Widget):
         self.set_has_window(False)
         self.set_app_paintable(True)
         self.connect('draw', self._draw)
-        self.connect_after('realize', self._realize)
-
-    def _realize(self, w):
-        # Big old hack to keep from getting input in this widget. Sets the Gdk
-        # input region to be none so events will propagate down.
-        # set_child_input_shapes set this widget to have the input region of
-        # its children and since it has no children this is an empty area.
-        # Other input region methods are not introspectable.
-        window = self.get_window()
-        window.set_child_input_shapes()
 
     def _draw(self, w, cr):
         alloc = self.get_allocation()
@@ -141,6 +131,7 @@ class CategoryExpander(Gtk.Grid):
         self._overlay = Gtk.Overlay()
         self._overlay.add(self._scroll_area)
         self._overlay.add_overlay(self._drop_shadow)
+        self._overlay.set_overlay_pass_through(self._drop_shadow, True)
 
         self.add(self._button)
         self.add(self._overlay)
