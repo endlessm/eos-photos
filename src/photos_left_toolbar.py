@@ -64,7 +64,6 @@ class ScrollWindowDropShadow(Gtk.Widget):
         self._separator_images = separator_images
         self.set_has_window(False)
         self.set_app_paintable(True)
-        self.set_size_request(183, -1)
         self.connect('draw', self._draw)
 
     def _draw(self, w, cr):
@@ -103,6 +102,10 @@ class CategoryButton(Gtk.Button, CompositeButton):
         self._hbox.pack_start(self._arrow_align, expand=False, fill=False, padding=0)
         self._hbox.pack_start(self._icon_align, expand=False, fill=False, padding=2)
         self._hbox.pack_start(self._category_label, expand=False, fill=False, padding=10)
+        # This hackish line keeps the expander widget from downsizing
+        # horizontally after the separator is removed. 183 is the width of the
+        # separator image
+        self._hbox.set_size_request(183, -1)
 
         self.add(self._hbox)
         self.set_sensitive_children([self._category_label, self._icon_frame, self._arrow_frame])
@@ -125,9 +128,10 @@ class CategoryExpander(Gtk.Grid):
         self._scroll_area.add_with_viewport(self._revealer)
         self._scroll_area.connect("size-allocate", self._update_scroll)
         self._drop_shadow = ScrollWindowDropShadow(separator_images)
-        self._overlay = Gtk.Grid()
-        self._overlay.attach(self._drop_shadow, 0, 0, 1, 1)
-        self._overlay.attach(self._scroll_area, 0, 0, 1, 1)
+        self._overlay = Gtk.Overlay()
+        self._overlay.add(self._scroll_area)
+        self._overlay.add_overlay(self._drop_shadow)
+        self._overlay.set_overlay_pass_through(self._drop_shadow, True)
 
         self.add(self._button)
         self.add(self._overlay)
