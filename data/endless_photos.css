@@ -383,28 +383,24 @@ EosPageManager .image-frame {
     background-image: url("images/open_photos_icon_pressed.png");
 }
 
-.filters-scroll-area {
+.filters-scroll-area:not(.undershoot):not(.overshoot) {
     background-image: -gtk-gradient (linear, left top, right top,
                                      color-stop(0.0, alpha(black, 0.2)),
                                      color-stop(0.8, alpha(black, 0.0)));
 }
 
-.filters-scroll-area > GtkViewport {
-    background-color: transparent;
-}
-
-.filters-scroll-area > .scrollbar {
+.filters-scroll-area .scrollbar {
     -GtkRange-slider-width: 8;
 }
 
-.filters-scroll-area > .scrollbar.slider {
+.filters-scroll-area .scrollbar.slider {
     /* this transition doesn't seem to work */
     transition:background-color 200ms ease-in-out;
     background-color: #3f3f3f;
     border-radius: 4px;
 }
 
-.filters-scroll-area > .scrollbar.slider:hover {
+.filters-scroll-area .scrollbar.slider:hover {
     background-color: #5c5c5c;
 }
 
