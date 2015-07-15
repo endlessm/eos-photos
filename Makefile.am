@@ -45,7 +45,8 @@ data/images/thumbnails/thumbnails.gresource: data/images/thumbnails/thumbnails.g
 CLEANFILES += data/images/thumbnails/thumbnails.gresource $(thumbnail_resource_files)
 
 subst_install = sed -e 's|@pkgdatadir[@]|$(pkgdatadir)|g' \
-	-e 's|@datadir[@]|$(datadir)|g'
+	-e 's|@datadir[@]|$(datadir)|g' \
+	-e 's|@bindir[@]|$(bindir)|g'
 subst_local = sed -e 's|@pkgdatadir[@]|$(realpath $(dir $(lastword $(MAKEFILE_LIST))))|g' \
 	-e 's|@datadir[@]|$(datadir)|g'
 eos-photos: eos-photos.in Makefile
@@ -55,6 +56,18 @@ eos-photos: eos-photos.in Makefile
 	chmod +x eos-photos-local
 CLEANFILES += eos-photos \
 	eos-photos-local
+
+applicationsdir = $(datadir)/applications
+dist_applications_DATA = data/com.endlessm.photos.desktop
+
+data/com.endlessm.photos.service: data/com.endlessm.photos.service.in Makefile
+	$(AM_V_GEN) $(subst_install) $< > $@
+
+servicesdir = $(datadir)/dbus-1/services
+services_DATA = data/com.endlessm.photos.service
+
+CLEANFILES += $(services_DATA)
+EXTRA_DIST += data/com.endlessm.photos.service.in
 
 # # # INSTALL RULES # # #
 

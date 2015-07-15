@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.endlessm.photos
+Exec=@bindir@/eos-photos --gapplication-service
