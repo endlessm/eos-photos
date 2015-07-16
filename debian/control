@@ -4,6 +4,7 @@ Priority: extra
 Maintainer: EndlessMobile <endlessmobile@gmail.com>
 Build-Depends: debhelper (>= 9),
                devscripts,
+               eos-shell-content-dev,
                gettext,
                gir1.2-clutter-1.0,
                gir1.2-glib-2.0,
