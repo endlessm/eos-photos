@@ -61,7 +61,8 @@ applicationsdir = $(datadir)/applications
 dist_applications_DATA = data/com.endlessm.photos.desktop
 
 data/com.endlessm.photos.service: data/com.endlessm.photos.service.in Makefile
-	$(AM_V_GEN) $(subst_install) $< > $@
+	$(AM_V_GEN) $(MKDIR_P) data && \
+	$(subst_install) $< > $@
 
 servicesdir = $(datadir)/dbus-1/services
 services_DATA = data/com.endlessm.photos.service
