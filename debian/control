@@ -20,7 +20,7 @@ Homepage: http://www.endlessm.com
 
 Package: eos-photos
 Architecture: all
-XCBS-EOS-MinOsVersion: 1.4.7
+XCBS-EOS-MinOsVersion: 2.4.0
 XCBS-EOS-AppId: com.endlessm.photos
 XCBS-EOS-AppName: Photos
 Replaces: endlessos-base-photos
