@@ -17,8 +17,6 @@ class TextEntry(Gtk.Frame):
         self._text_view = Gtk.TextView()
         self._text_view.set_wrap_mode(Gtk.WrapMode.WORD)
         self._text_view.set_hexpand(False)
-        # This is essentially padding, not border
-        self._text_view.set_border_width(5)
 
         self._scroll = Gtk.ScrolledWindow()
         self._scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
