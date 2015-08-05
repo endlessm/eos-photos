@@ -90,7 +90,7 @@ class CategoryButton(Gtk.Button, CompositeButton):
         self._icon_align.add(self._icon_frame)
 
         self._category_label = Gtk.Label(label=category_label, name="category-label")
-        self._category_label.get_style_context().add_class("label")
+        self._category_label.get_style_context().add_class("category-label")
 
         self._arrow_frame = Gtk.Frame(halign=Gtk.Align.END)
         self._arrow_frame.get_style_context().add_class("arrow-frame")

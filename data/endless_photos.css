@@ -82,14 +82,14 @@ EosPageManager .image-frame {
     background-image: url("images/icon_arrow_down.png");
 }
 
-.category-expander .label {
+.category-expander .category-label {
     font-size: 12px;
     color: #999999;
 }
 
-.category-expander .label:active,
-.category-expander .label:hover,
-.category-expander.expanded .label {
+.category-expander .category-label:active,
+.category-expander .category-label:hover,
+.category-expander.expanded .category-label {
     color: #ffffff;
 }
 
