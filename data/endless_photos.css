@@ -471,6 +471,10 @@ FacebookAuthDialog,
     border-radius: 0px 3px 3px 0px;
 }
 
+#message-box .dialog-title {
+    border-bottom: 0px none;
+}
+
 #continue-button {
     background-image: linear-gradient(to top,
         rgba(103, 125, 61, 1) 0%,
