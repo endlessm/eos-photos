@@ -253,10 +253,13 @@ class PhotosView(object):
     # from the user.
     def get_message(self, prompt, callback, *args):
         dialog = Gtk.Dialog(
-            parent=self.get_window(),
+            transient_for=self.get_window(),
             modal=True,
-            name='message-box',
-            title=prompt)
+            name='message-box')
+        # Title is not shown by default for transient windows anymore
+        title = Gtk.Label(label='<b>' + prompt + '</b>', use_markup=True)
+        title.get_style_context().add_class('dialog-title')
+        dialog.set_titlebar(title)
 
         grid = Gtk.Grid()
         continue_button = Gtk.Button(label=_("Continue"), name='continue-button')

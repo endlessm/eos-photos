@@ -461,6 +461,9 @@ FacebookAuthDialog,
     border-color: alpha(black, .35);
     border-style: solid;
     border-image: none;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .25);
+    padding: 5px;
+    background-color: white;
 }
 
 #message-box GtkScrolledWindow GtkScrollbar {
@@ -468,9 +471,8 @@ FacebookAuthDialog,
     border-radius: 0px 3px 3px 0px;
 }
 
-#message-box GtkTextView {
-    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, .25);
-    border-radius: 3px;
+#message-box .dialog-title {
+    border-bottom: 0px none;
 }
 
 #continue-button {
