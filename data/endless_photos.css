@@ -428,9 +428,7 @@ GtkScale {
     box-shadow: inset 0 -1px alpha(#ffffff, 0.25);
 }
 
-#message-box,
-FacebookAuthDialog,
-#message-dialog {
+#message-box {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;   
 }
