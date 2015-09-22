@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2014-10-15 12:32-0700\n"
+"POT-Creation-Date: 2015-09-02 19:24+0000\n"
 "PO-Revision-Date: 2014-10-22 22:40+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-photos/language/ar/)\n"
@@ -302,11 +302,11 @@ msgstr "الخروج دون الحفظ؟"
 msgid "Your changes have not been saved. Are you sure you want to quit?"
 msgstr "لم يتم حفظ التغييرات. هل أنت متأكد أنك تريد الانهاء؟"
 
-#: src/photos_view.py:262
+#: src/photos_view.py:265
 msgid "Continue"
 msgstr "متابعة"
 
-#: src/photos_view.py:263
+#: src/photos_view.py:266
 msgid "Cancel"
 msgstr "إلغاء"
 
