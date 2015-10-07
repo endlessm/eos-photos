@@ -13,6 +13,9 @@ class FacebookAuthDialog(Gtk.Dialog):
     FB_APP_ID = '407909575958642'
     FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
     FB_LOGIN_URL = 'https://graph.facebook.com/oauth/authorize'
+    # According to the developer docs, this redirect url should be used for all
+    # desktop apps with an embedded login page.
+    FB_REDIRCT_URL = 'https://www.facebook.com/connect/login_success.html'
 
     def __init__(self, **kw):
         kw.setdefault('default_width', 600)
@@ -27,7 +30,7 @@ class FacebookAuthDialog(Gtk.Dialog):
         url = self.FB_LOGIN_URL
         params = {
             'client_id': self.FB_APP_ID,
-            'redirect_uri': 'http://localhost:8080/',
+            'redirect_uri': self.FB_REDIRCT_URL,
             'display': 'popup',
             'scope': 'publish_actions',
         }
@@ -94,7 +97,7 @@ class FacebookAuthDialog(Gtk.Dialog):
     def _query_access_token(self, code):
         url = 'https://graph.facebook.com/oauth/access_token'
         params = {'client_id': self.FB_APP_ID,
-                  'redirect_uri':'http://localhost:8080/',
+                  'redirect_uri': self.FB_DESKTOP_APP_REDIRCT_URL,
                   'client_secret': self.FB_APP_SECRET,
                   'code':code}
         url = url + '?' + urllib.urlencode(params)
