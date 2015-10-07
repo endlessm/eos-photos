@@ -29,7 +29,7 @@ class FacebookAuthDialog(Gtk.Dialog):
             'client_id': self.FB_APP_ID,
             'redirect_uri': 'http://localhost:8080/',
             'display': 'popup',
-            'scope': 'read_stream,publish_stream',
+            'scope': 'publish_actions',
         }
         url = url + '?' + urllib.urlencode(params)
         self.web_view.load_uri(url)
