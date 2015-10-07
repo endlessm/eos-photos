@@ -12,6 +12,7 @@ class FacebookAuthDialog(Gtk.Dialog):
     # -- PRODUCTION --
     FB_APP_ID = '407909575958642'
     FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
+    FB_LOGIN_URL = 'https://graph.facebook.com/oauth/authorize'
 
     def __init__(self, **kw):
         kw.setdefault('default_width', 600)
@@ -23,7 +24,15 @@ class FacebookAuthDialog(Gtk.Dialog):
         self._message = ""
 
         self.web_view = WebKit2.WebView(expand=True)
-        self.web_view.load_uri('http://graph.facebook.com/oauth/authorize?scope=read_stream%2Cpublish_stream&redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&display=popup&client_id=' + self.FB_APP_ID)
+        url = self.FB_LOGIN_URL
+        params = {
+            'client_id': self.FB_APP_ID,
+            'redirect_uri': 'http://localhost:8080/',
+            'display': 'popup',
+            'scope': 'read_stream,publish_stream',
+        }
+        url = url + '?' + urllib.urlencode(params)
+        self.web_view.load_uri(url)
         self.web_view.connect('close', self._on_close)
         self.web_view.connect('load-failed', self._on_load_failed)
         self.web_view.connect('load-changed', self._on_load_changed)
