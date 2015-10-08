@@ -11,14 +11,11 @@ CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 class FacebookPost:
     # -- DEV --
     #FB_APP_ID = '393860344022808'
-    #FB_APP_SECRET = 'eb0dcb05f7512be39f7a3826ce99dfcd'
     # -- PRODUCTION --
     FB_APP_ID = '407909575958642'
-    FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
 
     def __init__(self):
         self._app_id = self.FB_APP_ID
-        self._app_secret = self.FB_APP_SECRET
         self._fb_access_token = None
         self._graph_api = None
 
