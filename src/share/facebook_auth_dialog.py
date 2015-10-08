@@ -12,7 +12,7 @@ class FacebookAuthDialog(Gtk.Dialog):
     # -- PRODUCTION --
     FB_APP_ID = '407909575958642'
     FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
-    FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth'
+    FB_LOGIN_URL = 'https://www.facebook.com/v2.5/dialog/oauth'
     # According to the developer docs, this redirect url should be used for all
     # desktop apps with an embedded login page.
     FB_REDIRCT_URL = 'https://www.facebook.com/connect/login_success.html'
