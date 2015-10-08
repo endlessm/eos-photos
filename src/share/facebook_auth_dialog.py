@@ -12,7 +12,7 @@ class FacebookAuthDialog(Gtk.Dialog):
     # -- PRODUCTION --
     FB_APP_ID = '407909575958642'
     FB_APP_SECRET = '496f85b88366ae40b42d16579719815c'
-    FB_LOGIN_URL = 'https://graph.facebook.com/oauth/authorize'
+    FB_LOGIN_URL = 'https://www.facebook.com/dialog/oauth'
     # According to the developer docs, this redirect url should be used for all
     # desktop apps with an embedded login page.
     FB_REDIRCT_URL = 'https://www.facebook.com/connect/login_success.html'
@@ -33,6 +33,7 @@ class FacebookAuthDialog(Gtk.Dialog):
             'redirect_uri': self.FB_REDIRCT_URL,
             'display': 'popup',
             'scope': 'publish_actions',
+            'response_type': 'token',
         }
         url = url + '?' + urllib.urlencode(params)
         self.web_view.load_uri(url)
@@ -65,46 +66,19 @@ class FacebookAuthDialog(Gtk.Dialog):
 
     def _on_load_changed(self, view, load_event):
         uri = view.get_uri()
+        if not uri.startswith(self.FB_REDIRCT_URL):
+            return
+
         parsed = urlparse.urlparse(uri)
-
-        # When the login flow eventually moves to a page other than the one specified in
-        # the original webkit load_uri call, all calls to window.close() will fail
-        # (https://developer.mozilla.org/en-US/docs/Web/API/Window.close)
-        # So instead override the close function to reload the current URI with an error
-        # parameter to abort the login flow
-        script = """
-            window.close = function(){
-                loc = window.location.toString()
-                if(loc.indexOf('?') === -1)
-                    loc += '?';
-                else
-                    loc += '&';
-                window.location = loc + 'error=WINDOW_CLOSED'
-            }
-            """
-        view.run_javascript(script, None, None, None)
-
-        parsed_query = urlparse.parse_qs(parsed.query)
-        if parsed_query.has_key('code') and self._access_token is None:
-            code = parsed_query['code'][0]
-            self._query_access_token(code)
-            return True
-        elif parsed_query.has_key('error'):
-            self._message = _("Login canceled.")
-            self._end_dialog(0)
-        return False
-    
-    def _query_access_token(self, code):
-        url = 'https://graph.facebook.com/oauth/access_token'
-        params = {'client_id': self.FB_APP_ID,
-                  'redirect_uri': self.FB_DESKTOP_APP_REDIRCT_URL,
-                  'client_secret': self.FB_APP_SECRET,
-                  'code':code}
-        url = url + '?' + urllib.urlencode(params)
-        try:
-            response = urllib2.urlopen(url).read()
-            self._access_token = urlparse.parse_qs(response)['access_token'][0]
+        parsed_fragment = urlparse.parse_qs(parsed.fragment)
+        if parsed_fragment.has_key('access_token'):
+            self._access_token = parsed_fragment['access_token'][0]
             self._end_dialog(1)
-        except Exception as e:
-            self._message = _("Could not reach facebook.")
-            self._end_dialog(0)
+            return
+        parsed_query = urlparse.parse_qs(parsed.query)
+        if parsed_query.has_key('error'):
+            self._message = _("Login canceled.")
+        else:
+            self._message = _('Login failed.')
+        self._end_dialog(0)
+        return
