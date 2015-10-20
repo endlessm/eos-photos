@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2015-09-02 19:24+0000\n"
+"POT-Creation-Date: 2015-10-13 02:00+0000\n"
 "PO-Revision-Date: 2015-04-01 00:43+0000\n"
 "Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/eos-photos/language/es/)\n"
@@ -26,29 +26,28 @@ msgstr ""
 "Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
+#: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
 msgid "Login canceled."
 msgstr "Inicio de sesión cancelado."
 
-#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
-#: src/share/facebook_post.py:38
+#: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
 msgstr "No fue posible conectar con Facebook."
 
-#: src/share/facebook_post.py:28
+#: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
+msgid "Login failed."
+msgstr "Falla en el inicio de sesión."
+
+#: src/share/facebook_post.py:25
 msgid "Image successfully posted to facebook!"
 msgstr "¡Imagen publicada en Facebook!"
 
-#: src/share/facebook_post.py:54
+#: src/share/facebook_post.py:51
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
 msgstr "No fue posible realizar la acción solicitada en este momento. Por favor intenta de nuevo más tarde."
 
-#: src/share/facebook_post.py:57
-msgid "Login failed."
-msgstr "Falla en el inicio de sesión."
-
-#: src/share/facebook_post.py:62
+#: src/share/facebook_post.py:59
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2015-09-02 19:24+0000\n"
+"POT-Creation-Date: 2015-10-13 02:00+0000\n"
 "PO-Revision-Date: 2014-10-22 22:40+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Arabic (http://www.transifex.com/endless-mobile-inc/eos-photos/language/ar/)\n"
@@ -18,29 +18,28 @@ msgstr ""
 "Language: ar\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: src/share/facebook_auth_dialog.py:46 src/share/facebook_auth_dialog.py:81
+#: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
 msgid "Login canceled."
 msgstr "تم إلغاء تسجيل الدخول."
 
-#: src/share/facebook_auth_dialog.py:51 src/share/facebook_auth_dialog.py:97
-#: src/share/facebook_post.py:38
+#: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
 msgstr "لا يمكن الوصول إلى الفيسبوك."
 
-#: src/share/facebook_post.py:28
+#: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
+msgid "Login failed."
+msgstr "تعذر تسجيل الدخول."
+
+#: src/share/facebook_post.py:25
 msgid "Image successfully posted to facebook!"
 msgstr "تم نشر الصورة بنجاح على الفيسبوك!"
 
-#: src/share/facebook_post.py:54
+#: src/share/facebook_post.py:51
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
 msgstr "الإجراء المطلوب غير ممكن في الوقت الحالي. يرجى المحاولة مرةً أخرى لاحقاً."
 
-#: src/share/facebook_post.py:57
-msgid "Login failed."
-msgstr "تعذر تسجيل الدخول."
-
-#: src/share/facebook_post.py:62
+#: src/share/facebook_post.py:59
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
