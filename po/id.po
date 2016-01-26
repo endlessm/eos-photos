@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2015-10-13 02:00+0000\n"
-"PO-Revision-Date: 2016-01-22 18:59+0000\n"
+"PO-Revision-Date: 2016-01-24 21:19+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-photos/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -19,295 +19,295 @@ msgstr ""
 
 #: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
 msgid "Login canceled."
-msgstr ""
+msgstr "Batal masuk."
 
 #: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
-msgstr ""
+msgstr "Tidak dapat menghubungi Facebook."
 
 #: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
 msgid "Login failed."
-msgstr ""
+msgstr "Gagal masuk."
 
 #: src/share/facebook_post.py:25
 msgid "Image successfully posted to facebook!"
-msgstr ""
+msgstr "Gambar berhasil dikirim ke Facebook!"
 
 #: src/share/facebook_post.py:51
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
-msgstr ""
+msgstr "Tindakan yang diminta untuk sementara tidak tersedia. Silakan coba lagi nanti."
 
 #: src/share/facebook_post.py:59
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr ""
+msgstr "Problem jaringan terdeteksi. Harap memeriksa sambungan internet Anda dan mencoba lagi."
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr ""
+msgstr "Seseorang"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr ""
+msgstr "mengirimi Anda foto dari Endless Photos!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr ""
+msgstr "Harap jangan membalas email ini. Balasan akan masuk ke kotak masuk yang tidak dipantau."
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr ""
+msgstr "Tanpa judul"
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr ""
+msgstr "Putar Kanan 90°"
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr ""
+msgstr "TRANSFORM"
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr ""
+msgstr "Pangkas"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr ""
+msgstr "Lakukan Krop?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr ""
+msgstr "BLURS"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr ""
+msgstr "BATAS-BATAS"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr ""
+msgstr "FILTER"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr ""
+msgstr "DISTORSI"
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr ""
+msgstr "Kecerahan"
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr ""
+msgstr "Kontras"
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr ""
+msgstr "Saturasi"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr ""
+msgstr "ADJUST"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr ""
+msgstr "Tak ada"
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr ""
+msgstr "Pergeseran dan Pemiringan"
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr ""
+msgstr "Kedalaman Ruang Tajam"
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr ""
+msgstr "Skala abu-abu"
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr ""
+msgstr "Negara"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr ""
+msgstr "Retro"
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr ""
+msgstr "Foto Lama"
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr ""
+msgstr "Penuh warna"
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr ""
+msgstr "Lomo"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "Biru Berkabut"
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr ""
+msgstr "Kertas"
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr ""
+msgstr "Kereta Api"
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr ""
+msgstr "Gurun"
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr ""
+msgstr "Posterisasi"
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr ""
+msgstr "Tepi"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr ""
+msgstr "Krayon"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr ""
+msgstr "Grunge"
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr ""
+msgstr "Semprotan"
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr ""
+msgstr "Kuas"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr ""
+msgstr "Lampu Mata Ikan"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "Fish Eye Heavy"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "Secercah Cahaya"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr ""
+msgstr "Hujan deras"
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr ""
+msgstr "Pusaran"
 
 #: src/photos_presenter.py:131
 msgid "Image successfully applied to background!"
-msgstr ""
+msgstr "Gambar berhasil diterapkan untuk latar belakang!"
 
 #: src/photos_presenter.py:140
 msgid "Email failed."
-msgstr ""
+msgstr "Email gagal."
 
 #: src/photos_presenter.py:266
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "Anda tidak punya izin untuk menyimpan foto di sini"
 
 #: src/photos_presenter.py:268
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "Terjadi kesalahan saat menyimpan foto"
 
 #: src/photos_presenter.py:328
 msgid "Facebook is not available offline."
-msgstr ""
+msgstr "Facebook tidak tersedia luring"
 
 #: src/photos_presenter.py:333
 msgid "Post to Facebook"
-msgstr ""
+msgstr "Kirimkan ke Facebook"
 
 #: src/photos_presenter.py:335
 msgid "Write a description for the photo"
-msgstr ""
+msgstr "Tulis deksripsi untuk foto"
 
 #: src/photos_presenter.py:358
 msgid "Enter a message to add to the e-mail"
-msgstr ""
+msgstr "Masukkan pesan untuk ditambahkan ke surel"
 
 #: src/photos_presenter.py:358
 msgid "Your Name:"
-msgstr ""
+msgstr "Nama Anda:"
 
 #: src/photos_presenter.py:358
 msgid "Recipient email:"
-msgstr ""
+msgstr "Surel penerima:"
 
 #: src/photos_presenter.py:358
 msgid "Message:"
-msgstr ""
+msgstr "Pesan:"
 
 #: src/photos_right_toolbar.py:19
 msgid "OPEN PHOTO"
-msgstr ""
+msgstr "BUKA FOTO"
 
 #: src/photos_right_toolbar.py:29
 msgid "SAVE"
-msgstr ""
+msgstr "SIMPAN"
 
 #: src/photos_right_toolbar.py:39
 msgid "FACEBOOK"
-msgstr ""
+msgstr "FACEBOOK"
 
 #: src/photos_right_toolbar.py:48
 msgid "BACKGROUND"
-msgstr ""
+msgstr "LATAR BELAKANG"
 
 #: src/photos_right_toolbar.py:59
 msgid "REVERT IMAGE"
-msgstr ""
+msgstr "KEMBALIKAN GAMBAR"
 
 #: src/photos_view.py:37
 msgid "Photos"
-msgstr ""
+msgstr "Foto"
 
 #: src/photos_view.py:134 src/splash_screen.py:27
 msgid "Open Image"
-msgstr ""
+msgstr "Buka Gambar"
 
 #: src/photos_view.py:165
 msgid "Save Image"
-msgstr ""
+msgstr "Simpan Gambar"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr ""
+msgstr "Buka foto baru tanpa menyimpan?"
 
 #: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
+msgstr "Perubahan Anda belum disimpan. Anda yakin ingin membuka foto baru tanpa menyimpan?"
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr ""
+msgstr "Berhenti Tanpa Menyimpan?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
+msgstr "Perubahan Anda belum disimpan. Anda yakin ingin keluar?"
 
 #: src/photos_view.py:265
 msgid "Continue"
-msgstr ""
+msgstr "Lanjutkan"
 
 #: src/photos_view.py:266
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: src/splash_screen.py:33
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "Pilih salah satu foto Anda untuk mulai!"
