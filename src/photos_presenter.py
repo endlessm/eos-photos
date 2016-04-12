@@ -183,7 +183,8 @@ class PhotosPresenter(object):
 
     def _do_crop_activate(self):
         self._model.do_crop_activate()
-        self._view._transformations.open_crop_options()
+        # Defer showing crop options to avoid crashing the app
+        GLib.idle_add(self._view._transformations.open_crop_options)
 
     def _do_crop_apply(self):
         self._model.do_crop_apply()
