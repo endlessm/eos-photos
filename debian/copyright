@@ -1,1 +1,13 @@
-Property of EndlessOS.  Do not copy.
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Endless Photo Editor
+Upstream-Contact: Philip Chimento <philip@endlessm.com>
+Source: https://github.com/endlessm/eos-photos
+
+Files: *
+Copyright: Copyright © 2013-2016 Endless Mobile, Inc.
+License: All Rights Reserved
+ This Software is provided subject to a limited, individual,
+ revocable, non-exclusive, non-transferrable, and non-assignable
+ personal license to use the Software in accordance with the
+ Terms of Use that are distributed with Endless OS as
+ /usr/share/eos-license-service/terms/C/Endless-Terms-of-Use.pdf.
