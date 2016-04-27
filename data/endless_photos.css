@@ -39,7 +39,7 @@ EosPageManager .image-frame {
     font-family: Lato Light;
     font-weight: normal;
     text-shadow: 0px 1px 1px rgba(0,0,0,0.25);
-    font-size: 48px;
+    font-size: 64px;
     color: rgba(255, 255, 255, 1);
     padding: 10px 0px 20px 0px;
 }
@@ -64,7 +64,7 @@ EosPageManager .image-frame {
 
 .slider-label,
 .option-label {
-    font-size: 11px;
+    font-size: 14.7px;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
 }
@@ -83,7 +83,7 @@ EosPageManager .image-frame {
 }
 
 .category-expander .category-label {
-    font-size: 12px;
+    font-size: 16px;
     color: #999999;
 }
 
@@ -159,13 +159,13 @@ EosPageManager .image-frame {
 #share-button GtkLabel,
 #revert-image-button GtkLabel {
     font-family: Lato-Regular;
-    font-size: 8px;
+    font-size: 10.7px;
     text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
     color: #A7A9AC;
 }
 
 #crop-options GtkLabel {
-    font-size: 10px;
+    font-size: 13.3px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #999999;
 }
@@ -190,7 +190,7 @@ EosPageManager .image-frame {
 #rotate-button GtkLabel,
 #crop-button GtkLabel {
     margin: 10px 3px 8px 0px;
-    font-size: 11px;
+    font-size: 14.7px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #c4c4c4;
 }
@@ -369,7 +369,7 @@ EosPageManager .image-frame {
 #splash-open-photos-button GtkLabel {
     font-family: Lato;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
     color: #333333;
     padding: 6px 20px 8px 12px;
 }
@@ -440,12 +440,12 @@ GtkScale {
 #message-box * {
     font-family: Lato;
     /* title font size */
-    font-size: 12px;
+    font-size: 16px;
 }
 
 #message-box GtkButton *,
 #message-box GtkGrid * {
-    font-size: 10px;
+    font-size: 13.3px;
 }
 
 #message-box GtkButton,
