@@ -459,7 +459,7 @@ scale trough {
     border-radius: 3px;
 }
 
-#message-box TextEntry {
+#message-box frame {
     border-radius: 3px;
     border-width: 1px;
     border-color: alpha(black, .35);
@@ -470,13 +470,26 @@ scale trough {
     background-color: white;
 }
 
+#message-box frame border {
+    border-color: white;
+}
+
 #message-box scrolledwindow scrollbar {
     /* scrollbar has right side curved borders to match scrolled window */
     border-radius: 0px 3px 3px 0px;
 }
 
 #message-box .dialog-title {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 6px;
+    /* padding gets ignored without min-height */
+    min-height: 0px;
     border-bottom: 0px none;
+}
+
+#message-box button {
+    min-height: 19px;
 }
 
 #continue-button {
