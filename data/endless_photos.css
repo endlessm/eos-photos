@@ -5,27 +5,27 @@ EosWindow {
 
 /* We don't want to theme the topbar here, so just select children of the page
  manager */
-EosPageManager GtkButton {
+EosWindow stack button {
     transition:background-image 200ms ease-in-out;
 }
 
-EosPageManager GtkLabel {
+EosWindow stack label {
     transition:color 200ms ease-in-out;
 }
 
-EosPageManager .arrow-frame,
-EosPageManager .image-frame,
-EosPageManager .category-image-frame {
+EosWindow stack .arrow-frame,
+EosWindow stack .image-frame,
+EosWindow stack .category-image-frame {
     transition:background-image 200ms ease-in-out;
 }
 
-EosPageManager .arrow-frame {
+EosWindow stack .arrow-frame {
     background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-EosPageManager .image-frame {
+EosWindow stack .image-frame {
     background-size: 100% 100%;
 }
 
@@ -148,18 +148,18 @@ EosPageManager .image-frame {
     background-image: url("images/icon_adjustments_hover.png");
 }
 
-#open-photo-button GtkLabel,
-#save-button GtkLabel,
-#wallpaper-button GtkLabel,
-#share-button GtkLabel,
-#revert-image-button GtkLabel {
+#open-photo-button label,
+#save-button label,
+#wallpaper-button label,
+#share-button label,
+#revert-image-button label {
     font-family: Lato-Regular;
     font-size: 10.7px;
     text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
     color: #A7A9AC;
 }
 
-#crop-options GtkLabel {
+#crop-options label {
     font-size: 13.3px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #999999;
@@ -182,22 +182,21 @@ EosPageManager .image-frame {
     padding: 0px 0px 0px 15px;
 }
 
-#rotate-button GtkLabel,
-#crop-button GtkLabel {
-    margin: 10px 3px 8px 0px;
+#rotate-button label,
+#crop-button label {
     font-size: 14.7px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #c4c4c4;
 }
 
-#rotate-button GtkLabel:hover,
-#crop-button GtkLabel:hover{
+#rotate-button label:hover,
+#crop-button label:hover{
     text-shadow: 0px 1px rgba(255,255,255,0.15);
     color: #ffffff;
 }
 
-#rotate-button GtkLabel:active,
-#crop-button GtkLabel:active {
+#rotate-button label:active,
+#crop-button label:active {
     color: #c4c4c4;
 }
 
@@ -361,7 +360,7 @@ EosPageManager .image-frame {
     text-shadow: none;
 }
 
-#splash-open-photos-button GtkLabel {
+#splash-open-photos-button label {
     font-family: Lato;
     font-weight: bold;
     font-size: 16px;
@@ -442,13 +441,13 @@ scale trough {
     font-size: 16px;
 }
 
-#message-box GtkButton *,
-#message-box GtkGrid * {
+#message-box button *,
+#message-box grid * {
     font-size: 13.3px;
 }
 
-#message-box GtkButton,
-#message-box GtkScrolledWindow {
+#message-box button,
+#message-box scrolledwindow {
     border-radius: 3px;
 }
 
@@ -463,7 +462,7 @@ scale trough {
     background-color: white;
 }
 
-#message-box GtkScrolledWindow GtkScrollbar {
+#message-box scrolledwindow scrollbar {
     /* scrollbar has right side curved borders to match scrolled window */
     border-radius: 0px 3px 3px 0px;
 }
