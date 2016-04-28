@@ -1,9 +1,4 @@
 EosWindow {
-    -GtkWidget-focus-line-width: 0px;
-    -GtkExpander-expander-size: 0px;
-    -GtkExpander-focus-line-width: 0px;
-    -GtkExpander-expander-spacing: 0px;
-    -GtkExpander-focus-padding: 0px;
     font-family: Lato;
     font-weight: bold;
 }
@@ -389,39 +384,43 @@ EosPageManager .image-frame {
                                      color-stop(0.8, alpha(black, 0.0)));
 }
 
-.filters-scroll-area .scrollbar {
-    -GtkRange-slider-width: 8;
+.filters-scroll-area scrollbar slider {
+    min-width: 8px;
 }
 
-.filters-scroll-area .scrollbar.slider {
+.filters-scroll-area scrollbar slider {
     /* this transition doesn't seem to work */
     transition:background-color 200ms ease-in-out;
     background-color: #3f3f3f;
     border-radius: 4px;
 }
 
-.filters-scroll-area .scrollbar.slider:hover {
+.filters-scroll-area scrollbar slider:hover {
     background-color: #5c5c5c;
 }
 
 /* Scale themeing */
-GtkScale {
-    -GtkRange-slider-width: 18px;
-    -GtkRange-trough-border: 2px;
-    -GtkScale-slider-length: 18px;
+scale slider {
+    min-width: 18px;
+    min-height: 18px;
+    margin: -6px;
 }
 
-.scale.slider {
+scale trough {
+   padding: 0px;
+}
+
+scale slider {
     /* this transition doesn't seem to work */
     transition:background-image 200ms ease-in-out;
     background-image: url("images/slider_knob_normal.png");
 }
 
-.scale.slider:hover {
+scale slider:hover {
     background-image: url("images/slider_knob_hover.png");
 }
 
-.scale.trough{
+scale trough {
     border-radius: 3px;
     margin: 8px 0;
     background-color: black;
