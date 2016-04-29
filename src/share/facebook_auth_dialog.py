@@ -23,6 +23,7 @@ class FacebookAuthDialog(Gtk.Dialog):
         super(FacebookAuthDialog, self).__init__(**kw)
         self._access_token = None
         self._message = ""
+        self.set_decorated(False)
 
         self.web_view = WebKit2.WebView(expand=True)
         url = self.FB_LOGIN_URL
