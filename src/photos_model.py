@@ -459,7 +459,7 @@ class PhotosModel(object):
             width, height = self._adjusted_image.size
             if self._displayable:
                 self._image_widget.replace_base_image(
-                    self._adjusted_image.tostring(), width, height)
+                    self._adjusted_image.tobytes(), width, height)
             self._is_saved = False
 
     def _update_border_image(self):
@@ -470,7 +470,7 @@ class PhotosModel(object):
             width, height = self._border_image.size
             if self._displayable:
                 self._image_widget.replace_border_image(
-                    self._border_image.tostring(), width, height)
+                    self._border_image.tobytes(), width, height)
             self._is_saved = False
         else:
             self._border_image = None

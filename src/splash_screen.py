@@ -30,7 +30,11 @@ class SplashScreen(Gtk.VBox):
                                                    name="splash-open-photos-button")
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
 
-        splash_label = WrappingLabel(width=600, label=_("Choose one of your photos to begin!"), name="splash-label", expand=False)
+        splash_label = WrappingLabel(width=600,
+                                     label=_("Choose one of your photos to begin!"),
+                                     name="splash-label",
+                                     expand=False,
+                                     halign=Gtk.Align.START)
         splash_label.set_alignment(0, 0)
         splash_label.set_margin_bottom(10)
 

@@ -1,36 +1,31 @@
 EosWindow {
-    -GtkWidget-focus-line-width: 0px;
-    -GtkExpander-expander-size: 0px;
-    -GtkExpander-focus-line-width: 0px;
-    -GtkExpander-expander-spacing: 0px;
-    -GtkExpander-focus-padding: 0px;
     font-family: Lato;
     font-weight: bold;
 }
 
 /* We don't want to theme the topbar here, so just select children of the page
  manager */
-EosPageManager GtkButton {
+EosWindow stack button {
     transition:background-image 200ms ease-in-out;
 }
 
-EosPageManager GtkLabel {
+EosWindow stack label {
     transition:color 200ms ease-in-out;
 }
 
-EosPageManager .arrow-frame,
-EosPageManager .image-frame,
-EosPageManager .category-image-frame {
+EosWindow stack .arrow-frame,
+EosWindow stack .image-frame,
+EosWindow stack .category-image-frame {
     transition:background-image 200ms ease-in-out;
 }
 
-EosPageManager .arrow-frame {
+EosWindow stack .arrow-frame {
     background-size: auto;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-EosPageManager .image-frame {
+EosWindow stack .image-frame {
     background-size: 100% 100%;
 }
 
@@ -39,7 +34,7 @@ EosPageManager .image-frame {
     font-family: Lato Light;
     font-weight: normal;
     text-shadow: 0px 1px 1px rgba(0,0,0,0.25);
-    font-size: 48px;
+    font-size: 64px;
     color: rgba(255, 255, 255, 1);
     padding: 10px 0px 20px 0px;
 }
@@ -64,7 +59,7 @@ EosPageManager .image-frame {
 
 .slider-label,
 .option-label {
-    font-size: 11px;
+    font-size: 14.7px;
     color: #7e7e7e;
     padding: 3px 0px 0px 0px;
 }
@@ -76,14 +71,18 @@ EosPageManager .image-frame {
 .category-expander .arrow-frame:active,
 .category-expander .arrow-frame:hover {
     background-image: url("images/icon_arrow_right.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .category-expander.expanded .arrow-frame {
     background-image: url("images/icon_arrow_down.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .category-expander .category-label {
-    font-size: 12px;
+    font-size: 16px;
     color: #999999;
 }
 
@@ -153,19 +152,19 @@ EosPageManager .image-frame {
     background-image: url("images/icon_adjustments_hover.png");
 }
 
-#open-photo-button GtkLabel,
-#save-button GtkLabel,
-#wallpaper-button GtkLabel,
-#share-button GtkLabel,
-#revert-image-button GtkLabel {
+#open-photo-button label,
+#save-button label,
+#wallpaper-button label,
+#share-button label,
+#revert-image-button label {
     font-family: Lato-Regular;
-    font-size: 8px;
+    font-size: 10.7px;
     text-shadow: 0px 1px 0px rgba(0,0,0,0.5);
     color: #A7A9AC;
 }
 
-#crop-options GtkLabel {
-    font-size: 10px;
+#crop-options label {
+    font-size: 13.3px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #999999;
 }
@@ -187,22 +186,21 @@ EosPageManager .image-frame {
     padding: 0px 0px 0px 15px;
 }
 
-#rotate-button GtkLabel,
-#crop-button GtkLabel {
-    margin: 10px 3px 8px 0px;
-    font-size: 11px;
+#rotate-button label,
+#crop-button label {
+    font-size: 14.7px;
     text-shadow: 0px -1px 1px rgba(0,0,0,0.8);
     color: #c4c4c4;
 }
 
-#rotate-button GtkLabel:hover,
-#crop-button GtkLabel:hover{
+#rotate-button label:hover,
+#crop-button label:hover{
     text-shadow: 0px 1px rgba(255,255,255,0.15);
     color: #ffffff;
 }
 
-#rotate-button GtkLabel:active,
-#crop-button GtkLabel:active {
+#rotate-button label:active,
+#crop-button label:active {
     color: #c4c4c4;
 }
 
@@ -366,10 +364,10 @@ EosPageManager .image-frame {
     text-shadow: none;
 }
 
-#splash-open-photos-button GtkLabel {
+#splash-open-photos-button label {
     font-family: Lato;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
     color: #333333;
     padding: 6px 20px 8px 12px;
 }
@@ -389,48 +387,60 @@ EosPageManager .image-frame {
                                      color-stop(0.8, alpha(black, 0.0)));
 }
 
-.filters-scroll-area .scrollbar {
-    -GtkRange-slider-width: 8;
+.filters-scroll-area scrollbar slider {
+    min-width: 8px;
 }
 
-.filters-scroll-area .scrollbar.slider {
+.filters-scroll-area scrollbar slider {
     /* this transition doesn't seem to work */
     transition:background-color 200ms ease-in-out;
     background-color: #3f3f3f;
     border-radius: 4px;
 }
 
-.filters-scroll-area .scrollbar.slider:hover {
+.filters-scroll-area scrollbar slider:hover {
     background-color: #5c5c5c;
 }
 
 /* Scale themeing */
-GtkScale {
-    -GtkRange-slider-width: 18px;
-    -GtkRange-trough-border: 2px;
-    -GtkScale-slider-length: 18px;
+scale slider {
+    min-width: 18px;
+    min-height: 18px;
+    margin: -6px;
 }
 
-.scale.slider {
+scale trough {
+   padding: 0px;
+}
+
+scale slider {
     /* this transition doesn't seem to work */
     transition:background-image 200ms ease-in-out;
     background-image: url("images/slider_knob_normal.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.scale.slider:hover {
+scale slider:hover {
     background-image: url("images/slider_knob_hover.png");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
-.scale.trough{
+scale trough {
     border-radius: 3px;
     margin: 8px 0;
     background-color: black;
     box-shadow: inset 0 -1px alpha(#ffffff, 0.25);
 }
 
+#message-box decoration {
+    border-radius: 7px;
+}
+
 #message-box {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;   
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
 }
 
 #message-box {
@@ -440,20 +450,20 @@ GtkScale {
 #message-box * {
     font-family: Lato;
     /* title font size */
-    font-size: 12px;
+    font-size: 16px;
 }
 
-#message-box GtkButton *,
-#message-box GtkGrid * {
-    font-size: 10px;
+#message-box button *,
+#message-box grid * {
+    font-size: 13.3px;
 }
 
-#message-box GtkButton,
-#message-box GtkScrolledWindow {
+#message-box button,
+#message-box scrolledwindow {
     border-radius: 3px;
 }
 
-#message-box TextEntry {
+#message-box frame {
     border-radius: 3px;
     border-width: 1px;
     border-color: alpha(black, .35);
@@ -464,13 +474,26 @@ GtkScale {
     background-color: white;
 }
 
-#message-box GtkScrolledWindow GtkScrollbar {
+#message-box frame border {
+    border-color: white;
+}
+
+#message-box scrolledwindow scrollbar {
     /* scrollbar has right side curved borders to match scrolled window */
     border-radius: 0px 3px 3px 0px;
 }
 
 #message-box .dialog-title {
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    padding: 6px;
+    /* padding gets ignored without min-height */
+    min-height: 0px;
     border-bottom: 0px none;
+}
+
+#message-box button {
+    min-height: 19px;
 }
 
 #continue-button {
