@@ -1,4 +1,4 @@
-from gi.repository import Gtk, Gdk, GdkPixbuf
+from gi.repository import Gtk
 
 from widgets.image_text_button import ImageTextButton
 
@@ -17,39 +17,26 @@ class WrappingLabel(Gtk.Label):
         return Gtk.Label.do_get_preferred_width()
 
 
-class SplashScreen(Gtk.VBox):
-    MINIMUM_HEIGHT = 37 # Set this minimum height of the toolbar to 37 to prevent size changes
-                        # when switching to the photo editor.
-
+class SplashScreen(Gtk.Grid):
     def __init__(self, **kw):
-        super(SplashScreen, self).__init__(**kw)
+        super(SplashScreen, self).__init__(margin_start=60, margin_top=65, **kw)
 
         self._splash_open_button = ImageTextButton(label=(_("Open Image")).upper(),
                                                    image_size_x=21, # Icon x-dimension
                                                    image_size_y=17, # Icon y-dimension
+                                                   halign=Gtk.Align.START,
+                                                   valign=Gtk.Align.START,
                                                    name="splash-open-photos-button")
         self._splash_open_button.connect('clicked', lambda w: self._presenter.on_open())
+        self.attach(self._splash_open_button, 0, 1, 1, 1)
 
-        splash_label = WrappingLabel(width=600,
+        splash_label = WrappingLabel(width=600, margin_bottom=10,
                                      label=_("Choose one of your photos to begin!"),
                                      name="splash-label",
-                                     expand=False,
+                                     xalign=0, yalign=0,
+                                     valign=Gtk.Align.START,
                                      halign=Gtk.Align.START)
-        splash_label.set_alignment(0, 0)
-        splash_label.set_margin_bottom(10)
-
-        # These hboxes are used to prevent GTK from ignoring expand flags and auto-expanding the
-        # button and label to the maximum window width.
-        label_hbox = Gtk.HBox()
-        label_hbox.pack_start(splash_label, expand=False, fill=False, padding=0)
-
-        button_hbox = Gtk.HBox()
-        button_hbox.pack_start(self._splash_open_button, expand=False, fill=False, padding=0)
-
-        self.set_margin_left(60)
-        self.set_margin_top(65)
-        self.pack_start(label_hbox, expand=False, fill=False, padding=0)
-        self.pack_start(button_hbox, expand=False, fill=False, padding=0)
+        self.attach(splash_label, 0, 0, 1, 1)
 
     def set_presenter(self, presenter):
         self._presenter = presenter

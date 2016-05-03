@@ -1,4 +1,4 @@
-from gi.repository import Gtk
+from gi.repository import Endless, Gtk
 
 from widgets.image_text_button import ImageTextButton
 
@@ -10,11 +10,15 @@ class PhotosRightToolbar(Gtk.VBox):
     def __init__(self, **kw):
         super(PhotosRightToolbar, self).__init__(homogeneous=False, vexpand=True, **kw)
 
+        vmargin = 40
+        if Endless.is_composite_tv_screen(None):
+            vmargin = 10
+
         self._open_photo_button = ImageTextButton(
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_top=40,
+            margin_top=vmargin,
             margin_bottom=15,
             label=_("OPEN PHOTO"),
             name="open-photo-button",
@@ -55,7 +59,7 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
             margin_top=15,
-            margin_bottom=40,
+            margin_bottom=vmargin,
             label=_("REVERT IMAGE"),
             name="revert-image-button",
             vertical=True)
