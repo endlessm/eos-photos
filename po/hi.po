@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2015-10-13 02:00+0000\n"
-"PO-Revision-Date: 2015-12-01 06:09+0000\n"
+"PO-Revision-Date: 2016-05-05 09:33+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-photos/language/hi/)\n"
 "MIME-Version: 1.0\n"
@@ -306,7 +306,7 @@ msgstr ""
 
 #: src/photos_view.py:266
 msgid "Cancel"
-msgstr ""
+msgstr "रद्द करें "
 
 #: src/splash_screen.py:33
 msgid "Choose one of your photos to begin!"
