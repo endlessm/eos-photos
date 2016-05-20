@@ -10,16 +10,16 @@ class PhotosRightToolbar(Gtk.VBox):
     def __init__(self, **kw):
         super(PhotosRightToolbar, self).__init__(homogeneous=False, vexpand=True, **kw)
 
-        vmargin = 40
+        outer_margin, inner_margin = 40, 15
         if Endless.is_composite_tv_screen(None):
-            vmargin = 10
+            outer_margin, inner_margin = 5, 5
 
         self._open_photo_button = ImageTextButton(
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_top=vmargin,
-            margin_bottom=15,
+            margin_top=outer_margin,
+            margin_bottom=inner_margin,
             label=_("OPEN PHOTO"),
             name="open-photo-button",
             vertical=True)
@@ -29,7 +29,7 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_bottom=15,
+            margin_bottom=inner_margin,
             label=_("SAVE"),
             name="save-button",
             vertical=True)
@@ -39,7 +39,7 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_bottom=15,
+            margin_bottom=inner_margin,
             label=_("FACEBOOK"),
             name="share-button",
             vertical=True)
@@ -58,8 +58,8 @@ class PhotosRightToolbar(Gtk.VBox):
             image_size_x=ImageTextButton.SIZE_MEDIUM,
             image_size_y=ImageTextButton.SIZE_MEDIUM,
             halign=Gtk.Align.CENTER,
-            margin_top=15,
-            margin_bottom=vmargin,
+            margin_top=inner_margin,
+            margin_bottom=outer_margin,
             label=_("REVERT IMAGE"),
             name="revert-image-button",
             vertical=True)
