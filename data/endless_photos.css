@@ -496,3 +496,13 @@ GtkScale {
         rgba(103, 125, 61, 1) 0%,
         rgba(140, 160, 80, 1) 100%);
 }
+
+/* Changes for composite */
+
+.composite #open-photo-button GtkLabel,
+.composite #save-button GtkLabel,
+.composite #wallpaper-button GtkLabel,
+.composite #share-button GtkLabel,
+.composite #revert-image-button GtkLabel {
+    font-size: 6px;
+}
