@@ -506,3 +506,7 @@ GtkScale {
 .composite #revert-image-button GtkLabel {
     font-size: 6px;
 }
+
+.composite #splash-label {
+    font-size: 32px;
+}
