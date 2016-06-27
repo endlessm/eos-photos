@@ -32,4 +32,4 @@ autoreconf -fi -I m4 || exit $?
 rm -f po/Makevars.template
 
 cd "$olddir"
-test -n "$NOCONFIGURE" || "./configure" "$@"
+test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"
