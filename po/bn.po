@@ -1,15 +1,16 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Endless Mobile, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
+# Shimon Sharmin <oparthib@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2015-10-13 02:00+0000\n"
-"PO-Revision-Date: 2016-04-16 04:28+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"POT-Creation-Date: 2016-06-21 01:51+0000\n"
+"PO-Revision-Date: 2016-06-26 15:20+0000\n"
+"Last-Translator: Shimon Sharmin <oparthib@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-photos/language/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,297 +18,297 @@ msgstr ""
 "Language: bn\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
-msgstr ""
+msgstr "লগইন বাতিল।"
 
-#: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
-msgstr ""
+msgstr "ফেসবুকে প্রবেশ করা যায়নি।"
 
-#: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
 msgid "Login failed."
-msgstr ""
+msgstr "লগইন ব্যর্থ।"
 
 #: src/share/facebook_post.py:25
 msgid "Image successfully posted to facebook!"
-msgstr ""
+msgstr "ফেসবুকে চিত্রটি সফলভাবে পোস্ট হয়েছে!"
 
 #: src/share/facebook_post.py:51
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
-msgstr ""
+msgstr "অনুরোধকৃত কাজটি এই মুহূর্তে করা সম্ভব নয়। অনুগ্রহ করে পরে আবার চেষ্টা করুন।"
 
 #: src/share/facebook_post.py:59
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr ""
+msgstr "নেটওয়ার্কে সমস্যা সনাক্ত হয়েছে। আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং আবার চেষ্টা করুন।"
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr ""
+msgstr "কেউ একজন"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr ""
+msgstr "Endless Photos থেকে আপনাকে একটি ছবি পাঠানো হয়েছে!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr ""
+msgstr "অনুগ্রহ করে এই ইমেইলের উত্তর দেবেন না। কোন উত্তর পাঠানো হলে তা পরীক্ষা করে দেখা হবে না।"
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr ""
+msgstr "শিরোনামহীন"
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr ""
+msgstr "ডানদিকে 90° ঘুরান"
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr ""
+msgstr "রূপান্তর"
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr ""
+msgstr "কাটুন"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr ""
+msgstr "কাটা নিশ্চিত?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr ""
+msgstr "ঝাপসা"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr ""
+msgstr "বর্ডার"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr ""
+msgstr "ফিল্টার"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr ""
+msgstr "বিকৃত"
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr ""
+msgstr "ঔজ্জ্বল্য"
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr ""
+msgstr "বৈপরীত্য"
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr ""
+msgstr "সম্পৃক্তি"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr ""
+msgstr "ঠিক করুন"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr ""
+msgstr "একটিও না"
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr ""
+msgstr "কাত করা পরিবর্তন"
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr ""
+msgstr "ফিল্ডের গভীরতা"
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr ""
+msgstr "রঙের স্কেল"
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr ""
+msgstr "দেশ"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr ""
+msgstr "রেট্রো"
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr ""
+msgstr "পুরানো ছবি"
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr ""
+msgstr "রঙিন"
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr ""
+msgstr "লোমো"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "কুয়াশাচ্ছন্ন নীল"
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr ""
+msgstr "কাগজ"
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr ""
+msgstr "রেলগাড়ি"
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr ""
+msgstr "মরুভূমি"
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr ""
+msgstr "পোস্টারাইজ"
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr ""
+msgstr "কিনারা"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr ""
+msgstr "ক্রেয়ন"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr ""
+msgstr "ময়লা"
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr ""
+msgstr "স্প্রে"
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr ""
+msgstr "ব্রাশ"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr ""
+msgstr "হালকা ফিস আই"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "ভারী ফিস আই"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "হালকা পিঞ্চ"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr ""
+msgstr "ভারী পিঞ্চ"
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr ""
+msgstr "ঘূর্ণন"
 
 #: src/photos_presenter.py:131
 msgid "Image successfully applied to background!"
-msgstr ""
+msgstr "পটভূমিতে ছবিটি সফলভাবে দেয়া হয়েছে!"
 
 #: src/photos_presenter.py:140
 msgid "Email failed."
-msgstr ""
+msgstr "ইমেইল ব্যর্থ।"
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:267
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "এখানে ছবিটি রেখে জমা করার অনুমতি আপনার নেই "
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:269
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "ছবিটি জমা করতে গিয়ে একটি ভুল হয়েছে"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:329
 msgid "Facebook is not available offline."
-msgstr ""
+msgstr "অফলাইন থেকে ফেসবুকে প্রবেশ করা যাবে না।"
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:334
 msgid "Post to Facebook"
-msgstr ""
+msgstr "ফেসবুকে পোস্ট করুন"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:336
 msgid "Write a description for the photo"
-msgstr ""
+msgstr "ছবিটিতে একটি বর্ণনা লিখুন"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Enter a message to add to the e-mail"
-msgstr ""
+msgstr "ইমেইলের সাথে একটি বার্তা যোগ করুন"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Your Name:"
-msgstr ""
+msgstr "আপনার নাম:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Recipient email:"
-msgstr ""
+msgstr "প্রাপকের ইমেইল:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Message:"
-msgstr ""
+msgstr "বার্তা:"
 
-#: src/photos_right_toolbar.py:19
+#: src/photos_right_toolbar.py:23
 msgid "OPEN PHOTO"
-msgstr ""
+msgstr "ছবি খুলুন"
 
-#: src/photos_right_toolbar.py:29
+#: src/photos_right_toolbar.py:33
 msgid "SAVE"
-msgstr ""
+msgstr "জমা করুন"
 
-#: src/photos_right_toolbar.py:39
+#: src/photos_right_toolbar.py:43
 msgid "FACEBOOK"
-msgstr ""
+msgstr "ফেসবুক"
 
-#: src/photos_right_toolbar.py:48
+#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
-msgstr ""
+msgstr "পটভূমি"
 
-#: src/photos_right_toolbar.py:59
+#: src/photos_right_toolbar.py:63
 msgid "REVERT IMAGE"
-msgstr ""
+msgstr "ছবিটি আগের মতো করুন"
 
 #: src/photos_view.py:37
 msgid "Photos"
-msgstr ""
+msgstr "ছবিসমূহ"
 
-#: src/photos_view.py:134 src/splash_screen.py:27
+#: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
-msgstr ""
+msgstr "ছবি খুলুন"
 
 #: src/photos_view.py:165
 msgid "Save Image"
-msgstr ""
+msgstr "ছবি জমা করুন"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr ""
+msgstr "জমা না করেই নতুন ছবি খুলবেন?"
 
 #: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
+msgstr "আপনার পরিবর্তনগুলো জমা করা হয়নি। আপনি কি নিশ্চিত যে জমা না করেই নতুন ছবি খুলবেন?"
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr ""
+msgstr "জমা ছাড়াই বেরিয়ে যাবেন?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
+msgstr "আপনার পরিবর্তনগুলো জমা হয়নি। আপনি নিশ্চিত যে বেরিয়ে যাবেন?"
 
 #: src/photos_view.py:265
 msgid "Continue"
-msgstr ""
+msgstr "চালিয়ে যান"
 
 #: src/photos_view.py:266
 msgid "Cancel"
-msgstr ""
+msgstr "বাতিল"
 
-#: src/splash_screen.py:33
+#: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "শুরু করার জন্য আপনার একটি ছবি বেছে নিন!"

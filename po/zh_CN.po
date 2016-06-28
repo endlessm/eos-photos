@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Endless Mobile, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
 # tanyuanxing <tanyuanxingendless@126.com>, 2016
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2015-10-13 02:00+0000\n"
+"POT-Creation-Date: 2016-06-21 01:51+0000\n"
 "PO-Revision-Date: 2016-02-21 06:57+0000\n"
 "Last-Translator: zhifeng peng <jnufeng@126.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/zh_CN/)\n"
@@ -20,15 +20,15 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
 msgstr "取消登陆。"
 
-#: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
 msgstr "无法获取facebook。"
 
-#: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
 msgid "Login failed."
 msgstr "登录失败。"
 
@@ -217,59 +217,59 @@ msgstr "成功将图像设置为背景！"
 msgid "Email failed."
 msgstr "电子邮件发送失败。"
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:267
 msgid "You do not have permissions to save the photo here"
 msgstr "您没有权限在此保存本图片"
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:269
 msgid "An error occurred while saving your photo"
 msgstr "保存图片时出错"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:329
 msgid "Facebook is not available offline."
 msgstr "脱机状态下不能连接到Facebook。"
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:334
 msgid "Post to Facebook"
 msgstr "发布到Facebook"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:336
 msgid "Write a description for the photo"
 msgstr "为图片添加文字描述"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Enter a message to add to the e-mail"
 msgstr "输入报文添加到邮件中"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Your Name:"
 msgstr "您的姓名："
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Recipient email:"
 msgstr "收件人电子邮件："
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Message:"
 msgstr "信息："
 
-#: src/photos_right_toolbar.py:19
+#: src/photos_right_toolbar.py:23
 msgid "OPEN PHOTO"
 msgstr "打开图片"
 
-#: src/photos_right_toolbar.py:29
+#: src/photos_right_toolbar.py:33
 msgid "SAVE"
 msgstr "保存"
 
-#: src/photos_right_toolbar.py:39
+#: src/photos_right_toolbar.py:43
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_right_toolbar.py:48
+#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
 msgstr "背景"
 
-#: src/photos_right_toolbar.py:59
+#: src/photos_right_toolbar.py:63
 msgid "REVERT IMAGE"
 msgstr "恢复图像"
 
@@ -277,7 +277,7 @@ msgstr "恢复图像"
 msgid "Photos"
 msgstr "图片"
 
-#: src/photos_view.py:134 src/splash_screen.py:27
+#: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
 msgstr "打开图像"
 
@@ -311,6 +311,6 @@ msgstr "继续"
 msgid "Cancel"
 msgstr "取消"
 
-#: src/splash_screen.py:33
+#: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
 msgstr "选择一张图片开始操作!"

@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Endless Mobile, Inc.
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
 # Devin J Ekins <devinj.ekins@gmail.com>, 2014
@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2015-10-13 02:00+0000\n"
+"POT-Creation-Date: 2016-06-21 01:51+0000\n"
 "PO-Revision-Date: 2015-05-19 23:46+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/pt_BR/)\n"
@@ -20,15 +20,15 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/share/facebook_auth_dialog.py:57 src/share/facebook_auth_dialog.py:78
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
 msgstr " Início de sessão cancelado."
 
-#: src/share/facebook_auth_dialog.py:62 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
 msgstr "Não foi possível acessar o facebook."
 
-#: src/share/facebook_auth_dialog.py:80 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
 msgid "Login failed."
 msgstr "Falha na conexão."
 
@@ -217,59 +217,59 @@ msgstr "Imagem de fundo aplicada com  sucesso!"
 msgid "Email failed."
 msgstr "Falha na conexão."
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:267
 msgid "You do not have permissions to save the photo here"
 msgstr "Você não tem permissão para salvar a foto aqui"
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:269
 msgid "An error occurred while saving your photo"
 msgstr "Ocorreu um erro ao salvar sua foto"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:329
 msgid "Facebook is not available offline."
 msgstr "Opa! Não conseguimos acessar o Facebook. Verifique sua conexão de internet."
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:334
 msgid "Post to Facebook"
 msgstr "Postar no Facebook"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:336
 msgid "Write a description for the photo"
 msgstr "Escreva uma descrição para a foto"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Enter a message to add to the e-mail"
 msgstr "Digite uma mensagem para adicionar ao e-mail"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Your Name:"
 msgstr "Seu Nome:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Recipient email:"
 msgstr "Email do destinatário:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:359
 msgid "Message:"
 msgstr "Mensagem:"
 
-#: src/photos_right_toolbar.py:19
+#: src/photos_right_toolbar.py:23
 msgid "OPEN PHOTO"
 msgstr "ABRIR IMAGEM"
 
-#: src/photos_right_toolbar.py:29
+#: src/photos_right_toolbar.py:33
 msgid "SAVE"
 msgstr "SALVAR"
 
-#: src/photos_right_toolbar.py:39
+#: src/photos_right_toolbar.py:43
 msgid "FACEBOOK"
 msgstr "FACEBOOK"
 
-#: src/photos_right_toolbar.py:48
+#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
 msgstr "PLANO DE FUNDO"
 
-#: src/photos_right_toolbar.py:59
+#: src/photos_right_toolbar.py:63
 msgid "REVERT IMAGE"
 msgstr "REVERTER IMAGEM"
 
@@ -277,7 +277,7 @@ msgstr "REVERTER IMAGEM"
 msgid "Photos"
 msgstr "Fotos"
 
-#: src/photos_view.py:134 src/splash_screen.py:27
+#: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
 msgstr "Abrir Imagem"
 
@@ -311,6 +311,6 @@ msgstr "Continuar"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/splash_screen.py:33
+#: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
 msgstr "Escolha uma de suas fotos para começar!"
