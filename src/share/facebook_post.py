@@ -5,6 +5,17 @@ import subprocess
 from facebook import GraphAPIError, GraphAPI
 from urllib2 import URLError
 
+# Choose which Facebook GraphAPI version we will use to make posts
+GRAPH_API_VERSION = "2.6"
+
+# Uncomment these lines to enable debug output
+#import logging
+#logging.basicConfig (level=logging.DEBUG)
+
+# Example: (useful to check which API version we are really using)
+#   INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): graph.facebook.com
+#   DEBUG:requests.packages.urllib3.connectionpool:"POST /v2.6/me/photos HTTP/1.1" 200 67
+
 CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 
@@ -36,7 +47,7 @@ class FacebookPost:
 
     def login(self, token):
         self._fb_access_token = token
-        self._graph_api = GraphAPI(access_token=self._fb_access_token)
+        self._graph_api = GraphAPI(version=GRAPH_API_VERSION, access_token=self._fb_access_token)
 
     def oauth_exception_message(self, result):
         server_error_codes = [1, 2, 4, 17]
@@ -73,7 +84,7 @@ class FacebookPost:
         if not token:
             token = self._fb_access_token
         try:
-            temp_api = GraphAPI(access_token=token)
+            temp_api = GraphAPI(version=GRAPH_API_VERSION, access_token=token)
             resp = temp_api.request('me/home')
             return True
         except:
