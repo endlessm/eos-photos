@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2016-06-28 01:54+0000\n"
-"PO-Revision-Date: 2016-07-03 06:02+0000\n"
+"PO-Revision-Date: 2016-07-07 03:34+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-photos/language/vi/)\n"
 "MIME-Version: 1.0\n"
@@ -148,7 +148,7 @@ msgstr "Lomo"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "Xanh lam Mờ sương"
 
 #: src/photos_model.py:82
 msgid "Paper"
@@ -192,11 +192,11 @@ msgstr "Ánh sáng Mắt cá"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "Hiệu ứng Fisheye (mắt cá) Đậm"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "Hiệu ứng Lồi Lõm Nhạt"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"

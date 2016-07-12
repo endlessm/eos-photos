@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
+# e2f_in c7 <e2f_in_c7@outlook.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2016-06-28 01:54+0000\n"
-"PO-Revision-Date: 2016-05-05 09:33+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"PO-Revision-Date: 2016-07-07 08:08+0000\n"
+"Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-photos/language/hi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,290 +20,290 @@ msgstr ""
 
 #: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
-msgstr ""
+msgstr "लॉगइन रद्द."
 
 #: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
 msgid "Could not reach facebook."
-msgstr ""
+msgstr "facebook तक नहीं पहुँच सके.\t"
 
 #: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
 msgid "Login failed."
-msgstr ""
+msgstr "लॉगइन विफल."
 
 #: src/share/facebook_post.py:25
 msgid "Image successfully posted to facebook!"
-msgstr ""
+msgstr "चित्र facebook पर सफलतापूर्वक पोस्ट किया गया!"
 
 #: src/share/facebook_post.py:51
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
-msgstr ""
+msgstr "अनुरोधिक कार्यवाही इस समय संभव नहीं. कृपया बाद में फिर से कोशिश करें."
 
 #: src/share/facebook_post.py:59
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr ""
+msgstr "नेटवर्क समस्या का पता लगा. कृपया अपना इंटरनेट कनेक्शन जाँचे और फिर से कोशिश करें. "
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr ""
+msgstr "किसी"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr ""
+msgstr "ने आपको Endless फ़ोटो से एक फ़ोटो भेजा!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr ""
+msgstr "कृपया इस ईमेल का जवाब न दें. जवाब गैरनिरीक्षित इनबॉक्स पर भेजे जाते हैं."
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr ""
+msgstr "बिना शीर्षक"
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr ""
+msgstr "दाएँ 90° घुमाएँँ"
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr ""
+msgstr "रूपांतर करें"
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr ""
+msgstr "क्रॉप करें"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr ""
+msgstr "क्रॉप लागू करें?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr ""
+msgstr "धुंधला"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr ""
+msgstr "बॉर्डर"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr ""
+msgstr "फ़िल्टर"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr ""
+msgstr "डिस्टॉर्ट करें"
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr ""
+msgstr "चमक"
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr ""
+msgstr "व्यतिरेक"
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr ""
+msgstr "संतृप्तता"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr ""
+msgstr "समायोजित करें"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr ""
+msgstr "कुछ नहीं"
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr ""
+msgstr "टिल्ट शिफ़्ट"
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr ""
+msgstr "क्षेत्र गहराई"
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr ""
+msgstr "ग्रेस्केल"
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr ""
+msgstr "देश"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr ""
+msgstr "रेट्रो"
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr ""
+msgstr "पुराना फ़ोटो"
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr ""
+msgstr "रंगीन"
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr ""
+msgstr "लोमो"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "धुंधला नीला"
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr ""
+msgstr "पेपर"
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr ""
+msgstr "ट्रेन"
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr ""
+msgstr "रेगिस्तान"
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr ""
+msgstr "पोस्टराइज़"
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr ""
+msgstr "किनारेे"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr ""
+msgstr "क्रेयॉन"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr ""
+msgstr "ग्रंज"
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr ""
+msgstr "स्प्रे"
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr ""
+msgstr "ब्रश"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr ""
+msgstr "फ़ि़श आई लाइट"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "फ़िश आई हेवी"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "पिंच लाइट"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr ""
+msgstr "पिंच हेवी"
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr ""
+msgstr "घुमाव"
 
 #: src/photos_presenter.py:131
 msgid "Image successfully applied to background!"
-msgstr ""
+msgstr "चि‍त्र पृष्ठभूमि में सफलतापूर्वक लागू किया गया!"
 
 #: src/photos_presenter.py:140
 msgid "Email failed."
-msgstr ""
+msgstr "ईमेल विफल."
 
 #: src/photos_presenter.py:267
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "आपको यहाँ फ़ोटो सहेजने की अनुमति नहीं है."
 
 #: src/photos_presenter.py:269
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "आपकी फ़ोटो  सहेजने के दौरान कोई त्रुटि आई"
 
 #: src/photos_presenter.py:329
 msgid "Facebook is not available offline."
-msgstr ""
+msgstr "Facebook ऑफ़लाइन उपलब्ध नहीं है."
 
 #: src/photos_presenter.py:334
 msgid "Post to Facebook"
-msgstr ""
+msgstr "Facebook पर पोस्ट करें"
 
 #: src/photos_presenter.py:336
 msgid "Write a description for the photo"
-msgstr ""
+msgstr "फ़ोटो के लिए कोई विवरण लिखें"
 
 #: src/photos_presenter.py:359
 msgid "Enter a message to add to the e-mail"
-msgstr ""
+msgstr "ई-मेल जोड़ने के लिए कोई संदेश लिखें"
 
 #: src/photos_presenter.py:359
 msgid "Your Name:"
-msgstr ""
+msgstr "आपका नाम: "
 
 #: src/photos_presenter.py:359
 msgid "Recipient email:"
-msgstr ""
+msgstr "प्राप्तकर्ता ईमेल:"
 
 #: src/photos_presenter.py:359
 msgid "Message:"
-msgstr ""
+msgstr "संदेश:"
 
 #: src/photos_right_toolbar.py:23
 msgid "OPEN PHOTO"
-msgstr ""
+msgstr "फ़ोटो खोलें"
 
 #: src/photos_right_toolbar.py:33
 msgid "SAVE"
-msgstr ""
+msgstr "सहेजें"
 
 #: src/photos_right_toolbar.py:43
 msgid "FACEBOOK"
-msgstr ""
+msgstr "FACEBOOK"
 
 #: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
-msgstr ""
+msgstr "पृष्ठभूमि"
 
 #: src/photos_right_toolbar.py:63
 msgid "REVERT IMAGE"
-msgstr ""
+msgstr "चि‍त्र लौटाएँ"
 
 #: src/photos_view.py:37
 msgid "Photos"
-msgstr ""
+msgstr "फ़ोटो"
 
 #: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
-msgstr ""
+msgstr "चित्र खोलें"
 
 #: src/photos_view.py:165
 msgid "Save Image"
-msgstr ""
+msgstr "चित्र सहेजें"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr ""
+msgstr "बिना सहजे नई फ़ोटो खोलें?"
 
 #: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
+msgstr "आपके बदलावों को सहेजा नहींं गया है. क्या आप वाकई सहेजेे बिना नई फ़ोटो खोलना चाहते हैं?"
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr ""
+msgstr "सहेजे बिना बाहर जाएँ?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
+msgstr "आपके बदलावों को सहेजा नहीं गया हैै. क्या आप वाकई बाहर जाना चाहते हैं?"
 
 #: src/photos_view.py:265
 msgid "Continue"
-msgstr ""
+msgstr "जारी रखें"
 
 #: src/photos_view.py:266
 msgid "Cancel"
@@ -310,4 +311,4 @@ msgstr "रद्द करें "
 
 #: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "शुरू करने के लिए आपकी फ़ोटो में से एक चुनें!"
