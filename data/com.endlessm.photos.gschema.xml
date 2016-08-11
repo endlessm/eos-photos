@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+
+  <schema id='com.endlessm.photos' path='/com/endlessm/photos/'>
+
+    <key name='share' type='b'>
+      <default>true</default>
+      <summary>Display share button</summary>
+      <description>
+        Whether we display the share to facebook button.
+      </description>
+    </key>
+
+  </schema>
+
+</schemalist>
