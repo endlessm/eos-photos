@@ -132,6 +132,7 @@ EXTRA_DIST += \
 	eos-photos.in \
 	data/images/thumbnail_original.jpg \
 	data/endless_photos.gresource.xml \
+	$(gsettings_SCHEMAS) \
 	$(NULL)
 
 # # # TESTS # # #
