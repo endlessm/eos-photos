@@ -70,6 +70,10 @@ services_DATA = data/com.endlessm.photos.service
 CLEANFILES += $(services_DATA)
 EXTRA_DIST += data/com.endlessm.photos.service.in
 
+gsettings_SCHEMAS = data/com.endlessm.photos.gschema.xml
+
+@GSETTINGS_RULES@
+
 # # # INSTALL RULES # # #
 
 py_sources = \
