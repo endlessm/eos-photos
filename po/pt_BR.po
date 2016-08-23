@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-06-28 01:54+0000\n"
+"POT-Creation-Date: 2016-08-16 02:15+0000\n"
 "PO-Revision-Date: 2015-05-19 23:46+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/pt_BR/)\n"
@@ -24,24 +24,24 @@ msgstr ""
 msgid "Login canceled."
 msgstr " Início de sessão cancelado."
 
-#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
 msgid "Could not reach facebook."
 msgstr "Não foi possível acessar o facebook."
 
-#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
 msgid "Login failed."
 msgstr "Falha na conexão."
 
-#: src/share/facebook_post.py:25
+#: src/share/facebook_post.py:36
 msgid "Image successfully posted to facebook!"
 msgstr "Imagem postada com sucesso no Facebook!"
 
-#: src/share/facebook_post.py:51
+#: src/share/facebook_post.py:62
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
 msgstr "Não for possível realizar a ação solicitada no momento. Por favor, tente novamente mais tarde."
 
-#: src/share/facebook_post.py:59
+#: src/share/facebook_post.py:70
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
@@ -217,39 +217,39 @@ msgstr "Imagem de fundo aplicada com  sucesso!"
 msgid "Email failed."
 msgstr "Falha na conexão."
 
-#: src/photos_presenter.py:267
+#: src/photos_presenter.py:266
 msgid "You do not have permissions to save the photo here"
 msgstr "Você não tem permissão para salvar a foto aqui"
 
-#: src/photos_presenter.py:269
+#: src/photos_presenter.py:268
 msgid "An error occurred while saving your photo"
 msgstr "Ocorreu um erro ao salvar sua foto"
 
-#: src/photos_presenter.py:329
+#: src/photos_presenter.py:328
 msgid "Facebook is not available offline."
 msgstr "Opa! Não conseguimos acessar o Facebook. Verifique sua conexão de internet."
 
-#: src/photos_presenter.py:334
+#: src/photos_presenter.py:333
 msgid "Post to Facebook"
 msgstr "Postar no Facebook"
 
-#: src/photos_presenter.py:336
+#: src/photos_presenter.py:335
 msgid "Write a description for the photo"
 msgstr "Escreva uma descrição para a foto"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Enter a message to add to the e-mail"
 msgstr "Digite uma mensagem para adicionar ao e-mail"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Your Name:"
 msgstr "Seu Nome:"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Recipient email:"
 msgstr "Email do destinatário:"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Message:"
 msgstr "Mensagem:"
 

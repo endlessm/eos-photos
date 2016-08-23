@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-06-28 01:54+0000\n"
+"POT-Creation-Date: 2016-08-16 02:15+0000\n"
 "PO-Revision-Date: 2016-02-21 06:57+0000\n"
 "Last-Translator: zhifeng peng <jnufeng@126.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/zh_CN/)\n"
@@ -24,24 +24,24 @@ msgstr ""
 msgid "Login canceled."
 msgstr "取消登陆。"
 
-#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
 msgid "Could not reach facebook."
 msgstr "无法获取facebook。"
 
-#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
 msgid "Login failed."
 msgstr "登录失败。"
 
-#: src/share/facebook_post.py:25
+#: src/share/facebook_post.py:36
 msgid "Image successfully posted to facebook!"
 msgstr "图片成功上传到facebook！"
 
-#: src/share/facebook_post.py:51
+#: src/share/facebook_post.py:62
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
 msgstr "当前行为不成功，请稍后再试。"
 
-#: src/share/facebook_post.py:59
+#: src/share/facebook_post.py:70
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
@@ -217,39 +217,39 @@ msgstr "成功将图像设置为背景！"
 msgid "Email failed."
 msgstr "电子邮件发送失败。"
 
-#: src/photos_presenter.py:267
+#: src/photos_presenter.py:266
 msgid "You do not have permissions to save the photo here"
 msgstr "您没有权限在此保存本图片"
 
-#: src/photos_presenter.py:269
+#: src/photos_presenter.py:268
 msgid "An error occurred while saving your photo"
 msgstr "保存图片时出错"
 
-#: src/photos_presenter.py:329
+#: src/photos_presenter.py:328
 msgid "Facebook is not available offline."
 msgstr "脱机状态下不能连接到Facebook。"
 
-#: src/photos_presenter.py:334
+#: src/photos_presenter.py:333
 msgid "Post to Facebook"
 msgstr "发布到Facebook"
 
-#: src/photos_presenter.py:336
+#: src/photos_presenter.py:335
 msgid "Write a description for the photo"
 msgstr "为图片添加文字描述"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Enter a message to add to the e-mail"
 msgstr "输入报文添加到邮件中"
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Your Name:"
 msgstr "您的姓名："
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Recipient email:"
 msgstr "收件人电子邮件："
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Message:"
 msgstr "信息："
 

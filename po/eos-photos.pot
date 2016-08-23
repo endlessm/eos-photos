@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-06-28 01:54+0000\n"
+"POT-Creation-Date: 2016-08-23 01:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,23 +21,23 @@ msgstr ""
 msgid "Login canceled."
 msgstr ""
 
-#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:35
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
 msgid "Could not reach facebook."
 msgstr ""
 
-#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:54
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
 msgid "Login failed."
 msgstr ""
 
-#: src/share/facebook_post.py:25
+#: src/share/facebook_post.py:36
 msgid "Image successfully posted to facebook!"
 msgstr ""
 
-#: src/share/facebook_post.py:51
+#: src/share/facebook_post.py:62
 msgid "Requested action is not possible at the moment. Please try again later."
 msgstr ""
 
-#: src/share/facebook_post.py:59
+#: src/share/facebook_post.py:70
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
@@ -213,60 +213,60 @@ msgstr ""
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:267
+#: src/photos_presenter.py:266
 msgid "You do not have permissions to save the photo here"
 msgstr ""
 
-#: src/photos_presenter.py:269
+#: src/photos_presenter.py:268
 msgid "An error occurred while saving your photo"
 msgstr ""
 
-#: src/photos_presenter.py:329
+#: src/photos_presenter.py:328
 msgid "Facebook is not available offline."
 msgstr ""
 
-#: src/photos_presenter.py:334
+#: src/photos_presenter.py:333
 msgid "Post to Facebook"
 msgstr ""
 
-#: src/photos_presenter.py:336
+#: src/photos_presenter.py:335
 msgid "Write a description for the photo"
 msgstr ""
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Your Name:"
 msgstr ""
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Recipient email:"
 msgstr ""
 
-#: src/photos_presenter.py:359
+#: src/photos_presenter.py:358
 msgid "Message:"
 msgstr ""
 
-#: src/photos_right_toolbar.py:23
+#: src/photos_right_toolbar.py:24
 msgid "OPEN PHOTO"
 msgstr ""
 
-#: src/photos_right_toolbar.py:33
+#: src/photos_right_toolbar.py:34
 msgid "SAVE"
 msgstr ""
 
 #: src/photos_right_toolbar.py:43
-msgid "FACEBOOK"
-msgstr ""
-
-#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
 msgstr ""
 
-#: src/photos_right_toolbar.py:63
+#: src/photos_right_toolbar.py:54
 msgid "REVERT IMAGE"
+msgstr ""
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
 msgstr ""
 
 #: src/photos_view.py:37
