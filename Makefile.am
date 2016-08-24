@@ -127,6 +127,7 @@ dist_noinst_DATA = \
 	$(NULL)
 
 EXTRA_DIST += \
+	COPYING.GPLv2 \
 	$(py_sources) \
 	$(asset_resource_files) \
 	eos-photos.in \
