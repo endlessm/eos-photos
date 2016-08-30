@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-16 02:15+0000\n"
+"POT-Creation-Date: 2016-08-23 01:51+0000\n"
 "PO-Revision-Date: 2016-07-07 08:08+0000\n"
 "Last-Translator: e2f_in c7 <e2f_in_c7@outlook.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/endless-mobile-inc/eos-photos/language/hi/)\n"
@@ -251,25 +251,25 @@ msgstr "प्राप्तकर्ता ईमेल:"
 msgid "Message:"
 msgstr "संदेश:"
 
-#: src/photos_right_toolbar.py:23
+#: src/photos_right_toolbar.py:24
 msgid "OPEN PHOTO"
 msgstr "फ़ोटो खोलें"
 
-#: src/photos_right_toolbar.py:33
+#: src/photos_right_toolbar.py:34
 msgid "SAVE"
 msgstr "सहेजें"
 
 #: src/photos_right_toolbar.py:43
-msgid "FACEBOOK"
-msgstr "FACEBOOK"
-
-#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
 msgstr "पृष्ठभूमि"
 
-#: src/photos_right_toolbar.py:63
+#: src/photos_right_toolbar.py:54
 msgid "REVERT IMAGE"
 msgstr "चि‍त्र लौटाएँ"
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
 
 #: src/photos_view.py:37
 msgid "Photos"

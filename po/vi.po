@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-16 02:15+0000\n"
+"POT-Creation-Date: 2016-08-23 01:51+0000\n"
 "PO-Revision-Date: 2016-07-07 03:34+0000\n"
 "Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
 "Language-Team: Vietnamese (http://www.transifex.com/endless-mobile-inc/eos-photos/language/vi/)\n"
@@ -250,25 +250,25 @@ msgstr "Email người nhận:"
 msgid "Message:"
 msgstr "Thông điệp:"
 
-#: src/photos_right_toolbar.py:23
+#: src/photos_right_toolbar.py:24
 msgid "OPEN PHOTO"
 msgstr "MỞ HÌNH ẢNH"
 
-#: src/photos_right_toolbar.py:33
+#: src/photos_right_toolbar.py:34
 msgid "SAVE"
 msgstr "LƯU"
 
 #: src/photos_right_toolbar.py:43
-msgid "FACEBOOK"
-msgstr "FACEBOOK"
-
-#: src/photos_right_toolbar.py:52
 msgid "BACKGROUND"
 msgstr "BỐI CẢNH"
 
-#: src/photos_right_toolbar.py:63
+#: src/photos_right_toolbar.py:54
 msgid "REVERT IMAGE"
 msgstr "HOÀN NGUYÊN HÌNH ẢNH"
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
 
 #: src/photos_view.py:37
 msgid "Photos"
