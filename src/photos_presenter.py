@@ -4,8 +4,7 @@ import os
 import tempfile
 import urllib2
 import time
-from subprocess import call
-from gi.repository import GLib, Gtk
+from gi.repository import GLib, Gtk, Gio
 
 from asyncworker import AsyncWorker
 from share.facebook_post import FacebookPost
@@ -121,17 +120,12 @@ class PhotosPresenter(object):
     def _do_set_image_as_background(self):
         filename = self.generate_hashed_filename()
         self._model.save(filename)
+
         file_uri = "file://" + filename
+        settings = Gio.Settings('org.gnome.desktop.background')
+        settings.set_string('picture-uri', file_uri)
 
-        # set the wallpaper background image to the saved file
-        bg_set_img_cmd = ['/usr/bin/gsettings', 'set', 'org.gnome.desktop.background', 'picture-uri', file_uri]
-
-        try:
-            result = call(bg_set_img_cmd)
-            self._view.update_async(lambda: self._view.show_message(text=_("Image successfully applied to background!")))
-        except:
-            print "There was an error setting the background!"
-            return
+        self._view.update_async(lambda: self._view.show_message(text=_("Image successfully applied to background!")))
 
     def _do_send_email(self, name, recipient, message):
         filename = self._get_image_tempfile()
