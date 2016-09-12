@@ -1,6 +1,6 @@
 """
 The extraction of the curves from the acv files are from here:
-    https://github.com/WeemoApps/filteriser
+    https://github.com/Joelone/filteriser
 """
 
 from struct import unpack
