@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Endless Mobile, Inc.
+# This file is distributed under the same license as the eos-photos package.
+# 
+# Translators:
+# georgian balan <braila222@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: eos-photos\n"
+"Report-Msgid-Bugs-To: philip@endlessm.com\n"
+"POT-Creation-Date: 2016-12-13 03:05+0000\n"
+"PO-Revision-Date: 2016-12-01 13:22+0000\n"
+"Last-Translator: georgian balan <braila222@gmail.com>\n"
+"Language-Team: Romanian (http://www.transifex.com/endless-mobile-inc/eos-photos/language/ro/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ro\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
+
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
+msgid "Login canceled."
+msgstr "Autentificare anulata."
+
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
+msgid "Could not reach facebook."
+msgstr "Nu se poate conecta la facebook"
+
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
+msgid "Login failed."
+msgstr "Autentificare esuata."
+
+#: src/share/facebook_post.py:36
+msgid "Image successfully posted to facebook!"
+msgstr "Imagine postata cu success pe facebook!"
+
+#: src/share/facebook_post.py:62
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr "Acțiunea solicitată nu este posibilă în acest moment. Vă rugăm să încercați din nou mai târziu."
+
+#: src/share/facebook_post.py:70
+msgid ""
+"Network problem detected. Please check your internet connection and try "
+"again."
+msgstr "Problema de retea detectata.Va rugam sa verificati conexiunea la internet si sa incercati din nou."
+
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr "Cineva"
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr "va trimis o poza din Poze Endless"
+
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr "Va rugam sa nu raspundeti la acest e-mail.Raspunsurile sunt trimise la o adresa nemonitorizata."
+
+#: src/photos_category_toolbars.py:26
+msgid "Untitled"
+msgstr "Fara titlu"
+
+#: src/photos_category_toolbars.py:73
+msgid "Rotate Right 90°"
+msgstr "Roteste Dreapta 90°"
+
+#: src/photos_category_toolbars.py:95
+msgid "TRANSFORM"
+msgstr "TRASFORMA"
+
+#: src/photos_category_toolbars.py:106
+msgid "Crop"
+msgstr "Decupeaza"
+
+#: src/photos_category_toolbars.py:111
+msgid "Apply Crop?"
+msgstr "Aplica decupare?"
+
+#: src/photos_category_toolbars.py:180
+msgid "BLURS"
+msgstr "ESTOMPEAZA"
+
+#: src/photos_category_toolbars.py:195
+msgid "BORDERS"
+msgstr "MARGINI"
+
+#: src/photos_category_toolbars.py:210
+msgid "FILTERS"
+msgstr "FILTRE"
+
+#: src/photos_category_toolbars.py:225
+msgid "DISTORT"
+msgstr "DISTORSIUNE"
+
+#: src/photos_category_toolbars.py:245
+msgid "Brightness"
+msgstr "Luminozitate"
+
+#: src/photos_category_toolbars.py:255
+msgid "Contrast"
+msgstr "Contrast"
+
+#: src/photos_category_toolbars.py:265
+msgid "Saturation"
+msgstr "Saturatie"
+
+#: src/photos_category_toolbars.py:288
+msgid "ADJUST"
+msgstr "AJUSTEAZA"
+
+#: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
+#: src/photos_model.py:106
+msgid "None"
+msgstr "Nimic"
+
+#: src/photos_model.py:65
+msgid "Tilt Shift"
+msgstr "Schimba Inclinatia"
+
+#: src/photos_model.py:66
+msgid "Depth of Field"
+msgstr "Adancimea terenului"
+
+#: src/photos_model.py:72
+msgid "Grayscale"
+msgstr "Alb-negru"
+
+#: src/photos_model.py:73
+msgid "Country"
+msgstr "Mioritic"
+
+#: src/photos_model.py:74
+msgid "Retro"
+msgstr "Retro"
+
+#: src/photos_model.py:75
+msgid "Old Photo"
+msgstr "Poza veche"
+
+#: src/photos_model.py:76
+msgid "Colorful"
+msgstr "Colorat"
+
+#: src/photos_model.py:78
+msgid "Lomo"
+msgstr "Lomo"
+
+#: src/photos_model.py:81
+msgid "Foggy Blue"
+msgstr "Ceata Albastra"
+
+#: src/photos_model.py:82
+msgid "Paper"
+msgstr "Hartie"
+
+#: src/photos_model.py:83
+msgid "Trains"
+msgstr "Trenuri"
+
+#: src/photos_model.py:84
+msgid "Desert"
+msgstr "Desert"
+
+#: src/photos_model.py:85
+msgid "Posterize"
+msgstr "Posterizare"
+
+#: src/photos_model.py:88
+msgid "Edges"
+msgstr "Margini"
+
+#: src/photos_model.py:98
+msgid "Crayon"
+msgstr "Creion"
+
+#: src/photos_model.py:99
+msgid "Grunge"
+msgstr "Vintage"
+
+#: src/photos_model.py:100
+msgid "Spray"
+msgstr "Spray"
+
+#: src/photos_model.py:101
+msgid "Brush"
+msgstr "Pensula"
+
+#: src/photos_model.py:107
+msgid "Fish Eye Light"
+msgstr "Filtru Fish Eye Usor"
+
+#: src/photos_model.py:108
+msgid "Fish Eye Heavy"
+msgstr "Filtru Fish Eye Puternic"
+
+#: src/photos_model.py:109
+msgid "Pinch Light"
+msgstr "Ciupeste Luminozitate"
+
+#: src/photos_model.py:110
+msgid "Pinch Heavy"
+msgstr "Ciupeste Contur"
+
+#: src/photos_model.py:111
+msgid "Swirl"
+msgstr "Vartej"
+
+#: src/photos_presenter.py:128
+msgid "Image successfully applied to background!"
+msgstr "Imagine aplicata in fundal cu success!"
+
+#: src/photos_presenter.py:134
+msgid "Email failed."
+msgstr "E-mail esuat."
+
+#: src/photos_presenter.py:260
+msgid "You do not have permissions to save the photo here"
+msgstr "Nu ai permisiunea sa salvezi poza aici"
+
+#: src/photos_presenter.py:262
+msgid "An error occurred while saving your photo"
+msgstr "Sa produs o eroare in timpul salvarii pozei"
+
+#: src/photos_presenter.py:322
+msgid "Facebook is not available offline."
+msgstr "Facebook nu este disponibil offline."
+
+#: src/photos_presenter.py:327
+msgid "Post to Facebook"
+msgstr "Posteaza pe Facebook"
+
+#: src/photos_presenter.py:329
+msgid "Write a description for the photo"
+msgstr "Adauga o descriere pentru poza"
+
+#: src/photos_presenter.py:352
+msgid "Enter a message to add to the e-mail"
+msgstr "Introdu un mesaj pentru e-mail"
+
+#: src/photos_presenter.py:352
+msgid "Your Name:"
+msgstr "Numele Dumneavoastra:"
+
+#: src/photos_presenter.py:352
+msgid "Recipient email:"
+msgstr "Email-ul destinatarului:"
+
+#: src/photos_presenter.py:352
+msgid "Message:"
+msgstr "Mesaj:"
+
+#: src/photos_right_toolbar.py:24
+msgid "OPEN PHOTO"
+msgstr "DESCHIDE POZA"
+
+#: src/photos_right_toolbar.py:34
+msgid "SAVE"
+msgstr "SALVEAZA"
+
+#: src/photos_right_toolbar.py:43
+msgid "BACKGROUND"
+msgstr "FUNDAL"
+
+#: src/photos_right_toolbar.py:54
+msgid "REVERT IMAGE"
+msgstr "Reveniti la imagine"
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+#: src/photos_view.py:37
+msgid "Photos"
+msgstr "Poze"
+
+#: src/photos_view.py:134 src/splash_screen.py:24
+msgid "Open Image"
+msgstr "Deschide Imaginea"
+
+#: src/photos_view.py:165
+msgid "Save Image"
+msgstr "Salveaza Imaginea"
+
+#: src/photos_view.py:194
+msgid "Open new photo without save?"
+msgstr "Deschide o poza noua fara a salva?"
+
+#: src/photos_view.py:195
+msgid ""
+"Your changes have not been saved. Are you sure you want to open a new photo "
+"without saving?"
+msgstr "Schimbarile nu vor fi salvate.Esti sigur ca vrei sa deschizi o poza noua fara sa salvezi?"
+
+#: src/photos_view.py:217
+msgid "Quit Without Save?"
+msgstr "Renunti fara sa salvezi?"
+
+#: src/photos_view.py:218
+msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr "Schimbarile nu vor fi salvate.Esti sigur ca vrei sa renunti?"
+
+#: src/photos_view.py:265
+msgid "Continue"
+msgstr "Continua"
+
+#: src/photos_view.py:266
+msgid "Cancel"
+msgstr "Anuleaza"
+
+#: src/splash_screen.py:34
+msgid "Choose one of your photos to begin!"
+msgstr "Alege una din poze pentru a incepe!"
