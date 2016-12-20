@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2016-12-13 03:05+0000\n"
-"PO-Revision-Date: 2016-12-14 07:48+0000\n"
-"Last-Translator: Vicki Niu <vicki@endlessm.com>\n"
+"PO-Revision-Date: 2016-12-17 18:00+0000\n"
+"Last-Translator: Stefan Schroeder <ondekoza@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/endless-mobile-inc/eos-photos/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,216 +19,216 @@ msgstr ""
 
 #: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
-msgstr ""
+msgstr "Anmeldung abgebrochen"
 
 #: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
 msgid "Could not reach facebook."
-msgstr ""
+msgstr "Facebook ist nicht erreichbar"
 
 #: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
 msgid "Login failed."
-msgstr ""
+msgstr "Anmeldung fehlgeschlagen"
 
 #: src/share/facebook_post.py:36
 msgid "Image successfully posted to facebook!"
-msgstr ""
+msgstr "Die Bilder wurden erfolgreich bei Facebook hochgeladen!"
 
 #: src/share/facebook_post.py:62
 msgid ""
 "Requested action is not possible at the moment. Please try again later."
-msgstr ""
+msgstr "Die gewünschte Aktion ist im Moment nicht möglich. Bitte versuche es später noch einmal."
 
 #: src/share/facebook_post.py:70
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr ""
+msgstr "Es gibt ein Problem mit dem Netzwerk. Bitte prüfe die Verbindung uns versuche es noch einmal."
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr ""
+msgstr "Jemand"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr ""
+msgstr "hat dir ein Foto über Endless-Photos geschickt!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr ""
+msgstr "Bitte nicht auf diese E-Mail antworten. Die Antwort wird nicht gelesen."
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr ""
+msgstr "Ohne Titel"
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr ""
+msgstr "Nach rechts drehen 90°"
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr ""
+msgstr "Verändern"
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr ""
+msgstr "Beschneiden"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr ""
+msgstr "Beschneiden ausführen?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr ""
+msgstr "Verwaschen"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr ""
+msgstr "RAHMEN"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr ""
+msgstr "FILTER"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr ""
+msgstr "STÖRUNGEN"
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr ""
+msgstr "Helligkeit"
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr ""
+msgstr "Kontrast"
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr ""
+msgstr "Sättigung"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr ""
+msgstr "ANPASSEN"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr ""
+msgstr "Keine"
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr ""
+msgstr "Kippen"
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr ""
+msgstr "Tiefe"
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr ""
+msgstr "Graustufen"
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr ""
+msgstr "Retro"
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr ""
+msgstr "Altes Foto"
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr ""
+msgstr "Bunt"
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr ""
+msgstr "Lomo"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "Blaunebel"
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr ""
+msgstr "Papier"
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr ""
+msgstr "Züge"
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr ""
+msgstr "Wüste"
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr ""
+msgstr "Posterisieren"
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr ""
+msgstr "Kanten"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr ""
+msgstr "Kreide"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr ""
+msgstr "Dreck"
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr ""
+msgstr "Spray"
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr ""
+msgstr "Pinsel"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr ""
+msgstr "Fischauge schwach"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "Fischauge stark"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "Quetschen schwach"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr ""
+msgstr "Quetschen stark"
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr ""
+msgstr "Verwirbeln"
 
 #: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
-msgstr ""
+msgstr "Bild erfolgreich im Hintergrund abgelegt"
 
 #: src/photos_presenter.py:134
 msgid "Email failed."
-msgstr ""
+msgstr "E-Mail-Versenden fehlgeschlagen"
 
 #: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "Du darfst hier kein Foto speichern"
 
 #: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "Beim Speichern des Fotos ist ein Fehler aufgetreten"
 
 #: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
-msgstr ""
+msgstr "Facebook kann nicht verwendet werden, wenn man offline ist."
 
 #: src/photos_presenter.py:327
 msgid "Post to Facebook"
-msgstr ""
+msgstr "Bei Facebook posten"
 
 #: src/photos_presenter.py:329
 msgid "Write a description for the photo"
@@ -240,74 +240,74 @@ msgstr ""
 
 #: src/photos_presenter.py:352
 msgid "Your Name:"
-msgstr ""
+msgstr "Dein Name:"
 
 #: src/photos_presenter.py:352
 msgid "Recipient email:"
-msgstr ""
+msgstr "Empfänger-E-Mail"
 
 #: src/photos_presenter.py:352
 msgid "Message:"
-msgstr ""
+msgstr "Nachricht"
 
 #: src/photos_right_toolbar.py:24
 msgid "OPEN PHOTO"
-msgstr ""
+msgstr "FOTO ÖFFNEN"
 
 #: src/photos_right_toolbar.py:34
 msgid "SAVE"
-msgstr ""
+msgstr "SPEICHERN"
 
 #: src/photos_right_toolbar.py:43
 msgid "BACKGROUND"
-msgstr ""
+msgstr "HINTERGRUND"
 
 #: src/photos_right_toolbar.py:54
 msgid "REVERT IMAGE"
-msgstr ""
+msgstr "FOTO INVERTIEREN"
 
 #: src/photos_right_toolbar.py:69
 msgid "FACEBOOK"
-msgstr ""
+msgstr "FACEBOOK"
 
 #: src/photos_view.py:37
 msgid "Photos"
-msgstr ""
+msgstr "Fotos"
 
 #: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
-msgstr ""
+msgstr "Bild öffnen"
 
 #: src/photos_view.py:165
 msgid "Save Image"
-msgstr ""
+msgstr "Bild speichern"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr ""
+msgstr "Neues Foto öffnen ohne das alte zu speichern?"
 
 #: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
+msgstr "Deine Änderungen sind nicht gespeichert. Bist du sicher, dass du ein neues Foto ohne vorheriges Speichern öffnen möchtest?"
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr ""
+msgstr "Schließen ohne zu speichern?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
+msgstr "Deine Änderungen sind nicht gespeichert. Bist du sicher, dass duBeenden möchstest?"
 
 #: src/photos_view.py:265
 msgid "Continue"
-msgstr ""
+msgstr "Weiter"
 
 #: src/photos_view.py:266
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "Wähle ein Foto um anzufangen!"

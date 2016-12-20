@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-23 01:51+0000\n"
-"PO-Revision-Date: 2016-06-26 15:20+0000\n"
-"Last-Translator: Shimon Sharmin <oparthib@gmail.com>\n"
+"POT-Creation-Date: 2016-12-13 03:05+0000\n"
+"PO-Revision-Date: 2016-08-31 21:39+0000\n"
+"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Bengali (http://www.transifex.com/endless-mobile-inc/eos-photos/language/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -207,47 +207,47 @@ msgstr "ভারী পিঞ্চ"
 msgid "Swirl"
 msgstr "ঘূর্ণন"
 
-#: src/photos_presenter.py:131
+#: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
 msgstr "পটভূমিতে ছবিটি সফলভাবে দেয়া হয়েছে!"
 
-#: src/photos_presenter.py:140
+#: src/photos_presenter.py:134
 msgid "Email failed."
 msgstr "ইমেইল ব্যর্থ।"
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
 msgstr "এখানে ছবিটি রেখে জমা করার অনুমতি আপনার নেই "
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
 msgstr "ছবিটি জমা করতে গিয়ে একটি ভুল হয়েছে"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
 msgstr "অফলাইন থেকে ফেসবুকে প্রবেশ করা যাবে না।"
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:327
 msgid "Post to Facebook"
 msgstr "ফেসবুকে পোস্ট করুন"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:329
 msgid "Write a description for the photo"
 msgstr "ছবিটিতে একটি বর্ণনা লিখুন"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
 msgstr "ইমেইলের সাথে একটি বার্তা যোগ করুন"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Your Name:"
 msgstr "আপনার নাম:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Recipient email:"
 msgstr "প্রাপকের ইমেইল:"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Message:"
 msgstr "বার্তা:"
 

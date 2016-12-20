@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-23 01:51+0000\n"
-"PO-Revision-Date: 2016-02-21 06:57+0000\n"
-"Last-Translator: zhifeng peng <jnufeng@126.com>\n"
+"POT-Creation-Date: 2016-12-13 03:05+0000\n"
+"PO-Revision-Date: 2016-08-31 21:39+0000\n"
+"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -209,47 +209,47 @@ msgstr "强挤压"
 msgid "Swirl"
 msgstr "旋转"
 
-#: src/photos_presenter.py:131
+#: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
 msgstr "成功将图像设置为背景！"
 
-#: src/photos_presenter.py:140
+#: src/photos_presenter.py:134
 msgid "Email failed."
 msgstr "电子邮件发送失败。"
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
 msgstr "您没有权限在此保存本图片"
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
 msgstr "保存图片时出错"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
 msgstr "脱机状态下不能连接到Facebook。"
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:327
 msgid "Post to Facebook"
 msgstr "发布到Facebook"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:329
 msgid "Write a description for the photo"
 msgstr "为图片添加文字描述"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
 msgstr "输入报文添加到邮件中"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Your Name:"
 msgstr "您的姓名："
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Recipient email:"
 msgstr "收件人电子邮件："
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Message:"
 msgstr "信息："
 

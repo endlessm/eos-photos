@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos 0\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-23 01:51+0000\n"
+"POT-Creation-Date: 2016-12-20 03:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,47 +205,47 @@ msgstr ""
 msgid "Swirl"
 msgstr ""
 
-#: src/photos_presenter.py:131
+#: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
 msgstr ""
 
-#: src/photos_presenter.py:140
+#: src/photos_presenter.py:134
 msgid "Email failed."
 msgstr ""
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
 msgstr ""
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
 msgstr ""
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
 msgstr ""
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:327
 msgid "Post to Facebook"
 msgstr ""
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:329
 msgid "Write a description for the photo"
 msgstr ""
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
 msgstr ""
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Your Name:"
 msgstr ""
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Recipient email:"
 msgstr ""
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Message:"
 msgstr ""
 

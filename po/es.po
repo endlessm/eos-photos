@@ -16,9 +16,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-08-23 01:51+0000\n"
-"PO-Revision-Date: 2015-04-01 00:43+0000\n"
-"Last-Translator: c.sanchez <cassandra@endlessm.com>\n"
+"POT-Creation-Date: 2016-12-13 03:05+0000\n"
+"PO-Revision-Date: 2016-08-31 21:39+0000\n"
+"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/endless-mobile-inc/eos-photos/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -215,47 +215,47 @@ msgstr "Pellizcar pesado"
 msgid "Swirl"
 msgstr "Remolino"
 
-#: src/photos_presenter.py:131
+#: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
 msgstr "¡Imagen aplicada al fondo!"
 
-#: src/photos_presenter.py:140
+#: src/photos_presenter.py:134
 msgid "Email failed."
 msgstr "Email falló."
 
-#: src/photos_presenter.py:266
+#: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
 msgstr "No tienes los permisos requeridos para guardar tu foto aquí"
 
-#: src/photos_presenter.py:268
+#: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
 msgstr "Sucedió un error y no se ha podido guardar tu foto"
 
-#: src/photos_presenter.py:328
+#: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
 msgstr "Facebook no está disponible sin conexión."
 
-#: src/photos_presenter.py:333
+#: src/photos_presenter.py:327
 msgid "Post to Facebook"
 msgstr "Publicar en Facebook"
 
-#: src/photos_presenter.py:335
+#: src/photos_presenter.py:329
 msgid "Write a description for the photo"
 msgstr "Escribe una descripción para la foto"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
 msgstr "Escribe un mensaje para agregar el e-mail"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Your Name:"
 msgstr "Tu nombre"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Recipient email:"
 msgstr "Email del destinatario"
 
-#: src/photos_presenter.py:358
+#: src/photos_presenter.py:352
 msgid "Message:"
 msgstr "Mensaje:"
 
