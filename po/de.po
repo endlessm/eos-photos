@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
+# Stefan Schroeder <ondekoza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
-"POT-Creation-Date: 2016-12-13 03:05+0000\n"
-"PO-Revision-Date: 2016-12-17 18:00+0000\n"
+"POT-Creation-Date: 2016-12-20 03:07+0000\n"
+"PO-Revision-Date: 2016-12-25 10:49+0000\n"
 "Last-Translator: Stefan Schroeder <ondekoza@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/endless-mobile-inc/eos-photos/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -232,11 +233,11 @@ msgstr "Bei Facebook posten"
 
 #: src/photos_presenter.py:329
 msgid "Write a description for the photo"
-msgstr ""
+msgstr "Beschreibe dein Foto"
 
 #: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
-msgstr ""
+msgstr "Füge deiner E-Mail eine Nachricht hinzu"
 
 #: src/photos_presenter.py:352
 msgid "Your Name:"
