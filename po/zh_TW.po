@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Endless Mobile, Inc.
+# This file is distributed under the same license as the eos-photos package.
+# 
+# Translators:
+# Roddy Shuler <roddy@endlessm.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: eos-photos\n"
+"Report-Msgid-Bugs-To: philip@endlessm.com\n"
+"POT-Creation-Date: 2016-12-20 03:07+0000\n"
+"PO-Revision-Date: 2017-01-09 06:17+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/endless-mobile-inc/eos-photos/language/zh_TW/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
+msgid "Login canceled."
+msgstr "登入已取消。"
+
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
+msgid "Could not reach facebook."
+msgstr "無法前往 facebook。"
+
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
+msgid "Login failed."
+msgstr "登入失敗。"
+
+#: src/share/facebook_post.py:36
+msgid "Image successfully posted to facebook!"
+msgstr "圖片已成功張貼至 facebook！"
+
+#: src/share/facebook_post.py:62
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr "目前無法完成要求的行動。請稍後再試。"
+
+#: src/share/facebook_post.py:70
+msgid ""
+"Network problem detected. Please check your internet connection and try "
+"again."
+msgstr "偵測到網路問題。請檢查你的網路連接並再次嘗試。"
+
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr "某人"
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr "傳送一張來自 Endless Photos 的相片給您！"
+
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr "請不要回覆這封電子郵件。回覆會傳送到未受監控的收件匣。"
+
+#: src/photos_category_toolbars.py:26
+msgid "Untitled"
+msgstr "無標題"
+
+#: src/photos_category_toolbars.py:73
+msgid "Rotate Right 90°"
+msgstr "向右旋轉 90°"
+
+#: src/photos_category_toolbars.py:95
+msgid "TRANSFORM"
+msgstr "轉換"
+
+#: src/photos_category_toolbars.py:106
+msgid "Crop"
+msgstr "裁剪"
+
+#: src/photos_category_toolbars.py:111
+msgid "Apply Crop?"
+msgstr "要套用裁切嗎？"
+
+#: src/photos_category_toolbars.py:180
+msgid "BLURS"
+msgstr "模糊"
+
+#: src/photos_category_toolbars.py:195
+msgid "BORDERS"
+msgstr "邊界"
+
+#: src/photos_category_toolbars.py:210
+msgid "FILTERS"
+msgstr "篩選器"
+
+#: src/photos_category_toolbars.py:225
+msgid "DISTORT"
+msgstr "失真"
+
+#: src/photos_category_toolbars.py:245
+msgid "Brightness"
+msgstr "亮度"
+
+#: src/photos_category_toolbars.py:255
+msgid "Contrast"
+msgstr "對比"
+
+#: src/photos_category_toolbars.py:265
+msgid "Saturation"
+msgstr "飽和度"
+
+#: src/photos_category_toolbars.py:288
+msgid "ADJUST"
+msgstr "調整"
+
+#: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
+#: src/photos_model.py:106
+msgid "None"
+msgstr "無"
+
+#: src/photos_model.py:65
+msgid "Tilt Shift"
+msgstr "移軸"
+
+#: src/photos_model.py:66
+msgid "Depth of Field"
+msgstr "景深"
+
+#: src/photos_model.py:72
+msgid "Grayscale"
+msgstr "灰階"
+
+#: src/photos_model.py:73
+msgid "Country"
+msgstr "國家"
+
+#: src/photos_model.py:74
+msgid "Retro"
+msgstr "向後"
+
+#: src/photos_model.py:75
+msgid "Old Photo"
+msgstr "舊相片"
+
+#: src/photos_model.py:76
+msgid "Colorful"
+msgstr "五彩繽紛"
+
+#: src/photos_model.py:78
+msgid "Lomo"
+msgstr "Lomo 風格"
+
+#: src/photos_model.py:81
+msgid "Foggy Blue"
+msgstr "霧藍"
+
+#: src/photos_model.py:82
+msgid "Paper"
+msgstr "紙張"
+
+#: src/photos_model.py:83
+msgid "Trains"
+msgstr "火車"
+
+#: src/photos_model.py:84
+msgid "Desert"
+msgstr "沙漠"
+
+#: src/photos_model.py:85
+msgid "Posterize"
+msgstr "色調分離"
+
+#: src/photos_model.py:88
+msgid "Edges"
+msgstr "邊緣"
+
+#: src/photos_model.py:98
+msgid "Crayon"
+msgstr "蠟筆"
+
+#: src/photos_model.py:99
+msgid "Grunge"
+msgstr "死亡碼"
+
+#: src/photos_model.py:100
+msgid "Spray"
+msgstr "噴霧"
+
+#: src/photos_model.py:101
+msgid "Brush"
+msgstr "筆刷"
+
+#: src/photos_model.py:107
+msgid "Fish Eye Light"
+msgstr "魚眼燈"
+
+#: src/photos_model.py:108
+msgid "Fish Eye Heavy"
+msgstr "魚眼重"
+
+#: src/photos_model.py:109
+msgid "Pinch Light"
+msgstr "Pinch Light"
+
+#: src/photos_model.py:110
+msgid "Pinch Heavy"
+msgstr "大力擰起"
+
+#: src/photos_model.py:111
+msgid "Swirl"
+msgstr "旋轉"
+
+#: src/photos_presenter.py:128
+msgid "Image successfully applied to background!"
+msgstr "成功將圖片設定為背景！"
+
+#: src/photos_presenter.py:134
+msgid "Email failed."
+msgstr "電子郵件傳送失敗。"
+
+#: src/photos_presenter.py:260
+msgid "You do not have permissions to save the photo here"
+msgstr "您沒有在這裡儲存相片的權限"
+
+#: src/photos_presenter.py:262
+msgid "An error occurred while saving your photo"
+msgstr "儲存相片時發生錯誤"
+
+#: src/photos_presenter.py:322
+msgid "Facebook is not available offline."
+msgstr "離線時無法使用 Facebook。"
+
+#: src/photos_presenter.py:327
+msgid "Post to Facebook"
+msgstr "張貼至 Facebook"
+
+#: src/photos_presenter.py:329
+msgid "Write a description for the photo"
+msgstr "撰寫相片說明"
+
+#: src/photos_presenter.py:352
+msgid "Enter a message to add to the e-mail"
+msgstr "請輸入要新增到電子郵件的訊息"
+
+#: src/photos_presenter.py:352
+msgid "Your Name:"
+msgstr "您的姓名："
+
+#: src/photos_presenter.py:352
+msgid "Recipient email:"
+msgstr "接收者的電子郵件："
+
+#: src/photos_presenter.py:352
+msgid "Message:"
+msgstr "訊息："
+
+#: src/photos_right_toolbar.py:24
+msgid "OPEN PHOTO"
+msgstr "開啟照片"
+
+#: src/photos_right_toolbar.py:34
+msgid "SAVE"
+msgstr "儲存"
+
+#: src/photos_right_toolbar.py:43
+msgid "BACKGROUND"
+msgstr "背景"
+
+#: src/photos_right_toolbar.py:54
+msgid "REVERT IMAGE"
+msgstr "復原圖片"
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
+msgstr "FACEBOOK"
+
+#: src/photos_view.py:37
+msgid "Photos"
+msgstr "照片"
+
+#: src/photos_view.py:134 src/splash_screen.py:24
+msgid "Open Image"
+msgstr "開啟影像"
+
+#: src/photos_view.py:165
+msgid "Save Image"
+msgstr "儲存影像"
+
+#: src/photos_view.py:194
+msgid "Open new photo without save?"
+msgstr "是否要開啟新相片而不儲存？"
+
+#: src/photos_view.py:195
+msgid ""
+"Your changes have not been saved. Are you sure you want to open a new photo "
+"without saving?"
+msgstr "系統尚未儲存您的變更，是否確定要開啟新相片而不儲存？"
+
+#: src/photos_view.py:217
+msgid "Quit Without Save?"
+msgstr "未儲存便退出嗎？"
+
+#: src/photos_view.py:218
+msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr "尚未儲存您的變更。確定退出嗎？"
+
+#: src/photos_view.py:265
+msgid "Continue"
+msgstr "繼續"
+
+#: src/photos_view.py:266
+msgid "Cancel"
+msgstr "取消"
+
+#: src/splash_screen.py:34
+msgid "Choose one of your photos to begin!"
+msgstr "選擇一張照片以開始！"
