@@ -41,7 +41,8 @@ AC_PROG_MKDIR_P
 # Library configuration tool
 PKG_PROG_PKG_CONFIG
 # Gettext
-AM_PO_SUBDIRS
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.18.1])
 # Various tools
 GLIB_GSETTINGS
 GLIB_COMPILE_RESOURCES=`$PKG_CONFIG --variable glib_compile_resources gio-2.0`
