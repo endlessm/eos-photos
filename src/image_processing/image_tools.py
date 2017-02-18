@@ -122,12 +122,12 @@ def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
         raw = l_slope * y + l_intercept
         raw = (raw / l_max) * amplitude
         normalized = raw if raw < 255 else 255
-        draw.point((0,y), normalized)
+        draw.point((0,y), int(normalized))
     for y in range(c,height):
         raw = r_slope * y + r_intercept
         raw = (raw / r_max) * amplitude
         normalized = raw if raw < 255 else 255
-        draw.point((0,y), normalized)
+        draw.point((0,y), int(normalized))
 
     return mask
 
