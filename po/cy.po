@@ -1,0 +1,313 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Endless Mobile, Inc.
+# This file is distributed under the same license as the eos-photos package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: eos-photos\n"
+"Report-Msgid-Bugs-To: philip@endlessm.com\n"
+"POT-Creation-Date: 2016-12-20 03:07+0000\n"
+"PO-Revision-Date: 2017-04-17 05:42+0000\n"
+"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
+"Language-Team: Welsh (http://www.transifex.com/endless-mobile-inc/eos-photos/language/cy/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cy\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;\n"
+
+#: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
+msgid "Login canceled."
+msgstr ""
+
+#: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
+msgid "Could not reach facebook."
+msgstr ""
+
+#: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
+msgid "Login failed."
+msgstr ""
+
+#: src/share/facebook_post.py:36
+msgid "Image successfully posted to facebook!"
+msgstr ""
+
+#: src/share/facebook_post.py:62
+msgid ""
+"Requested action is not possible at the moment. Please try again later."
+msgstr ""
+
+#: src/share/facebook_post.py:70
+msgid ""
+"Network problem detected. Please check your internet connection and try "
+"again."
+msgstr ""
+
+#: src/share/emailer.py:17
+msgid "Someone"
+msgstr ""
+
+#: src/share/emailer.py:18
+msgid "sent you a photo from Endless Photos!"
+msgstr ""
+
+#: src/share/emailer.py:21
+msgid ""
+"Please do not reply to this email. Replies are sent to an unmonitored inbox."
+msgstr ""
+
+#: src/photos_category_toolbars.py:26
+msgid "Untitled"
+msgstr ""
+
+#: src/photos_category_toolbars.py:73
+msgid "Rotate Right 90°"
+msgstr ""
+
+#: src/photos_category_toolbars.py:95
+msgid "TRANSFORM"
+msgstr ""
+
+#: src/photos_category_toolbars.py:106
+msgid "Crop"
+msgstr ""
+
+#: src/photos_category_toolbars.py:111
+msgid "Apply Crop?"
+msgstr ""
+
+#: src/photos_category_toolbars.py:180
+msgid "BLURS"
+msgstr ""
+
+#: src/photos_category_toolbars.py:195
+msgid "BORDERS"
+msgstr ""
+
+#: src/photos_category_toolbars.py:210
+msgid "FILTERS"
+msgstr ""
+
+#: src/photos_category_toolbars.py:225
+msgid "DISTORT"
+msgstr ""
+
+#: src/photos_category_toolbars.py:245
+msgid "Brightness"
+msgstr ""
+
+#: src/photos_category_toolbars.py:255
+msgid "Contrast"
+msgstr ""
+
+#: src/photos_category_toolbars.py:265
+msgid "Saturation"
+msgstr ""
+
+#: src/photos_category_toolbars.py:288
+msgid "ADJUST"
+msgstr ""
+
+#: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
+#: src/photos_model.py:106
+msgid "None"
+msgstr ""
+
+#: src/photos_model.py:65
+msgid "Tilt Shift"
+msgstr ""
+
+#: src/photos_model.py:66
+msgid "Depth of Field"
+msgstr ""
+
+#: src/photos_model.py:72
+msgid "Grayscale"
+msgstr ""
+
+#: src/photos_model.py:73
+msgid "Country"
+msgstr ""
+
+#: src/photos_model.py:74
+msgid "Retro"
+msgstr ""
+
+#: src/photos_model.py:75
+msgid "Old Photo"
+msgstr ""
+
+#: src/photos_model.py:76
+msgid "Colorful"
+msgstr ""
+
+#: src/photos_model.py:78
+msgid "Lomo"
+msgstr ""
+
+#: src/photos_model.py:81
+msgid "Foggy Blue"
+msgstr ""
+
+#: src/photos_model.py:82
+msgid "Paper"
+msgstr ""
+
+#: src/photos_model.py:83
+msgid "Trains"
+msgstr ""
+
+#: src/photos_model.py:84
+msgid "Desert"
+msgstr ""
+
+#: src/photos_model.py:85
+msgid "Posterize"
+msgstr ""
+
+#: src/photos_model.py:88
+msgid "Edges"
+msgstr ""
+
+#: src/photos_model.py:98
+msgid "Crayon"
+msgstr ""
+
+#: src/photos_model.py:99
+msgid "Grunge"
+msgstr ""
+
+#: src/photos_model.py:100
+msgid "Spray"
+msgstr ""
+
+#: src/photos_model.py:101
+msgid "Brush"
+msgstr ""
+
+#: src/photos_model.py:107
+msgid "Fish Eye Light"
+msgstr ""
+
+#: src/photos_model.py:108
+msgid "Fish Eye Heavy"
+msgstr ""
+
+#: src/photos_model.py:109
+msgid "Pinch Light"
+msgstr ""
+
+#: src/photos_model.py:110
+msgid "Pinch Heavy"
+msgstr ""
+
+#: src/photos_model.py:111
+msgid "Swirl"
+msgstr ""
+
+#: src/photos_presenter.py:128
+msgid "Image successfully applied to background!"
+msgstr ""
+
+#: src/photos_presenter.py:134
+msgid "Email failed."
+msgstr ""
+
+#: src/photos_presenter.py:260
+msgid "You do not have permissions to save the photo here"
+msgstr ""
+
+#: src/photos_presenter.py:262
+msgid "An error occurred while saving your photo"
+msgstr ""
+
+#: src/photos_presenter.py:322
+msgid "Facebook is not available offline."
+msgstr ""
+
+#: src/photos_presenter.py:327
+msgid "Post to Facebook"
+msgstr ""
+
+#: src/photos_presenter.py:329
+msgid "Write a description for the photo"
+msgstr ""
+
+#: src/photos_presenter.py:352
+msgid "Enter a message to add to the e-mail"
+msgstr ""
+
+#: src/photos_presenter.py:352
+msgid "Your Name:"
+msgstr ""
+
+#: src/photos_presenter.py:352
+msgid "Recipient email:"
+msgstr ""
+
+#: src/photos_presenter.py:352
+msgid "Message:"
+msgstr ""
+
+#: src/photos_right_toolbar.py:24
+msgid "OPEN PHOTO"
+msgstr ""
+
+#: src/photos_right_toolbar.py:34
+msgid "SAVE"
+msgstr ""
+
+#: src/photos_right_toolbar.py:43
+msgid "BACKGROUND"
+msgstr ""
+
+#: src/photos_right_toolbar.py:54
+msgid "REVERT IMAGE"
+msgstr ""
+
+#: src/photos_right_toolbar.py:69
+msgid "FACEBOOK"
+msgstr ""
+
+#: src/photos_view.py:37
+msgid "Photos"
+msgstr ""
+
+#: src/photos_view.py:134 src/splash_screen.py:24
+msgid "Open Image"
+msgstr ""
+
+#: src/photos_view.py:165
+msgid "Save Image"
+msgstr ""
+
+#: src/photos_view.py:194
+msgid "Open new photo without save?"
+msgstr ""
+
+#: src/photos_view.py:195
+msgid ""
+"Your changes have not been saved. Are you sure you want to open a new photo "
+"without saving?"
+msgstr ""
+
+#: src/photos_view.py:217
+msgid "Quit Without Save?"
+msgstr ""
+
+#: src/photos_view.py:218
+msgid "Your changes have not been saved. Are you sure you want to quit?"
+msgstr ""
+
+#: src/photos_view.py:265
+msgid "Continue"
+msgstr ""
+
+#: src/photos_view.py:266
+msgid "Cancel"
+msgstr ""
+
+#: src/splash_screen.py:34
+msgid "Choose one of your photos to begin!"
+msgstr ""
