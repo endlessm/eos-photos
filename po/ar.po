@@ -133,7 +133,7 @@ msgstr "الدولة"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr "ريترو"
+msgstr ""
 
 #: src/photos_model.py:75
 msgid "Old Photo"
