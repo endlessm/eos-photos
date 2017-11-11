@@ -3,13 +3,14 @@
 # This file is distributed under the same license as the eos-photos package.
 # 
 # Translators:
+# Kukuh Syafaat <syafaatkukuh@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2016-12-20 03:07+0000\n"
-"PO-Revision-Date: 2016-08-31 21:39+0000\n"
-"Last-Translator: Philip Chimento <philip.chimento@gmail.com>\n"
+"PO-Revision-Date: 2017-11-09 05:55+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/endless-mobile-inc/eos-photos/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,7 +43,7 @@ msgstr "Tindakan yang diminta untuk sementara tidak tersedia. Silakan coba lagi 
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
-msgstr "Problem jaringan terdeteksi. Harap memeriksa sambungan internet Anda dan mencoba lagi."
+msgstr "Masalah jaringan terdeteksi. Harap memeriksa sambungan internet Anda dan mencoba lagi."
 
 #: src/share/emailer.py:17
 msgid "Someone"
@@ -55,7 +56,7 @@ msgstr "mengirimi Anda foto dari Endless Photos!"
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
-msgstr "Harap jangan membalas email ini. Balasan akan masuk ke kotak masuk yang tidak dipantau."
+msgstr "Harap jangan membalas surel ini. Balasan akan masuk ke kotak masuk yang tidak dipantau."
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
@@ -75,11 +76,11 @@ msgstr "Pangkas"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr "Lakukan Krop?"
+msgstr "Lakukan Pangkas?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr "BLURS"
+msgstr "KABUR"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
@@ -87,7 +88,7 @@ msgstr "BATAS-BATAS"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr "FILTER"
+msgstr "PENYARING"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
@@ -107,7 +108,7 @@ msgstr "Saturasi"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr "ADJUST"
+msgstr "SESUAIKAN"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
@@ -188,11 +189,11 @@ msgstr "Kuas"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr "Lampu Mata Ikan"
+msgstr "Mata Ikan Ringan"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr "Fish Eye Heavy"
+msgstr "Mata Ikan Berat"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
@@ -212,7 +213,7 @@ msgstr "Gambar berhasil diterapkan untuk latar belakang!"
 
 #: src/photos_presenter.py:134
 msgid "Email failed."
-msgstr "Email gagal."
+msgstr "Surel gagal."
 
 #: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
@@ -294,7 +295,7 @@ msgstr "Perubahan Anda belum disimpan. Anda yakin ingin membuka foto baru tanpa 
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr "Berhenti Tanpa Menyimpan?"
+msgstr "Keluar Tanpa Menyimpan?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
