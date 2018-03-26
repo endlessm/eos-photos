@@ -35,6 +35,7 @@ thumbnails:
 	$(MAKE) $(AM_MAKEFLAGS) data/images/thumbnails/thumbnails.gresource
 
 data/images/thumbnails/thumbnails.gresource.xml: data/endless_photos.gresource
+	$(MKDIR_P) data/images/thumbnails
 	$(AM_V_GEN) $(builddir)/generate-filter-thumbnails
 CLEANFILES += data/images/thumbnails/thumbnails.gresource.xml
 
