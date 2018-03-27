@@ -2,9 +2,9 @@ import collections
 import cairo
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
-from widgets.composite_button import CompositeButton
-from widgets.image_text_button import ImageTextButton
-from resource_prefixes import *
+from .widgets.composite_button import CompositeButton
+from .widgets.image_text_button import ImageTextButton
+from .resource_prefixes import *
 
 
 class PhotosLeftToolbar(Gtk.VBox):
@@ -40,7 +40,7 @@ class PhotosLeftToolbar(Gtk.VBox):
             # do something to cancel crop
             self._presenter.on_crop_cancel()
 
-        for name, category in self._categories.items():
+        for name, category in list(self._categories.items()):
             if not name == category_label:
                 category.unexpand()
 
@@ -136,14 +136,14 @@ class CategoryExpander(Gtk.Grid):
         self.add(self._button)
         self.add(self._overlay)
         self._expanded = False
-        self._button.connect("clicked", lambda (w): self._toggle_expanded())
+        self._button.connect("clicked", self._toggle_expanded)
         self._scroll_target = 0
 
     def _update_scroll(self, w, a):
         if not self._revealer.get_child_revealed():
             self._scroll_area.get_vadjustment().set_value(self._scroll_target)
 
-    def _toggle_expanded(self):
+    def _toggle_expanded(self, button):
         if self._expanded:
             self.unexpand()
         else:

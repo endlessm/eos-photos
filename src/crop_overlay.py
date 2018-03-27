@@ -1,5 +1,5 @@
 from gi.repository import Clutter
-from draggable_box import DraggableBox
+from .draggable_box import DraggableBox
 
 class CropOverlay(Clutter.Actor):
     def __init__(self, **kw):

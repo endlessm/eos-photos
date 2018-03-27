@@ -1,6 +1,6 @@
 from gi.repository import Clutter, GLib, Gdk, GObject
 
-from crop_overlay import CropOverlay
+from .crop_overlay import CropOverlay
 
 class PhotosImageWidget(Clutter.Actor):
     """

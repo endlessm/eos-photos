@@ -3,9 +3,9 @@ import collections
 from PIL import Image
 from PIL import ImageFilter
 
-import util
-from resource_prefixes import *
-import image_processing.image_tools as ImageTools
+from . import util
+from .resource_prefixes import *
+from .image_processing import image_tools as ImageTools
 
 class PhotosModel(object):
     """
@@ -27,7 +27,7 @@ class PhotosModel(object):
         if displayable:
             # Only import this if displayable; we don't want to do any graphical
             # operations in generate_filter_thumbnails.py
-            from photos_image_widget import PhotosImageWidget
+            from .photos_image_widget import PhotosImageWidget
             self._image_widget = PhotosImageWidget()
         else:
             self._image_widget = None
@@ -173,16 +173,16 @@ class PhotosModel(object):
             self._is_saved = True
 
     def _get_default_filter(self):
-        return self._filter_dict.keys()[0]
+        return next(iter(self._filter_dict))
 
     def _get_default_border(self):
-        return self._border_dict.keys()[0]
+        return next(iter(self._border_dict))
 
     def _get_default_distortion(self):
-        return self._distortions_dict.keys()[0]
+        return next(iter(self._distortions_dict))
 
     def _get_default_blur(self):
-        return self._blur_dict.keys()[0]
+        return next(iter(self._blur_dict))
 
     def get_image_widget(self):
         return self._image_widget
@@ -220,45 +220,45 @@ class PhotosModel(object):
         return self._filename
 
     def get_blur_names(self):
-        return self._blur_dict.keys()
+        return list(self._blur_dict.keys())
 
     def get_blur_names_and_thumbnails(self):
         names_and_thumbs = []
         blur_no = 0
-        for name in self._blur_dict.keys():
+        for name in self.get_blur_names():
             names_and_thumbs.append((name, "blur_" + str(blur_no) + ".jpg"))
             blur_no += 1
         return names_and_thumbs
 
     def get_filter_names(self):
-        return self._filter_dict.keys()
+        return list(self._filter_dict.keys())
 
     def get_filter_names_and_thumbnails(self):
         names_and_thumbs = []
         filter_no = 0
-        for name in self._filter_dict.keys():
+        for name in self.get_filter_names():
             names_and_thumbs.append((name, "filter_" + str(filter_no) + ".jpg"))
             filter_no += 1
         return names_and_thumbs
 
     def get_border_names(self):
-        return self._border_dict.keys()
+        return list(self._border_dict.keys())
 
     def get_border_names_and_thumbnails(self):
         names_and_thumbs = []
         border_no = 0
-        for name in self._border_dict.keys():
+        for name in self.get_border_names():
             names_and_thumbs.append((name, "border_" + str(border_no) + ".jpg"))
             border_no += 1
         return names_and_thumbs
 
     def get_distortion_names(self):
-        return self._distortions_dict.keys()
+        return list(self._distortions_dict.keys())
 
     def get_distortion_names_and_thumbnails(self):
         names_and_thumbs = []
         distort_no = 0
-        for name in self._distortions_dict.keys():
+        for name in self.get_distortion_names():
             names_and_thumbs.append((name, "distort_" + str(distort_no) + ".jpg"))
             distort_no += 1
         return names_and_thumbs
@@ -426,7 +426,7 @@ class PhotosModel(object):
                 self._last_filter = self._filter
                 self._filtered_image = self._filter_dict[self._filter](self._rotated_image)
             else:
-                print "Filter not supported!"
+                print("Filter not supported!")
 
         # distort
         if not self._distort == self._last_distort or modified:
@@ -441,7 +441,7 @@ class PhotosModel(object):
                 self._last_blur_type = self._blur_type
                 self._blurred_image = self._blur_dict[self._blur_type](self._distorted_image)
             else:
-                print "Blur not supported!"
+                print("Blur not supported!")
 
         # adjust
         adjusted = not (self._last_brightness == self._brightness

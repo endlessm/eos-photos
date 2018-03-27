@@ -2,13 +2,13 @@ from datetime import datetime
 import errno
 import os
 import tempfile
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import time
 from gi.repository import GLib, Gtk, Gio
 
-from asyncworker import AsyncWorker
-from share.facebook_post import FacebookPost
-import share.emailer
+from .asyncworker import AsyncWorker
+from .share.facebook_post import FacebookPost
+from .share import emailer as Emailer
 
 VALID_FILE_TYPES = ["jpg", "png", "gif", "jpeg"]
 
@@ -130,7 +130,7 @@ class PhotosPresenter(object):
     def _do_send_email(self, name, recipient, message):
         filename = self._get_image_tempfile()
         self._model.save(filename)
-        if not share.emailer.email_photo(name, recipient, message, filename):
+        if not Emailer.email_photo(name, recipient, message, filename):
             self._view.update_async(lambda: self._view.show_message(text=_("Email failed."), warning=True))
         os.remove(filename)
 
@@ -285,8 +285,8 @@ class PhotosPresenter(object):
         If Google is down, this will generate false negatives.
         '''
         try:
-            test_request = urllib2.Request("http://www.google.com")
-            urllib2.urlopen(test_request)
+            test_request = urllib.request.Request("http://www.google.com")
+            urllib.request.urlopen(test_request)
             return True
         except:
             return False
@@ -433,13 +433,15 @@ class PhotosPresenter(object):
         self._make_adjustment_change(
             value, self._model.get_saturation, self._model.set_saturation, "Saturation Slider Thread")
 
-    def on_tilt_shift_toggle(self, toggleAction, (coord_x, coord_y)):
+    def on_tilt_shift_toggle(self, toggleAction, coords):
+        coord_x, coord_y = coords
         if not self._model.is_open():
             return
         if toggleAction.get_active():
             self._run_locking_task(self._do_blur_select, ("TILT-SHIFT",))
 
-    def on_depth_of_field_toggle(self, toggleAction, (coord_x, coord_y)):
+    def on_depth_of_field_toggle(self, toggleAction, coords):
+        coord_x, coord_y = coords
         if not self._model.is_open():
             return
         if toggleAction.get_active():

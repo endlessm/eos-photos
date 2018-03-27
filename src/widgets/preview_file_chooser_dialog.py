@@ -26,7 +26,7 @@ class PreviewFileChooserDialog(Gtk.FileChooserDialog):
                 PreviewFileChooserDialog.PREVIEW_MAX_SIZE)
             self._preview.set_from_pixbuf(pixbuf)
         except Exception as e:
-            print e
+            print(e)
             self.set_preview_widget_active(False)
             return
         self.set_preview_widget_active(True)

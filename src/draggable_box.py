@@ -3,8 +3,8 @@ import inspect
 
 from gi.repository import Clutter, Gdk
 
-import util
-from resource_prefixes import *
+from . import util
+from .resource_prefixes import *
 
 
 # Bitwise flags to indicate clickable locations
@@ -113,7 +113,7 @@ class DraggableBox(Clutter.Actor):
         if coordinates is None:
             self.reset_dimensions()
         else:
-            left_coord, top_coord, right_coord, bot_coord = map(float, coordinates)
+            left_coord, top_coord, right_coord, bot_coord = list(map(float, coordinates))
             stage_width, stage_height = self.stage.get_width(), self.stage.get_height()
 
             self.x_pos_as_pct = left_coord / real_width
@@ -151,7 +151,7 @@ class DraggableBox(Clutter.Actor):
         right_coord = ((x + width) / stage_width) * real_width
         bot_coord = ((y + height) / stage_height) * real_height
 
-        return map(int, (left_coord, top_coord, right_coord, bot_coord))
+        return list(map(int, (left_coord, top_coord, right_coord, bot_coord)))
 
     def opposing_side(self, side):
         if side & TOP or side & BOT:
@@ -409,10 +409,14 @@ class DraggableBox(Clutter.Actor):
             unselected_handles = [h for h in self.draggable_handles if h not in selected_handles]
 
             # highlight the relevant handles and edges
-            map(lambda border: border.highlight(), selected_borders)
-            map(lambda border: border.darken(), unselected_borders)
-            map(lambda handle: handle.highlight(), selected_handles)
-            map(lambda handle: handle.normalize() if region == NONE else handle.darken(), unselected_handles)
+            for border in selected_borders:
+                border.highlight()
+            for border in unselected_borders:
+                border.darken()
+            for handle in selected_handles:
+                handle.highlight()
+            for handle in unselected_handles:
+                handle.normalize() if region == NONE else handle.darken()
 
     def mouse_enter_handler(self, actor, event):
         self.mouse_changed_region(MIDDLE)

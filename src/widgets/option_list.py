@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from composite_button import CompositeButton
+from .composite_button import CompositeButton
 
 class OptionLabel(Gtk.Label):
     """

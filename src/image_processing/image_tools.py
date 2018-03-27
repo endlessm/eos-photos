@@ -11,9 +11,9 @@ import colorsys
 
 from .. import util
 from ..resource_prefixes import *
-from curve import Curve
-from curve import CurveManager
-from distortions import Distortion
+from .curve import Curve
+from .curve import CurveManager
+from .distortions import Distortion
 
 """
 Pretty much all the image processing functionality we coded right now. Maybe
@@ -27,7 +27,7 @@ def limit_size(image, size_limits):
         return image
     else:
         scale = min(width_limit / float(width), height_limit / float(height))
-        new_size = map(int, (width * scale, height * scale))
+        new_size = list(map(int, (width * scale, height * scale)))
         return image.resize(new_size, Image.BILINEAR)
 
 def apply_contrast(image, value):
@@ -54,7 +54,7 @@ def make_linear_ramp(color):
     ramp = []
     r, g, b = color
     for i in range(256):
-        ramp.extend((r*i/255, g*i/255, b*i/255))
+        ramp.extend((int(r*i/255), int(g*i/255), int(b*i/255)))
     return ramp
 
 def apply_palette(image, palette):
@@ -89,10 +89,11 @@ def old_photo(image):
     image = sepia_tone(image)
     return texture_overlay(image, "old_film.jpg", 0.25)
 
-def _depth_of_field_mask(center_x, center_y, (height, width), radius):
+def _depth_of_field_mask(center_x, center_y, size, radius):
     # center_x/center_y: the (x,y) coordinate of the transparent disk
     # radius: radius of the transparent disk
-    # height/width: dimensions of the blur mask
+    # size: dimensions of the blur mask
+    height, width = size
     yy, xx = numpy.mgrid[0:height, 0:width]
     xx = xx - center_x
     yy = yy - center_y
@@ -103,11 +104,12 @@ def _depth_of_field_mask(center_x, center_y, (height, width), radius):
 
     return mask
 
-def _tilt_shift_mask(angle, rot_angle, (height, width), center_pct, amplitude):
+def _tilt_shift_mask(angle, rot_angle, size, center_pct, amplitude):
     # angle: the slope of the linear blur gradient, measured from rot_angle
     # rot_angle: corresponds to the angle of the plane of focus
     # center_pct: value from (0,1) indicating where the focus is on the y axis
     # amplitude: scales the blur after normalization
+    height, width = size
     c = int(height * center_pct)
     rot_angle = 90.0
     mask = Image.new('L', (1,height))

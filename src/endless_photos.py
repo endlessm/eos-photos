@@ -3,10 +3,10 @@ import os
 import inspect
 from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio, Endless
 
-from photos_model import PhotosModel
-from photos_view import PhotosView
-from photos_presenter import PhotosPresenter
-from resource_prefixes import *
+from .photos_model import PhotosModel
+from .photos_view import PhotosView
+from .photos_presenter import PhotosPresenter
+from .resource_prefixes import *
 
 CURRENT_FILE = os.path.abspath(inspect.getfile(inspect.currentframe()))
 CURRENT_DIR = os.path.dirname(CURRENT_FILE)
