@@ -1,6 +1,6 @@
 import numpy
 import math
-from scipy import ndimage, stats
+from scipy import ndimage
 
 from PIL import Image
 from PIL import ImageOps
@@ -98,7 +98,7 @@ def _depth_of_field_mask(center_x, center_y, size, radius):
     xx = xx - center_x
     yy = yy - center_y
     rad = numpy.sqrt(numpy.power(xx, 2) + numpy.power(yy, 2))
-    rad = stats.threshold(rad, threshmax=radius, newval=radius)
+    rad = numpy.clip(rad, None, radius)
     rad = (rad / radius) * 255
     mask = Image.fromarray(numpy.uint8(rad))
 
