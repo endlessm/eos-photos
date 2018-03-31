@@ -61,6 +61,9 @@ CLEANFILES += eos-photos \
 applicationsdir = $(datadir)/applications
 dist_applications_DATA = data/com.endlessm.photos.desktop
 
+iconsdir = $(datadir)/icons/hicolor/64x64/apps
+dist_icons_DATA = data/com.endlessm.photos.png
+
 data/com.endlessm.photos.service: data/com.endlessm.photos.service.in Makefile
 	$(AM_V_GEN) $(MKDIR_P) data && \
 	$(subst_install) $< > $@
