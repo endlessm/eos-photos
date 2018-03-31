@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.endlessm.photos.desktop</id>
+  <metadata_license>CC0</metadata_license>
+  <project_license>GPL-3.0+</project_license>
+  <categories>
+    <category>Graphics</category>
+  </categories>
+  <name>Photo Editor</name>
+  <name xml:lang="ar">محرر الصور</name>
+  <name xml:lang="bn">ফটো সম্পাদনা</name>
+  <name xml:lang="de">Foto-Editor</name>
+  <name xml:lang="es">Editor de fotos</name>
+  <name xml:lang="fr">Éditeur Photo</name>
+  <name xml:lang="hi">फ़ोटो एडिटर</name>
+  <name xml:lang="id">Editor Foto</name>
+  <name xml:lang="pt_BR">Editor de Fotos</name>
+  <name xml:lang="ro">Editor poze</name>
+  <name xml:lang="th">การแก้ไขภาพ</name>
+  <name xml:lang="vi">Trình biên tập ảnh</name>
+  <name xml:lang="zh_CN">照片编辑器</name>
+  <name xml:lang="zh_TW">相片編輯工具</name>
+
+  <summary>Easily edit and share all of your favorite photos</summary>
+  <summary xml:lang="ar">حرر وشارك بسهولة كل صورك المفضلة</summary>
+  <summary xml:lang="bn">আপনার সকল প্রিয় ফটোগুলো সহজে সম্পাদনা করে ভাগ করে নিন</summary>
+  <summary xml:lang="es">Edita y comparte tus fotos favoritas fácilmente</summary>
+  <summary xml:lang="fr">Éditez et partagez facilement toutes vos photos favorites</summary>
+  <summary xml:lang="hi">अपने सभी पसंदीदा फ़ोटोज को एडिट करें और शेयर करें </summary>
+  <summary xml:lang="id">Mengedit dan membagikan semua foto favorit Anda secara mudah</summary>
+  <summary xml:lang="pt_BR">Edite as suas fotografias e crie belas imagens para compartilhar com todos os seus amigos</summary>
+  <summary xml:lang="ro">Editeaza usor si impartaseste pozele tale favorite</summary>
+  <summary xml:lang="th">แต่งรูปและแบ่งปันรูปที่คุณชอบทั้งหมดอย่างง่าย ๆ</summary>
+  <summary xml:lang="vi">Dễ dàng chỉnh sửa và chia sẻ tất cả những tấm ảnh ưa thích của bạn</summary>
+  <summary xml:lang="zh_CN">便捷地编辑和分享您喜欢的照片</summary>
+  <summary xml:lang="zh_TW">輕鬆編輯並分享所有喜愛的相片</summary>
+
+  <description><p>Have you ever wanted to edit your own photos like the pros and create beautiful images you can share with those you love? Well, now you can do that in just a few steps! We have a variety of attractive, artful filters so you can customize your photos and create one-of-a-kind works of art from your everyday life. With this handy app, you can post your creations directly to Facebook, so everyone can see your awesome pictures!</p></description>
+  <description xml:lang="ar"><p>هل كنت تريد في أي وقت مضى تحرير الصور الخاصة بك مثل المحترفين وخلق صورٍ جميلةٍ يمكنك مشاركتها مع من تحبهم؟ حسناً، يمكنك أن تفعل ذلك الآن في خطوات قليلة فقط! لدينا مجموعة متنوعة من المرشحات الجذابة والمتقنة حتى تتمكن من تخصيص صورك وإنشاء عمل فني فريد من نوعه من حياتك اليومية. مع هذا التطبيق السهل، يمكنك نشر الإبداعات الخاصة بك مباشرة على الفيسبوك، ليتمكن الجميع من رؤية صورك الرائعة!</p></description>
+  <description xml:lang="bn"><p>কখনো চেয়েছেন নিজের ছবি নিজে সম্পাদনা করতে এবং সুন্দর সব ছবি তৈরি করে প্রিয়জনের সাথে ভাগাভাগি করতে? এখন আপনি সেটি করতে পারবেন মাত্র কয়েকটি ধাপে! আমাদের রয়েছে বিভিন্ন আকর্ষণীয়, কৌশলি ফিল্টার যার সাহায্যে আপনি নিজেই রূপান্তর করতে পারবেন আপনার ছবি এবং আপনার দৈনন্দিন জীবন থেকেই একটি শিল্পকর্ম তৈরি করতে পারবেন। এই এ্যাপের মাধ্যমে, আপনি আপনার সৃষ্টিকর্ম সরাসরি ফেসবুকে পোস্ট করতে পারবেন, যাতে সবাই আপনার দারুন সব ছবি দেখতে পারে! </p></description>
+  <description xml:lang="es"><p>¿Quieres modificar tus propias fotos como los profesionales y crear lindas imágenes para compartir con tus seres queridos? ¡Ahora puedes hacerlo en unos pocos pasos! Tenemos una variedad de filtros atractivos y artísticos para que personalices tus fotos y hagas obras de arte sobre tu vida diaria. ¡Y con este útil programa, puedes publicar tus fotos directamente en Facebook, para compartirlas con todos tus amigos!</p></description>
+  <description xml:lang="fr"><p>Avez-vous déjà rêvé d’éditer vos photographies personnelles comme les pros et créer des images magnifiques que vous pouvez partager avec ceux que vous aimez ? Désormais, vous pouvez faire cela en seulement quelques étapes ! Nous avons une large palette de filtres élégants et artistiques afin que vous puissiez personnaliser vos photos et créer des réalisations artistiques uniques à partir de votre vie de tous les jours. Avec cette application pratique, vous pouvez directement poster vos créations sur Facebook, afin que tout le monde puisse voir vos superbes images !</p></description>
+  <description xml:lang="hi"><p>क्या आपने कभी पेशेवरों की तरह अपने खुद के फ़ोटो को एडिट करने और खूबसूरत तस्वीरें बनाने के बारे में सोचा है जिन्हें आप अपने प्रियजनों को भेज सकें? बहुत अच्छे, अब आप कुछ स्टेप्स में ऐसा कर सकते हैं! हमारे पास विभिन्न किस्मों के आकर्षक, कलात्मक फिल्टर्स हैं जिनसे आप अपने फ़ोटोज को कस्टमाइज कर सकते हैं और अपने दैनिक जीवन से खास प्रकार की कलाकृतियां बना सकते हैं। इस सुविधाजनक ऐप की मदद से आप अपनी रचनाओं को सीधे  फेसबुक पर भेज सकते हैं ताकि हर कोई आपकी अद्भुत तस्वीकों को देख सकें!</p></description>
+  <description xml:lang="id"><p>Pernahkah Anda ingin dapat mengedit foto-foto Anda layaknya seorang profesional dan menciptakan gambar-gambar indah yang bisa Anda bagikan dengan orang-orang yang Anda kasihi? Sekarang Anda bisa melakukannya hanya dalam beberapa langkah! Kami menyediakan bermacam-macam filter yang indah dan berseni agar Anda dapat mengedit foto Anda dan menciptakan sebuah karya seni yang memukau dari kehidupan sehari-hari Anda. Dengan aplikasi yang berguna ini, Anda dapat mengirimkan hasil kreasi Anda langsung ke Facebook agar semua orang bisa melihat gambar-gambar Anda yang mengagumkan!</p></description>
+  <description xml:lang="pt_BR"><p>Alguma vez você quis editar suas próprias fotos como os profissionais e criar belas imagens para compartilhar com as pessoas que você ama? Bem, agora você pode fazer isso em poucos passos! Temos uma grande variedade de atrativos, filtros artísticos para que você possa personalizar suas fotos e criar verdadeiras obras de arte da sua própria vida. E com este programa acessível , você pode enviar suas criações diretamente para o Facebook, para que todos possam ver suas habilidades fotográficas!</p></description>
+  <description xml:lang="ro"><p>V-ați dorit vreodată să editați propriile fotografii la fel ca profesionistii si de a crea imagini frumoase sa le puteți împărtăși cu cei care va iubesc? Ei bine, acum poți să faci asta în doar câțiva pași! Avem o varietate de filtre atractive, astfel încât să puteți personaliza fotografiile și a crea opere de artă din viața de zi cu zi. Cu această aplicație la îndemână, puteți posta creatiile  direct pe Facebook, astfel încât toată lumea poate vedea imaginile minunate!</p></description>
+  <description xml:lang="th"><p>คุณเคยอยากที่จะแก้ไขภาพถ่ายของคุณอย่างมืออาชีพและสร้างภาพสวยๆที่คุณสามารถแบ่งปันกับคนที่คุณรักหรือไม่ ตอนนี้คุณสามารถทำได้ในแค่เพียงไม่กี่ขั้นตอน! เรามีสิ่งดึงดูดใจหลากหลาย ฟิลเตอร์ที่มีศิลปะเพื่อให้คุณสามารถปรับแต่งรูปถ่ายของคุณและสร้างผลงานศิลปะหนึ่งเดียวจากชีวิตประจำวันของคุณ ด้วยแอพที่ใช้ง่ายนี้คุณสามารถโพสต์สร้างสรรค์ของคุณโดยตรงไปยัง Facebook เพื่อให้ทุกคนเห็นภาพสุดยอดของคุณ!</p></description>
+  <description xml:lang="vi"><p>Đã bao giờ bạn muốn chỉnh sửa ảnh của mình như dân chuyên nghiệp và tạo ra những bức ảnh đẹp để chia sẻ với những người bạn yêu quý? Giờ đây, bạn có thể làm điều đó chỉ trong một vài bước! Chúng tôi có một loạt các bộ lọc hấp dẫn và nghệ thuật để bạn có thể tùy chỉnh hình ảnh của mình và tạo ra các tác phẩm nghệ thuật độc nhất vô nhị từ cuộc sống thường ngày của bạn. Với ứng dụng tiện lợi này, bạn có thể đăng các tác phẩm của bạn trực tiếp lên Facebook để tất cả mọi người đều nhìn thấy bức ảnh tuyệt vời của bạn!</p></description>
+  <description xml:lang="zh_CN"><p>您想要像专业人士那样编辑您自己的照片，创造并分享美丽的画面吗？只需几步，便可实现！我们有各种漂亮、艺术化的滤镜帮助您装饰您的照片，让您创造出日常生活的艺术品。这个便捷的app还可以让您将照片直接上传到Facebook上，让大家都能欣赏您精彩的照片！</p></description>
+  <description xml:lang="zh_TW"><p>你曾想要像一位專業人士一樣編修自己的照片，然後製作出可以讓你分享給你所愛的人的美麗影像嗎？現在，只需幾個步驟就可以做到囉！我們提供一系列充滿魅力與藝術感的濾鏡工具，可讓你自訂照片，從每一天的生活中建立獨一無二的藝術作品。使用這款方便的應用程式，你可以將你的作品直接發布在 Facebook 上，以便所有人看見你的美照！</p></description>
+
+  <screenshots>
+    <screenshot>
+      <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-es.png</image>
+      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-pt.png</image>
+      <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-C.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-es.png</image>
+      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-pt.png</image>
+      <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-C.png</image>
+    </screenshot>
+    <screenshot>
+      <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-es.png</image>
+      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-pt.png</image>
+      <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-C.png</image>
+    </screenshot>
+  </screenshots>
+
+  <metadata>
+    <value key="GnomeSoftware::popular-background">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/thumb.jpg</value>
+  </metadata>
+
+  <translation type="gettext">eos-photos</translation>
+  <url type="homepage">http://www.endlessm.com</url>
+  <update_contact>cosimo@endlessm.com</update_contact>
+</component>
