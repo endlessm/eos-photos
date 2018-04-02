@@ -58,9 +58,9 @@ if __name__ == '__main__':
                                               output_dir)
     thumbnail_files += create_thumbnail_files(model, 'blur', 'blur', output_dir)
 
-    gresource_file = open("data/images/thumbnails/thumbnails.gresource.xml", "w")
-    gresource_file.write(GRESOURCE_HEAD)
-    for thumbnail_file in thumbnail_files:
-        gresource_file.write(GRESOURCE_BODY.format(file=thumbnail_file))
-    gresource_file.write(GRESOURCE_TAIL)
-    gresource_file.close()
+    gresource_filename = os.path.join(output_dir, 'thumbnails.gresource.xml')
+    with open(gresource_filename, 'w') as gresource_file:
+        gresource_file.write(GRESOURCE_HEAD)
+        for thumbnail_file in thumbnail_files:
+            gresource_file.write(GRESOURCE_BODY.format(file=thumbnail_file))
+        gresource_file.write(GRESOURCE_TAIL)
