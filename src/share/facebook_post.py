@@ -1,6 +1,7 @@
 import os
 import inspect
 import subprocess
+import traceback
 
 from .facebook import GraphAPIError, GraphAPI
 from urllib.error import URLError
@@ -42,7 +43,7 @@ class FacebookPost:
         # except URLError as e:
         #     return False, self.url_exception_handler()
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             return False, _("Could not reach facebook.")
 
     def login(self, token):
