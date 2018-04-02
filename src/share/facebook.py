@@ -23,6 +23,9 @@ https://developers.facebook.com/docs/graph-api.
 
 """
 
+# Original source of this file:
+# https://github.com/mobolic/facebook-sdk/blob/master/facebook/__init__.py
+
 import hashlib
 import hmac
 import binascii
