@@ -8,10 +8,10 @@ class FacebookAuthDialog(Gtk.Dialog):
     #FB_APP_ID = '393860344022808'
     # -- PRODUCTION --
     FB_APP_ID = '407909575958642'
-    FB_LOGIN_URL = 'https://www.facebook.com/v2.5/dialog/oauth'
+    FB_LOGIN_URL = 'https://www.facebook.com/v2.12/dialog/oauth'
     # According to the developer docs, this redirect url should be used for all
     # desktop apps with an embedded login page.
-    FB_REDIRCT_URL = 'https://www.facebook.com/connect/login_success.html'
+    FB_REDIRECT_URL = 'https://www.facebook.com/connect/login_success.html'
 
     def __init__(self, **kw):
         kw.setdefault('default_width', 600)
@@ -27,7 +27,7 @@ class FacebookAuthDialog(Gtk.Dialog):
         url = self.FB_LOGIN_URL
         params = {
             'client_id': self.FB_APP_ID,
-            'redirect_uri': self.FB_REDIRCT_URL,
+            'redirect_uri': self.FB_REDIRECT_URL,
             'display': 'popup',
             'scope': 'publish_actions',
             'response_type': 'token',
@@ -63,7 +63,7 @@ class FacebookAuthDialog(Gtk.Dialog):
 
     def _on_load_changed(self, view, load_event):
         uri = view.get_uri()
-        if not uri.startswith(self.FB_REDIRCT_URL):
+        if not uri.startswith(self.FB_REDIRECT_URL):
             return
 
         parsed = urllib.parse.urlparse(uri)
