@@ -26,9 +26,6 @@ GRESOURCE_TAIL="""
     </gresource>
 </gresources>"""
 
-def create_dir_if_necessary(directory):
-    if not os.path.exists(directory):
-        os.makedirs(directory)
 
 if __name__ == '__main__':
     asset_resource = Gio.Resource.load(ASSET_RESOURCE_PATH);
@@ -37,7 +34,7 @@ if __name__ == '__main__':
 
     thumbnail_files = []
     output_dir = "data/images/thumbnails"
-    create_dir_if_necessary(output_dir)
+    os.makedirs(output_dir, exist_ok=True)
     model.open(THUMBNAIL_IMAGE_PATH)
     filter_no = 0
     for f in model.get_filter_names():
