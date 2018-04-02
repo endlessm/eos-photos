@@ -7,7 +7,7 @@ from .facebook import GraphAPIError, GraphAPI
 from urllib.error import URLError
 
 # Choose which Facebook GraphAPI version we will use to make posts
-GRAPH_API_VERSION = "2.6"
+GRAPH_API_VERSION = "2.12"
 
 # Uncomment these lines to enable debug output
 #import logging
