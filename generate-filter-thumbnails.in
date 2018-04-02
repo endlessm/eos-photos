@@ -27,6 +27,19 @@ GRESOURCE_TAIL="""
 </gresources>"""
 
 
+def create_thumbnail_files(model, api_name, root_name, output_dir):
+    model.revert_to_original()
+    thumbnail_files = []
+    seq = 0
+    for f in getattr(model, 'get_{}_names'.format(api_name))():
+        getattr(model, 'set_{}'.format(api_name))(f)
+        filename = '{}_{}.jpg'.format(root_name, seq)
+        model.save(os.path.join(output_dir, filename))
+        print(filename)
+        thumbnail_files.append(filename)
+        seq += 1
+    return thumbnail_files
+
 if __name__ == '__main__':
     asset_resource = Gio.Resource.load(ASSET_RESOURCE_PATH);
     asset_resource._register();
@@ -36,44 +49,14 @@ if __name__ == '__main__':
     output_dir = "data/images/thumbnails"
     os.makedirs(output_dir, exist_ok=True)
     model.open(THUMBNAIL_IMAGE_PATH)
-    filter_no = 0
-    for f in model.get_filter_names():
-        model.set_filter(f)
-        filename = "filter_" + str(filter_no) + ".jpg"
-        model.save(os.path.join(output_dir, filename))
-        print(filename)
-        thumbnail_files.append(filename)
-        filter_no += 1
 
-    model.revert_to_original()
-    border_no = 0
-    for b in model.get_border_names():
-        model.set_border(b)
-        filename = "border_" + str(border_no) + ".jpg"
-        model.save(os.path.join(output_dir, filename))
-        print(filename)
-        thumbnail_files.append(filename)
-        border_no += 1
-
-    model.revert_to_original()
-    distort_no = 0
-    for d in model.get_distortion_names():
-        model.set_distortion(d)
-        filename = "distort_" + str(distort_no) + ".jpg"
-        model.save(os.path.join(output_dir, filename))
-        print(filename)
-        thumbnail_files.append(filename)
-        distort_no += 1
-
-    model.revert_to_original()
-    distort_no = 0
-    for d in model.get_blur_names():
-        model.set_blur(d)
-        filename = "blur_" + str(distort_no) + ".jpg"
-        model.save(os.path.join(output_dir, filename))
-        print(filename)
-        thumbnail_files.append(filename)
-        distort_no += 1
+    thumbnail_files += create_thumbnail_files(model, 'filter', 'filter',
+                                              output_dir)
+    thumbnail_files += create_thumbnail_files(model, 'border', 'border',
+                                              output_dir)
+    thumbnail_files += create_thumbnail_files(model, 'distortion', 'distort',
+                                              output_dir)
+    thumbnail_files += create_thumbnail_files(model, 'blur', 'blur', output_dir)
 
     gresource_file = open("data/images/thumbnails/thumbnails.gresource.xml", "w")
     gresource_file.write(GRESOURCE_HEAD)
