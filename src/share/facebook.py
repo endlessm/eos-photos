@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #
 # Copyright 2010 Facebook
+# Copyright 2015 Mobolic
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
@@ -23,6 +24,9 @@ https://developers.facebook.com/docs/graph-api.
 
 """
 
+# Original source of this file:
+# https://github.com/mobolic/facebook-sdk/blob/master/facebook/__init__.py
+
 import hashlib
 import hmac
 import binascii
@@ -33,11 +37,13 @@ import re
 
 from urllib.parse import parse_qs, urlencode
 
-__version__ = "2.0.0"
+__version__ = "3.0.0-alpha"
 
 FACEBOOK_GRAPH_URL = "https://graph.facebook.com/"
 FACEBOOK_OAUTH_DIALOG_URL = "https://www.facebook.com/dialog/oauth?"
-VALID_API_VERSIONS = ["2.0", "2.1", "2.2", "2.3", "2.4", "2.5", "2.6"]
+VALID_API_VERSIONS = [
+    "2.5", "2.6", "2.7", "2.8", "2.9", "2.10", "2.11", "2.12"]
+VALID_SEARCH_TYPES = ["page", "event", "group", "place", "placetopic", "user"]
 
 
 class GraphAPI(object):
@@ -70,16 +76,17 @@ class GraphAPI(object):
     """
 
     def __init__(self, access_token=None, timeout=None, version=None,
-                 proxies=None):
+                 proxies=None, session=None):
         # The default version is only used if the version kwarg does not exist.
-        default_version = "2.0"
+        default_version = VALID_API_VERSIONS[0]
 
         self.access_token = access_token
         self.timeout = timeout
         self.proxies = proxies
+        self.session = session or requests.Session()
 
         if version:
-            version_regex = re.compile("^\d\.\d$")
+            version_regex = re.compile("^\d\.\d{1,2}$")
             match = version_regex.search(str(version))
             if match is not None:
                 if str(version) not in VALID_API_VERSIONS:
@@ -93,9 +100,16 @@ class GraphAPI(object):
         else:
             self.version = "v" + default_version
 
+    def get_permissions(self, user_id):
+        """Fetches the permissions object from the graph."""
+        response = self.request(
+            "{0}/{1}/permissions".format(self.version, user_id), {}
+            )["data"]
+        return {x["permission"] for x in response if x["status"] == "granted"}
+
     def get_object(self, id, **args):
         """Fetches the given object from the graph."""
-        return self.request(self.version + "/" + id, args)
+        return self.request("{0}/{1}".format(self.version, id), args)
 
     def get_objects(self, ids, **args):
         """Fetches all of the given object from the graph.
@@ -106,10 +120,39 @@ class GraphAPI(object):
         args["ids"] = ",".join(ids)
         return self.request(self.version + "/", args)
 
+    def search(self, type, **args):
+        """Fetches all objects of a given type from the graph.
+
+        Returns all objects of a given type from the graph as a dict.
+        """
+
+        if type not in VALID_SEARCH_TYPES:
+            raise GraphAPIError('Valid types are: %s'
+                                % ', '.join(VALID_SEARCH_TYPES))
+
+        args["type"] = type
+        return self.request(self.version + "/search/", args)
+
     def get_connections(self, id, connection_name, **args):
         """Fetches the connections for given object."""
         return self.request(
-            "%s/%s/%s" % (self.version, id, connection_name), args)
+            "{0}/{1}/{2}".format(self.version, id, connection_name), args)
+
+    def get_all_connections(self, id, connection_name, **args):
+        """Get all pages from a get_connections call
+
+        This will iterate over all pages returned by a get_connections call
+        and yield the individual items.
+        """
+        while True:
+            page = self.get_connections(id, connection_name, **args)
+            for post in page['data']:
+                yield post
+            next = page.get('paging', {}).get('next')
+            if not next:
+                return
+            args = parse_qs(urlparse(next).query)
+            del args['access_token']
 
     def put_object(self, parent_object, connection_name, **data):
         """Writes the given object to the graph, connected to the given parent.
@@ -132,28 +175,9 @@ class GraphAPI(object):
         """
         assert self.access_token, "Write operations require an access token"
         return self.request(
-            self.version + "/" + parent_object + "/" + connection_name,
+            "{0}/{1}/{2}".format(self.version, parent_object, connection_name),
             post_args=data,
             method="POST")
-
-    def put_wall_post(self, message, attachment={}, profile_id="me"):
-        """Writes a wall post to the given profile's wall.
-
-        We default to writing to the authenticated user's wall if no
-        profile_id is specified.
-
-        attachment adds a structured attachment to the status message
-        being posted to the Wall. It should be a dictionary of the form:
-
-            {"name": "Link name"
-             "link": "https://www.example.com/",
-             "caption": "{*actor*} posted a new review",
-             "description": "This is a longer description of the attachment",
-             "picture": "https://www.example.com/thumbnail.jpg"}
-
-        """
-        return self.put_object(profile_id, "feed", message=message,
-                               **attachment)
 
     def put_comment(self, object_id, message):
         """Writes the given comment on the given post."""
@@ -165,11 +189,11 @@ class GraphAPI(object):
 
     def delete_object(self, id):
         """Deletes the object with the given ID from the graph."""
-        self.request(self.version + "/" + id, method="DELETE")
+        self.request("{0}/{1}".format(self.version, id), method="DELETE")
 
     def delete_request(self, user_id, request_id):
         """Deletes the Request with the given ID for the given user."""
-        self.request("%s_%s" % (request_id, user_id), method="DELETE")
+        self.request("{0}_{1}".format(request_id, user_id), method="DELETE")
 
     def put_photo(self, image, album_path="me/photos", **kwargs):
         """
@@ -180,7 +204,7 @@ class GraphAPI(object):
 
         """
         return self.request(
-            self.version + "/" + album_path,
+            "{0}/{1}".format(self.version, album_path),
             post_args=kwargs,
             files={"source": image},
             method="POST")
@@ -189,7 +213,7 @@ class GraphAPI(object):
         """Fetches the current version number of the Graph API being used."""
         args = {"access_token": self.access_token}
         try:
-            response = requests.request(
+            response = self.session.request(
                 "GET",
                 FACEBOOK_GRAPH_URL + self.version + "/me",
                 params=args,
@@ -202,7 +226,7 @@ class GraphAPI(object):
         try:
             headers = response.headers
             version = headers["facebook-api-version"].replace("v", "")
-            return float(version)
+            return str(version)
         except Exception:
             raise GraphAPIError("API version number not available")
 
@@ -215,8 +239,8 @@ class GraphAPI(object):
         arguments.
 
         """
-        args = args or {}
-
+        if args is None:
+            args = dict()
         if post_args is not None:
             method = "POST"
 
@@ -227,17 +251,18 @@ class GraphAPI(object):
             # or it does not need `access_token`.
             if post_args and "access_token" not in post_args:
                 post_args["access_token"] = self.access_token
-            elif args and "access_token" not in args:
+            elif "access_token" not in args:
                 args["access_token"] = self.access_token
 
         try:
-            response = requests.request(method or "GET",
-                                        FACEBOOK_GRAPH_URL + path,
-                                        timeout=self.timeout,
-                                        params=args,
-                                        data=post_args,
-                                        proxies=self.proxies,
-                                        files=files)
+            response = self.session.request(
+                method or "GET",
+                FACEBOOK_GRAPH_URL + path,
+                timeout=self.timeout,
+                params=args,
+                data=post_args,
+                proxies=self.proxies,
+                files=files)
         except requests.HTTPError as e:
             response = json.loads(e.read())
             raise GraphAPIError(response)
@@ -265,14 +290,6 @@ class GraphAPI(object):
             raise GraphAPIError(result)
         return result
 
-    def fql(self, query):
-        """FQL query.
-
-        Example query: "SELECT affiliations FROM user WHERE uid = me()"
-
-        """
-        return self.request(self.version + "/" + "fql", {"q": query})
-
     def get_app_access_token(self, app_id, app_secret, offline=False):
         """
         Get the application's access token as a string.
@@ -282,13 +299,13 @@ class GraphAPI(object):
         access-tokens#apptokens>
         """
         if offline:
-            return "%s|%s" % (app_id, app_secret)
+            return "{0}|{1}".format(app_id, app_secret)
         else:
             args = {'grant_type': 'client_credentials',
                     'client_id': app_id,
                     'client_secret': app_secret}
 
-            return self.request("oauth/access_token",
+            return self.request("{0}/oauth/access_token".format(self.version),
                                 args=args)["access_token"]
 
     def get_access_token_from_code(
@@ -305,7 +322,8 @@ class GraphAPI(object):
             "client_id": app_id,
             "client_secret": app_secret}
 
-        return self.request("oauth/access_token", args)
+        return self.request(
+            "{0}/oauth/access_token".format(self.version), args)
 
     def extend_access_token(self, app_id, app_secret):
         """
@@ -321,7 +339,8 @@ class GraphAPI(object):
             "fb_exchange_token": self.access_token,
         }
 
-        return self.request("oauth/access_token", args=args)
+        return self.request("{0}/oauth/access_token".format(self.version),
+                            args=args)
 
     def debug_access_token(self, token, app_id, app_secret):
         """
@@ -336,9 +355,9 @@ class GraphAPI(object):
         """
         args = {
             "input_token": token,
-            "access_token": "%s|%s" % (app_id, app_secret)
+            "access_token": "{0}|{1}".format(app_id, app_secret)
         }
-        return self.request("/debug_token", args=args)
+        return self.request(self.version + "/" + "debug_token", args=args)
 
 
 class GraphAPIError(Exception):
@@ -347,24 +366,24 @@ class GraphAPIError(Exception):
         self.code = None
         try:
             self.type = result["error_code"]
-        except:
+        except (KeyError, TypeError):
             self.type = ""
 
         # OAuth 2.0 Draft 10
         try:
             self.message = result["error_description"]
-        except:
+        except (KeyError, TypeError):
             # OAuth 2.0 Draft 00
             try:
                 self.message = result["error"]["message"]
                 self.code = result["error"].get("code")
                 if not self.type:
                     self.type = result["error"].get("type", "")
-            except:
+            except (KeyError, TypeError):
                 # REST server style
                 try:
                     self.message = result["error_msg"]
-                except:
+                except (KeyError, TypeError):
                     self.message = result
 
         Exception.__init__(self, self.message)
@@ -412,7 +431,7 @@ def parse_signed_request(signed_request, app_secret):
 
     """
     try:
-        encoded_sig, payload = list(map(str, signed_request.split('.', 1)))
+        encoded_sig, payload = map(str, signed_request.split('.', 1))
 
         sig = base64.urlsafe_b64decode(encoded_sig + "=" *
                                        ((4 - len(encoded_sig) % 4) % 4))
@@ -453,4 +472,3 @@ def auth_url(app_id, canvas_url, perms=None, **kwargs):
         kvps['scope'] = ",".join(perms)
     kvps.update(kwargs)
     return url + urlencode(kvps)
-

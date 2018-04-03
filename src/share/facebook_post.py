@@ -1,12 +1,13 @@
 import os
 import inspect
 import subprocess
+import traceback
 
 from .facebook import GraphAPIError, GraphAPI
 from urllib.error import URLError
 
 # Choose which Facebook GraphAPI version we will use to make posts
-GRAPH_API_VERSION = "2.6"
+GRAPH_API_VERSION = "2.12"
 
 # Uncomment these lines to enable debug output
 #import logging
@@ -42,7 +43,7 @@ class FacebookPost:
         # except URLError as e:
         #     return False, self.url_exception_handler()
         except Exception as e:
-            print(e)
+            traceback.print_exc()
             return False, _("Could not reach facebook.")
 
     def login(self, token):
