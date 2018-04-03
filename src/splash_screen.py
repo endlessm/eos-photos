@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from widgets.image_text_button import ImageTextButton
+from .widgets.image_text_button import ImageTextButton
 
 
 class WrappingLabel(Gtk.Label):

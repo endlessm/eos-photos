@@ -23,7 +23,7 @@ EXTRA_DIST =
 # static assets GResource file
 asset_resource_files = $(shell $(GLIB_COMPILE_RESOURCES) --sourcedir=$(srcdir)/data --generate-dependencies $(srcdir)/data/endless_photos.gresource.xml)
 data/endless_photos.gresource: data/endless_photos.gresource.xml $(asset_resource_files)
-	mkdir -p data
+	$(MKDIR_P) data
 	$(AM_V_GEN) $(GLIB_COMPILE_RESOURCES) --target=$@ --sourcedir=$(srcdir)/data  $<
 CLEANFILES += data/endless_photos.gresource
 
@@ -35,6 +35,7 @@ thumbnails:
 	$(MAKE) $(AM_MAKEFLAGS) data/images/thumbnails/thumbnails.gresource
 
 data/images/thumbnails/thumbnails.gresource.xml: data/endless_photos.gresource
+	$(MKDIR_P) data/images/thumbnails
 	$(AM_V_GEN) $(builddir)/generate-filter-thumbnails
 CLEANFILES += data/images/thumbnails/thumbnails.gresource.xml
 
@@ -59,6 +60,12 @@ CLEANFILES += eos-photos \
 
 applicationsdir = $(datadir)/applications
 dist_applications_DATA = data/com.endlessm.photos.desktop
+
+iconsdir = $(datadir)/icons/hicolor/64x64/apps
+dist_icons_DATA = data/com.endlessm.photos.png
+
+appdatadir = $(datadir)/appdata
+dist_appdata_DATA = data/com.endlessm.photos.appdata.xml
 
 data/com.endlessm.photos.service: data/com.endlessm.photos.service.in Makefile
 	$(AM_V_GEN) $(MKDIR_P) data && \

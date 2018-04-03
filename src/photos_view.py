@@ -1,14 +1,14 @@
 from gi.repository import Gtk, Gdk, GLib
 
-from splash_screen import SplashScreen
-from photos_left_toolbar import PhotosLeftToolbar
-from photos_right_toolbar import PhotosRightToolbar
-from photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar, TransformToolbar
-from photos_window import PhotosWindow
-from photos_image_container import ImageContainer
-from widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
-from widgets.text_entry import TextEntry
-from share.facebook_auth_dialog import FacebookAuthDialog
+from .splash_screen import SplashScreen
+from .photos_left_toolbar import PhotosLeftToolbar
+from .photos_right_toolbar import PhotosRightToolbar
+from .photos_category_toolbars import AdjustmentToolbar, BorderToolbar, FilterToolbar, DistortToolbar, BlurToolbar, TransformToolbar
+from .photos_window import PhotosWindow
+from .photos_image_container import ImageContainer
+from .widgets.preview_file_chooser_dialog import PreviewFileChooserDialog
+from .widgets.text_entry import TextEntry
+from .share.facebook_auth_dialog import FacebookAuthDialog
 
 
 class PhotosView(object):
@@ -293,7 +293,8 @@ class PhotosView(object):
 
         def message_callback(dialog, confirm, entries):
             responses = []
-            map(lambda x: responses.append(x.get_text()), entries)
+            for entry in entries:
+                responses.append(entry.get_text())
             dialog.hide()
             callback(confirm, responses)
 

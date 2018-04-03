@@ -1,8 +1,8 @@
 from gi.repository import Gtk, Gdk, GdkPixbuf, Endless
 
-from drop_shadow_alignment import DropShadowAlignment
-from widgets.image_text_button import ImageTextButton
-from resource_prefixes import *
+from .drop_shadow_alignment import DropShadowAlignment
+from .widgets.image_text_button import ImageTextButton
+from .resource_prefixes import *
 
 
 class PhotosWindow(Endless.Window):

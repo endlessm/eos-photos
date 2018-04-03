@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from gi.repository import Gtk
 
-from widgets.option_list import OptionList
-from widgets.slider import Slider
-from widgets.image_text_button import ImageTextButton
-from resource_prefixes import *
+from .widgets.option_list import OptionList
+from .widgets.slider import Slider
+from .widgets.image_text_button import ImageTextButton
+from .resource_prefixes import *
 
 class CategoryToolbar(Gtk.Alignment):
     """
@@ -42,7 +42,7 @@ class OptionListToolbar(CategoryToolbar):
         self.show_all()
 
     def set_options(self, options):
-        map(self._set_option, options)
+        list(map(self._set_option, options))
 
     def _set_option(self, name_and_thumb):
         option_name = name_and_thumb[0]
@@ -70,7 +70,7 @@ class TransformToolbar(CategoryToolbar):
         super(TransformToolbar, self).__init__(**kw)
         self._vbox = Gtk.VBox(homogeneous=False, spacing=8)
 
-        self._rotate_button = ImageTextButton(label=_(u"Rotate Right 90\N{Degree Sign}"))
+        self._rotate_button = ImageTextButton(label=_("Rotate Right 90\N{Degree Sign}"))
         self._rotate_button.connect("clicked", lambda e: self._presenter.on_rotate())
         self._rotate_button.set_name("rotate-button")
 

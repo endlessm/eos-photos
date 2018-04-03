@@ -1,6 +1,4 @@
-import urllib
-import urllib2
-import urlparse
+import urllib.request, urllib.parse, urllib.error
 from gi.repository import Gtk, WebKit2
 
 
@@ -34,7 +32,7 @@ class FacebookAuthDialog(Gtk.Dialog):
             'scope': 'publish_actions',
             'response_type': 'token',
         }
-        url = url + '?' + urllib.urlencode(params)
+        url = url + '?' + urllib.parse.urlencode(params)
         self.web_view.load_uri(url)
         self.web_view.connect('close', self._on_close)
         self.web_view.connect('load-failed', self._on_load_failed)
@@ -59,7 +57,7 @@ class FacebookAuthDialog(Gtk.Dialog):
         self._end_dialog(0)
 
     def _on_load_failed(self, web_view, load_event, failing_uri, error):
-        print "Load failed"
+        print("Load failed")
         self._message = _("Could not reach facebook.")
         self._end_dialog(0)
 
@@ -68,14 +66,14 @@ class FacebookAuthDialog(Gtk.Dialog):
         if not uri.startswith(self.FB_REDIRCT_URL):
             return
 
-        parsed = urlparse.urlparse(uri)
-        parsed_fragment = urlparse.parse_qs(parsed.fragment)
-        if parsed_fragment.has_key('access_token'):
+        parsed = urllib.parse.urlparse(uri)
+        parsed_fragment = urllib.parse.parse_qs(parsed.fragment)
+        if 'access_token' in parsed_fragment:
             self._access_token = parsed_fragment['access_token'][0]
             self._end_dialog(1)
             return
-        parsed_query = urlparse.parse_qs(parsed.query)
-        if parsed_query.has_key('error'):
+        parsed_query = urllib.parse.parse_qs(parsed.query)
+        if 'error' in parsed_query:
             self._message = _("Login canceled.")
         else:
             self._message = _('Login failed.')

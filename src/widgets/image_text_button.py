@@ -1,5 +1,5 @@
 from gi.repository import Gtk, GdkPixbuf, Gdk
-from composite_button import CompositeButton
+from .composite_button import CompositeButton
 
 class ImageTextButton(Gtk.Button, CompositeButton):
     """

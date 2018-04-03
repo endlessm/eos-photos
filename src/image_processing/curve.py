@@ -21,10 +21,10 @@ class Curve:
     def _read_curves(self, acv_file):
         _, nr_curves = unpack('!hh', acv_file.read(4))
         curves = []
-        for i in xrange(0, nr_curves):
+        for i in range(0, nr_curves):
             curve = []
             num_curve_points, = unpack('!h', acv_file.read(2))
-            for j in xrange(0, num_curve_points):
+            for j in range(0, num_curve_points):
                 y, x = unpack('!hh', acv_file.read(4))
                 curve.append((x, y))
             curves.append(curve)

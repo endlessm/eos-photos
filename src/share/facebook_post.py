@@ -2,8 +2,8 @@ import os
 import inspect
 import subprocess
 
-from facebook import GraphAPIError, GraphAPI
-from urllib2 import URLError
+from .facebook import GraphAPIError, GraphAPI
+from urllib.error import URLError
 
 # Choose which Facebook GraphAPI version we will use to make posts
 GRAPH_API_VERSION = "2.6"
@@ -32,7 +32,7 @@ class FacebookPost:
 
     def post_image(self, file_name, message=""):
         try:
-            self._graph_api.put_photo(open(file_name), message=message)
+            self._graph_api.put_photo(open(file_name, 'rb'), message=message)
             return True, _("Image successfully posted to facebook!")
         # I think a simpler collection of error messages for the user would be
         # better so I'm commenting out our fancier exception differentiating.
@@ -42,7 +42,7 @@ class FacebookPost:
         # except URLError as e:
         #     return False, self.url_exception_handler()
         except Exception as e:
-            print e
+            print(e)
             return False, _("Could not reach facebook.")
 
     def login(self, token):
@@ -52,7 +52,6 @@ class FacebookPost:
     def oauth_exception_message(self, result):
         server_error_codes = [1, 2, 4, 17]
         oauth_error_codes = [102, 190]
-        permissions_error_codes = range(200, 300)
         if 'error' in result:
             if 'code' in result['error']:
                 code = result['error']['code']
@@ -61,7 +60,7 @@ class FacebookPost:
         if code in server_error_codes:
             message = _('Requested action is not possible at the moment. Please try again later.')
             return message
-        if code in oauth_error_codes or code in permissions_error_codes or code == 606:
+        if code in oauth_error_codes or (code >= 200 and code < 300) or code == 606:
             message = _('Login failed.')
             return message
         return ""

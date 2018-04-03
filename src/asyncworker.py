@@ -1,5 +1,5 @@
 from threading import Thread
-import Queue
+import queue
 import traceback
 
 class AsyncWorker(Thread):
@@ -8,7 +8,7 @@ class AsyncWorker(Thread):
     """
     def __init__(self, name=""):
         Thread.__init__(self)
-        self.queue = Queue.Queue(0)
+        self.queue = queue.Queue(0)
         self.name = name
         self.finished = False
 
@@ -21,6 +21,6 @@ class AsyncWorker(Thread):
                 method, args = self.queue.get()
                 method(*args)
             except Exception:
-                print "In worker thread...."
-                print traceback.format_exc()
+                print("In worker thread....")
+                print(traceback.format_exc())
         self.finished = True
