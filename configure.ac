@@ -14,7 +14,7 @@ dnl are doing.
 # Initialize Autoconf: package name, version, bug report address, tarball name,
 # website
 AC_PREREQ(2.63)
-AC_INIT([Endless Photos], [1.0.0],
+AC_INIT([Endless Photos], [1.0.1],
     [], [eos-photos], [http://endlessm.com])
 # Initialize Automake: enable all warnings and do not insist on GNU standards
 # no-portability suppresses warnings about syntax specific to GNU make

@@ -74,6 +74,10 @@
   <translation type="gettext">eos-photos</translation>
   <url type="homepage">http://www.endlessm.com</url>
 
+  <releases>
+    <release date="2018-04-26" version="1.0.1"/>
+  </releases>
+
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">none</content_attribute>
     <content_attribute id="violence-fantasy">none</content_attribute>
