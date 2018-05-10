@@ -67,6 +67,9 @@ dist_icons_DATA = data/com.endlessm.photos.png
 appdatadir = $(datadir)/appdata
 dist_appdata_DATA = data/com.endlessm.photos.appdata.xml
 
+splashdir = $(datadir)/eos-shell-content/splash
+dist_splash_DATA = data/com.endlessm.photos.jpg
+
 data/com.endlessm.photos.service: data/com.endlessm.photos.service.in Makefile
 	$(AM_V_GEN) $(MKDIR_P) data && \
 	$(subst_install) $< > $@
