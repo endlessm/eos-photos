@@ -301,7 +301,7 @@ class PhotosModel(object):
         target_orientation = (un_orient_crop + self._orientation) % 360
 
         # crop overlay's rotation operation works at 90 degree intervals (clockwise)
-        num_rotations = target_orientation / 90
+        num_rotations = target_orientation // 90
         for times in range(0, num_rotations):
             self._image_widget.rotate_crop_overlay()
 
