@@ -52,17 +52,17 @@
   <screenshots>
     <screenshot>
       <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-es.png</image>
-      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-pt.png</image>
+      <image type="source" xml:lang="pt_BR">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-pt.png</image>
       <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot1-C.png</image>
     </screenshot>
     <screenshot>
       <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-es.png</image>
-      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-pt.png</image>
+      <image type="source" xml:lang="pt_BR">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-pt.png</image>
       <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot2-C.png</image>
     </screenshot>
     <screenshot>
       <image type="source" xml:lang="es">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-es.png</image>
-      <image type="source" xml:lang="pt">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-pt.png</image>
+      <image type="source" xml:lang="pt_BR">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-pt.png</image>
       <image type="source">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/screenshot3-C.png</image>
     </screenshot>
   </screenshots>
