@@ -1,6 +1,8 @@
 import sys
 import os
 import inspect
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib, GtkClutter, GObject, Gio, Endless
 
 from .photos_model import PhotosModel
