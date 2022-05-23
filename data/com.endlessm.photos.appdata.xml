@@ -74,7 +74,11 @@
   <developer_name>Endless</developer_name>
 
   <translation type="gettext">eos-photos</translation>
-  <url type="homepage">http://www.endlessm.com</url>
+  <url type="homepage">https://endlessos.org/</url>
+  <url type="bugtracker">https://github.com/endlessm/eos-photos/issues</url>
+  <url type="translate">https://www.transifex.com/endless-os/eos-photos/</url>
+  <url type="vcs-browser">https://github.com/endlessm/eos-photos</url>
+
 
   <releases>
     <release date="2018-07-10" version="1.0.2"/>
@@ -111,5 +115,5 @@
     <content_attribute id="money-gambling">none</content_attribute>
   </content_rating>
 
-  <update_contact>cosimo@endlessm.com</update_contact>
+  <update_contact>maintainers@endlessos.org</update_contact>
 </component>
