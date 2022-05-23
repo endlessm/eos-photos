@@ -71,6 +71,8 @@
     <value key="GnomeSoftware::popular-background">https://raw.githubusercontent.com/endlessm/eos-photos/master/data/assets/thumb.jpg</value>
   </metadata>
 
+  <developer_name>Endless</developer_name>
+
   <translation type="gettext">eos-photos</translation>
   <url type="homepage">http://www.endlessm.com</url>
 
