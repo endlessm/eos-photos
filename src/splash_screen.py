@@ -1,3 +1,5 @@
+import gi
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 from .widgets.image_text_button import ImageTextButton
