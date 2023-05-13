@@ -61,7 +61,7 @@ CURRENT_DIR = os.path.dirname(CURRENT_FILE)
 BASE_IMAGE_PATH = os.path.join(CURRENT_DIR, os.pardir) + '/data/images/'
 
 class DraggableBox(Clutter.Actor):
-    
+
     def __init__(self, stage, **kw):
         kw["opacity"] = 0
         kw["reactive"] = True
@@ -123,7 +123,7 @@ class DraggableBox(Clutter.Actor):
             self.height_as_pct = bot_coord / real_height - self.y_pos_as_pct
 
     def reset_dimensions(self):
-        # The box will store its position/dimensions as percentages of the total stage, 
+        # The box will store its position/dimensions as percentages of the total stage,
         # (values between 0 and 1) so that upon stage resizing/rotation, its dimensions
         # can be reconstructed faithfully
         self.x_pos_as_pct = (1 - DEFAULT_PROPORTION) / 2
@@ -362,9 +362,9 @@ class DraggableBox(Clutter.Actor):
 
             # All the boxes have their namesake's edge bound to the same
             # named edge of the stage, and have the opposite side bound to their
-            # namesake's edge of CROP. 
+            # namesake's edge of CROP.
             #
-            # For example, LEFT's left side is bound to the left edge of 
+            # For example, LEFT's left side is bound to the left edge of
             # the stage, and LEFT's right side is bound to the left side of CROP
 
             cropbox_constraint = Clutter.SnapConstraint()
@@ -498,7 +498,7 @@ class DraggableBox(Clutter.Actor):
             elif clicked_region & BOT:
                 self.set_height(self.get_height() + dy)
         else:
-            # If the click happened away from either horizontal or 
+            # If the click happened away from either horizontal or
             # vertical edges, just drag the box around
             self.set_x(self.get_x() + dx)
             self.set_y(self.get_y() + dy)
@@ -507,7 +507,7 @@ class DraggableOrnament(Clutter.Group):
     """
     Base class for an object which forwards mouse events to the crop box. The hitbox actor is kept
     separate from any other visual actors so that the ornament can receieve events over a wider
-    region than what is actually visible to the user 
+    region than what is actually visible to the user
     """
     def __init__(self, box, coordinate, **kw):
         kw["reactive"] = True

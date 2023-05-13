@@ -46,7 +46,7 @@ class PhotosImageWidget(Clutter.Actor):
             return self._ratio
         else:
             return Clutter.Actor.do_get_property(self, property)
-    
+
     def toggle_crop_overlay(self):
         if self.crop_overlay_visible:
             self.hide_crop_overlay()
