@@ -1,3 +1,5 @@
+import gi
+gi.require_version("Gdk", "3.0")
 from gi.repository import Clutter, GLib, Gdk, GObject
 
 from .crop_overlay import CropOverlay

@@ -1,6 +1,8 @@
 
 from PIL import Image
 import io
+import gi
+gi.require_version("Gdk", "3.0")
 from gi.repository import Clutter, Cogl, GdkPixbuf, Gio
 
 def load_clutter_image_from_resource(resource_path):
