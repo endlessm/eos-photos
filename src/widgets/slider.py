@@ -1,7 +1,10 @@
+import gi
+gi.require_version("Gtk", "3.0")
+gi.require_version("Gdk", "3.0")
 from gi.repository import Gtk, Gdk
 
 class Slider(Gtk.HScale):
-    
+
     SNAP_MARGIN = 0.1
 
     def __init__(self, adjustment=None, **kw):
@@ -13,7 +16,7 @@ class Slider(Gtk.HScale):
         self.DEFAULT_VALUE = adjustment.get_value()
 
         self.connect('button-press-event', self._detect_double_click)
-    
+
     # Override default button-release event, so when
     # user releases the mouse after a double click, the
     # value is set to the default value rather than
@@ -25,7 +28,7 @@ class Slider(Gtk.HScale):
             self.set_value(self.DEFAULT_VALUE)
 
     def do_value_changed(self, **kw):
-        current_val = self.get_adjustment().get_value() 
+        current_val = self.get_adjustment().get_value()
         dist_to_default = abs(current_val - self.DEFAULT_VALUE)
         if dist_to_default < self.SNAP_MARGIN:
             self.set_value(self.DEFAULT_VALUE)

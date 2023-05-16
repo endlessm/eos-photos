@@ -1,3 +1,5 @@
+import gi
+gi.require_version("Gtk", "3.0")
 from gi.repository import Endless, Gtk, Gio
 
 from .widgets.image_text_button import ImageTextButton

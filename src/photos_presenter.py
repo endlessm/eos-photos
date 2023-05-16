@@ -4,6 +4,8 @@ import os
 import tempfile
 import urllib.request, urllib.error, urllib.parse
 import time
+import gi
+gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gtk, Gio
 
 from .asyncworker import AsyncWorker

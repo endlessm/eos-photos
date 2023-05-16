@@ -1,3 +1,5 @@
+import gi
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 
@@ -35,8 +37,7 @@ class CompositeButton(object):
                 # for each flag we want the children to inherit, grab this widget's flag
                 # value, and set the child's matching flag accordingly
                 my_flag = int(my_flags & flag)
-                set_value = (my_flag is not 0)
-                if set_value:
+                if my_flag != 0:
                     child.set_state_flags(flag, True)
                 else:
                     child.unset_state_flags(flag)
