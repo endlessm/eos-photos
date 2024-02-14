@@ -61,8 +61,8 @@ CLEANFILES += eos-photos \
 applicationsdir = $(datadir)/applications
 dist_applications_DATA = data/com.endlessm.photos.desktop
 
-iconsdir = $(datadir)/icons/hicolor/64x64/apps
-dist_icons_DATA = data/com.endlessm.photos.png
+iconsdir = $(datadir)/icons/hicolor/scalable/apps
+dist_icons_DATA = data/com.endlessm.photos.svg
 
 appdatadir = $(datadir)/appdata
 dist_appdata_DATA = data/com.endlessm.photos.appdata.xml
