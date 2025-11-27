@@ -1,313 +1,325 @@
-# SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR Endless Mobile, Inc.
 # This file is distributed under the same license as the eos-photos package.
-# 
+#
 # Translators:
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2024 SPDX-FileCopyrightText :
 msgid ""
 msgstr ""
 "Project-Id-Version: eos-photos\n"
 "Report-Msgid-Bugs-To: philip@endlessm.com\n"
 "POT-Creation-Date: 2016-12-20 03:07+0000\n"
-"PO-Revision-Date: 2017-08-03 16:21+0000\n"
-"Last-Translator: Roddy Shuler <roddy@endlessm.com>\n"
-"Language-Team: Russian (http://www.transifex.com/endless-mobile-inc/eos-photos/language/ru/)\n"
+"PO-Revision-Date: 2024-07-09 19:17+0300\n"
+"Last-Translator: Вячеслав <ma12@rambler.ru>\n"
+"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: src/share/facebook_auth_dialog.py:58 src/share/facebook_auth_dialog.py:79
 msgid "Login canceled."
-msgstr ""
+msgstr "Вход отменен."
 
 #: src/share/facebook_auth_dialog.py:63 src/share/facebook_post.py:46
 msgid "Could not reach facebook."
-msgstr ""
+msgstr "Не удалось связаться с Facebook."
 
 #: src/share/facebook_auth_dialog.py:81 src/share/facebook_post.py:65
 msgid "Login failed."
-msgstr ""
+msgstr "Ошибка входа."
 
 #: src/share/facebook_post.py:36
 msgid "Image successfully posted to facebook!"
-msgstr ""
+msgstr "Изображение успешно опубликовано на Facebook!"
 
 #: src/share/facebook_post.py:62
-msgid ""
-"Requested action is not possible at the moment. Please try again later."
+msgid "Requested action is not possible at the moment. Please try again later."
 msgstr ""
+"Запрошенное действие в данный момент невозможно. Повторите попытку позже."
 
 #: src/share/facebook_post.py:70
 msgid ""
 "Network problem detected. Please check your internet connection and try "
 "again."
 msgstr ""
+"Обнаружена проблема с сетью. Проверьте подключение к Интернету и попробуйте "
+"снова."
 
 #: src/share/emailer.py:17
 msgid "Someone"
-msgstr ""
+msgstr "Кто-то"
 
 #: src/share/emailer.py:18
 msgid "sent you a photo from Endless Photos!"
-msgstr ""
+msgstr "отправил вам фотографию из Endless Photos!"
 
 #: src/share/emailer.py:21
 msgid ""
 "Please do not reply to this email. Replies are sent to an unmonitored inbox."
 msgstr ""
+"Пожалуйста, не отвечайте на это письмо. Ответы отправляются в "
+"неконтролируемый почтовый ящик."
 
 #: src/photos_category_toolbars.py:26
 msgid "Untitled"
-msgstr ""
+msgstr "Без названия"
 
 #: src/photos_category_toolbars.py:73
 msgid "Rotate Right 90°"
-msgstr ""
+msgstr "Поворот вправо на 90°"
 
 #: src/photos_category_toolbars.py:95
 msgid "TRANSFORM"
-msgstr ""
+msgstr "ТРАНСФОРМАЦИЯ"
 
 #: src/photos_category_toolbars.py:106
 msgid "Crop"
-msgstr ""
+msgstr "Образка"
 
 #: src/photos_category_toolbars.py:111
 msgid "Apply Crop?"
-msgstr ""
+msgstr "Применить обрезку?"
 
 #: src/photos_category_toolbars.py:180
 msgid "BLURS"
-msgstr ""
+msgstr "РАЗМЫТИЕ"
 
 #: src/photos_category_toolbars.py:195
 msgid "BORDERS"
-msgstr ""
+msgstr "РАМКА"
 
 #: src/photos_category_toolbars.py:210
 msgid "FILTERS"
-msgstr ""
+msgstr "ФИЛЬТРЫ"
 
 #: src/photos_category_toolbars.py:225
 msgid "DISTORT"
-msgstr ""
+msgstr "ИСКАЖЕНИЕ"
 
 #: src/photos_category_toolbars.py:245
 msgid "Brightness"
-msgstr ""
+msgstr "Яркость"
 
 #: src/photos_category_toolbars.py:255
 msgid "Contrast"
-msgstr ""
+msgstr "Контраст"
 
 #: src/photos_category_toolbars.py:265
 msgid "Saturation"
-msgstr ""
+msgstr "Цветность"
 
 #: src/photos_category_toolbars.py:288
 msgid "ADJUST"
-msgstr ""
+msgstr "РЕГУЛИРОВКА"
 
 #: src/photos_model.py:64 src/photos_model.py:71 src/photos_model.py:95
 #: src/photos_model.py:106
 msgid "None"
-msgstr ""
+msgstr "Ничего"
 
 #: src/photos_model.py:65
 msgid "Tilt Shift"
-msgstr ""
+msgstr "Наклон Сдвиг"
 
 #: src/photos_model.py:66
 msgid "Depth of Field"
-msgstr ""
+msgstr "Глубина резкости"
 
 #: src/photos_model.py:72
 msgid "Grayscale"
-msgstr ""
+msgstr "Оттенки серого"
 
 #: src/photos_model.py:73
 msgid "Country"
-msgstr ""
+msgstr "Кантри"
 
 #: src/photos_model.py:74
 msgid "Retro"
-msgstr ""
+msgstr "Ретро"
 
 #: src/photos_model.py:75
 msgid "Old Photo"
-msgstr ""
+msgstr "Старое фото"
 
 #: src/photos_model.py:76
 msgid "Colorful"
-msgstr ""
+msgstr "Красочный"
 
 #: src/photos_model.py:78
 msgid "Lomo"
-msgstr ""
+msgstr "Ломо"
 
 #: src/photos_model.py:81
 msgid "Foggy Blue"
-msgstr ""
+msgstr "Туманно-голубой"
 
 #: src/photos_model.py:82
 msgid "Paper"
-msgstr ""
+msgstr "Бумага"
 
 #: src/photos_model.py:83
 msgid "Trains"
-msgstr ""
+msgstr "Поезда"
 
 #: src/photos_model.py:84
 msgid "Desert"
-msgstr ""
+msgstr "Пустыня"
 
 #: src/photos_model.py:85
 msgid "Posterize"
-msgstr ""
+msgstr "Постеризация"
 
 #: src/photos_model.py:88
 msgid "Edges"
-msgstr ""
+msgstr "Окаймлять"
 
 #: src/photos_model.py:98
 msgid "Crayon"
-msgstr ""
+msgstr "Карандашный"
 
 #: src/photos_model.py:99
 msgid "Grunge"
-msgstr ""
+msgstr "Гранж"
 
 #: src/photos_model.py:100
 msgid "Spray"
-msgstr ""
+msgstr "Спрей"
 
 #: src/photos_model.py:101
 msgid "Brush"
-msgstr ""
+msgstr "Щетка"
 
 #: src/photos_model.py:107
 msgid "Fish Eye Light"
-msgstr ""
+msgstr "Рыбий глаз легко"
 
 #: src/photos_model.py:108
 msgid "Fish Eye Heavy"
-msgstr ""
+msgstr "Рыбий глаз сильно"
 
 #: src/photos_model.py:109
 msgid "Pinch Light"
-msgstr ""
+msgstr "Вогнутость слабая"
 
 #: src/photos_model.py:110
 msgid "Pinch Heavy"
-msgstr ""
+msgstr "Вогнутость сильная"
 
 #: src/photos_model.py:111
 msgid "Swirl"
-msgstr ""
+msgstr "Водоворот"
 
 #: src/photos_presenter.py:128
 msgid "Image successfully applied to background!"
-msgstr ""
+msgstr "Изображение успешно применено к фону!"
 
 #: src/photos_presenter.py:134
 msgid "Email failed."
-msgstr ""
+msgstr "Ошибка отправки эл.почты."
 
 #: src/photos_presenter.py:260
 msgid "You do not have permissions to save the photo here"
-msgstr ""
+msgstr "У вас нет прав на сохранение фотографии здесь"
 
 #: src/photos_presenter.py:262
 msgid "An error occurred while saving your photo"
-msgstr ""
+msgstr "Произошла ошибка при сохранении фотографии"
 
 #: src/photos_presenter.py:322
 msgid "Facebook is not available offline."
-msgstr ""
+msgstr "Facebook недоступен в автономном режиме."
 
 #: src/photos_presenter.py:327
 msgid "Post to Facebook"
-msgstr ""
+msgstr "Опубликовать в Facebook"
 
 #: src/photos_presenter.py:329
 msgid "Write a description for the photo"
-msgstr ""
+msgstr "Напишите описание к фото"
 
 #: src/photos_presenter.py:352
 msgid "Enter a message to add to the e-mail"
-msgstr ""
+msgstr "Введите сообщение для добавления в эл.письмо"
 
 #: src/photos_presenter.py:352
 msgid "Your Name:"
-msgstr ""
+msgstr "Ваше имя:"
 
 #: src/photos_presenter.py:352
 msgid "Recipient email:"
-msgstr ""
+msgstr "Эл.почта получателя:"
 
 #: src/photos_presenter.py:352
 msgid "Message:"
-msgstr ""
+msgstr "Сообщение:"
 
 #: src/photos_right_toolbar.py:24
 msgid "OPEN PHOTO"
-msgstr ""
+msgstr "ОТКРЫТЬ ФОТО"
 
 #: src/photos_right_toolbar.py:34
 msgid "SAVE"
-msgstr ""
+msgstr "СОХРАНИТЬ"
 
 #: src/photos_right_toolbar.py:43
 msgid "BACKGROUND"
-msgstr ""
+msgstr "ФОН"
 
 #: src/photos_right_toolbar.py:54
 msgid "REVERT IMAGE"
-msgstr ""
+msgstr "СБРОСИТЬ ВСЁ"
 
 #: src/photos_right_toolbar.py:69
 msgid "FACEBOOK"
-msgstr ""
+msgstr "FACEBOOK"
 
 #: src/photos_view.py:37
 msgid "Photos"
-msgstr ""
+msgstr "Фото"
 
 #: src/photos_view.py:134 src/splash_screen.py:24
 msgid "Open Image"
-msgstr ""
+msgstr "Открыть изображение"
 
 #: src/photos_view.py:165
 msgid "Save Image"
-msgstr ""
+msgstr "Сохранить изображение"
 
 #: src/photos_view.py:194
 msgid "Open new photo without save?"
-msgstr ""
+msgstr "Открыть новую фотографию без сохранения?"
 
 #: src/photos_view.py:195
 msgid ""
 "Your changes have not been saved. Are you sure you want to open a new photo "
 "without saving?"
-msgstr ""
+msgstr "Ваши изменения не сохранены. Открыть новую фотографию без сохранения?"
 
 #: src/photos_view.py:217
 msgid "Quit Without Save?"
-msgstr ""
+msgstr "Выйти без сохранения?"
 
 #: src/photos_view.py:218
 msgid "Your changes have not been saved. Are you sure you want to quit?"
-msgstr ""
+msgstr "Ваши изменения не сохранены. Выйти?"
 
 #: src/photos_view.py:265
 msgid "Continue"
-msgstr ""
+msgstr "Продолжить"
 
 #: src/photos_view.py:266
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 #: src/splash_screen.py:34
 msgid "Choose one of your photos to begin!"
-msgstr ""
+msgstr "Выберите одну из ваших фотографий, чтобы начать!"
